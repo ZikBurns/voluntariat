@@ -2,16 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 
-
 class HomeList extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
 class _State extends State<HomeList> {
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +19,7 @@ class _State extends State<HomeList> {
           return CircularProgressIndicator();
         }
         else{
-
           var list=querySnapshot.data.docs;
-
           return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context,index){
@@ -38,9 +32,7 @@ class _State extends State<HomeList> {
               }
           );
         }
-
       },
-
     );
   }
 }

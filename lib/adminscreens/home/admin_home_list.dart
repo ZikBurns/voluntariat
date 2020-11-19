@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/screens/home/home_list_tile.dart';
+import 'admin_home_list_tile.dart';
 
 
-class HomeList extends StatefulWidget {
+class AdminHomeList extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<HomeList> {
+class _State extends State<AdminHomeList> {
 
 
 
@@ -32,7 +32,7 @@ class _State extends State<HomeList> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
-                      child: HomeListTile(snapshot: list[index]),
+                    child: AdminHomeListTile(snapshot: list[index]),
                   ),
                 );
               }

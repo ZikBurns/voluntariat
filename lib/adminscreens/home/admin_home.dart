@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
-import 'package:flutter_firestore/screens/home/home_list.dart';
+import 'package:flutter_firestore/screens/home/home.dart';
+import 'admin_home_list.dart';
 
 
-class HomePage extends StatefulWidget {
+class AdminHomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<AdminHomePage> {
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> snapshot= List(10);
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     //db.reference().child(firelistname).onChildAdded.listen(_activityAdded);
     //db.reference().child(firelistname).onChildRemoved.listen(_activityRemoved);
     //db.reference().child(firelistname).onChildChanged.listen(_activityChanged);
-  super.initState();
+    super.initState();
     subscription = collectionReference.snapshots().listen((datasnapshot) {
       setState(() {
         snapshot = datasnapshot.docs;
@@ -38,10 +38,10 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Theme.of(context).primaryColor,
           centerTitle: true,
           actions: <Widget>[
-            /*new IconButton(
+            new IconButton(
                 icon: new Icon(Icons.search, color: Colors.white,),
                 onPressed: null
-            )*/
+            )
           ]
       ),
       drawer: new Drawer(
@@ -58,14 +58,18 @@ class _HomePageState extends State<HomePage> {
             new ListTile(
               title: new Text("Zona Administrador"),
               leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
-              },
             ),
             new Divider(
               height: 10.0,
               color: Colors.black,
             ),
+            new ListTile(
+              title: new Text("Tancar"),
+              leading: new Icon(Icons.close, color: Colors.deepPurpleAccent),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            )
           ],
         ),
       ),
@@ -74,7 +78,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Flexible(
-              child: HomeList(),
+              child: AdminHomeList(),
             )
           ],
         ),
@@ -82,7 +86,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(onPressed: (){
         //Navigator.push(context, MaterialPageRoute(builder:(context)=> Afegir()));
       },
-        child: Icon(Icons.search,color:Colors.white),
+        child: Icon(Icons.edit,color:Colors.black),
         backgroundColor: Colors.deepPurpleAccent,
         tooltip: "Afegeix una activitat",
       ),

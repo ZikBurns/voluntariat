@@ -1,18 +1,15 @@
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class DetailsPage extends StatefulWidget {
+class AdminDetailsPage extends StatefulWidget {
   DocumentSnapshot snapshot;
-  DetailsPage(this.snapshot);
+  AdminDetailsPage(this.snapshot);
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _DetailsPageState extends State<AdminDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

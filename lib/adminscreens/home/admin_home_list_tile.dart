@@ -3,20 +3,20 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/details_view.dart';
+import 'package:flutter_firestore/adminscreens/details/admin_details.dart';
 
-class HomeListTile extends StatefulWidget {
+class AdminHomeListTile extends StatefulWidget {
   DocumentSnapshot snapshot;
-  HomeListTile({this.snapshot});
+  AdminHomeListTile({this.snapshot});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
 
-class _HomeListTileState extends State<HomeListTile> {
+class _HomeListTileState extends State<AdminHomeListTile> {
 
 
   passData(DocumentSnapshot snap){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(snap)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(snap)));
   }
 
   @override

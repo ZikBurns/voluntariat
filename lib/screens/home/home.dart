@@ -13,15 +13,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> snapshot= List(10);
-
   CollectionReference collectionReference = FirebaseFirestore.instance.collection("Activities");
+  bool searching=false;
 
 
 
   void initState() {
-    //db.reference().child(firelistname).onChildAdded.listen(_activityAdded);
-    //db.reference().child(firelistname).onChildRemoved.listen(_activityRemoved);
-    //db.reference().child(firelistname).onChildChanged.listen(_activityChanged);
   super.initState();
     subscription = collectionReference.snapshots().listen((datasnapshot) {
       setState(() {
@@ -34,14 +31,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:Text("Voluntariats"),
+          title: !searching ?  Text("Voluntariats"):
+                                TextField(
+                                  decoration: InputDecoration(
+                                      icon: Icon(Icons.search),
+                                      hintText: "Cerca",
+                                    hintStyle: TextStyle(color: Colors.white)
+                                  ),
+                                ),
           backgroundColor: Theme.of(context).primaryColor,
           centerTitle: true,
           actions: <Widget>[
-            /*new IconButton(
+            !searching?IconButton(
                 icon: new Icon(Icons.search, color: Colors.white,),
-                onPressed: null
-            )*/
+                onPressed: (){
+                  setState(() {
+                    searching=!searching;
+                  });
+                }
+            )
+            : IconButton(
+                icon: new Icon(Icons.cancel, color: Colors.white,),
+                onPressed: (){
+                  setState(() {
+                    searching=!searching;
+                  });
+                }
+            )
           ]
       ),
       drawer: new Drawer(
@@ -78,13 +94,6 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        //Navigator.push(context, MaterialPageRoute(builder:(context)=> Afegir()));
-      },
-        child: Icon(Icons.search,color:Colors.white),
-        backgroundColor: Colors.deepPurpleAccent,
-        tooltip: "Afegeix una activitat",
       ),
     );
   }

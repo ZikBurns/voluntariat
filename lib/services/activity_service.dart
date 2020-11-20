@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_firestore/data/activity.dart';
 
-class FireService{
+class ActivityService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Activities");
   String id;
 
 
-  FireService();
+  ActivityService();
 
   Future updateActivity(String id, String title, String desc) async{
     return await ref.doc(id).set({

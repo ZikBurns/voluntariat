@@ -56,8 +56,8 @@ class _HomePageState extends State<AdminHomePage> {
               leading: new Icon(Icons.approval, color: Colors.deepPurpleAccent),
             ),
             new ListTile(
-              title: new Text("Zona Administrador"),
-              leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
+              title: new Text("Entitats"),
+              leading: new Icon(Icons.account_circle_outlined, color: Colors.deepPurpleAccent),
             ),
             new Divider(
               height: 10.0,

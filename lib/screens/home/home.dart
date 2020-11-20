@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
-import 'package:flutter_firestore/firestore_service.dart';
+import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 
 
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
-    value: FireService().activities,
+    value: ActivityService().activities,
     child: Scaffold(
       appBar: AppBar(
           title: !searching ?  Text("Voluntariats"):
@@ -78,6 +79,9 @@ class _HomePageState extends State<HomePage> {
             new ListTile(
               title: new Text("Zona Administrador"),
               leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+              },
             ),
             new Divider(
               height: 10.0,
@@ -99,13 +103,6 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        //Navigator.push(context, MaterialPageRoute(builder:(context)=> Afegir()));
-      },
-        child: Icon(Icons.edit,color:Colors.black),
-        backgroundColor: Colors.deepPurpleAccent,
-        tooltip: "Afegeix una activitat",
       ),
     )
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'screens/home/home.dart';
 
 class Switcher extends StatelessWidget {
@@ -13,7 +12,5 @@ class Switcher extends StatelessWidget {
       return Authenticate();
     } else {*/
     return HomePage();
-
-
   }
 }

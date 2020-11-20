@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:flutter_firestore/data/activity.dart';
+
 class FireService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Activities");
   String id;
@@ -14,8 +16,19 @@ class FireService{
     });
   }
 
-  Stream<QuerySnapshot> get activities {
-    return ref.snapshots();
+  List<Activity> _ActivitiesFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+      print(doc.data);
+      return Activity(doc.get('title')?? '', doc.get('desc')?? '');
+    }).toList();
   }
-  
+
+  // get brews stream
+  Stream<List<Activity>> get activities {
+    return ref.snapshots()
+        .map(_ActivitiesFromSnapshot);
+  }
+
+
+
 }

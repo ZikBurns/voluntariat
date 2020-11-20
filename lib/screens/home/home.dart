@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
+import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
+import 'package:flutter_firestore/firestore_service.dart';
+import 'package:provider/provider.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -13,9 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> snapshot= List(10);
+
   CollectionReference collectionReference = FirebaseFirestore.instance.collection("Activities");
   bool searching=false;
-
 
 
   void initState() {
@@ -29,28 +31,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return StreamProvider<List<Activity>>.value(
+    value: FireService().activities,
+    child: Scaffold(
       appBar: AppBar(
           title: !searching ?  Text("Voluntariats"):
-                                TextField(
-                                  decoration: InputDecoration(
-                                      icon: Icon(Icons.search),
-                                      hintText: "Cerca",
-                                    hintStyle: TextStyle(color: Colors.white)
-                                  ),
-                                ),
+          TextField(
+            decoration: InputDecoration(
+                icon: Icon(Icons.search),
+                hintText: "Cerca",
+                hintStyle: TextStyle(color: Colors.white)
+            ),
+          ),
           backgroundColor: Theme.of(context).primaryColor,
           centerTitle: true,
           actions: <Widget>[
             !searching?IconButton(
-                icon: new Icon(Icons.search, color: Colors.white,),
+                icon: Icon(Icons.search, color: Colors.white,),
                 onPressed: (){
                   setState(() {
                     searching=!searching;
                   });
                 }
             )
-            : IconButton(
+                : IconButton(
                 icon: new Icon(Icons.cancel, color: Colors.white,),
                 onPressed: (){
                   setState(() {
@@ -74,14 +78,15 @@ class _HomePageState extends State<HomePage> {
             new ListTile(
               title: new Text("Zona Administrador"),
               leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
-              },
             ),
             new Divider(
               height: 10.0,
               color: Colors.black,
             ),
+            new ListTile(
+              title: new Text("Tancar"),
+              leading: new Icon(Icons.close, color: Colors.deepPurpleAccent),
+            )
           ],
         ),
       ),
@@ -95,6 +100,14 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        //Navigator.push(context, MaterialPageRoute(builder:(context)=> Afegir()));
+      },
+        child: Icon(Icons.edit,color:Colors.black),
+        backgroundColor: Colors.deepPurpleAccent,
+        tooltip: "Afegeix una activitat",
+      ),
+    )
     );
   }
 }

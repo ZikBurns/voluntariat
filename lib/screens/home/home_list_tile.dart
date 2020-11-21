@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/details_view.dart';
+import '../../screens/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
 
 class HomeListTile extends StatefulWidget {

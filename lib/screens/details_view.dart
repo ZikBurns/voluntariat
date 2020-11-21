@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_firestore/data/activity.dart';
+import '../data/activity.dart';
 
 class DetailsPage extends StatefulWidget {
   Activity activity;

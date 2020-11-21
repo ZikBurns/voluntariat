@@ -28,7 +28,4 @@ class ActivityService{
     return ref.snapshots()
         .map(_ActivitiesFromSnapshot);
   }
-
-
-
 }

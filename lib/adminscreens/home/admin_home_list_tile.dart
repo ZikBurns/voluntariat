@@ -1,13 +1,10 @@
-
-
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/details/admin_details.dart';
+import 'package:flutter_firestore/data/activity.dart';
 
 class AdminHomeListTile extends StatefulWidget {
-  DocumentSnapshot snapshot;
-  AdminHomeListTile({this.snapshot});
+  final Activity activity;
+  AdminHomeListTile({this.activity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
@@ -15,18 +12,18 @@ class AdminHomeListTile extends StatefulWidget {
 class _HomeListTileState extends State<AdminHomeListTile> {
 
 
-  passData(DocumentSnapshot snap){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(snap)));
+  passData(Activity activity){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(activity)));
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: (){
-        passData(widget.snapshot);
+        passData(widget.activity);
       },
-      title:Text(widget.snapshot["title"],style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold)),
-      subtitle: Text(widget.snapshot["desc"], maxLines: 3,),
+      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold)),
+      subtitle: Text(widget.activity.desc, maxLines: 3,),
     );
   }
 }

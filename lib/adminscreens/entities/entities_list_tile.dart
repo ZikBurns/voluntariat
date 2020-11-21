@@ -29,7 +29,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
                   ),
                   IconButton(icon: Icon(Icons.edit),
                     onPressed: (){
-                      //TODO: Create functionality
+
                     },
                   ),
                   IconButton(icon: Icon(Icons.delete),

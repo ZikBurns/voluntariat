@@ -30,6 +30,10 @@ class EntityService{
   deleteEntity(Entity entity) async {
     await FirebaseFirestore.instance.collection('Entities').doc(entity.id).delete();
   }
+  
+  void addEntity(String entityname){
+    ref.add({'name':entityname});
+  }
 
 
 }

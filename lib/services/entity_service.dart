@@ -35,5 +35,13 @@ class EntityService{
     ref.add({'name':entityname});
   }
 
+  void updateEntity(Entity entity) {
+    try {
+      ref.doc(entity.id)
+          .update({'name': entity.name});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
 }

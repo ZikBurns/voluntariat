@@ -24,6 +24,7 @@ class _EntitiesListState extends State<Entities> {
             title: Text("Introdueix el nom de la entitat"),
             content: TextField(
               controller: controller,
+              autofocus: true,
             ),
             actions: <Widget>[
               MaterialButton(

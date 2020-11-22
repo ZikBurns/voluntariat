@@ -3,16 +3,7 @@ import 'package:flutter_firestore/data/entity.dart';
 
 class EntityService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Entities");
-  String id;
-
-
   EntityService();
-
-  Future updateActivity(String id, String name) async{
-    return await ref.doc(id).set({
-      'name': name,
-    });
-  }
 
   List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){

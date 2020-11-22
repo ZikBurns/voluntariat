@@ -1,7 +1,7 @@
 class Activity{
-  final String title;
-  final String desc;
-
-  Activity(this.title, this.desc);
+  String title;
+  String desc;
+  String id;
+  Activity(this.id,this.title, this.desc);
 
 }

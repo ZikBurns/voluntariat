@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_firestore/adminscreens/entities/entities.dart';
+import 'package:flutter_firestore/adminscreens/newactivity/form_new_activity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
@@ -93,7 +94,7 @@ class _HomePageState extends State<AdminHomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(onPressed: (){
-          //Navigator.push(context, MaterialPageRoute(builder:(context)=> Afegir()));
+          Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
         },
           child: Icon(Icons.add,color:Colors.white,size: 30),
           backgroundColor: Colors.green,

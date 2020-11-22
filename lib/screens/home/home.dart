@@ -12,44 +12,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool searching=false;
+  Stream<List<Activity>> searchresults=ActivityService().activities;
 
 
   void initState() {
-  super.initState();
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
-      value: ActivityService().activities,
+      value: searchresults,
       child: Scaffold(
         appBar: AppBar(
-            title: !searching ?  Text("Voluntariats"):
-            TextField(
-              decoration: InputDecoration(
-                  icon: Icon(Icons.search),
-                  hintText: "Cerca",
-                  hintStyle: TextStyle(color: Colors.white)
-              ),
-            ),
+            title: Text("Voluntariats"),
             backgroundColor: Theme.of(context).primaryColor,
             centerTitle: true,
             actions: <Widget>[
-              !searching?IconButton(
+              IconButton(
                   icon: Icon(Icons.search, color: Colors.white,),
                   onPressed: (){
-                    setState(() {
-                      searching=!searching;
-                    });
-                  }
-              )
-                  : IconButton(
-                  icon: new Icon(Icons.cancel, color: Colors.white,),
-                  onPressed: (){
-                    setState(() {
-                      searching=!searching;
-                    });
+
                   }
               )
             ]

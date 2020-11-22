@@ -4,9 +4,6 @@ import 'package:flutter_firestore/data/activity.dart';
 
 class ActivityService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Activities");
-  String id;
-
-
   ActivityService();
 
   Future updateActivity(String id, String title, String desc) async{
@@ -18,8 +15,8 @@ class ActivityService{
 
   List<Activity> _ActivitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      print(doc.data);
-      return Activity(doc.get('title')?? '', doc.get('desc')?? '');
+      print(doc.id+doc.get('title')+doc.get('desc'));
+      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '');
     }).toList();
   }
 
@@ -28,4 +25,17 @@ class ActivityService{
     return ref.snapshots()
         .map(_ActivitiesFromSnapshot);
   }
+
+  void addActivity(Activity activity){
+    ref.add({'tittle':activity.title, 'desc':activity.desc});
+  }
+
+  void addActivityMap(Map<String, dynamic> map){
+    ref.add(map);
+  }
+
+  deleteActivity(Activity activity) async {
+    await FirebaseFirestore.instance.collection('Activities').doc(activity.id).delete();
+  }
+
 }

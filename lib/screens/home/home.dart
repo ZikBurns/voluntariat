@@ -4,6 +4,7 @@ import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -12,32 +13,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Stream<List<Activity>> searchresults=ActivityService().activities;
+  SearchBar searchBar;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-
-  void initState() {
-
-    super.initState();
+  AppBar buildAppBar(BuildContext context) {
+    return new AppBar(
+        title: new Text('Voluntariats'),
+        centerTitle: true,
+        actions: [searchBar.getSearchAction(context)]);
   }
+
+  void onSubmitted(String value) {
+    setState(() => _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
+  }
+
+  _HomePageState() {
+    searchBar = new SearchBar(
+        inBar: false,
+        buildDefaultAppBar: buildAppBar,
+        setState: setState,
+        onSubmitted: onSubmitted,
+        onCleared: () {
+          print("cleared");
+        },
+        onClosed: () {
+          print("closed");
+        });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
-      value: searchresults,
+      value: ActivityService().activities,
       child: Scaffold(
-        appBar: AppBar(
-            title: Text("Voluntariats"),
-            backgroundColor: Theme.of(context).primaryColor,
-            centerTitle: true,
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.search, color: Colors.white,),
-                  onPressed: (){
-
-                  }
-              )
-            ]
-        ),
+        appBar: searchBar.build(context),
         drawer: new Drawer(
           child: new ListView(
             children: <Widget>[

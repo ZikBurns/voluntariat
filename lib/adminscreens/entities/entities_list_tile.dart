@@ -13,7 +13,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
   TextEditingController controller = TextEditingController();
 
   //It's Future because we are promising that a String will be returned
-  Future<String> NewEntityDialog(BuildContext context){
+  Future<String> UpdateEntityDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){
@@ -44,6 +44,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -59,7 +60,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
                   ),
                   IconButton(icon: Icon(Icons.edit),
                     onPressed: (){
-                      NewEntityDialog(context).then((onValue){
+                      UpdateEntityDialog(context).then((onValue){
                         if ((onValue!=null)&&(onValue.isNotEmpty)) {
                           widget.entity.name=onValue;
                           EntityService().updateEntity(widget.entity);
@@ -69,8 +70,30 @@ class _HomeListTileState extends State<EntitiesListTile> {
                   ),
                   IconButton(icon: Icon(Icons.delete),
                     onPressed: (){
-                    //TODO: Show alert dialog instead of deleting directly https://medium.com/multiverse-software/alert-dialog-and-confirmation-dialog-in-flutter-8d8c160f4095
-                      EntityService().deleteEntity(widget.entity);
+                      showDialog(
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              title: Text("Estas segur?"),
+                              content: Text("Aquesta operació podria afectar altres dades de l'aplicacio"),
+                              actions: [
+                                FlatButton(
+                                  child: Text("Cancelar"),
+                                  onPressed:  () {
+                                    Navigator.of(context, rootNavigator: true).pop();
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Esborrar"),
+                                  onPressed:  () {
+                                    EntityService().deleteEntity(widget.entity);
+                                    Navigator.of(context, rootNavigator: true).pop();
+                                  },
+                                )
+                              ],
+                            );
+                          }
+                      );
                     },
                   ),
                 ],

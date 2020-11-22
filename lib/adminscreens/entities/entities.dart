@@ -27,8 +27,13 @@ class _EntitiesListState extends State<Entities> {
               autofocus: true,
             ),
             actions: <Widget>[
-              MaterialButton(
-                elevation: 5.0,
+              FlatButton(
+                child: Text("Cancelar"),
+                onPressed:  () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+              ),
+              FlatButton(
                 onPressed: (){
                   Navigator.of(context).pop(controller.text.toString());
                 },

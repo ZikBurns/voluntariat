@@ -15,8 +15,13 @@ class ActivityService{
 
   List<Activity> _ActivitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
+      var entitylist;
+      //Firestore returns a List<Dynamic>, we want to transform it to List<String>
+      if (doc.get('entities')==null) entitylist=null;
+      else entitylist=List<String>.from(doc.get('entities'));
+
       print(doc.id+doc.get('title')+doc.get('desc'));
-      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '');
+      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',entitylist);
     }).toList();
   }
 

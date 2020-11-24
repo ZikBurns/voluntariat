@@ -42,7 +42,9 @@ class _FormElementsState extends State<FormElements> {
               attribute: 'title',
               readOnly: false,
               validators: [
-                FormBuilderValidators.required(),
+                (val){
+                  if(val=="") return "L'activitat ha de tenir un titol.";
+                }
               ],
             ),
             SizedBox(height: 20),
@@ -65,9 +67,14 @@ class _FormElementsState extends State<FormElements> {
             Text('checkboxGroup',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckboxGroup(
-              attribute: 'checkboxGroup',
+              attribute: 'entities',
               options:
                 listOfEntities.map((e) => FormBuilderFieldOption(value: e)).toList(),
+              validators: [
+                (val){
+                  if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
+                }
+              ],
             ),
             SizedBox(height: 20),
           ],

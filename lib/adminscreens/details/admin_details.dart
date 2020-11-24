@@ -17,15 +17,21 @@ class _DetailsPageState extends State<AdminDetailsPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.activity.title),
-
         ),
-        body: Column(
+        body: ListView(
+          padding: const EdgeInsets.all(8),
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(widget.activity.desc),
-            )
-          ],
+            ListTile(
+              title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),
+              subtitle: SelectableText(widget.activity.desc)
+            ),
+            Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+            ListTile(
+                title: Text("Entitats",style: Theme.of(context).textTheme.headline5),
+                subtitle: SelectableText(widget.activity.presentEntities())
+            ),
+            Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+          ]
         ),
       floatingActionButton: Column(
       mainAxisAlignment: MainAxisAlignment.end,

@@ -12,17 +12,19 @@ class _State extends State<HomeList> {
 
   @override
   Widget build(BuildContext context) {
-    final list_activities=Provider.of<List<Activity>>(context) ?? [];
-    return ListView.builder(
-        itemCount: list_activities.length,
-        itemBuilder: (context,index){
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
+    var list_activities=Provider.of<List<Activity>>(context) ?? [];
+      return ListView.builder(
+          itemCount: list_activities.length,
+          itemBuilder: (context,index){
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
                 child: HomeListTile(activity: list_activities[index]),
-            ),
-          );
-        }
-    );
+              ),
+            );
+          }
+      );
+
+
   }
 }

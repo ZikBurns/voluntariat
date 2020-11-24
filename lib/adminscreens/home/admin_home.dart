@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_firestore/adminscreens/entities/entities.dart';
 import 'package:flutter_firestore/adminscreens/newactivity/form_new_activity.dart';
+import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
@@ -17,23 +17,40 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<AdminHomePage> {
-  StreamSubscription<QuerySnapshot> subscription;
-  List<DocumentSnapshot> snapshot= List(10);
 
-  CollectionReference collectionReference = FirebaseFirestore.instance.collection("Activities");
+  SearchBar searchBar;
+  String searchvalue=null;
 
+  AppBar buildAppBar(BuildContext context) {
+    return new AppBar(
+        title: new Text('Voluntariats'),
+        centerTitle: true,
+        actions: [searchBar.getSearchAction(context)]);
+  }
 
-
-  void initState() {
-    //db.reference().child(firelistname).onChildAdded.listen(_activityAdded);
-    //db.reference().child(firelistname).onChildRemoved.listen(_activityRemoved);
-    //db.reference().child(firelistname).onChildChanged.listen(_activityChanged);
-    super.initState();
-    subscription = collectionReference.snapshots().listen((datasnapshot) {
-      setState(() {
-        snapshot = datasnapshot.docs;
-      });
+  void onSubmitted(String value) {
+    print("Maria "+value);
+    setState(() async {
+      searchvalue=value;
+      await Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
+      searchvalue=null;
     });
+  }
+
+  _HomePageState() {
+    searchBar = new SearchBar(
+        inBar: false,
+        buildDefaultAppBar: buildAppBar,
+        setState: setState,
+        onSubmitted: onSubmitted,
+        onCleared: () {
+          searchvalue=null;
+          print("cleared");
+        },
+        onClosed: () {
+          searchvalue=null;
+          print("closed");
+        });
   }
 
   @override
@@ -41,17 +58,7 @@ class _HomePageState extends State<AdminHomePage> {
     return StreamProvider<List<Activity>>.value(
       value: ActivityService().activities,
       child: Scaffold(
-        appBar: AppBar(
-            title:Text("Voluntariats"),
-            backgroundColor: Theme.of(context).primaryColor,
-            centerTitle: true,
-            actions: <Widget>[
-              new IconButton(
-                  icon: new Icon(Icons.search, color: Colors.white,),
-                  onPressed: null
-              )
-            ]
-        ),
+        appBar: searchBar.build(context),
         drawer: new Drawer(
           child: new ListView(
             children: <Widget>[

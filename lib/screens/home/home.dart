@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
+import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -14,18 +15,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   SearchBar searchBar;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  String searchvalue=null;
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
         title: new Text('Voluntariats'),
         centerTitle: true,
         actions: [searchBar.getSearchAction(context)]);
-  }
+    }
 
   void onSubmitted(String value) {
-    setState(() => _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
+    print("Maria "+value);
+    setState(() async {
+      searchvalue=value;
+      await Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
+      searchvalue=null;
+    });
   }
 
   _HomePageState() {
@@ -35,13 +40,14 @@ class _HomePageState extends State<HomePage> {
         setState: setState,
         onSubmitted: onSubmitted,
         onCleared: () {
+          searchvalue=null;
           print("cleared");
         },
         onClosed: () {
+          searchvalue=null;
           print("closed");
         });
   }
-
 
   @override
   Widget build(BuildContext context) {

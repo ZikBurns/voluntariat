@@ -13,7 +13,6 @@ class HomeListTile extends StatefulWidget {
 
 class _HomeListTileState extends State<HomeListTile> {
 
-
   passData(Activity act){
     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(act)));
   }

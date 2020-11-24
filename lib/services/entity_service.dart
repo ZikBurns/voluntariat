@@ -18,12 +18,16 @@ class EntityService{
         .map(_EntitiesFromSnapshot);
   }
 
+  Stream<QuerySnapshot> getsnapshots(){
+    return ref.snapshots();
+  }
+
   deleteEntity(Entity entity) async {
     await FirebaseFirestore.instance.collection('Entities').doc(entity.id).delete();
   }
   
   void addEntity(String entityname){
-    ref.add({'name':entityname});
+    ref.doc(entityname).set({'name':entityname});
   }
 
   void updateEntity(Entity entity) {
@@ -34,5 +38,19 @@ class EntityService{
       print(e.toString());
     }
   }
+
+  Future<List<String>> listOfNamesEntity() async {
+    List<String> endlist = new List();
+    final QuerySnapshot result = await ref.get();
+    final List<DocumentSnapshot> documents = result.docs;
+    documents.forEach((data){
+        print(data['name']);
+        endlist.add(data['name']);
+    });
+    print(endlist);
+    return endlist;
+  }
+
+
 
 }

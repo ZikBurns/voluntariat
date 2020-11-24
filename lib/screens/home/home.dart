@@ -5,7 +5,7 @@ import 'package:flutter_firestore/screens/home/home_list.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
-
+import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -59,6 +59,9 @@ class _HomePageState extends State<HomePage> {
               new ListTile(
                 title: new Text("Qui som?"),
                 leading: new Icon(Icons.approval, color: Colors.deepPurpleAccent),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+                },
               ),
               new ListTile(
                 title: new Text("Zona Administrador"),

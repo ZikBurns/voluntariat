@@ -8,6 +8,7 @@ import 'package:flutter_firestore/screens/home/home.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'admin_home_list.dart';
+import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 
 
 class AdminHomePage extends StatefulWidget {
@@ -61,6 +62,9 @@ class _HomePageState extends State<AdminHomePage> {
               new ListTile(
                 title: new Text("Qui som?"),
                 leading: new Icon(Icons.approval, color: Colors.deepPurpleAccent),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPageAdmin()));
+                },
               ),
               new ListTile(
                 title: new Text("Entitats"),

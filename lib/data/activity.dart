@@ -1,17 +1,14 @@
 class Activity{
+  String id;
   String title;
   String desc;
-  String id;
+  String type;
   List<String> entities;
+  DateTime startDate;
+  DateTime finalDate;
 
-  Activity(String id,String title, String desc,List<String> entities){
-    print('hola');
-    this.id=id;
-    this.title=title;
-    this.desc=desc;
-    print(entities??'0');
-    this.entities=entities;
-  }
+
+  Activity(this.id, this.title, this.desc, this.type, this.entities, this.startDate, this.finalDate);
 
   String presentEntities(){
     if (entities!=null){
@@ -19,7 +16,7 @@ class Activity{
       for (var i=0; i<entities.length; i++) {
         text=text+entities[i]+"\n";
       }
-      return text;
+      return text.substring(0,text.length-1);
     }
     else return "No hi ha entitats assignades";
 

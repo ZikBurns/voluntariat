@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter_firestore/data/activity.dart';
 
 class ActivityService{
@@ -19,9 +18,12 @@ class ActivityService{
       //Firestore returns a List<Dynamic>, we want to transform it to List<String>
       if (doc.get('entities')==null) entitylist=null;
       else entitylist=List<String>.from(doc.get('entities'));
-
+      DateTime startdate = doc.get('startdate')?.toDate();
+      print(startdate);
+      DateTime finaldate = doc.get('finaldate')?.toDate();
+      print(finaldate);
       print(doc.id+doc.get('title')+doc.get('desc'));
-      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',entitylist);
+      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',doc.get('type')?? '',entitylist,startdate,finaldate);
     }).toList();
   }
 

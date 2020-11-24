@@ -1,10 +1,9 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
 
 class FormElements extends StatefulWidget {
   @override
@@ -64,7 +63,7 @@ class _FormElementsState extends State<FormElements> {
             //* ----------------------------------------------------
             //* CHECKBOX GROUP
             //* ----------------------------------------------------
-            Text('checkboxGroup',
+            Text('Entitat/s',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckboxGroup(
               attribute: 'entities',
@@ -77,6 +76,38 @@ class _FormElementsState extends State<FormElements> {
               ],
             ),
             SizedBox(height: 20),
+            //* ----------------------------------------------------
+            //* CHECKBOX GROUP
+            //* ----------------------------------------------------
+            Text('Entitat/s',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormBuilderDropdown(
+              hint: Text('Select Gender'),
+              attribute: 'type',
+              items: ['Participacio comunitaria', 'Exit educatiu', 'Families', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
+                 .map((type) =>
+                     DropdownMenuItem(value: type, child: Text("$type")))
+                 .toList(),
+            ),
+            SizedBox(height: 20),
+            Text('Dates',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormBuilderDateTimePicker(
+              attribute: 'startdate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Dia d\'inici',
+              ),
+            ),
+            FormBuilderDateTimePicker(
+              attribute: 'finaldate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Dia final',
+              ),
+            ),
           ],
         ),
       ),

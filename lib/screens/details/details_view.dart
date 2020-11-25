@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/screens/details/present_entities.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import '../../data/activity.dart';
@@ -28,10 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   subtitle: SelectableText(widget.activity.desc)
               ),
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                  title: Text("Entitats",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.presentEntities())
-              ),
+              PresentEntities(widget.activity),
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
               ListTile(
                   title: Text("Tipus",style: Theme.of(context).textTheme.headline5),

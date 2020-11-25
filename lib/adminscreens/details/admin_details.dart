@@ -28,7 +28,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
             Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
             ListTile(
                 title: Text("Entitats",style: Theme.of(context).textTheme.headline5),
-                subtitle: SelectableText(widget.activity.presentEntities())
+
             ),
             Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
             ListTile(

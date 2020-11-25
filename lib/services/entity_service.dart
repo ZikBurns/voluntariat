@@ -27,7 +27,7 @@ class EntityService{
   }
   
   void addEntity(String entityname){
-    ref.doc(entityname).set({'name':entityname});
+    ref.add({'name':entityname});
   }
 
   void updateEntity(Entity entity) {

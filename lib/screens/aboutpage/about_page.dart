@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
             children: <Widget>[
               ListTile(
                   title: Text("Qui ha fet aquesta app?",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText("")
+                  subtitle: SelectableText("Aquest es un projecte de colaboracio entre el ajuntament de Tortosa i la Universitat Rovira i Virgili bla bla bla...")
               ),
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
             ]

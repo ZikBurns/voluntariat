@@ -22,7 +22,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
       onTap: (){
         passData(widget.activity);
       },
-      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold)),
+      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2),
       subtitle: Text(widget.activity.desc, maxLines: 3,),
     );
   }

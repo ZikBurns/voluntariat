@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../screens/details_view.dart';
+import '../details/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
 
 class HomeListTile extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomeListTileState extends State<HomeListTile> {
       onTap: (){
         passData(widget.activity);
       },
-      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold)),
+      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2),
       subtitle: Text(widget.activity.desc, maxLines: 3,),
     );
   }

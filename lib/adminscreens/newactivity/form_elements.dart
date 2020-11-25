@@ -5,12 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 
-class FormElements extends StatefulWidget {
-  @override
-  _FormElementsState createState() => _FormElementsState();
-}
-
-class _FormElementsState extends State<FormElements> {
+class FormElements extends StatelessWidget {
+  List<Entity> entitylist;
+  List<dynamic> listOfIDs;
 
   List<String> EntitiesToNames(List<Entity> entitylist){
     List<String> namelist = new List();
@@ -21,9 +18,21 @@ class _FormElementsState extends State<FormElements> {
     return namelist;
   }
 
+  List<String> NamestoIDs(List<String> namelist){
+    List<String> idlist=[];
+    for (var i=0; i<entitylist.length; i++) {
+      print(entitylist[i].name+entitylist[i].id);
+      for (var j=0; j<namelist.length; j++) {
+        if (namelist[j] == entitylist[i].name) idlist.add(entitylist[i].id);
+      }
+    }
+    return idlist;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<String> listOfEntities = EntitiesToNames(Provider.of<List<Entity>>(context) ?? []);
+    entitylist=Provider.of<List<Entity>>(context) ?? [];
+    final List<String> namelist = EntitiesToNames(entitylist);
     return Container(
       color: Colors.white,
       child: Padding(
@@ -68,21 +77,23 @@ class _FormElementsState extends State<FormElements> {
             FormBuilderCheckboxGroup(
               attribute: 'entities',
               options:
-                listOfEntities.map((e) => FormBuilderFieldOption(value: e)).toList(),
+                namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
               validators: [
                 (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
               ],
+              valueTransformer: (val)=>
+              List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------
             //* CHECKBOX GROUP
             //* ----------------------------------------------------
-            Text('Entitat/s',
+            Text('Tipus',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderDropdown(
-              hint: Text('Select Gender'),
+              hint: Text('Selecciona un tipus'),
               attribute: 'type',
               items: ['Participacio comunitaria', 'Exit educatiu', 'Families', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
                  .map((type) =>
@@ -97,7 +108,7 @@ class _FormElementsState extends State<FormElements> {
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Dia d\'inici',
+                labelText: 'Data d\'inici',
               ),
             ),
             FormBuilderDateTimePicker(
@@ -105,7 +116,7 @@ class _FormElementsState extends State<FormElements> {
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Dia final',
+                labelText: 'Data final',
               ),
             ),
           ],

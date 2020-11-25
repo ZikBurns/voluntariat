@@ -15,7 +15,7 @@ class PresentEntities extends StatefulWidget {
 class _PresentEntitiesState extends State<PresentEntities> {
 
   String presentEntities(List<Entity> entities){
-    if (entities!=null){
+    if ((entities!=null)&&(entities.length>0)){
       String text="";
       for (var i=0; i<entities.length; i++) {
         for (var j = 0; j < widget.activity.entities.length; j++) {
@@ -24,6 +24,7 @@ class _PresentEntitiesState extends State<PresentEntities> {
       }
         return text.substring(0,text.length-1);
       }
+    else if(entities.length==0)return "";
     else return "No hi ha entitats assignades";
   }
 

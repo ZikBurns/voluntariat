@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
 import 'package:flutter_firestore/commonscreeens/search_results.dart';
+import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text("Zona Administrador"),
                 leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
               ),
             ],

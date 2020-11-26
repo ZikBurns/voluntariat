@@ -24,39 +24,29 @@ class _HomeListTileState extends State<AdminHomeListTile> {
         onTap: (){
           passData(widget.activity);
         },
+
         title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
-        subtitle: Column(
-          children: [
-            Container(
-              child: Row(
-                children:<Widget> [
-                  Expanded(
-                      child: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,)
+        subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,),
+        trailing: IconButton(
+          icon: Icon(Icons.visibility),
+          onPressed: (){
+            widget.activity.visible=false;
+            ActivityService().updateActivity(widget.activity);
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Row(
+                    children: [
+                      Icon(Icons.visibility),
+                      SizedBox(width: 20,),
+                      Expanded(
+                        child: Text('L\'activitat ja no es visible'),
+                      )
+                    ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.visibility),
-                    onPressed: (){
-                      widget.activity.visible=false;
-                      ActivityService().updateActivity(widget.activity);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Row(
-                            children: [
-                              Icon(Icons.visibility),
-                              SizedBox(width: 20,),
-                              Expanded(
-                                child: Text('L\'activitat ja no es visible'),
-                              )
-                            ],
-                          ),
-                        )
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
+                )
+            );
+          },
         ),
       );
     }
@@ -66,38 +56,27 @@ class _HomeListTileState extends State<AdminHomeListTile> {
           passData(widget.activity);
         },
         title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
-        subtitle: Column(
-          children: [
-            Container(
-              child: Row(
-                children:<Widget> [
-                  Expanded(
-                      child: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,)
+        subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,),
+        trailing: IconButton(
+          icon: Icon(Icons.visibility_off),
+          onPressed: (){
+            widget.activity.visible=true;
+            ActivityService().updateActivity(widget.activity);
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Row(
+                    children: [
+                      Icon(Icons.visibility),
+                      SizedBox(width: 20,),
+                      Expanded(
+                        child: Text('L\'activitat ara es visible per tothom'),
+                      )
+                    ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.visibility_off),
-                    onPressed: (){
-                      widget.activity.visible=true;
-                      ActivityService().updateActivity(widget.activity);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Row(
-                              children: [
-                                Icon(Icons.visibility),
-                                SizedBox(width: 20,),
-                                Expanded(
-                                  child: Text('L\'activitat ara es visible per tothom'),
-                                )
-                              ],
-                            ),
-                          )
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
+                )
+            );
+          },
         ),
       );
     }

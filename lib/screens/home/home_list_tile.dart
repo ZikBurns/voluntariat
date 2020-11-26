@@ -21,6 +21,7 @@ class _HomeListTileState extends State<HomeListTile> {
   Widget build(BuildContext context) {
     if (widget.activity.visible) {
       return ListTile(
+
         onTap: () {
           passData(widget.activity);
         },

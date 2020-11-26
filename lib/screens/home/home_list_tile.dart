@@ -19,12 +19,17 @@ class _HomeListTileState extends State<HomeListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: (){
-        passData(widget.activity);
-      },
-      title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
-      subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,),
-    );
+    if (widget.activity.visible) {
+      return ListTile(
+        onTap: () {
+          passData(widget.activity);
+        },
+        title: Text(widget.activity.title,
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+            maxLines: 2),
+        subtitle: Text(widget.activity.desc, maxLines: 3,),
+      );
+    }
+    else return Container();
   }
 }

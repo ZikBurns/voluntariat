@@ -6,7 +6,7 @@ class Activity{
   List<String> entities;
   DateTime startDate;
   DateTime finalDate;
+  bool visible;
 
-
-  Activity(this.id, this.title, this.desc, this.type, this.entities, this.startDate, this.finalDate);
+  Activity(this.id, this.title, this.desc, this.type, this.entities, this.startDate, this.finalDate,this.visible);
 }

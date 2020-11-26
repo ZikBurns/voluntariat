@@ -119,6 +119,13 @@ class FormElements extends StatelessWidget {
                 labelText: 'Data final',
               ),
             ),
+            SizedBox(height: 20),
+            Text('Visibilitat',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormBuilderCheckbox(
+              attribute: 'visible',
+              label: Text('Vols que l\'activitat sigui visible?'),
+            ),
           ],
         ),
       ),

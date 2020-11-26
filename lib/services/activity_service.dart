@@ -5,10 +5,15 @@ class ActivityService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Activities");
   ActivityService();
 
-  Future updateActivity(String id, String title, String desc) async{
-    return await ref.doc(id).set({
-      'title': title,
-      'desc': desc,
+  Future updateActivity(Activity act) async{
+    return await ref.doc(act.id).set({
+      'title': act.title,
+      'desc': act.desc,
+      'type':act.type,
+      'entities':act.entities,
+      'startdate':act.startDate,
+      'finaldate':act.finalDate,
+      'visible':act.visible
     });
   }
 
@@ -23,7 +28,8 @@ class ActivityService{
       DateTime finaldate = doc.get('finaldate')?.toDate();
       print(finaldate);
       print(doc.id+doc.get('title')+doc.get('desc'));
-      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',doc.get('type')?? '',entitylist,startdate,finaldate);
+      print(doc.get('visible'));
+      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',doc.get('type')?? '',entitylist,startdate,finaldate, doc.get('visible')??false);
     }).toList();
   }
 

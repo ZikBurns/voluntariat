@@ -3,6 +3,7 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import "package:charcode/charcode.dart";
 
 
 class FormElements extends StatelessWidget {
@@ -95,7 +96,7 @@ class FormElements extends StatelessWidget {
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
-              items: ['Participacio comunitaria', 'Exit educatiu', 'Families', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
+              items: ['Participaci'+String.fromCharCode($oacute)+' comunit'+String.fromCharCode($agrave)+'ria',String.fromCharCode($Egrave)+'xit educatiu', 'Fam'+String.fromCharCode($iacute)+'lies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
                  .map((type) =>
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),

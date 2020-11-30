@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firestore/adminscreens/details/modify_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
@@ -52,7 +53,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
           FloatingActionButton(
             heroTag: "editactivitybutton",
             onPressed: () {
-
+              Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyActivity(widget.activity)));
             },
             child: Icon(Icons.edit),
             foregroundColor: Colors.white,

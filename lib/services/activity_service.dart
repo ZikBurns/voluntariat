@@ -16,6 +16,20 @@ class ActivityService{
       'visible':act.visible
     });
   }
+  Future updateActivityMap(String id,Map<String, dynamic> map) async{
+    print(map['id']);
+    print(map['id']);
+    print(map['title']);
+    return await ref.doc(id).set({
+      'title': map['title'],
+      'desc': map['desc'],
+      'type':map['type'],
+      'entities':map['entities'],
+      'startdate':map['startdate'],
+      'finaldate':map['finaldate'],
+      'visible':map['visible']
+    });
+  }
 
   List<Activity> _ActivitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){

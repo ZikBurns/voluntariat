@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -6,12 +9,15 @@ import 'package:intl/intl.dart';
 import "package:charcode/charcode.dart";
 
 
-class FormElements extends StatefulWidget {
+class ModifyActivityElements extends StatefulWidget {
+  Activity activity;
+  ModifyActivityElements(this.activity);
+
   @override
-  _FormElementsState createState() => _FormElementsState();
+  _ModifyActivityElementsState createState() => _ModifyActivityElementsState();
 }
 
-class _FormElementsState extends State<FormElements> {
+class _ModifyActivityElementsState extends State<ModifyActivityElements> {
   List<Entity> entitylist;
   List<dynamic> listOfIDs;
 
@@ -51,12 +57,13 @@ class _FormElementsState extends State<FormElements> {
             //* TEXT INPUT
             //* ----------------------------------------------------
             FormBuilderTextField(
+              initialValue: widget.activity.title,
               maxLines: 1,
               obscureText: false,
               attribute: 'title',
               readOnly: false,
               validators: [
-                (val){
+                    (val){
                   if(val=="") return "L'activitat ha de tenir un titol.";
                 }
               ],
@@ -68,6 +75,7 @@ class _FormElementsState extends State<FormElements> {
             //* TEXT INPUT
             //* ----------------------------------------------------
             FormBuilderTextField(
+              initialValue: widget.activity.desc,
               maxLines: 10,
               obscureText: false,
               attribute: 'desc',
@@ -81,11 +89,12 @@ class _FormElementsState extends State<FormElements> {
             Text('Entitat/s',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckboxGroup(
+              // TODO: initialValue: widget.activity.entities,
               attribute: 'entities',
               options:
-                namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
+              namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
               validators: [
-                (val){
+                    (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
               ],
@@ -99,17 +108,19 @@ class _FormElementsState extends State<FormElements> {
             Text('Tipus',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderDropdown(
+              // TODO: initialValue: widget.activity.type,
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
               items: ['Participaci'+String.fromCharCode($oacute)+' comunit'+String.fromCharCode($agrave)+'ria',String.fromCharCode($Egrave)+'xit educatiu', 'Fam'+String.fromCharCode($iacute)+'lies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
-                 .map((type) =>
-                     DropdownMenuItem(value: type, child: Text("$type")))
-                 .toList(),
+                  .map((type) =>
+                  DropdownMenuItem(value: type, child: Text("$type")))
+                  .toList(),
             ),
             SizedBox(height: 20),
             Text('Dates',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderDateTimePicker(
+              initialValue: widget.activity.startDate,
               attribute: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -118,6 +129,7 @@ class _FormElementsState extends State<FormElements> {
               ),
             ),
             FormBuilderDateTimePicker(
+              initialValue: widget.activity.finalDate,
               attribute: 'finaldate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -129,6 +141,7 @@ class _FormElementsState extends State<FormElements> {
             Text('Visibilitat',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckbox(
+              initialValue: widget.activity.visible,
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
             ),

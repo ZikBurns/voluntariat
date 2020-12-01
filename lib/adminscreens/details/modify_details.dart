@@ -7,6 +7,7 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import "package:charcode/charcode.dart";
 
 
 class ModifyActivity extends StatefulWidget {
@@ -22,6 +23,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.activity.entities);
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
       child: Scaffold(
@@ -29,6 +31,16 @@ class _ModifyActivityState extends State<ModifyActivity> {
           title: Text("Form"),
         ),
         body: FormBuilder(
+          initialValue:
+          {
+            'title': widget.activity.title,
+            'desc': widget.activity.desc,
+            //entities are modified inside ModifyActivityElements()
+            'type':widget.activity.type,
+            'startdate': widget.activity.startDate,
+            'finaldate': widget.activity.finalDate,
+            'visible': widget.activity.visible,
+          },
           key: _fbKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -45,7 +57,6 @@ class _ModifyActivityState extends State<ModifyActivity> {
                           child: Text("Create"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              print(_fbKey.currentState.value);
                               ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value);
                               Navigator.pop(context);
                               Navigator.pop(context);

@@ -25,7 +25,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
     List<String> namelist = new List();
     for (var i=0; i<entitylist.length; i++) {
       namelist.add(entitylist[i].name);
-      print(namelist);
     }
     return namelist;
   }
@@ -33,7 +32,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
   List<String> NamestoIDs(List<String> namelist){
     List<String> idlist=[];
     for (var i=0; i<entitylist.length; i++) {
-      print(entitylist[i].name+entitylist[i].id);
       for (var j=0; j<namelist.length; j++) {
         if (namelist[j] == entitylist[i].name) idlist.add(entitylist[i].id);
       }
@@ -41,10 +39,24 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
     return idlist;
   }
 
+  List<String> IDsToNames(List<String> idlist){
+    print(entitylist.length);
+    List<String> namelist=[];
+    for (var i=0; i<entitylist.length; i++) {
+      for (var j=0; j<idlist.length; j++) {
+        if (idlist[j] == entitylist[i].id) namelist.add(entitylist[i].name);
+      }
+    }
+    print('hola'+namelist.toString());
+    return namelist;
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    entitylist=Provider.of<List<Entity>>(context) ?? [];
+    entitylist= Provider.of<List<Entity>>(context) ?? [];
     final List<String> namelist = EntitiesToNames(entitylist);
+    List<String> initialcheckedentities=IDsToNames(widget.activity.entities);
     return Container(
       color: Colors.white,
       child: Padding(
@@ -57,7 +69,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             //* TEXT INPUT
             //* ----------------------------------------------------
             FormBuilderTextField(
-              initialValue: widget.activity.title,
               maxLines: 1,
               obscureText: false,
               attribute: 'title',
@@ -75,7 +86,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             //* TEXT INPUT
             //* ----------------------------------------------------
             FormBuilderTextField(
-              initialValue: widget.activity.desc,
               maxLines: 10,
               obscureText: false,
               attribute: 'desc',
@@ -89,7 +99,8 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             Text('Entitat/s',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckboxGroup(
-              // TODO: initialValue: widget.activity.entities,
+              //TODO: initialvalue is assigned with [] first because the data has not yet arrived from the cloud and therefore cannot be assigned again. Find a way to make it work. Ideal option: make a loading button until Stream Provider has everything.
+              initialValue: initialcheckedentities,
               attribute: 'entities',
               options:
               namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
@@ -108,7 +119,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             Text('Tipus',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderDropdown(
-              // TODO: initialValue: widget.activity.type,
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
               items: ['Participaci'+String.fromCharCode($oacute)+' comunit'+String.fromCharCode($agrave)+'ria',String.fromCharCode($Egrave)+'xit educatiu', 'Fam'+String.fromCharCode($iacute)+'lies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
@@ -120,7 +130,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             Text('Dates',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderDateTimePicker(
-              initialValue: widget.activity.startDate,
               attribute: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -129,7 +138,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ),
             ),
             FormBuilderDateTimePicker(
-              initialValue: widget.activity.finalDate,
               attribute: 'finaldate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -141,7 +149,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             Text('Visibilitat',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckbox(
-              initialValue: widget.activity.visible,
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
             ),

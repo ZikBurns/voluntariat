@@ -54,7 +54,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
-                          child: Text("Create"),
+                          child: Text("Enviar"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value);

@@ -57,7 +57,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
     entitylist= Provider.of<List<Entity>>(context) ?? [];
     final List<String> namelist = EntitiesToNames(entitylist);
     List<String> initialcheckedentities=IDsToNames(widget.activity.entities);
-    return Container(
+    return entitylist.length==0 ? CircularProgressIndicator(): Container(
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(16.0),

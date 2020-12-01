@@ -37,7 +37,8 @@ class _FormNewActivityState extends State<FormNewActivity> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
-                          child: Text("Create"),
+                          child: Text("Crear"
+                              ""),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               print(_fbKey.currentState.value);

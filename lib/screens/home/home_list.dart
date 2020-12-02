@@ -19,9 +19,7 @@ class _State extends State<HomeList> {
             if(list_activities[index].visible){
               return Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Card(
-                  child: HomeListTile(activity: list_activities[index]),
-                ),
+                child: HomeListTile(activity: list_activities[index]),
               );
             }
             else return Container();

@@ -57,10 +57,15 @@ class _HomePageState extends State<HomePage> {
         appBar: searchBar.build(context),
         drawer: new Drawer(
           child: new ListView(
+            padding: EdgeInsets.zero,
             children: <Widget>[
               new UserAccountsDrawerHeader(
-                  accountName: new Text("Aplicació de voluntariats"),
-                  accountEmail: new Text("Troba un a Tortosa")
+                  //accountName: new Text("Aplicació de voluntariats",style:TextStyle(color: Colors.black),),
+                  accountEmail: new Text("Troba un voluntariat a Tortosa",style:TextStyle(color: Colors.black)),
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage("http://www.tortosa.cat/webajt/ajunta/imatge/escutpv.jpg"),
+                    )
+                ),
               ),
               new ListTile(
                 title: new Text("Qui som?"),

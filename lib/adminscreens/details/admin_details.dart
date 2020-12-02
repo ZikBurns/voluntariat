@@ -28,6 +28,14 @@ class _DetailsPageState extends State<AdminDetailsPage> {
           body: ListView(
             padding: const EdgeInsets.all(8),
             children: <Widget>[
+              Container(
+                child: Image(
+                    alignment: Alignment(-.2, 0),
+                    image: NetworkImage(
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png"),
+                    fit: BoxFit.cover),
+              ),
+              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
               ListTile(
                 title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),
                 subtitle: SelectableText(widget.activity.desc)

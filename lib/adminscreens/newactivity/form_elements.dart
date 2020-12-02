@@ -72,7 +72,11 @@ class _FormElementsState extends State<FormElements> {
               obscureText: false,
               attribute: 'desc',
               readOnly: false,
-              validators: [],
+              validators: [
+                    (val){
+                  if(val=="") return "L'activitat ha de tenir una descripció.";
+                }
+              ],
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------
@@ -105,6 +109,11 @@ class _FormElementsState extends State<FormElements> {
                  .map((type) =>
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
+                }
+              ],
             ),
             SizedBox(height: 20),
             Text('Dates',
@@ -116,6 +125,11 @@ class _FormElementsState extends State<FormElements> {
               decoration: InputDecoration(
                 labelText: 'Data d\'inici',
               ),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data d\'inici";
+                }
+              ],
             ),
             FormBuilderDateTimePicker(
               attribute: 'finaldate',
@@ -124,6 +138,11 @@ class _FormElementsState extends State<FormElements> {
               decoration: InputDecoration(
                 labelText: 'Data final',
               ),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data final";
+                }
+              ],
             ),
             SizedBox(height: 20),
             Text('Visibilitat',

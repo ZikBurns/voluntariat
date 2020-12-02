@@ -19,9 +19,7 @@ class _HomeListTileState extends State<HomeListTile> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.activity.visible) {
       return ListTile(
-
         onTap: () {
           passData(widget.activity);
         },
@@ -30,7 +28,5 @@ class _HomeListTileState extends State<HomeListTile> {
             maxLines: 2),
         subtitle: Text(widget.activity.desc, maxLines: 3,),
       );
-    }
-    else return Container();
   }
 }

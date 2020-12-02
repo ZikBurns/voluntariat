@@ -62,7 +62,7 @@ class _FormElementsState extends State<FormElements> {
               ],
             ),
             SizedBox(height: 20),
-            Text('Descripcio',
+            Text('Descripció',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             //* ----------------------------------------------------
             //* TEXT INPUT

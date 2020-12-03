@@ -40,12 +40,13 @@ class _State extends State<SearchResultList> {
     return ListView.builder(
         itemCount: list_activities.length,
         itemBuilder: (context,index){
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
+          if(list_activities[index].visible){
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
               child: HomeListTile(activity: list_activities[index]),
-            ),
-          );
+            );
+          }
+          else return Container();
         }
     );
 

@@ -93,8 +93,7 @@ class _FormElementsState extends State<FormElements> {
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
               ],
-              valueTransformer: (val)=>
-              List<dynamic>.from(NamestoIDs(List<String>.from(val))),
+              valueTransformer: (val)=> val==null ? val : List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------

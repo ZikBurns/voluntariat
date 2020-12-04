@@ -16,7 +16,10 @@ class _State extends State<HomeList> {
       return ListView.builder(
           itemCount: list_activities.length,
           itemBuilder: (context,index){
-            if(list_activities[index].visible){
+            var now= new DateTime.now();
+            bool expired= list_activities[index].visibleDate.isBefore(now);
+
+            if((list_activities[index].visible)&&(!expired)){
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: HomeListTile(activity: list_activities[index]),

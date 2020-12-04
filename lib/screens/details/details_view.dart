@@ -25,6 +25,7 @@ class _DetailsPageState extends State<DetailsPage> {
             padding: const EdgeInsets.all(8),
             children: <Widget>[
               Container(
+                constraints: BoxConstraints(minWidth: 100, maxWidth: 200),
                 child: Image(
                   alignment: Alignment(-.2, 0),
                   image: NetworkImage(
@@ -47,8 +48,23 @@ class _DetailsPageState extends State<DetailsPage> {
               ListTile(
                   title: Text("Dates",style: Theme.of(context).textTheme.headline5),
                   subtitle: SelectableText("Data d\'inici: "+widget.activity.startDate.day.toString()+"/"+widget.activity.startDate.month.toString()+"/"+widget.activity.startDate.year.toString()+"\n"+
-                      "Data final: "+widget.activity.finalDate.day.toString()+"/"+widget.activity.finalDate.month.toString()+"/"+widget.activity.finalDate.year.toString()+"\n")
+                      "Data final: "+widget.activity.finalDate.day.toString()+"/"+widget.activity.finalDate.month.toString()+"/"+widget.activity.finalDate.year.toString())
               ),
+              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+              ListTile(
+                  title: Text("Lloc",style: Theme.of(context).textTheme.headline5),
+                  subtitle: SelectableText(widget.activity.place)
+              ),
+              ListTile(
+                  title: Text("Horari",style: Theme.of(context).textTheme.headline5),
+                  subtitle: SelectableText(widget.activity.schedule)
+              ),
+              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+              ListTile(
+                  title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
+                  subtitle: SelectableText(widget.activity.contact)
+              ),
+              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
             ]
         ),
       ),

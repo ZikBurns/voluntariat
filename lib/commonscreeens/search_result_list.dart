@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_firestore/data/admin.dart' as admin;
+import 'package:flutter_firestore/adminscreens/home/admin_home_list_tile.dart';
 
 class SearchResultList extends StatefulWidget {
   final String searchtext;
@@ -40,13 +42,19 @@ class _State extends State<SearchResultList> {
     return ListView.builder(
         itemCount: list_activities.length,
         itemBuilder: (context,index){
-          if(list_activities[index].visible){
+          if((!admin.isLoggedIn)&&(!list_activities[index].visible)) return Container();
+          else if((!admin.isLoggedIn)&&(list_activities[index].visible)){
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: HomeListTile(activity: list_activities[index]),
             );
           }
-          else return Container();
+          else{
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: AdminHomeListTile(activity: list_activities[index]),
+            );
+          }
         }
     );
 

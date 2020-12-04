@@ -35,8 +35,11 @@ class _ModifyActivityState extends State<ModifyActivity> {
           {
             'title': widget.activity.title,
             'desc': widget.activity.desc,
-            //entities are modified inside ModifyActivityElements()
+            'contact':widget.activity.contact,
+            'place':widget.activity.place,
+            'schedule':widget.activity.schedule,
             'type':widget.activity.type,
+            'visibledate':widget.activity.visibleDate,
             'startdate': widget.activity.startDate,
             'finaldate': widget.activity.finalDate,
             'visible': widget.activity.visible,

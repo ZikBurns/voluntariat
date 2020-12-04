@@ -9,7 +9,8 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
-
+import 'package:flutter_firestore/data/admin.dart' as admin;
+import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
 
 class AdminHomePage extends StatefulWidget {
   @override
@@ -17,9 +18,14 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<AdminHomePage> {
-
   SearchBar searchBar;
   String searchvalue=null;
+
+
+  void initState() {
+    admin.isLoggedIn=true;
+    super.initState();
+  }
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
@@ -84,6 +90,13 @@ class _HomePageState extends State<AdminHomePage> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Entities()));
                 },
               ),
+              new ListTile(
+                title: new Text("Dona el teu feedback"),
+                leading: new Icon(Icons.announcement_outlined, color: Colors.deepPurpleAccent),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FireFeedback()));
+                },
+              ),
               new Divider(
                 height: 10.0,
                 color: Colors.black,
@@ -92,6 +105,7 @@ class _HomePageState extends State<AdminHomePage> {
                 title: new Text("Tancar"),
                 leading: new Icon(Icons.close, color: Colors.deepPurpleAccent),
                 onTap: (){
+                  admin.isLoggedIn=false;
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                 },
               )

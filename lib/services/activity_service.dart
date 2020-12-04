@@ -11,8 +11,12 @@ class ActivityService{
       'desc': act.desc,
       'type':act.type,
       'entities':act.entities,
+      'contact':act.contact,
+      'place':act.place,
+      'schedule':act.schedule,
       'startdate':act.startDate,
       'finaldate':act.finalDate,
+      'visibledate':act.visibleDate,
       'visible':act.visible
     });
   }
@@ -24,9 +28,13 @@ class ActivityService{
       'title': map['title'],
       'desc': map['desc'],
       'type':map['type'],
+      'contact':map['contact'],
+      'place':map['place'],
+      'schedule':map['schedule'],
       'entities':map['entities'],
       'startdate':map['startdate'],
       'finaldate':map['finaldate'],
+      'visibledate':map['visibledate'],
       'visible':map['visible']
     });
   }
@@ -38,12 +46,21 @@ class ActivityService{
       if (doc.get('entities')==null) entitylist=null;
       else entitylist=List<String>.from(doc.get('entities'));
       DateTime startdate = doc.get('startdate')?.toDate();
-      print(startdate);
       DateTime finaldate = doc.get('finaldate')?.toDate();
-      print(finaldate);
-      print(doc.id+doc.get('title')+doc.get('desc'));
+      DateTime visibledate = doc.get('visibledate')?.toDate();
       print(doc.get('visible'));
-      return Activity(doc.id,doc.get('title')?? '', doc.get('desc')?? '',doc.get('type')?? '',entitylist,startdate,finaldate, doc.get('visible')??false);
+      return Activity(
+          doc.id,doc.get('title')?? '',
+          doc.get('desc')?? '',
+          doc.get('type')?? '',
+          doc.get('contact')?? '',
+          doc.get('place')?? '',
+          doc.get('schedule')?? '',
+          entitylist,
+          startdate,
+          finaldate,
+          visibledate,
+          doc.get('visible')??false);
     }).toList();
   }
 

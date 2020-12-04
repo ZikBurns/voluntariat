@@ -145,6 +145,69 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                 labelText: 'Data final',
               ),
             ),
+            FormBuilderDateTimePicker(
+              attribute: 'visibledate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Data fins la que l\'activitat serà visible',
+              ),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
+                }
+              ],
+            ),
+            SizedBox(height: 20),
+            Text('Lloc/s',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            //* ----------------------------------------------------
+            //* TEXT INPUT
+            //* ----------------------------------------------------
+            FormBuilderTextField(
+              maxLines: 1,
+              obscureText: false,
+              attribute: 'place',
+              readOnly: false,
+              validators: [
+                    (val){
+                  if(val=="") return "L'activitat ha de tenir un lloc.";
+                }
+              ],
+            ),
+            Text('Horari',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            //* ----------------------------------------------------
+            //* TEXT INPUT
+            //* ----------------------------------------------------
+            FormBuilderTextField(
+              maxLines: 1,
+              obscureText: false,
+              attribute: 'schedule',
+              readOnly: false,
+              validators: [
+                    (val){
+                  if(val=="") return "L'activitat ha de tenir un horari.";
+                }
+              ],
+            ),
+            SizedBox(height: 20),
+            Text('Contacte',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            //* ----------------------------------------------------
+            //* TEXT INPUT
+            //* ----------------------------------------------------
+            FormBuilderTextField(
+              maxLines: 10,
+              obscureText: false,
+              attribute: 'contact',
+              readOnly: false,
+              validators: [
+                    (val){
+                  if(val=="") return "L'activitat ha de tenir un contacte.";
+                }
+              ],
+            ),
             SizedBox(height: 20),
             Text('Visibilitat',
                 style: TextStyle(fontSize: 20, color: Colors.black)),

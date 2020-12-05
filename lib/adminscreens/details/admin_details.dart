@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore/adminscreens/details/modify_details.dart';
@@ -6,7 +9,9 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:linkable/linkable.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 class AdminDetailsPage extends StatefulWidget {
   Activity activity;
@@ -16,6 +21,37 @@ class AdminDetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<AdminDetailsPage> {
+  String imageUrl;
+  uploadImage() async {
+
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    //Check Permissions
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted)
+    {
+      //Select Image
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+      if (image != null)
+      {
+        //Upload to Firebase
+        var snapshot = await _storage.ref()
+            .child('folderName/imageName')
+            .putFile(file);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(()
+        {
+          imageUrl = downloadUrl;
+        });
+      }
+      else print('No Path Received');
+    }
+    else print('Grant Permissions and try again');
+  }
 
 
 
@@ -77,11 +113,21 @@ class _DetailsPageState extends State<AdminDetailsPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
+            heroTag: "addphototoactivitybutton",
+            onPressed: () {
+              uploadImage();
+            },
+            child: Icon(Icons.add_photo_alternate_rounded),
+            foregroundColor: Colors.white,
+          ),
+          SizedBox(height: 20),
+          FloatingActionButton(
             heroTag: "editactivitybutton",
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyActivity(widget.activity)));
             },
             child: Icon(Icons.edit),
+            backgroundColor: Colors.yellow[900],
             foregroundColor: Colors.white,
           ),
           SizedBox(height: 20),

@@ -219,7 +219,7 @@ class _FormElementsState extends State<FormElements> {
             FormBuilderCheckbox(
               attribute: 'prime',
               label: Text('Vols que l\'activitat sigui destacada?'),
-            ),
+            )
           ],
         ),
       ),

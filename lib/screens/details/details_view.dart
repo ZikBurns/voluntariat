@@ -4,7 +4,6 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../data/activity.dart';
 import 'package:linkable/linkable.dart';
 

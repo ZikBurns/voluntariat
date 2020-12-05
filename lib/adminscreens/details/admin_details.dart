@@ -6,6 +6,7 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:linkable/linkable.dart';
 import 'package:provider/provider.dart';
 class AdminDetailsPage extends StatefulWidget {
   Activity activity;
@@ -66,7 +67,12 @@ class _DetailsPageState extends State<AdminDetailsPage> {
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
               ListTile(
                   title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.contact)
+                  subtitle: ListTile(
+                      title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
+                      subtitle: Linkable(
+                        text: widget.activity.contact,
+                      )
+                  ),
               ),
             ]
           ),

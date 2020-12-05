@@ -43,6 +43,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
             'startdate': widget.activity.startDate,
             'finaldate': widget.activity.finalDate,
             'visible': widget.activity.visible,
+            'prime': widget.activity.prime,
           },
           key: _fbKey,
           child: Padding(

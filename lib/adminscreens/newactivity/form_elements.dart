@@ -39,6 +39,7 @@ class _FormElementsState extends State<FormElements> {
   Widget build(BuildContext context) {
     entitylist=Provider.of<List<Entity>>(context) ?? [];
     final List<String> namelist = EntitiesToNames(entitylist);
+    namelist.sort();
     return Container(
       color: Colors.white,
       child: Padding(
@@ -104,7 +105,7 @@ class _FormElementsState extends State<FormElements> {
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
-              items: ['Participaci'+String.fromCharCode($oacute)+' comunit'+String.fromCharCode($agrave)+'ria',String.fromCharCode($Egrave)+'xit educatiu', 'Fam'+String.fromCharCode($iacute)+'lies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
+              items: ['Participació comunitària','Èxit educatiu', 'Famílies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
                  .map((type) =>
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),

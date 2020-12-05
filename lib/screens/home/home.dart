@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   String searchvalue=null;
   ScrollController scrollController;
   bool dialVisible = true;
+  String filter="";
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
@@ -84,30 +85,23 @@ class _HomePageState extends State<HomePage> {
       animatedIconTheme: IconThemeData(size: 22.0),
       // child: Icon(Icons.add),
       onOpen: () => print('OPENING DIAL'),
-      onClose: () => print('DIAL CLOSED'),
+      onClose: () => setState(() {}),
       visible: dialVisible,
       curve: Curves.bounceIn,
       children: [
         SpeedDialChild(
           child: Icon(Icons.local_library_rounded, color: Colors.white),
-          backgroundColor: Colors.yellowAccent,
-          onTap: () => print('FIRST CHILD'),
-          label: 'Èxit Educatiu',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.yellowAccent,
+          backgroundColor: Colors.amber,
+          onTap: () => filter='Èxit educatiu',
+          label: 'Èxit educatiu',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),
+          labelBackgroundColor: Colors.amberAccent,
         ),
-        SpeedDialChild(
-          child: Icon(Icons.group, color: Colors.white),
-          backgroundColor: Colors.deepOrange,
-          onTap: () => print('FIRST CHILD'),
-          label: 'Participació Comunitaria',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.deepOrangeAccent,
-        ),
+
         SpeedDialChild(
           child: Icon(Icons.face_rounded, color: Colors.white),
           backgroundColor: Colors.red,
-          onTap: () => print('SECOND CHILD'),
+          onTap: () => filter='Joves',
           label: 'Joves',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.redAccent,
@@ -115,8 +109,8 @@ class _HomePageState extends State<HomePage> {
         SpeedDialChild(
           child: Icon(Icons.family_restroom, color: Colors.white),
           backgroundColor: Colors.lightBlue,
-          onTap: () => print('THIRD CHILD'),
-          label: 'Families',
+          onTap: () => filter='Famílies',
+          label: 'Famílies',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.lightBlueAccent,
           /*labelWidget: Container(
@@ -129,10 +123,26 @@ class _HomePageState extends State<HomePage> {
         SpeedDialChild(
           child: Icon(Icons.all_inclusive_rounded, color: Colors.white),
           backgroundColor: Colors.green,
-          onTap: () => print('SECOND CHILD'),
-          label: 'Igualtat oportunitats',
+          onTap: () => filter='Igualtat d\'oportunitats',
+          label: 'Igualtat d\'oportunitats',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.green,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.group, color: Colors.white),
+          backgroundColor: Colors.deepOrange,
+          onTap: () => filter='Participació comunitària',
+          label: 'Participació comunitària',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.deepOrangeAccent,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.format_align_left, color: Colors.white),
+          backgroundColor: Colors.black26,
+          onTap: () => filter="",
+          label: 'Totes les activitats',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.black38,
         ),
       ],
     );
@@ -167,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text("Zona Administrador"),
                 leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
               ),
               new ListTile(
@@ -185,7 +195,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Flexible(
-                child: HomeList(),
+                child: HomeList(filter),
               )
             ],
           ),

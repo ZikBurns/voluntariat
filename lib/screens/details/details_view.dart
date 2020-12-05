@@ -27,6 +27,16 @@ class _DetailsPageState extends State<DetailsPage> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context){
+                        return AlertDialog(
+                          title: Text("Aquesta es una activitat destacada:"),
+                          content: Text("Es necessiten voluntaris urgentment."),
+                        );
+                        //Navigator.of(context, rootNavigator: true).pop();
+                      }
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         duration: Duration(seconds: 6),

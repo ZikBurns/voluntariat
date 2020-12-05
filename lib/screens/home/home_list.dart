@@ -18,7 +18,6 @@ class _State extends State<HomeList> {
           itemBuilder: (context,index){
             var now= new DateTime.now();
             bool expired= list_activities[index].visibleDate.isBefore(now);
-
             if((list_activities[index].visible)&&(!expired)){
               return Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -26,7 +25,6 @@ class _State extends State<HomeList> {
               );
             }
             else return Container();
-
           }
       );
 

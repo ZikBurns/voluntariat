@@ -11,6 +11,7 @@ class Activity{
   DateTime finalDate;
   DateTime visibleDate;
   bool visible;
+  bool prime;
 
   Activity(
       this.id,
@@ -24,5 +25,6 @@ class Activity{
       this.startDate,
       this.finalDate,
       this.visibleDate,
-      this.visible);
+      this.visible,
+      this.prime);
 }

@@ -17,7 +17,8 @@ class ActivityService{
       'startdate':act.startDate,
       'finaldate':act.finalDate,
       'visibledate':act.visibleDate,
-      'visible':act.visible
+      'visible':act.visible,
+      'prime':act.prime
     });
   }
   Future updateActivityMap(String id,Map<String, dynamic> map) async{
@@ -35,7 +36,8 @@ class ActivityService{
       'startdate':map['startdate'],
       'finaldate':map['finaldate'],
       'visibledate':map['visibledate'],
-      'visible':map['visible']
+      'visible':map['visible'],
+      'prime':map['prime']
     });
   }
 
@@ -48,7 +50,6 @@ class ActivityService{
       DateTime startdate = doc.get('startdate')?.toDate();
       DateTime finaldate = doc.get('finaldate')?.toDate();
       DateTime visibledate = doc.get('visibledate')?.toDate();
-      print(doc.get('visible'));
       return Activity(
           doc.id,doc.get('title')?? '',
           doc.get('desc')?? '',
@@ -60,7 +61,8 @@ class ActivityService{
           startdate,
           finaldate,
           visibledate,
-          doc.get('visible')??false);
+          doc.get('visible')??false,
+          doc.get('prime')??false,);
     }).toList();
   }
 

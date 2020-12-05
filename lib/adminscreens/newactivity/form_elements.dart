@@ -213,6 +213,12 @@ class _FormElementsState extends State<FormElements> {
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
             ),
+            Text('Destacada',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormBuilderCheckbox(
+              attribute: 'prime',
+              label: Text('Vols que l\'activitat sigui destacada?'),
+            ),
           ],
         ),
       ),

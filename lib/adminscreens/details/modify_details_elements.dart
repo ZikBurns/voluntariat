@@ -215,6 +215,10 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
             ),
+            FormBuilderCheckbox(
+              attribute: 'prime',
+              label: Text('Vols que l\'activitat sigui destacada?'),
+            ),
           ],
         ),
       ),

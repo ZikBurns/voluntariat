@@ -4,7 +4,10 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../data/activity.dart';
+import 'package:linkable/linkable.dart';
+
 
 class DetailsPage extends StatefulWidget {
   Activity activity;
@@ -13,7 +16,10 @@ class DetailsPage extends StatefulWidget {
   _DetailsPageState createState() => _DetailsPageState();
 }
 
+
 class _DetailsPageState extends State<DetailsPage> {
+
+
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
@@ -62,7 +68,9 @@ class _DetailsPageState extends State<DetailsPage> {
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
               ListTile(
                   title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.contact)
+                  subtitle: Linkable(
+                    text: widget.activity.contact,
+                  )
               ),
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
             ]

@@ -122,7 +122,8 @@ class _HomePageState extends State<AdminHomePage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: (){
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
         },
           child: Icon(Icons.add,color:Colors.white,size: 30),

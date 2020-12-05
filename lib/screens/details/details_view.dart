@@ -16,16 +16,53 @@ class DetailsPage extends StatefulWidget {
 }
 
 
-class _DetailsPageState extends State<DetailsPage> {
 
+class _DetailsPageState extends State<DetailsPage> {
+  Widget primeAppBar(){
+    if(widget.activity.prime){
+      return AppBar(
+        title: Text(widget.activity.title),
+        actions: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 6),
+                        content: Row(
+                          children: [
+                            Icon(Icons.error),
+                            SizedBox(width: 20,),
+                            Expanded(
+                              child: Text('L\'activitat està detacada i necessita voluntaris urgentment.'),
+                            )
+                          ],
+                        ),
+                      )
+                  );
+                },
+                child: Icon(
+                  Icons.error,
+                  size: 26.0,
+                ),
+              )
+          ),
+        ],
+      );
+    }
+    else{
+      return AppBar(
+          title: Text(widget.activity.title)
+      );
+    }
+  }
 
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.activity.title),
-          ),
+          appBar:primeAppBar(),
         body: ListView(
             padding: const EdgeInsets.all(8),
             children: <Widget>[

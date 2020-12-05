@@ -67,12 +67,9 @@ class _DetailsPageState extends State<AdminDetailsPage> {
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
               ListTile(
                   title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
-                  subtitle: ListTile(
-                      title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
-                      subtitle: Linkable(
-                        text: widget.activity.contact,
-                      )
-                  ),
+                  subtitle: Linkable(
+                    text: widget.activity.contact,
+                  )
               ),
             ]
           ),

@@ -15,11 +15,12 @@ class _HomeListTileState extends State<HomeListTile> {
   passData(Activity act){
     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(act)));
   }
-
+  Widget getPrimeIcon() {
+    if(widget.activity.prime) return Icon(Icons.error_outline);
+  }
   @override
   Widget build(BuildContext context) {
-      return Card(
-        child: ListTile(
+      return ListTile(
           leading: CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.white,
@@ -28,9 +29,10 @@ class _HomeListTileState extends State<HomeListTile> {
           onTap: () {
             passData(widget.activity);
           },
-          title:Text(widget.activity.title,style:TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
+          isThreeLine: true,
+          title:Text(widget.activity.title,style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
           subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,),
-        ),
+          trailing: getPrimeIcon(),
       );
   }
 }

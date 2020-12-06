@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text("Zona Administrador"),
                 leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
                 },
               ),
               new ListTile(

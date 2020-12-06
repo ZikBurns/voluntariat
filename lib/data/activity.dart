@@ -12,6 +12,7 @@ class Activity{
   DateTime visibleDate;
   bool visible;
   bool prime;
+  String image;
 
   Activity(
       this.id,
@@ -26,5 +27,6 @@ class Activity{
       this.finalDate,
       this.visibleDate,
       this.visible,
-      this.prime);
+      this.prime,
+      this.image);
 }

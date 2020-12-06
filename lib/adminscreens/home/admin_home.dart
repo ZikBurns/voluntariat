@@ -11,6 +11,8 @@ import 'admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter/rendering.dart';
 
 class AdminHomePage extends StatefulWidget {
   @override
@@ -20,7 +22,8 @@ class AdminHomePage extends StatefulWidget {
 class _HomePageState extends State<AdminHomePage> {
   SearchBar searchBar;
   String searchvalue=null;
-
+  bool dialVisible = true;
+  String filter="";
 
   void initState() {
     admin.isLoggedIn=true;
@@ -57,6 +60,75 @@ class _HomePageState extends State<AdminHomePage> {
           searchvalue=null;
           print("closed");
         });
+  }
+
+  SpeedDial buildSpeedDial() {
+    return SpeedDial(
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      // child: Icon(Icons.add),
+      onOpen: () => print('OPENING DIAL'),
+      onClose: () => setState(() {}),
+      visible: dialVisible,
+      curve: Curves.bounceIn,
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.local_library_rounded, color: Colors.white),
+          backgroundColor: Colors.amber,
+          onTap: () => filter='Èxit educatiu',
+          label: 'Èxit educatiu',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),
+          labelBackgroundColor: Colors.amberAccent,
+        ),
+
+        SpeedDialChild(
+          child: Icon(Icons.face_rounded, color: Colors.white),
+          backgroundColor: Colors.red,
+          onTap: () => filter='Joves',
+          label: 'Joves',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.redAccent,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.family_restroom, color: Colors.white),
+          backgroundColor: Colors.lightBlue,
+          onTap: () => filter='Famílies',
+          label: 'Famílies',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.lightBlueAccent,
+          /*labelWidget: Container(
+            color: Colors.blue,
+            margin: EdgeInsets.only(right: 10),
+            padding: EdgeInsets.all(6),
+            child: Text('Custom Label Widget'),
+          ),*/
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.all_inclusive_rounded, color: Colors.white),
+          backgroundColor: Colors.green,
+          onTap: () => filter='Igualtat d\'oportunitats',
+          label: 'Igualtat d\'oportunitats',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.green,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.group, color: Colors.white),
+          backgroundColor: Colors.deepOrange,
+          onTap: () => filter='Participació comunitària',
+          label: 'Participació comunitària',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.deepOrangeAccent,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.format_align_left, color: Colors.white),
+          backgroundColor: Colors.black26,
+          onTap: () => filter="",
+          label: 'Totes les activitats',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.black38,
+        ),
+      ],
+    );
   }
 
   @override
@@ -122,13 +194,17 @@ class _HomePageState extends State<AdminHomePage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
-        },
-          child: Icon(Icons.add,color:Colors.white,size: 30),
-          backgroundColor: Colors.green,
-
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
+            },
+              child: Icon(Icons.add,color:Colors.white,size: 30),
+              backgroundColor: Colors.green,
+            ),
+          ],
         ),
       )
     );

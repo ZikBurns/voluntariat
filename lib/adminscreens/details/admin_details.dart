@@ -13,6 +13,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:linkable/linkable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 class AdminDetailsPage extends StatefulWidget {
   Activity activity;
   AdminDetailsPage(this.activity);
@@ -22,37 +24,65 @@ class AdminDetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<AdminDetailsPage> {
   String imageUrl;
+
   uploadImage() async {
 
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
     PickedFile image;
-    //Check Permissions
-    await Permission.photos.request();
-    var permissionStatus = await Permission.photos.status;
 
-    if (permissionStatus.isGranted)
-    {
-      //Select Image
+    if(kIsWeb){
       image = await _picker.getImage(source: ImageSource.gallery);
-      var file = File(image.path);
+      File file = File(image.path);
       if (image != null)
       {
-        //Upload to Firebase
         var snapshot = await _storage.ref()
-            .child('folderName/imageName')
+            .child('descriptionimages/'+widget.activity.id)
             .putFile(file);
         var downloadUrl = await snapshot.ref.getDownloadURL();
         setState(()
         {
-          imageUrl = downloadUrl;
+          widget.activity.image = downloadUrl;
+          ActivityService().updateActivity(widget.activity);
         });
       }
       else print('No Path Received');
     }
-    else print('Grant Permissions and try again');
-  }
+    else{
+      //Check Permissions
+      await Permission.photos.request();
+      var permissionStatus = await Permission.photos.status;
+      if (permissionStatus.isGranted)
+      {
+        //Select Image
+        image = await _picker.getImage(source: ImageSource.gallery);
+        var file = File(image.path);
+        if (image != null)
+        {
+          //Upload to Firebase
+          var snapshot = await _storage.ref()
+              .child('descriptionimages/'+widget.activity.id)
+              .putFile(file);
+          var downloadUrl = await snapshot.ref.getDownloadURL();
+          setState(()
+          {
+            widget.activity.image = downloadUrl;
+            ActivityService().updateActivity(widget.activity);
+          });
+        }
+        else print('No Path Received');
+      }
+      else print('Grant Permissions and try again');
+    }
 
+  }
+  void deleteImage() {
+    final _storage = FirebaseStorage.instance;
+    _storage.ref()
+        .child('descriptionimages/'+widget.activity.id).delete();
+    widget.activity.image = "";
+    ActivityService().updateActivity(widget.activity);
+  }
 
 
   Widget build(BuildContext context) {
@@ -62,62 +92,77 @@ class _DetailsPageState extends State<AdminDetailsPage> {
           appBar: AppBar(
             title: Text(widget.activity.title),
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(8),
-            children: <Widget>[
-              Container(
-                constraints: BoxConstraints(minWidth: 100, maxWidth: 200),
-                child: Image(
-                    alignment: Alignment(-.2, 0),
-                    image: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png"),
-                    fit: BoxFit.cover),
+          body: Center(
+            child: ConstrainedBox(
+              constraints: new BoxConstraints(
+                //minWidth: 70,
+                //minHeight: 70,
+                maxWidth: 1000,
               ),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),
-                subtitle: SelectableText(widget.activity.desc)
+              child: ListView(
+                padding: const EdgeInsets.all(8),
+                children: <Widget>[
+                  widget.activity.image!=""
+                      ? Image.network(widget.activity.image)
+                      : Container(),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  ListTile(
+                    title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),
+                    subtitle: SelectableText(widget.activity.desc)
+                  ),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  PresentEntities(widget.activity),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  ListTile(
+                      title: Text("Tipus",style: Theme.of(context).textTheme.headline5),
+                      subtitle: SelectableText(widget.activity.type)
+                  ),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  ListTile(
+                      title: Text("Dates",style: Theme.of(context).textTheme.headline5),
+                      subtitle: SelectableText("Data d\'inici: "+widget.activity.startDate.day.toString()+"/"+widget.activity.startDate.month.toString()+"/"+widget.activity.startDate.year.toString()+"\n"+
+                                                  "Data final: "+widget.activity.finalDate.day.toString()+"/"+widget.activity.finalDate.month.toString()+"/"+widget.activity.finalDate.year.toString())
+                  ),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  ListTile(
+                      title: Text("Lloc",style: Theme.of(context).textTheme.headline5),
+                      subtitle: SelectableText(widget.activity.place)
+                  ),
+                  ListTile(
+                      title: Text("Horari",style: Theme.of(context).textTheme.headline5),
+                      subtitle: SelectableText(widget.activity.schedule)
+                  ),
+                  Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+                  ListTile(
+                      title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
+                      subtitle: Linkable(
+                        text: widget.activity.contact,
+                      )
+                  ),
+                ]
               ),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              PresentEntities(widget.activity),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                  title: Text("Tipus",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.type)
-              ),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                  title: Text("Dates",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText("Data d\'inici: "+widget.activity.startDate.day.toString()+"/"+widget.activity.startDate.month.toString()+"/"+widget.activity.startDate.year.toString()+"\n"+
-                                              "Data final: "+widget.activity.finalDate.day.toString()+"/"+widget.activity.finalDate.month.toString()+"/"+widget.activity.finalDate.year.toString())
-              ),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                  title: Text("Lloc",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.place)
-              ),
-              ListTile(
-                  title: Text("Horari",style: Theme.of(context).textTheme.headline5),
-                  subtitle: SelectableText(widget.activity.schedule)
-              ),
-              Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
-              ListTile(
-                  title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
-                  subtitle: Linkable(
-                    text: widget.activity.contact,
-                  )
-              ),
-            ]
+            ),
           ),
         floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          widget.activity.image==""
+              ? FloatingActionButton(
+                  heroTag: "addphototoactivitybutton",
+                  onPressed: () {
+                    uploadImage();
+                  },
+                  child: Icon(Icons.add_photo_alternate_rounded),
+                  foregroundColor: Colors.white,
+                )
+          :
           FloatingActionButton(
             heroTag: "addphototoactivitybutton",
             onPressed: () {
-              uploadImage();
+              deleteImage();
+              (context as Element).reassemble();
             },
-            child: Icon(Icons.add_photo_alternate_rounded),
+            child: Icon(Icons.broken_image),
             foregroundColor: Colors.white,
           ),
           SizedBox(height: 20),
@@ -170,4 +215,6 @@ class _DetailsPageState extends State<AdminDetailsPage> {
       ),
     );
   }
+
+
 }

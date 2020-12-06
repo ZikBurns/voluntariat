@@ -209,15 +209,26 @@ class _HomePageState extends State<AdminHomePage> {
             ],
           ),
         ),
-        floatingActionButton: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        floatingActionButton: Stack(
+          alignment: Alignment.bottomRight,
           children: [
-            FloatingActionButton(
-              onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
-            },
-              child: Icon(Icons.add,color:Colors.white,size: 30),
-              backgroundColor: Colors.green,
+            Positioned(
+              bottom: 70,
+              child: Container(
+                child: FloatingActionButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=> FormNewActivity()));
+                  },
+                  child: Icon(Icons.add,color:Colors.white,size: 30),
+                  backgroundColor: Colors.green,
+                )
+              ),
+            ),
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                buildSpeedDial(),
+              ],
             ),
           ],
         ),

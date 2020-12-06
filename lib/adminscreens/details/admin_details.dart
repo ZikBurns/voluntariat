@@ -74,7 +74,6 @@ class _DetailsPageState extends State<AdminDetailsPage> {
       }
       else print('Grant Permissions and try again');
     }
-
   }
   void deleteImage() {
     final _storage = FirebaseStorage.instance;
@@ -161,6 +160,34 @@ class _DetailsPageState extends State<AdminDetailsPage> {
             onPressed: () {
               deleteImage();
               (context as Element).reassemble();
+/*
+              showDialog(
+                  context: context,
+                  builder: (context){
+                    return AlertDialog(
+                      title: Text("Vols esborrar la imatge de l'activitat?"),
+                      content: Text("Aquesta acció serà irreversible"),
+                      actions: [
+                        FlatButton(
+                          child: Text("Cancelar"),
+                          onPressed:  () {
+                            Navigator.of(context, rootNavigator: true).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("Esborrar"),
+                          onPressed:  () {
+                            deleteImage();
+                            Navigator.of(context, rootNavigator: true).pop();
+                            (context as Element).reassemble();
+                          },
+                        )
+                      ],
+                    );
+                    //Navigator.of(context, rootNavigator: true).pop();
+                  }
+              );
+*/
             },
             child: Icon(Icons.broken_image),
             foregroundColor: Colors.white,

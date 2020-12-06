@@ -23,6 +23,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
 
   @override
   Widget build(BuildContext context) {
+
     print(widget.activity.entities);
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,

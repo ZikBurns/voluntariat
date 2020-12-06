@@ -39,11 +39,8 @@ class _HomePageState extends State<AdminHomePage> {
 
   void onSubmitted(String value) {
     print("Maria "+value);
-    setState(() async {
-      searchvalue=value;
-      await Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
-      searchvalue=null;
-    });
+    searchvalue=value;
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
   }
 
   _HomePageState() {
@@ -53,11 +50,9 @@ class _HomePageState extends State<AdminHomePage> {
         setState: setState,
         onSubmitted: onSubmitted,
         onCleared: () {
-          searchvalue=null;
           print("cleared");
         },
         onClosed: () {
-          searchvalue=null;
           print("closed");
         });
   }

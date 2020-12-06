@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
@@ -15,9 +16,25 @@ class SearchResultList extends StatefulWidget {
 }
 
 class _State extends State<SearchResultList> {
+  List<Entity> entitylist;
+
+  List<String> IDsToNames(List<String> idlist){
+    print(entitylist.length);
+    List<String> namelist=[];
+    for (var i=0; i<entitylist.length; i++) {
+      for (var j=0; j<idlist.length; j++) {
+        if (idlist[j] == entitylist[i].id) namelist.add(entitylist[i].name);
+      }
+    }
+    print('hola'+namelist.toString());
+    return namelist;
+  }
 
   @override
   Widget build(BuildContext context) {
+    entitylist= Provider.of<List<Entity>>(context) ?? [];
+
+
     print(widget.searchtext);
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
     print(list_activities);
@@ -29,11 +46,15 @@ class _State extends State<SearchResultList> {
       for(var activity in list_activities){
         print(i);
         print(activity.title);
-        var title = activity.title.toLowerCase();
-        var desc =activity.desc.toLowerCase();
-        if(title.contains(widget.searchtext.toLowerCase())) {
-          _resultsList.add(activity);
-        } else if (desc.contains(widget.searchtext.toLowerCase())) {
+        List<String> entitiesinactivity=IDsToNames(activity.entities);
+        var act=activity.title.toLowerCase()+
+            activity.desc.toLowerCase()+
+            activity.place.toLowerCase()+
+            activity.schedule.toLowerCase()+
+            entitiesinactivity.toString().toLowerCase()+
+            activity.type.toString().toLowerCase();
+        print(act);
+        if(act.contains(widget.searchtext.toLowerCase())) {
           _resultsList.add(activity);
         }
       }
@@ -46,13 +67,13 @@ class _State extends State<SearchResultList> {
           else if((!admin.isLoggedIn)&&(list_activities[index].visible)){
             return Padding(
               padding: const EdgeInsets.all(4.0),
-              child: HomeListTile(activity: list_activities[index]),
+              child: Card(child: HomeListTile(activity: list_activities[index])),
             );
           }
           else{
             return Padding(
               padding: const EdgeInsets.all(4.0),
-              child: AdminHomeListTile(activity: list_activities[index]),
+              child: Card(child: AdminHomeListTile(activity: list_activities[index])),
             );
           }
         }

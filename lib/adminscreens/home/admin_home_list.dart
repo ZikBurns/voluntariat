@@ -16,6 +16,7 @@ class _State extends State<AdminHomeList> {
   Widget build(BuildContext context) {
     final list_activities = Provider.of<List<Activity>>(context) ?? [];
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
+    list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
     return ListView.builder(
         itemCount: list_activities.length,
         itemBuilder: (context, index) {

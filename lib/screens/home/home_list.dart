@@ -16,6 +16,7 @@ class _State extends State<HomeList> {
   Widget build(BuildContext context) {
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
+    list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
     if(widget.filter!="") {
       list_activities = list_activities.where((activity) => activity.type==widget.filter).toList();
     }

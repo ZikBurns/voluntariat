@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
+import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/commonscreeens/search_result_list.dart';
 
@@ -20,20 +22,24 @@ class _SearchResultsState extends State<SearchResults> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
         value: ActivityService().activities,
-        child: Scaffold(
-          appBar: AppBar(
-            title: new Text('Resultats amb: '+widget.searchtext),
-            centerTitle: true,
-          ),
-          body: Container(
-            color: Colors.black12,
-            child: Column(
-              children: [
-                Flexible(
-                  child: SearchResultList(widget.searchtext),
-                )
-              ],
+        child: StreamProvider<List<Entity>>.value(
+          value: EntityService().entities,
+          child: Scaffold(
+            appBar: AppBar(
+              title: new Text('Resultats amb: '+widget.searchtext),
+              centerTitle: true,
             ),
+            body: Container(
+              color: Colors.black12,
+              child: Column(
+                children: [
+                  Flexible(
+                    child: SearchResultList(widget.searchtext),
+                  )
+                ],
+              ),
+            ),
+
           ),
         )
     );

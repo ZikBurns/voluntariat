@@ -24,10 +24,16 @@ class _HomePageState extends State<AdminHomePage> {
   String searchvalue=null;
   bool dialVisible = true;
   String filter="";
+  ScrollController scrollController;
 
   void initState() {
     admin.isLoggedIn=true;
     super.initState();
+    scrollController = ScrollController()
+      ..addListener(() {
+        setDialVisible(scrollController.position.userScrollDirection ==
+            ScrollDirection.forward);
+      });
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -40,7 +46,7 @@ class _HomePageState extends State<AdminHomePage> {
   void onSubmitted(String value) {
     print("Maria "+value);
     searchvalue=value;
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue,filter)));
   }
 
   _HomePageState() {
@@ -55,6 +61,20 @@ class _HomePageState extends State<AdminHomePage> {
         onClosed: () {
           print("closed");
         });
+  }
+
+  void setDialVisible(bool value) {
+    setState(() {
+      dialVisible = value;
+    });
+  }
+
+  Widget buildBody() {
+    return ListView.builder(
+      controller: scrollController,
+      itemCount: 30,
+      itemBuilder: (ctx, i) => ListTile(title: Text('Item $i')),
+    );
   }
 
   SpeedDial buildSpeedDial() {

@@ -8,8 +8,9 @@ import 'package:flutter_firestore/adminscreens/home/admin_home_list_tile.dart';
 
 class SearchResultList extends StatefulWidget {
   final String searchtext;
+  final String filter;
 
-  SearchResultList(this.searchtext);
+  SearchResultList(this.searchtext,this.filter);
 
   @override
   _State createState() => _State();
@@ -33,12 +34,12 @@ class _State extends State<SearchResultList> {
   @override
   Widget build(BuildContext context) {
     entitylist= Provider.of<List<Entity>>(context) ?? [];
-
-
-    print(widget.searchtext);
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
-    print(list_activities);
     List<Activity> _resultsList=null;
+
+    if(widget.filter!="") {
+      list_activities = list_activities.where((activity) => activity.type==widget.filter).toList();
+    }
 
     if((widget.searchtext!=null)&&(widget.searchtext != "")) {
       _resultsList=[];
@@ -63,17 +64,42 @@ class _State extends State<SearchResultList> {
     return ListView.builder(
         itemCount: list_activities.length,
         itemBuilder: (context,index){
+          var now= new DateTime.now();
+          bool expired= list_activities[index].visibleDate.isBefore(now);
           if((!admin.isLoggedIn)&&(!list_activities[index].visible)) return Container();
           else if((!admin.isLoggedIn)&&(list_activities[index].visible)){
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(child: HomeListTile(activity: list_activities[index])),
-            );
+            if((!expired)&&(list_activities[index].prime)){
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Card(
+                    shape: new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.redAccent, width: 4.0),
+                        borderRadius: BorderRadius.circular(4.0)),
+                    child: HomeListTile(activity: list_activities[index])
+                ),
+              );
+            }
+            else if((!expired)&&(!list_activities[index].prime)){
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Card(child: HomeListTile(activity: list_activities[index])),
+              );
+            }
+            else return Container();
           }
           else{
             return Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Card(child: AdminHomeListTile(activity: list_activities[index])),
+              child: Card(
+                  shape: list_activities[index].prime
+                      ?new RoundedRectangleBorder(
+                      side: new BorderSide(color: Colors.red, width: 4.0),
+                      borderRadius: BorderRadius.circular(4.0))
+                      : new RoundedRectangleBorder(
+                      side: new BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.circular(4.0)),
+                  child: AdminHomeListTile(activity: list_activities[index])
+              ),
             );
           }
         }

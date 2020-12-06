@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   void onSubmitted(String value) {
     print("Maria "+value);
     searchvalue=value;
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResults(searchvalue,filter)));
   }
 
   _HomePageState() {

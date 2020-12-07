@@ -3,7 +3,6 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import "package:charcode/charcode.dart";
 
 
 class FormElements extends StatefulWidget {
@@ -19,7 +18,6 @@ class _FormElementsState extends State<FormElements> {
     List<String> namelist = new List();
     for (var i=0; i<entitylist.length; i++) {
       namelist.add(entitylist[i].name);
-      print(namelist);
     }
     return namelist;
   }
@@ -27,7 +25,6 @@ class _FormElementsState extends State<FormElements> {
   List<String> NamestoIDs(List<String> namelist){
     List<String> idlist=[];
     for (var i=0; i<entitylist.length; i++) {
-      print(entitylist[i].name+entitylist[i].id);
       for (var j=0; j<namelist.length; j++) {
         if (namelist[j] == entitylist[i].name) idlist.add(entitylist[i].id);
       }

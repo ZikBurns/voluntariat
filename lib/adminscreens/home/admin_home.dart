@@ -156,8 +156,8 @@ class _HomePageState extends State<AdminHomePage> {
           child: new ListView(
             children: <Widget>[
               new UserAccountsDrawerHeader(
-                //accountName: new Text("Aplicació de voluntariats",style:TextStyle(color: Colors.black),),
-                //accountEmail: new Text("Troba un voluntariat a Tortosa",style:TextStyle(color: Colors.black)),
+                accountName: new Text("Aplicació de voluntariats",style:TextStyle(color: Colors.black),),
+                accountEmail: new Text("Sigues voluntari a Tortosa",style:TextStyle(color: Colors.black)),
                 decoration: BoxDecoration(
                     image: DecorationImage(image: NetworkImage(
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png"),),

@@ -41,7 +41,6 @@ class _FormNewActivityState extends State<FormNewActivity> {
                               ""),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              print(_fbKey.currentState.value);
                               ActivityService().addActivityMap(_fbKey.currentState.value);
                               Navigator.pop(context);
                             }

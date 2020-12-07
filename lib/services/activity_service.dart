@@ -23,9 +23,6 @@ class ActivityService{
     });
   }
   Future updateActivityMap(String id,Map<String, dynamic> map) async{
-    print(map['id']);
-    print(map['id']);
-    print(map['title']);
     return await ref.doc(id).set({
       'title': map['title'],
       'desc': map['desc'],

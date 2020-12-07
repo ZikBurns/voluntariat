@@ -6,6 +6,7 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import '../../data/activity.dart';
 import 'package:linkable/linkable.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 
 class DetailsPage extends StatefulWidget {
@@ -15,12 +16,35 @@ class DetailsPage extends StatefulWidget {
   _DetailsPageState createState() => _DetailsPageState();
 }
 
+Color typecolor(String type){
+  switch(type) {
+    case 'Èxit educatiu': {
+      return Colors.amber;
+    }break;
+    case 'Joves': {
+      return Colors.red;
+    }break;
+    case 'Famílies': {
+      return Colors.lightBlue;
+    }break;
+    case 'Igualtat d\'oportunitats': {
+      return Colors.green;
+    }break;
+    case 'Participació comunitària': {
+      return Colors.deepOrange;
+    }break;
+    default: {
+      return Colors.white;
 
+    }break;
+  }
+}
 
 class _DetailsPageState extends State<DetailsPage> {
   Widget primeAppBar(){
     if(widget.activity.prime){
       return AppBar(
+        backgroundColor: typecolor(widget.activity.type),
         title: Text(widget.activity.title),
         actions: <Widget>[
           Padding(
@@ -37,20 +61,6 @@ class _DetailsPageState extends State<DetailsPage> {
                         //Navigator.of(context, rootNavigator: true).pop();
                       }
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 6),
-                        content: Row(
-                          children: [
-                            Icon(Icons.error),
-                            SizedBox(width: 20,),
-                            Expanded(
-                              child: Text('L\'activitat està detacada i necessita voluntaris urgentment.'),
-                            )
-                          ],
-                        ),
-                      )
-                  );
                 },
                 child: Icon(
                   Icons.error,
@@ -63,6 +73,7 @@ class _DetailsPageState extends State<DetailsPage> {
     }
     else{
       return AppBar(
+          backgroundColor: typecolor(widget.activity.type),
           title: Text(widget.activity.title)
       );
     }
@@ -84,7 +95,18 @@ class _DetailsPageState extends State<DetailsPage> {
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
                   (widget.activity.image!="")
-                      ? Image.network(widget.activity.image)
+                      ? Stack(
+                        children:[
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Center(child: CircularProgressIndicator()),
+                          ),
+                          Center(child: FadeInImage.memoryNetwork  (
+                            placeholder: kTransparentImage,
+                            image:widget.activity.image,
+                          ), )
+                        ],
+                      )
                       : Container(),
                   Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
                   ListTile(

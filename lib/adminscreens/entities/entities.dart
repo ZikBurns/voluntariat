@@ -14,7 +14,7 @@ class Entities extends StatefulWidget {
 class _EntitiesListState extends State<Entities> {
   TextEditingController controller = TextEditingController();
 
-  //It's Future because we are promising that a String will be returned
+  //It's Future because we are promising to come back
   Future<String> NewEntityDialog(BuildContext context){
     return showDialog(
         context: context,

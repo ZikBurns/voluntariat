@@ -14,6 +14,7 @@ import 'package:linkable/linkable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:transparent_image/transparent_image.dart';
 
 class AdminDetailsPage extends StatefulWidget {
   Activity activity;
@@ -24,6 +25,31 @@ class AdminDetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<AdminDetailsPage> {
   String imageUrl;
+
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.white;
+
+      }break;
+    }
+  }
+
 
   uploadImage() async {
 
@@ -83,12 +109,42 @@ class _DetailsPageState extends State<AdminDetailsPage> {
     ActivityService().updateActivity(widget.activity);
   }
 
+  Future<String> NewImageDialog(BuildContext context){
+    return showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Vols esborrar la imatge de l'activitat?"),
+            content: Text("Aquesta acció serà irreversible"),
+            actions: [
+              FlatButton(
+                child: Text("Cancelar"),
+                onPressed:  () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+              ),
+              FlatButton(
+                child: Text("Esborrar"),
+                onPressed:  () {
+                  deleteImage();
+                  Navigator.of(context, rootNavigator: true).pop();
+                  (context as Element).reassemble();
+                },
+              )
+            ],
+          );
+          //Navigator.of(context, rootNavigator: true).pop();
+        }
+    );
+  }
+
 
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
       child: Scaffold(
           appBar: AppBar(
+            backgroundColor: typecolor(widget.activity.type),
             title: Text(widget.activity.title),
           ),
           body: Center(
@@ -102,7 +158,18 @@ class _DetailsPageState extends State<AdminDetailsPage> {
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
                   widget.activity.image!=""
-                      ? Image.network(widget.activity.image)
+                      ? Stack(
+                    children:[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                      Center(child: FadeInImage.memoryNetwork  (
+                        placeholder: kTransparentImage,
+                        image:widget.activity.image,
+                      ), )
+                    ],
+                  )
                       : Container(),
                   Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
                   ListTile(
@@ -157,37 +224,9 @@ class _DetailsPageState extends State<AdminDetailsPage> {
           :
           FloatingActionButton(
             heroTag: "addphototoactivitybutton",
-            onPressed: () {
-              deleteImage();
+            onPressed: () async {
+              await NewImageDialog(context);
               (context as Element).reassemble();
-/*
-              showDialog(
-                  context: context,
-                  builder: (context){
-                    return AlertDialog(
-                      title: Text("Vols esborrar la imatge de l'activitat?"),
-                      content: Text("Aquesta acció serà irreversible"),
-                      actions: [
-                        FlatButton(
-                          child: Text("Cancelar"),
-                          onPressed:  () {
-                            Navigator.of(context, rootNavigator: true).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text("Esborrar"),
-                          onPressed:  () {
-                            deleteImage();
-                            Navigator.of(context, rootNavigator: true).pop();
-                            (context as Element).reassemble();
-                          },
-                        )
-                      ],
-                    );
-                    //Navigator.of(context, rootNavigator: true).pop();
-                  }
-              );
-*/
             },
             child: Icon(Icons.broken_image),
             foregroundColor: Colors.white,

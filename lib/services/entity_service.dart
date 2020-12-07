@@ -7,7 +7,6 @@ class EntityService{
 
   List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      print(doc.data);
       return Entity(doc.id,doc.get('name')?? '');
     }).toList();
   }
@@ -44,10 +43,8 @@ class EntityService{
     final QuerySnapshot result = await ref.get();
     final List<DocumentSnapshot> documents = result.docs;
     documents.forEach((data){
-        print(data['name']);
         endlist.add(data['name']);
     });
-    print(endlist);
     return endlist;
   }
 

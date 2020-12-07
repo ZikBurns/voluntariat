@@ -20,14 +20,12 @@ class _State extends State<SearchResultList> {
   List<Entity> entitylist;
 
   List<String> IDsToNames(List<String> idlist){
-    print(entitylist.length);
     List<String> namelist=[];
     for (var i=0; i<entitylist.length; i++) {
       for (var j=0; j<idlist.length; j++) {
         if (idlist[j] == entitylist[i].id) namelist.add(entitylist[i].name);
       }
     }
-    print('hola'+namelist.toString());
     return namelist;
   }
 
@@ -43,10 +41,7 @@ class _State extends State<SearchResultList> {
 
     if((widget.searchtext!=null)&&(widget.searchtext != "")) {
       _resultsList=[];
-      int i=0;
       for(var activity in list_activities){
-        print(i);
-        print(activity.title);
         List<String> entitiesinactivity=IDsToNames(activity.entities);
         var act=activity.title.toLowerCase()+
             activity.desc.toLowerCase()+
@@ -54,7 +49,6 @@ class _State extends State<SearchResultList> {
             activity.schedule.toLowerCase()+
             entitiesinactivity.toString().toLowerCase()+
             activity.type.toString().toLowerCase();
-        print(act);
         if(act.contains(widget.searchtext.toLowerCase())) {
           _resultsList.add(activity);
         }

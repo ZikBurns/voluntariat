@@ -23,10 +23,35 @@ class _HomePageState extends State<HomePage> {
   bool dialVisible = true;
   String filter="";
 
+
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.black38;
+      }break;
+    }
+  }
+
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
         title: new Text('Voluntariats'),
         //centerTitle: true,
+        backgroundColor: typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
     }
 
@@ -161,21 +186,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               new ListTile(
                 title: new Text("Qui som?"),
-                leading: new Icon(Icons.approval, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.approval, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
                 },
               ),
               new ListTile(
                 title: new Text("Zona Administrador"),
-                leading: new Icon(Icons.assignment_outlined, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.assignment_outlined, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
               ),
               new ListTile(
                 title: new Text("Dona el teu feedback"),
-                leading: new Icon(Icons.announcement_outlined, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.announcement_outlined, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FireFeedback()));
                 },

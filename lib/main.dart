@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/switcher.dart';
-import 'screens/home/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Switcher(),
       theme: ThemeData(
-          primaryColor: Colors.deepPurpleAccent
+          //primaryColor: Colors.black38
       ),
     );
   }

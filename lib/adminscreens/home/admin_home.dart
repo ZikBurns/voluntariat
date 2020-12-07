@@ -36,10 +36,34 @@ class _HomePageState extends State<AdminHomePage> {
       });
   }
 
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.black38;
+      }break;
+    }
+  }
+
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
         title: new Text('Voluntariats'),
         centerTitle: true,
+        backgroundColor: typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
   }
 
@@ -156,30 +180,30 @@ class _HomePageState extends State<AdminHomePage> {
           child: new ListView(
             children: <Widget>[
               new UserAccountsDrawerHeader(
-                accountName: new Text("Aplicació de voluntariats",style:TextStyle(color: Colors.black),),
-                accountEmail: new Text("Sigues voluntari a Tortosa",style:TextStyle(color: Colors.black)),
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png"),),
-                    )
-                ),
+                  accountName: new Text("Aplicació de voluntariats",style:TextStyle(color: Colors.black),),
+                  accountEmail: new Text("Sigues voluntari a Tortosa",style:TextStyle(color: Colors.black)),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage("assets/escutp.png"),
+                        fit: BoxFit.cover),
+                  )
+              ),
               new ListTile(
                 title: new Text("Qui som?"),
-                leading: new Icon(Icons.approval, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.approval, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPageAdmin()));
                 },
               ),
               new ListTile(
                 title: new Text("Entitats"),
-                leading: new Icon(Icons.account_circle_outlined, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.account_circle_outlined, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Entities()));
                 },
               ),
               new ListTile(
                 title: new Text("Dona el teu feedback"),
-                leading: new Icon(Icons.announcement_outlined, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.announcement_outlined, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FireFeedback()));
                 },
@@ -190,7 +214,7 @@ class _HomePageState extends State<AdminHomePage> {
               ),
               new ListTile(
                 title: new Text("Tancar"),
-                leading: new Icon(Icons.close, color: Colors.deepPurpleAccent),
+                leading: new Icon(Icons.close, color: Colors.black),
                 onTap: (){
                   admin.isLoggedIn=false;
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));

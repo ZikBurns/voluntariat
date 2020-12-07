@@ -36,6 +36,7 @@ dependencies:
   image_picker: ^0.6.7+4
   image_picker_for_web: ^0.1.0+1
   permission_handler: ^5.0.1+1
+  flutter_launcher_icons: ^0.8.1
 
 
 
@@ -47,6 +48,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/ajuntament.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

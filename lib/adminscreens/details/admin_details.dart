@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:transparent_image/transparent_image.dart';
 
+
 class AdminDetailsPage extends StatefulWidget {
   Activity activity;
   AdminDetailsPage(this.activity);
@@ -52,19 +53,17 @@ class _DetailsPageState extends State<AdminDetailsPage> {
 
 
   uploadImage() async {
-
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
     PickedFile image;
-
     if(kIsWeb){
       image = await _picker.getImage(source: ImageSource.gallery);
-      File file = File(image.path);
+      var bytes = await image.readAsBytes();
       if (image != null)
       {
-        var snapshot = await _storage.ref()
-            .child('descriptionimages/'+widget.activity.id)
-            .putFile(file);
+        var ref= _storage.ref();
+        var snapshot = await ref.child('descriptionimages/'+widget.activity.id)
+            .putData(bytes);
         var downloadUrl = await snapshot.ref.getDownloadURL();
         setState(()
         {

@@ -16,8 +16,64 @@ class _HomeListTileState extends State<HomeListTile> {
   passData(Activity act){
     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(act)));
   }
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.white;
+
+      }break;
+    }
+  }
+
+
   Widget getPrimeIcon() {
-    if(widget.activity.prime) return Icon(Icons.error_outline);
+    if(widget.activity.prime){
+      return IconButton(
+        tooltip: 'Destacat',
+        color: Colors.white,
+        highlightColor: typecolor(widget.activity.type),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context){
+                return AlertDialog(
+                  title: Text("Es necessiten voluntaris urgentment:"),
+                  content: Text("Les activitats destacades tenen el triangle amb exclamació."),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('D\'acord'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+                //Navigator.of(context, rootNavigator: true).pop();
+              }
+          );
+        },
+        icon: Icon(
+          Icons.warning_amber_outlined,
+          color: typecolor(widget.activity.type),
+          size: 30.0,
+        ),
+      );
+    }
   }
 
   CircleAvatar showAvatar(Activity act){

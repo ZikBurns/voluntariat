@@ -61,7 +61,7 @@ class _HomePageState extends State<AdminHomePage> {
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
-        title: new Text('Voluntariats'),
+        title: filter==""?new Text('Voluntariats'):new Text(filter),
         centerTitle: true,
         backgroundColor: typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
@@ -119,7 +119,6 @@ class _HomePageState extends State<AdminHomePage> {
           labelStyle: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),
           labelBackgroundColor: Colors.amberAccent,
         ),
-
         SpeedDialChild(
           child: Icon(Icons.face_rounded, color: Colors.white),
           backgroundColor: Colors.red,

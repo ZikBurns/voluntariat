@@ -11,6 +11,28 @@ class AdminHomeList extends StatefulWidget {
 
 class _State extends State<AdminHomeList> {
 
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.black38;
+      }break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +47,7 @@ class _State extends State<AdminHomeList> {
               child: Card(
                   shape: list_activities[index].prime
                       ?new RoundedRectangleBorder(
-                      side: new BorderSide(color: Colors.red, width: 4.0),
+                      side: new BorderSide(color: typecolor(list_activities[index].type), width: 4.0),
                       borderRadius: BorderRadius.circular(4.0))
                       : new RoundedRectangleBorder(
                       side: new BorderSide(color: Colors.white, width: 2.0),

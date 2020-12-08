@@ -116,6 +116,28 @@ class _SearchResultsState extends State<SearchResults> {
     );
   }
 
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.black38;
+      }break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
@@ -124,6 +146,7 @@ class _SearchResultsState extends State<SearchResults> {
           value: EntityService().entities,
           child: Scaffold(
             appBar: AppBar(
+              backgroundColor: typecolor(widget.filter),
               title: new Text('Resultats amb: '+widget.searchtext),
               centerTitle: true,
             ),

@@ -12,6 +12,28 @@ class HomeList extends StatefulWidget {
 
 class _State extends State<HomeList> {
 
+  Color typecolor(String type){
+    switch(type) {
+      case 'Èxit educatiu': {
+        return Colors.amber;
+      }break;
+      case 'Joves': {
+        return Colors.red;
+      }break;
+      case 'Famílies': {
+        return Colors.lightBlue;
+      }break;
+      case 'Igualtat d\'oportunitats': {
+        return Colors.green;
+      }break;
+      case 'Participació comunitària': {
+        return Colors.deepOrange;
+      }break;
+      default: {
+        return Colors.black38;
+      }break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
@@ -30,7 +52,7 @@ class _State extends State<HomeList> {
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
                     shape: new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.redAccent, width: 4.0),
+                        side: new BorderSide(color: typecolor(list_activities[index].type), width: 4.0),
                         borderRadius: BorderRadius.circular(4.0)),
                     child: HomeListTile(activity: list_activities[index])
                 ),

@@ -55,15 +55,23 @@ class _DetailsPageState extends State<DetailsPage> {
                       context: context,
                       builder: (context){
                         return AlertDialog(
-                          title: Text("Aquesta es una activitat destacada:"),
-                          content: Text("Es necessiten voluntaris urgentment."),
+                          title: Text("Es necessiten voluntaris urgentment:"),
+                          content: Text("Les activitats destacades tenen el triangle amb exclamació."),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('D\'acord'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
                         );
                         //Navigator.of(context, rootNavigator: true).pop();
                       }
                   );
                 },
                 child: Icon(
-                  Icons.error,
+                  Icons.warning_amber_outlined,
                   size: 26.0,
                 ),
               )

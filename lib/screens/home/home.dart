@@ -47,9 +47,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
-        title: new Text('Voluntariats'),
+        title: filter==""?new Text('Voluntariats'):new Text(filter),
         //centerTitle: true,
         backgroundColor: typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
@@ -101,11 +102,12 @@ class _HomePageState extends State<HomePage> {
     return SpeedDial(
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(size: 22.0),
-      // child: Icon(Icons.add),
+      child: Icon(Icons.format_align_left),
       onOpen: () => print('OPENING DIAL'),
       onClose: () => setState(() {}),
       visible: dialVisible,
       curve: Curves.bounceIn,
+      backgroundColor: typecolor(filter),
       children: [
         SpeedDialChild(
           child: Icon(Icons.local_library_rounded, color: Colors.white),
@@ -156,11 +158,11 @@ class _HomePageState extends State<HomePage> {
         ),
         SpeedDialChild(
           child: Icon(Icons.format_align_left, color: Colors.white),
-          backgroundColor: Colors.black26,
+          backgroundColor: Colors.black38,
           onTap: () => filter="",
           label: 'Totes les activitats',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.black38,
+          labelBackgroundColor: Colors.black12,
         ),
       ],
     );

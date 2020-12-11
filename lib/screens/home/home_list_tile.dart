@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../details/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeListTile extends StatefulWidget {
   final Activity activity;
@@ -68,9 +69,9 @@ class _HomeListTileState extends State<HomeListTile> {
           );
         },
         icon: Icon(
-          Icons.warning_amber_outlined,
+          Icons.alarm,
           color: typecolor(widget.activity.type),
-          size: 30.0,
+          size: kIsWeb?26.0:30.0,
         ),
       );
     }

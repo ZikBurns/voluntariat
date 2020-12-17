@@ -38,6 +38,7 @@ dependencies:
   flutter_launcher_icons: ^0.8.1
   transparent_image: ^1.0.0
   firebase_core: ^0.5.3
+  highlighter_coachmark: ^0.0.3
 
 
 

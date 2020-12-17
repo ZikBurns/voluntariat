@@ -10,6 +10,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
+import 'package:highlighter_coachmark/highlighter_coachmark.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
         setDialVisible(scrollController.position.userScrollDirection ==
             ScrollDirection.forward);
       });
+
   }
 
   void setDialVisible(bool value) {
@@ -99,6 +101,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   SpeedDial buildSpeedDial() {
+    //TODO: showCoachMarkFAB();
     return SpeedDial(
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(size: 22.0),
@@ -220,8 +223,40 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        floatingActionButton: buildSpeedDial()
+          floatingActionButton: FloatingActionButton(
+            key: _fabKey,
+            backgroundColor: typecolor(filter),
+            child: buildSpeedDial(),
+          )
         ),
       );
+  }
+  GlobalKey _fabKey = GlobalObjectKey("fab");
+
+  //TODO: showCoachMarkFAB() shows Exception NoSuchMethodError: invalid member on null: 'findRenderObject'
+  void showCoachMarkFAB() {
+    CoachMark coachMarkFAB = CoachMark();
+    RenderBox target = _fabKey.currentContext.findRenderObject();
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromCircle(
+        center: markRect.center, radius: markRect.longestSide * 0.6);
+
+    coachMarkFAB.show(
+        targetContext: _fabKey.currentContext,
+        markRect: markRect,
+        children: [
+          Center(
+              child: Text("Tap on button\nto add a friend",
+                  style: const TextStyle(
+                    fontSize: 24.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white,
+                  )))
+        ],
+        duration: null,
+        onClose: () {
+          //TODO: Add close function
+        });
   }
 }

@@ -34,6 +34,7 @@ class _State extends State<HomeList> {
       }break;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     var list_activities=Provider.of<List<Activity>>(context) ?? [];

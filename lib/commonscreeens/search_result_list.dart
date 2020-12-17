@@ -57,7 +57,8 @@ class _State extends State<SearchResultList> {
     entitylist= Provider.of<List<Entity>>(context) ?? [];
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> _resultsList=null;
-
+    list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
+    list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
     if(widget.filter!="") {
       list_activities = list_activities.where((activity) => activity.type==widget.filter).toList();
     }

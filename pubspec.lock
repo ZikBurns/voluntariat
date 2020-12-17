@@ -119,7 +119,7 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+1"
+    version: "1.0.2"
   date_range_picker:
     dependency: transitive
     description:
@@ -215,7 +215,7 @@ packages:
       name: flutter_chips_input
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.4"
+    version: "1.9.5"
   flutter_colorpicker:
     dependency: transitive
     description:
@@ -330,7 +330,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.7+14"
+    version: "0.6.7+15"
   image_picker_for_web:
     dependency: "direct main"
     description:
@@ -615,7 +615,7 @@ packages:
       name: vin_decoder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.3"
   xml:
     dependency: transitive
     description:

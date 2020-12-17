@@ -215,14 +215,13 @@ class _HomeListTileState extends State<HomeListTile> {
   @override
   Widget build(BuildContext context) {
       return ListTile(
-          isThreeLine: true,
           leading: showAvatar(widget.activity),
           onTap: () {
             passData(widget.activity);
           },
           //isThreeLine: true,
-          title:Text(widget.activity.title,style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: true,),
-          subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis,softWrap: false),
+          title:Text(widget.activity.title,style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis),
+          subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis),
           trailing: getPrimeIcon(),
       );
   }

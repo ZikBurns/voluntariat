@@ -10,10 +10,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tutorial_coach_mark/animated_focus_light.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-import 'package:tutorial_coach_mark/custom_target_position.dart';
-import 'package:tutorial_coach_mark/target_position.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -85,8 +82,6 @@ class _HomePageState extends State<HomePage> {
         setDialVisible(scrollController.position.userScrollDirection ==
             ScrollDirection.forward);
       });
-    //initTarget();
-    //WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     super.initState();
 
   }
@@ -230,69 +225,5 @@ class _HomePageState extends State<HomePage> {
           floatingActionButton: buildSpeedDial(),
         ),
       );
-  }
-
-  TutorialCoachMark tutorialcoachmark;
-  List<TargetFocus> targets = List();
-
-
-  _afterLayout(_){
-    Future.delayed(Duration(milliseconds: 200));
-    showTutorial();
-  }
-
-  void showTutorial(){
-    tutorialcoachmark=TutorialCoachMark(
-      context,
-      targets: targets,
-      colorShadow: Colors.blue,
-      textSkip: "SKIP",
-      opacityShadow: 0.7,
-      paddingFocus: 10,
-      alignSkip:Alignment.bottomLeft,
-      onFinish: () {
-        print("finish");
-      },
-      onClickTarget: (target) {
-        print(target);
-      },
-      onClickSkip: () {
-        print("skip");
-      }
-    )..show();
-  }
-
-  void initTarget() {
-
-    targets.add(
-      TargetFocus(
-        identify: "Target0",
-        targetPosition: TargetPosition(Size(40,32),Offset(295,650)),
-        shape: ShapeLightFocus.Circle,
-        contents: [
-          ContentTarget(
-              align: AlignContent.bottom,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Text(
-                      "Multiples contents",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar tortor eget maximus iaculis.",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              )
-          )
-        ]
-      )
-    );
   }
 }

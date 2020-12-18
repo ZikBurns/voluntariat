@@ -10,7 +10,10 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
-import 'package:highlighter_coachmark/highlighter_coachmark.dart';
+import 'package:tutorial_coach_mark/animated_focus_light.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:tutorial_coach_mark/custom_target_position.dart';
+import 'package:tutorial_coach_mark/target_position.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         return Colors.deepOrange;
       }break;
       default: {
-        return Colors.black38;
+        return Colors.black54;
       }break;
     }
   }
@@ -76,13 +79,15 @@ class _HomePageState extends State<HomePage> {
         });
   }
   void initState() {
-    super.initState();
 
     scrollController = ScrollController()
       ..addListener(() {
         setDialVisible(scrollController.position.userScrollDirection ==
             ScrollDirection.forward);
       });
+    //initTarget();
+    //WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    super.initState();
 
   }
 
@@ -101,7 +106,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   SpeedDial buildSpeedDial() {
-    //TODO: showCoachMarkFAB();
     return SpeedDial(
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(size: 22.0),
@@ -161,7 +165,7 @@ class _HomePageState extends State<HomePage> {
         ),
         SpeedDialChild(
           child: Icon(Icons.format_align_left, color: Colors.white),
-          backgroundColor: Colors.black38,
+          backgroundColor: Colors.black54,
           onTap: () => filter="",
           label: 'Totes les activitats',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
@@ -223,40 +227,72 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-          floatingActionButton: FloatingActionButton(
-            key: _fabKey,
-            backgroundColor: typecolor(filter),
-            child: buildSpeedDial(),
-          )
+          floatingActionButton: buildSpeedDial(),
         ),
       );
   }
-  GlobalKey _fabKey = GlobalObjectKey("fab");
 
-  //TODO: showCoachMarkFAB() shows Exception NoSuchMethodError: invalid member on null: 'findRenderObject'
-  void showCoachMarkFAB() {
-    CoachMark coachMarkFAB = CoachMark();
-    RenderBox target = _fabKey.currentContext.findRenderObject();
+  TutorialCoachMark tutorialcoachmark;
+  List<TargetFocus> targets = List();
 
-    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
-    markRect = Rect.fromCircle(
-        center: markRect.center, radius: markRect.longestSide * 0.6);
 
-    coachMarkFAB.show(
-        targetContext: _fabKey.currentContext,
-        markRect: markRect,
-        children: [
-          Center(
-              child: Text("Tap on button\nto add a friend",
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white,
-                  )))
-        ],
-        duration: null,
-        onClose: () {
-          //TODO: Add close function
-        });
+  _afterLayout(_){
+    Future.delayed(Duration(milliseconds: 200));
+    showTutorial();
+  }
+
+  void showTutorial(){
+    tutorialcoachmark=TutorialCoachMark(
+      context,
+      targets: targets,
+      colorShadow: Colors.blue,
+      textSkip: "SKIP",
+      opacityShadow: 0.7,
+      paddingFocus: 10,
+      alignSkip:Alignment.bottomLeft,
+      onFinish: () {
+        print("finish");
+      },
+      onClickTarget: (target) {
+        print(target);
+      },
+      onClickSkip: () {
+        print("skip");
+      }
+    )..show();
+  }
+
+  void initTarget() {
+
+    targets.add(
+      TargetFocus(
+        identify: "Target0",
+        targetPosition: TargetPosition(Size(40,32),Offset(295,650)),
+        shape: ShapeLightFocus.Circle,
+        contents: [
+          ContentTarget(
+              align: AlignContent.bottom,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Text(
+                      "Multiples contents",
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar tortor eget maximus iaculis.",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              )
+          )
+        ]
+      )
+    );
   }
 }

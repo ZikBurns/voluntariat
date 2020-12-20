@@ -13,6 +13,7 @@ import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 class AdminHomePage extends StatefulWidget {
   @override
@@ -36,34 +37,11 @@ class _HomePageState extends State<AdminHomePage> {
       });
   }
 
-  Color typecolor(String type){
-    switch(type) {
-      case 'Èxit educatiu': {
-        return Colors.amber;
-      }break;
-      case 'Joves': {
-        return Colors.red;
-      }break;
-      case 'Famílies': {
-        return Colors.lightBlue;
-      }break;
-      case 'Igualtat d\'oportunitats': {
-        return Colors.green;
-      }break;
-      case 'Participació comunitària': {
-        return Colors.deepOrange;
-      }break;
-      default: {
-        return Colors.black38;
-      }break;
-    }
-  }
-
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
         title: filter==""?new Text('Voluntariats'):new Text(filter),
         centerTitle: true,
-        backgroundColor: typecolor(filter),
+        backgroundColor: Colorizer.typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
   }
 

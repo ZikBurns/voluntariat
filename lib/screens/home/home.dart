@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
 import 'package:flutter_firestore/commonscreeens/search_results.dart';
@@ -25,35 +26,12 @@ class _HomePageState extends State<HomePage> {
   String filter="";
 
 
-  Color typecolor(String type){
-    switch(type) {
-      case 'Èxit educatiu': {
-        return Colors.amber;
-      }break;
-      case 'Joves': {
-        return Colors.red;
-      }break;
-      case 'Famílies': {
-        return Colors.lightBlue;
-      }break;
-      case 'Igualtat d\'oportunitats': {
-        return Colors.green;
-      }break;
-      case 'Participació comunitària': {
-        return Colors.deepOrange;
-      }break;
-      default: {
-        return Colors.black54;
-      }break;
-    }
-  }
-
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
         title: filter==""?new Text('Voluntariats'):new Text(filter),
         //centerTitle: true,
-        backgroundColor: typecolor(filter),
+        backgroundColor: Colorizer.typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
     }
 
@@ -109,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       onClose: () => setState(() {}),
       visible: dialVisible,
       curve: Curves.bounceIn,
-      backgroundColor: typecolor(filter),
+      backgroundColor: Colorizer.typecolor(filter),
       children: [
         SpeedDialChild(
           child: Icon(Icons.local_library_rounded, color: Colors.white),
@@ -119,7 +97,6 @@ class _HomePageState extends State<HomePage> {
           labelStyle: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),
           labelBackgroundColor: Colors.amberAccent,
         ),
-
         SpeedDialChild(
           child: Icon(Icons.face_rounded, color: Colors.white),
           backgroundColor: Colors.red,

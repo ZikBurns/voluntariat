@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 
-class EntitiesListTile extends StatefulWidget {
+import 'package:flutter_firestore/commonscreeens/entities_list_sublist.dart';
+
+class AdminEntitiesListTile extends StatefulWidget {
   Entity entity;
-  EntitiesListTile({this.entity});
+  AdminEntitiesListTile({this.entity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
 
-class _HomeListTileState extends State<EntitiesListTile> {
+class _HomeListTileState extends State<AdminEntitiesListTile> {
   TextEditingController controller = TextEditingController();
+
+  passData(Entity entity){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivites(entity)));
+  }
+
 
   //It's Future because we are promising that a String will be returned
   Future<String> UpdateEntityDialog(BuildContext context){
@@ -100,6 +107,9 @@ class _HomeListTileState extends State<EntitiesListTile> {
               ))
         ],
       ),
+      onTap: (){
+        passData(widget.entity);
+      },
     );
   }
 }

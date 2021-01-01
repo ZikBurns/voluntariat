@@ -11,7 +11,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:flutter_firestore/screens/entities/entities.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -170,6 +170,13 @@ class _HomePageState extends State<HomePage> {
                 leading: new Icon(Icons.approval, color: Colors.black),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+                },
+              ),
+              new ListTile(
+                title: new Text("Entitats"),
+                leading: new Icon(Icons.account_circle_outlined, color: Colors.black),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Entities()));
                 },
               ),
               new ListTile(

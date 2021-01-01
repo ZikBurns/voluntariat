@@ -3,15 +3,15 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 
-import 'entities_list.dart';
+import 'admin_entities_list.dart';
 
 
-class Entities extends StatefulWidget {
+class AdminEntities extends StatefulWidget {
   @override
   _EntitiesListState createState() => _EntitiesListState();
 }
 
-class _EntitiesListState extends State<Entities> {
+class _EntitiesListState extends State<AdminEntities> {
   TextEditingController controller = TextEditingController();
 
   //It's Future because we are promising to come back
@@ -61,7 +61,7 @@ class _EntitiesListState extends State<Entities> {
             child: Column(
               children: [
                 Flexible(
-                  child: EntitiesList(),
+                  child: AdminEntitiesList(),
                 )
               ],
             ),

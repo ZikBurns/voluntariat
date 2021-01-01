@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:provider/provider.dart';
 
-import 'entities_list_tile.dart';
-
+import 'package:flutter_firestore/screens/entities/entities_list_tile.dart';
 
 class EntitiesList extends StatefulWidget {
   @override

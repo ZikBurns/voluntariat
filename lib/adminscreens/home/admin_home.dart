@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/entities.dart';
+import 'package:flutter_firestore/adminscreens/entities/admin_entities.dart';
 import 'package:flutter_firestore/adminscreens/newactivity/form_new_activity.dart';
 import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/data/activity.dart';
@@ -175,7 +175,7 @@ class _HomePageState extends State<AdminHomePage> {
                 title: new Text("Entitats"),
                 leading: new Icon(Icons.account_circle_outlined, color: Colors.black),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Entities()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminEntities()));
                 },
               ),
               new ListTile(

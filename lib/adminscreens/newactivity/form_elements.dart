@@ -5,12 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 
-class FormElements extends StatefulWidget {
-  @override
-  _FormElementsState createState() => _FormElementsState();
-}
-
-class _FormElementsState extends State<FormElements> {
+class FormElements extends StatelessWidget {
   List<Entity> entitylist;
   List<dynamic> listOfIDs;
 

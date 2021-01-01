@@ -40,10 +40,11 @@ class _State extends State<EntitiesListSubActivitiesResults> {
     _resultsList=[];
     for(var activity in list_activities){
       List<String> entitiesinactivity=IDsToNames(activity.entities);
-      for(var entity in entitiesinactivity)
-        if(entity==widget.entity.name) {
+      for(var entity in entitiesinactivity) {
+        if (entity == widget.entity.name) {
           _resultsList.add(activity);
         }
+      }
     }
     list_activities=_resultsList;
     return ListView.builder(

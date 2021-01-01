@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/services/activity_service.dart';
 import 'admin_entities_list.dart';
 
 
@@ -52,27 +53,30 @@ class _EntitiesListState extends State<AdminEntities> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
         value: EntityService().entities,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Entities"),
-          ),
-          body: Container(
-            color: Colors.black12,
-            child: Column(
-              children: [
-                Flexible(
-                  child: AdminEntitiesList(),
-                )
-              ],
+        child: StreamProvider<List<Activity>>.value(
+          value: ActivityService().activities,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text("Entities"),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(onPressed: (){
-            NewEntityDialog(context).then((onValue){
-              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
-            });
-          },
-            child: Icon(Icons.add,color:Colors.white,size: 30),
-            backgroundColor: Colors.green,
+            body: Container(
+              color: Colors.black12,
+              child: Column(
+                children: [
+                  Flexible(
+                    child: AdminEntitiesList(),
+                  )
+                ],
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(onPressed: (){
+              NewEntityDialog(context).then((onValue){
+                if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
+              });
+            },
+              child: Icon(Icons.add,color:Colors.white,size: 30),
+              backgroundColor: Colors.green,
+            ),
           ),
         )
     );

@@ -53,30 +53,27 @@ class _EntitiesListState extends State<AdminEntities> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
         value: EntityService().entities,
-        child: StreamProvider<List<Activity>>.value(
-          value: ActivityService().activities,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text("Entities"),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Entities"),
+          ),
+          body: Container(
+            color: Colors.black12,
+            child: Column(
+              children: [
+                Flexible(
+                  child: AdminEntitiesList(),
+                )
+              ],
             ),
-            body: Container(
-              color: Colors.black12,
-              child: Column(
-                children: [
-                  Flexible(
-                    child: AdminEntitiesList(),
-                  )
-                ],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(onPressed: (){
-              NewEntityDialog(context).then((onValue){
-                if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
-              });
-            },
-              child: Icon(Icons.add,color:Colors.white,size: 30),
-              backgroundColor: Colors.green,
-            ),
+          ),
+          floatingActionButton: FloatingActionButton(onPressed: (){
+            NewEntityDialog(context).then((onValue){
+              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
+            });
+          },
+            child: Icon(Icons.add,color:Colors.white,size: 30),
+            backgroundColor: Colors.green,
           ),
         )
     );

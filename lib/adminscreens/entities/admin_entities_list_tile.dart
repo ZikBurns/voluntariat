@@ -8,9 +8,7 @@ import 'package:flutter_firestore/data/activity.dart';
 
 class AdminEntitiesListTile extends StatefulWidget {
   Entity entity;
-  List<Activity> list_activities;
-  List<Entity> list_entities;
-  AdminEntitiesListTile(this.entity,list_activities,list_entities);
+  AdminEntitiesListTile(this.entity);
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
@@ -54,18 +52,9 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
     );
   }
 
-  List<String> IDsToNames(List<String> idlist){
-    List<String> namelist=[];
-    for (var i=0; i<widget.list_entities.length; i++) {
-      for (var j=0; j<idlist.length; j++) {
-        if (idlist[j] == widget.list_entities[i].id) namelist.add(widget.list_entities[i].name);
-      }
-    }
-    return namelist;
-  }
-
   @override
   Widget build(BuildContext context) {
+    var list_activities=Provider.of<List<Activity>>(context) ?? [];
     return ListTile(
       title:Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
       subtitle: Column(
@@ -91,14 +80,13 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
 
                       //TODO: Check if Entitity has activities
                       var canDelete=true;
-                      /*
-                      for(var activity in widget.list_activities){
-                        List<String> entitiesinactivity=IDsToNames(activity.entities);
-                        for(var entity in entitiesinactivity) {
-                          if (entity == widget.entity.name) canDelete=false;
+
+                      for(var activity in list_activities){
+                        for(var entity in activity.entities) {
+                          if (entity == widget.entity.id) canDelete=false;
                         }
                       }
-                      */
+
                       if(canDelete) {
                         showDialog(
                             context: context,
@@ -134,9 +122,9 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Esborra les activitats per poder esborrar l'entitat"),
+                                title: Text("No es pot esborrar l'entitat ja que té activitats assignades"),
                                 content: Text(
-                                    "No es pot esborrar l'entitat ja que té activitats assignades"),
+                                    "Desassigna les activitats d'aquesta entitat o esborra les activitats de l'entitat"),
                                 actions: [
 
                                   FlatButton(

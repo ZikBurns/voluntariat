@@ -66,14 +66,6 @@ class _EntitiesListState extends State<Entities> {
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton(onPressed: (){
-            NewEntityDialog(context).then((onValue){
-              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
-            });
-          },
-            child: Icon(Icons.add,color:Colors.white,size: 30),
-            backgroundColor: Colors.green,
-          ),
         )
     );
 

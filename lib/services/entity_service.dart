@@ -39,7 +39,7 @@ class EntityService{
   }
 
   Future<List<String>> listOfNamesEntity() async {
-    List<String> endlist = new List();
+    List<String> endlist = [];
     final QuerySnapshot result = await ref.get();
     final List<DocumentSnapshot> documents = result.docs;
     documents.forEach((data){

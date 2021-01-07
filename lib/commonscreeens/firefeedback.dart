@@ -39,9 +39,12 @@ class _FireFeedbackState extends State<FireFeedback> {
                             attribute: 'title',
                             readOnly: false,
                             validators: [
-                            (val){
-                            if(val=="") return "L'activitat ha de tenir un titol.";
+                              FormBuilderValidators.required(),
+                              /*
+                              (val){
+                              if(val=="") return "L'activitat ha de tenir un titol.";
                             }
+                            */
                         ],
                         ),
                           SizedBox(height: 20),
@@ -56,9 +59,12 @@ class _FireFeedbackState extends State<FireFeedback> {
                             attribute: 'desc',
                             readOnly: false,
                             validators: [
+                              FormBuilderValidators.required(),
+                                  /*
                                   (val){
                                 if(val=="") return "L'activitat ha de tenir una descripció.";
                               }
+                              */
                             ],
                           ),
                       ]
@@ -74,25 +80,30 @@ class _FireFeedbackState extends State<FireFeedback> {
                           child: Text("Crear"
                               ""),
                           onPressed: (){
-                            if(_fbKey.currentState.saveAndValidate()){
-                              CollectionReference ref = FirebaseFirestore.instance.collection("Feedback");
-                              ref.add(_fbKey.currentState.value);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    duration: Duration(seconds: 4),
-                                    content: Row(
-                                      children: [
-                                        Icon(Icons.assignment_turned_in_outlined),
-                                        SizedBox(width: 20),
-                                        Expanded(
-                                          child: Text('Feedback enviat'),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                              );
-                              Navigator.pop(context);
-                              Navigator.pop(context);
+                            var state_current=_fbKey.currentState;
+                            if(state_current!=null) {
+                              if (state_current.saveAndValidate()) {
+                                CollectionReference ref = FirebaseFirestore
+                                    .instance.collection("Feedback");
+                                ref.add(state_current.value);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      duration: Duration(seconds: 4),
+                                      content: Row(
+                                        children: [
+                                          Icon(Icons
+                                              .assignment_turned_in_outlined),
+                                          SizedBox(width: 20),
+                                          Expanded(
+                                            child: Text('Feedback enviat'),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                );
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
                             }
                           },
                         ),

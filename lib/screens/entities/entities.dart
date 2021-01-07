@@ -15,7 +15,7 @@ class _EntitiesListState extends State<Entities> {
   TextEditingController controller = TextEditingController();
 
   //It's Future because we are promising to come back
-  Future<String> NewEntityDialog(BuildContext context){
+  Future<String?> NewEntityDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){

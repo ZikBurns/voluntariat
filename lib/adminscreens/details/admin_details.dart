@@ -25,7 +25,7 @@ class AdminDetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<AdminDetailsPage> {
-  String imageUrl;
+  String imageUrl="";
 
   Color typecolor(String type){
     switch(type) {
@@ -108,7 +108,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
     ActivityService().updateActivity(widget.activity);
   }
 
-  Future<String> NewImageDialog(BuildContext context){
+  Future<String?> NewImageDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){

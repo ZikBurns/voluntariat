@@ -16,7 +16,7 @@ class EntitiesListSubActivitiesResults extends StatefulWidget {
 }
 
 class _State extends State<EntitiesListSubActivitiesResults> {
-  List<Entity> entitylist;
+  List<Entity> entitylist=[];
 
   List<String> IDsToNames(List<String> idlist){
     List<String> namelist=[];
@@ -31,13 +31,13 @@ class _State extends State<EntitiesListSubActivitiesResults> {
 
   @override
   Widget build(BuildContext context) {
-    entitylist= Provider.of<List<Entity>>(context) ?? [];
+    entitylist= Provider.of<List<Entity>>(context);
     var list_activities=Provider.of<List<Activity>>(context) ?? [];
-    List<Activity> _resultsList=null;
+    List<Activity> _resultsList=[];
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
 
-    _resultsList=[];
+
     for(var activity in list_activities){
       List<String> entitiesinactivity=IDsToNames(activity.entities);
       for(var entity in entitiesinactivity) {

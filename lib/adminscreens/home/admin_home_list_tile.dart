@@ -7,7 +7,7 @@ import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 class AdminHomeListTile extends StatefulWidget {
   final Activity activity;
-  AdminHomeListTile({this.activity});
+  AdminHomeListTile({required this.activity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }

@@ -21,7 +21,7 @@ class SearchResults extends StatefulWidget {
 }
 
 class _SearchResultsState extends State<SearchResults> {
-  ScrollController scrollController;
+  late ScrollController scrollController;
   bool dialVisible = true;
 
   void initState() {

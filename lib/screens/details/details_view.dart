@@ -91,7 +91,10 @@ class _DetailsPageState extends State<DetailsPage> {
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
       child: Scaffold(
-          appBar:primeAppBar(),
+        appBar:PreferredSize(
+            preferredSize: const Size.fromHeight(100),
+            child: primeAppBar()
+        ),
         body: Center(
           child: ConstrainedBox(
             constraints: new BoxConstraints(

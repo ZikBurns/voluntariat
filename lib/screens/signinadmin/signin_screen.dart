@@ -36,21 +36,28 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: new InputDecoration(hintText: 'email'),
-                  validator: (val) => val.isEmpty ? 'Introdueix un email' : null,
-                  onChanged: (val) {
-                    setState(() => email = val);
+                  validator: (val)
+                    {
+                      if(val==null) return 'Introdueix un email';
+                      else if(val.isEmpty) return 'Introdueix un email';
+                      else return null;
+                    },
+                    onChanged: (val) {
+                  setState(() => email = val);
                   },
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  obscureText: true,
-                  decoration: new InputDecoration(hintText: 'contrasenya'),
-                  validator: (val) =>
-                  val.length < 6
-                      ? 'La contasenya ha de tenir mes de 6 caracters'
-                      : null,
+                  ),
+                  SizedBox(height: 20.0),
+                    TextFormField(
+                    obscureText: true,
+                    decoration: new InputDecoration(hintText: 'contrasenya'),
+                  validator: (val) {
+                    if(val==null) return 'La contasenya ha de tenir mes de 6 caracters';
+                    else if(val.length < 6)return 'La contasenya ha de tenir mes de 6 caracters';
+                    else return null;
+                  },
+
                   onChanged: (val) {
-                    setState(() => password = val);
+                  setState(() => password = val);
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -61,17 +68,22 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        setState(() => loading = true);
-                        dynamic result = await _authservice
-                            .signInWithEmailAndPassword(email, password);
-                        if (result == null) {
-                          setState(() {
-                            loading = false;
-                            error = 'No s\' ha pogut iniciar sessio';
-                          });
+                      var state_current =_formKey.currentState;
+                      if(state_current!=null) {
+                        if ((state_current.validate())) {
+                          setState(() => loading = true);
+                          dynamic result = await _authservice
+                              .signInWithEmailAndPassword(email, password);
+                          if (result == null) {
+                            setState(() {
+                              loading = false;
+                              error = 'No s\' ha pogut iniciar sessio';
+                            });
+                          }
+                          else
+                            Navigator.push(context, MaterialPageRoute(builder: (
+                                context) => AdminHomePage()));;
                         }
-                        else Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));;
                       }
                     }
                 ),

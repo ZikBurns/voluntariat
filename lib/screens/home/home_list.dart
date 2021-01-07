@@ -23,6 +23,7 @@ class _State extends State<HomeList> {
       list_activities = list_activities.where((activity) => activity.type==widget.filter).toList();
     }
       return ListView.builder(
+          shrinkWrap: true,
           itemCount: list_activities.length,
           itemBuilder: (context,index){
             var now= new DateTime.now();
@@ -44,7 +45,7 @@ class _State extends State<HomeList> {
                 child: Card(child: HomeListTile(activity: list_activities[index])),
               );
             }
-            else return Container();
+            else return Container(width: 1);
           }
       );
     }

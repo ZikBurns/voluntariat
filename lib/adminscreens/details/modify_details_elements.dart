@@ -18,11 +18,11 @@ class ModifyActivityElements extends StatefulWidget {
 }
 
 class _ModifyActivityElementsState extends State<ModifyActivityElements> {
-  List<Entity> entitylist;
-  List<dynamic> listOfIDs;
+  List<Entity> entitylist=[];
+  List<dynamic> listOfIDs=[];
 
   List<String> EntitiesToNames(List<Entity> entitylist){
-    List<String> namelist = new List();
+    List<String> namelist = [];
     for (var i=0; i<entitylist.length; i++) {
       namelist.add(entitylist[i].name);
     }
@@ -75,9 +75,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               attribute: 'title',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un titol.";
                 }
+                 */
               ],
             ),
             SizedBox(height: 20),
@@ -106,9 +109,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               options:
               namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
+                */
               ],
               valueTransformer: (val)=>
               List<dynamic>.from(NamestoIDs(List<String>.from(val))),
@@ -154,9 +160,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                 labelText: 'Data fins la que l\'activitat serà visible',
               ),
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
                 }
+                */
               ],
             ),
             SizedBox(height: 20),
@@ -171,9 +180,13 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               attribute: 'place',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un lloc.";
                 }
+                */
+
               ],
             ),
             Text('Horari',
@@ -187,9 +200,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               attribute: 'schedule',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un horari.";
                 }
+                */
               ],
             ),
             SizedBox(height: 20),
@@ -204,9 +220,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               attribute: 'contact',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un contacte.";
                 }
+                */
               ],
             ),
             SizedBox(height: 20),

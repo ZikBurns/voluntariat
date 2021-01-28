@@ -13,6 +13,7 @@ import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_firestore/screens/entities/entities.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,12 +26,14 @@ class _HomePageState extends State<HomePage> {
   ScrollController scrollController;
   bool dialVisible = true;
   String filter="";
+  var foregroundColor;
 
 
 
   AppBar buildAppBar(BuildContext context) {
+
     return new AppBar(
-        title: filter==""?new Text('Voluntariats'):new Text(filter),
+        title: filter==""?new Text('Voluntariats'):new Text(filter,style:TextStyle(color:foregroundColor)),
         //centerTitle: true,
         backgroundColor: Colorizer.typecolor(filter),
         actions: [searchBar.getSearchAction(context)]);
@@ -55,7 +58,6 @@ class _HomePageState extends State<HomePage> {
         });
   }
   void initState() {
-
     scrollController = ScrollController()
       ..addListener(() {
         setDialVisible(scrollController.position.userScrollDirection ==
@@ -79,82 +81,222 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  SpeedDial buildSpeedDial() {
-    return SpeedDial(
-      animatedIcon: AnimatedIcons.menu_close,
-      animatedIconTheme: IconThemeData(size: 22.0),
-      child: Icon(Icons.format_align_left),
-      onOpen: () => print('OPENING DIAL'),
-      onClose: () => setState(() {}),
-      visible: dialVisible,
-      curve: Curves.bounceIn,
-      backgroundColor: Colorizer.typecolor(filter),
-      children: [
-        SpeedDialChild(
-          child: Icon(Icons.local_library_rounded, color: Colors.white),
-          backgroundColor: Colors.amber,
-          onTap: () => filter='Èxit educatiu',
-          label: 'Èxit educatiu',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),
-          labelBackgroundColor: Colors.amberAccent,
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.face_rounded, color: Colors.white),
-          backgroundColor: Colors.red,
-          onTap: () => filter='Joves',
-          label: 'Joves',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.redAccent,
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.family_restroom, color: Colors.white),
-          backgroundColor: Colors.lightBlue,
-          onTap: () => filter='Famílies',
-          label: 'Famílies',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.lightBlueAccent,
-          /*labelWidget: Container(
-            color: Colors.blue,
-            margin: EdgeInsets.only(right: 10),
-            padding: EdgeInsets.all(6),
-            child: Text('Custom Label Widget'),
-          ),*/
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.all_inclusive_rounded, color: Colors.white),
-          backgroundColor: Colors.green,
-          onTap: () => filter='Igualtat d\'oportunitats',
-          label: 'Igualtat d\'oportunitats',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.green,
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.group, color: Colors.white),
-          backgroundColor: Colors.deepOrange,
-          onTap: () => filter='Participació comunitària',
-          label: 'Participació comunitària',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.deepOrangeAccent,
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.format_align_left, color: Colors.white),
-          backgroundColor: Colors.black54,
-          onTap: () => filter="",
-          label: 'Totes les activitats',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.black12,
-        ),
-      ],
+
+  void _settingModalBottomSheet(context){
+    double screenpercentage;
+    if(kIsWeb)screenpercentage=0.60;
+    else screenpercentage=0.85;
+    showModalBottomSheet<dynamic>(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext bc){
+            return Container(
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * screenpercentage,
+              child:new ListView(
+                children: <Widget>[
+                  new ListTile(
+                    tileColor: Colors.black87,
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.black87,
+                      child: IconButton(
+                        icon: Icon(Icons.dashboard, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Totes les activitats',
+                        style: TextStyle(color: Colors.white)),
+                    onTap: () {
+                      filter = "";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                      leading: CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.red,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.local_hospital, color: Colors.white,),
+                        ),
+                      ),
+                      title: new Text('Serveis Sociosanitaris'),
+                      onTap: () {
+                        filter = "Serveis Sociosanitaris";
+                        setState(() {});
+                        Navigator.pop(context);
+                      }
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.deepPurpleAccent,
+                      child: IconButton(
+                        icon: Icon(Icons.family_restroom, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Atenció i suport a les families'),
+                    onTap: () {
+                      filter = "Atenció i suport a les families";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.lime,
+                      child: IconButton(
+                        icon: Icon(Icons.local_library, color: Colors.black,),
+                      ),
+                    ),
+                    title: new Text('Educació i lleure'),
+                    onTap: () {
+                      filter = "Educació i lleure";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.cyanAccent,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.sports_volleyball, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Esport'),
+                    onTap: () {
+                      filter = "Esport";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.greenAccent,
+                      child: IconButton(
+                        icon: Icon(Icons.public, color: Colors.black,),
+                      ),
+                    ),
+                    title: new Text('Voluntariat Internacional'),
+                    onTap: () {
+                      filter = "Voluntariat Internacional";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.pinkAccent,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.accessibility_new, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Atenció a les necessitats bàsiques'),
+                    onTap: () {
+                      filter = "Atenció a les necessitats bàsiques";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.lightGreenAccent,
+                      child: IconButton(
+                        icon: Icon(Icons.nature, color: Colors.black,),
+                      ),
+                    ),
+                    title: new Text('Defensa del mediambient'),
+                    onTap: () {
+                      filter = "Defensa del mediambient";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.deepOrange,
+                      child: IconButton(
+                        icon: Icon(Icons.face, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Joventut'),
+                    onTap: () {
+                      filter = "Joventut";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.indigo,
+                      child: IconButton(
+                        icon: Icon(Icons.elderly, color: Colors.white,),
+                      ),
+                    ),
+                    title: new Text('Gent Gran'),
+                    onTap: () {
+                      filter = "Gent Gran";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.brown,
+                      child: IconButton(
+                        icon: Icon(Icons.pets, color: Colors.white),
+                      ),
+                    ),
+                    title: new Text('Protecció dels animals'),
+                    onTap: () {
+                      filter = "Protecció dels animals";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                  new ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.yellow,
+                      child: IconButton(
+                        icon: Icon(Icons.theater_comedy, color: Colors.black,),
+                      ),
+                    ),
+                    title: new Text('Cultura'),
+                    onTap: () {
+                      filter = "Cultura";
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            );
+        }
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    foregroundColor = Colorizer.typecolor(filter).computeLuminance() > 0.5 ? Colors.black : Colors.white;
     return StreamProvider<List<Activity>>.value(
       value: ActivityService().activities,
       child: Scaffold(
         appBar: searchBar.build(context),
-        drawer: new Drawer(
+        drawer:filter==""? new Drawer(
           child: new ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -196,7 +338,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-        ),
+        ):null,
         body: Container(
           color: Colors.black12,
           child: Column(
@@ -207,8 +349,15 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-          floatingActionButton: buildSpeedDial(),
-        ),
+          floatingActionButton: FloatingActionButton.extended(
+                  onPressed: (){
+                    _settingModalBottomSheet(context);
+                  },
+                  backgroundColor:Colorizer.typecolor(filter),
+                  icon: Icon(Icons.explore, color:foregroundColor),
+                  label: Text("Tipus",style:TextStyle(color:foregroundColor)),
+                ),
+      )
       );
   }
 }

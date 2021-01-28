@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore/adminscreens/details/modify_details.dart';
+import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/details/present_entities.dart';
@@ -26,31 +27,6 @@ class AdminDetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<AdminDetailsPage> {
   String imageUrl;
-
-  Color typecolor(String type){
-    switch(type) {
-      case 'Èxit educatiu': {
-        return Colors.amber;
-      }break;
-      case 'Joves': {
-        return Colors.red;
-      }break;
-      case 'Famílies': {
-        return Colors.lightBlue;
-      }break;
-      case 'Igualtat d\'oportunitats': {
-        return Colors.green;
-      }break;
-      case 'Participació comunitària': {
-        return Colors.deepOrange;
-      }break;
-      default: {
-        return Colors.white;
-
-      }break;
-    }
-  }
-
 
   uploadImage() async {
     final _storage = FirebaseStorage.instance;
@@ -143,7 +119,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
       value: EntityService().entities,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: typecolor(widget.activity.type),
+            backgroundColor: Colorizer.typecolor(widget.activity.type),
             title: Text(widget.activity.title),
           ),
           body: Center(
@@ -170,25 +146,25 @@ class _DetailsPageState extends State<AdminDetailsPage> {
                     ],
                   )
                       : Container(),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(
                     title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),
                     subtitle: SelectableText(widget.activity.desc)
                   ),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   PresentEntities(widget.activity),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(
                       title: Text("Tipus",style: Theme.of(context).textTheme.headline5),
                       subtitle: SelectableText(widget.activity.type)
                   ),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(
                       title: Text("Dates",style: Theme.of(context).textTheme.headline5),
                       subtitle: SelectableText("Data d\'inici: "+widget.activity.startDate.day.toString()+"/"+widget.activity.startDate.month.toString()+"/"+widget.activity.startDate.year.toString()+"\n"+
                                                   "Data final: "+widget.activity.finalDate.day.toString()+"/"+widget.activity.finalDate.month.toString()+"/"+widget.activity.finalDate.year.toString())
                   ),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(
                       title: Text("Lloc",style: Theme.of(context).textTheme.headline5),
                       subtitle: SelectableText(widget.activity.place)
@@ -197,7 +173,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
                       title: Text("Horari",style: Theme.of(context).textTheme.headline5),
                       subtitle: SelectableText(widget.activity.schedule)
                   ),
-                  Divider(thickness:2,color: typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(
                       title: Text("Contacte",style: Theme.of(context).textTheme.headline5),
                       subtitle: Linkable(

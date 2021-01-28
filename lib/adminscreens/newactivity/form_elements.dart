@@ -97,7 +97,7 @@ class FormElements extends StatelessWidget {
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
-              items: ['Participació comunitària','Èxit educatiu', 'Famílies', 'Joves', 'Igualtat d\'oportunitats', 'Altres']
+              items: ['Serveis Sociosanitaris','Atenció i suport a les families','Educació i lleure','Esport','Voluntariat Internacional','Atenció a les necessitats bàsiques','Defensa del mediambient','Joventut','Gent Gran','Protecció dels animals','Cultura']
                  .map((type) =>
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),

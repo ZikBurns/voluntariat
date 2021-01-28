@@ -24,7 +24,7 @@ class _HomeListTileState extends State<HomeListTile> {
       return IconButton(
         tooltip: 'Destacat',
         color: Colors.white,
-        highlightColor: typecolor(widget.activity.type),
+        highlightColor: Colorizer.typecolor(widget.activity.type),
         onPressed: () {
           showDialog(
               context: context,
@@ -47,7 +47,7 @@ class _HomeListTileState extends State<HomeListTile> {
         },
         icon: Icon(
           Icons.alarm,
-          color: typecolor(widget.activity.type),
+          color: Colorizer.typecolor(widget.activity.type),
           size: kIsWeb?26.0:30.0,
         ),
       );

@@ -35,9 +35,12 @@ class FormNewActivity extends StatelessWidget {
                           child: Text("Crear"
                               ""),
                           onPressed: (){
-                            if(_fbKey.currentState.saveAndValidate()){
-                              ActivityService().addActivityMap(_fbKey.currentState.value);
-                              Navigator.pop(context);
+                            var state_current=_fbKey.currentState;
+                            if(state_current!=null) {
+                              if (state_current.saveAndValidate()) {
+                                ActivityService().addActivityMap(state_current.value);
+                                Navigator.pop(context);
+                              }
                             }
                           },
                         ),

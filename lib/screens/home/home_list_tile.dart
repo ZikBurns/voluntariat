@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../details/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 class HomeListTile extends StatefulWidget {
   final Activity activity;
-  HomeListTile({this.activity});
+  HomeListTile({required this.activity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
@@ -52,6 +51,7 @@ class _HomeListTileState extends State<HomeListTile> {
         ),
       );
     }
+    else return Container();
   }
 
 
@@ -67,7 +67,7 @@ class _HomeListTileState extends State<HomeListTile> {
           //isThreeLine: true,
           title:Text(widget.activity.title,style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),maxLines: 2,overflow: TextOverflow.ellipsis),
           subtitle: Text(widget.activity.desc, maxLines: 3,overflow: TextOverflow.ellipsis),
-          trailing: getPrimeIcon(),
+          //trailing: getPrimeIcon(),
       );
   }
 }

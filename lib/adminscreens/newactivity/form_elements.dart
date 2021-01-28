@@ -6,11 +6,11 @@ import 'package:intl/intl.dart';
 
 
 class FormElements extends StatelessWidget {
-  List<Entity> entitylist;
-  List<dynamic> listOfIDs;
+  List<Entity> entitylist=[];
+  List<dynamic> listOfIDs=[];
 
   List<String> EntitiesToNames(List<Entity> entitylist){
-    List<String> namelist = new List();
+    List<String> namelist = [];
     for (var i=0; i<entitylist.length; i++) {
       namelist.add(entitylist[i].name);
     }
@@ -49,9 +49,13 @@ class FormElements extends StatelessWidget {
               attribute: 'title',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                /*
                 (val){
                   if(val=="") return "L'activitat ha de tenir un titol.";
                 }
+
+                 */
               ],
             ),
             SizedBox(height: 20),
@@ -66,9 +70,13 @@ class FormElements extends StatelessWidget {
               attribute: 'desc',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir una descripció.";
                 }
+
+                     */
               ],
             ),
             SizedBox(height: 20),
@@ -82,9 +90,13 @@ class FormElements extends StatelessWidget {
               options:
                 namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
               validators: [
+                FormBuilderValidators.required(),
+                /*
                 (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
+
+                 */
               ],
               valueTransformer: (val)=> val==null ? val : List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
@@ -102,9 +114,13 @@ class FormElements extends StatelessWidget {
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
                 }
+
+                     */
               ],
             ),
             SizedBox(height: 20),
@@ -118,9 +134,13 @@ class FormElements extends StatelessWidget {
                 labelText: 'Data d\'inici',
               ),
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data d\'inici";
                 }
+
+                     */
               ],
             ),
             FormBuilderDateTimePicker(
@@ -131,9 +151,13 @@ class FormElements extends StatelessWidget {
                 labelText: 'Data final',
               ),
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data final";
                 }
+
+                     */
               ],
             ),
             FormBuilderDateTimePicker(
@@ -144,9 +168,13 @@ class FormElements extends StatelessWidget {
                 labelText: 'Data fins la que l\'activitat serà visible',
               ),
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
                 }
+
+                     */
               ],
             ),
             SizedBox(height: 20),
@@ -161,9 +189,13 @@ class FormElements extends StatelessWidget {
               attribute: 'place',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un lloc.";
                 }
+
+                     */
               ],
             ),
             Text('Horari',
@@ -177,9 +209,13 @@ class FormElements extends StatelessWidget {
               attribute: 'schedule',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un horari.";
                 }
+
+                     */
               ],
             ),
             SizedBox(height: 20),
@@ -194,9 +230,13 @@ class FormElements extends StatelessWidget {
               attribute: 'contact',
               readOnly: false,
               validators: [
+                FormBuilderValidators.required(),
+                    /*
                     (val){
                   if(val=="") return "L'activitat ha de tenir un contacte.";
                 }
+                
+                     */
               ],
             ),
             SizedBox(height: 20),

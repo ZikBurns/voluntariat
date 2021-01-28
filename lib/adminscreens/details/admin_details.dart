@@ -26,7 +26,7 @@ class AdminDetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<AdminDetailsPage> {
-  String imageUrl;
+  String imageUrl="";
 
   uploadImage() async {
     final _storage = FirebaseStorage.instance;
@@ -84,7 +84,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
     ActivityService().updateActivity(widget.activity);
   }
 
-  Future<String> NewImageDialog(BuildContext context){
+  Future<String?> NewImageDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){

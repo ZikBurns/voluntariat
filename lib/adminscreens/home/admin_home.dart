@@ -22,11 +22,11 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<AdminHomePage> {
-  SearchBar searchBar;
-  String searchvalue=null;
+  late SearchBar searchBar;
+  String searchvalue="";
   bool dialVisible = true;
   String filter="";
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   void initState() {
     admin.isLoggedIn=true;

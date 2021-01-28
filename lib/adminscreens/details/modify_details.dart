@@ -61,10 +61,15 @@ class _ModifyActivityState extends State<ModifyActivity> {
                         RaisedButton(
                           child: Text("Enviar"),
                           onPressed: (){
-                            if(_fbKey.currentState.saveAndValidate()){
-                              ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value);
-                              Navigator.pop(context);
-                              Navigator.pop(context);
+                            var state_current=_fbKey.currentState;
+                            if(state_current!=null) {
+                              if (state_current.saveAndValidate()) {
+                                ActivityService().updateActivityMap(
+                                    widget.activity.id,
+                                    state_current.value);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
                             }
                           },
                         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
@@ -21,9 +20,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  SearchBar searchBar;
-  String searchvalue=null;
-  ScrollController scrollController;
+  late SearchBar searchBar;
+  String searchvalue="";
+  late ScrollController scrollController;
   bool dialVisible = true;
   String filter="";
   var foregroundColor;

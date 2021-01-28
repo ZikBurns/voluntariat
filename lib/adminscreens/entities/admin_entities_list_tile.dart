@@ -22,7 +22,7 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
 
 
   //It's Future because we are promising that a String will be returned
-  Future<String> UpdateEntityDialog(BuildContext context){
+  Future<String?> UpdateEntityDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){

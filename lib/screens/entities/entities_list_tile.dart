@@ -4,7 +4,7 @@ import 'package:flutter_firestore/commonscreeens/entities_list_sublist.dart';
 
 class EntitiesListTile extends StatefulWidget {
   Entity entity;
-  EntitiesListTile({this.entity});
+  EntitiesListTile({required this.entity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
@@ -18,7 +18,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
 
 
   //It's Future because we are promising that a String will be returned
-  Future<String> UpdateEntityDialog(BuildContext context){
+  Future<String?> UpdateEntityDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){

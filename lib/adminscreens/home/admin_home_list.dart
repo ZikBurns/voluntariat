@@ -6,6 +6,8 @@ import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 
 class AdminHomeList extends StatefulWidget {
+  String filter;
+  AdminHomeList(this.filter);
   @override
   _State createState() => _State();
 }
@@ -14,9 +16,12 @@ class _State extends State<AdminHomeList> {
 
   @override
   Widget build(BuildContext context) {
-    final list_activities = Provider.of<List<Activity>>(context) ?? [];
+    var list_activities = Provider.of<List<Activity>>(context) ?? [];
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
     list_activities.sort((a, b) {if(b.prime) return 1; else return -1;});
+    if(widget.filter!="") {
+      list_activities = list_activities.where((activity) => activity.type==widget.filter).toList();
+    }
     return ListView.builder(
         itemCount: list_activities.length,
         itemBuilder: (context, index) {

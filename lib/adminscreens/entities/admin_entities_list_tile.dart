@@ -77,16 +77,12 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
                   ),
                   IconButton(icon: Icon(Icons.delete),
                     onPressed: (){
-
-                      //TODO: Check if Entitity has activities
-                      var canDelete=true;
-
+                     var canDelete=true;
                       for(var activity in list_activities){
                         for(var entity in activity.entities) {
                           if (entity == widget.entity.id) canDelete=false;
                         }
                       }
-
                       if(canDelete) {
                         showDialog(
                             context: context,

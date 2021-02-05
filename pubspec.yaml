@@ -39,6 +39,11 @@ dependencies:
   transparent_image: ^1.0.0
   firebase_core: ^0.5.3
   tutorial_coach_mark: ^0.5.2
+  unicorndial: "^1.1.5"
+  material_design_icons_flutter: ^4.0.5855
+  mdi: ^4.0.0
+  carousel_slider: ^3.0.0
+
 
 
 

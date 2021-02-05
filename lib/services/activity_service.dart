@@ -17,6 +17,7 @@ class ActivityService{
       'startdate':act.startDate,
       'finaldate':act.finalDate,
       'visibledate':act.visibleDate,
+      'launchdate':act.launchDate,
       'visible':act.visible,
       'prime':act.prime,
       'image':act.image,
@@ -34,6 +35,7 @@ class ActivityService{
       'startdate':map['startdate'],
       'finaldate':map['finaldate'],
       'visibledate':map['visibledate'],
+      'launchdate':map['launchdate'],
       'visible':map['visible'],
       'prime':map['prime'],
       'image':map['image']
@@ -49,8 +51,11 @@ class ActivityService{
       DateTime startdate = doc.get('startdate')?.toDate();
       DateTime finaldate = doc.get('finaldate')?.toDate();
       DateTime visibledate = doc.get('visibledate')?.toDate();
+      DateTime launchdate = doc.get('launchdate')?.toDate();
+
       return Activity(
-          doc.id,doc.get('title')?? '',
+          doc.id,
+          doc.get('title')?? '',
           doc.get('desc')?? '',
           doc.get('type')?? '',
           doc.get('contact')?? '',
@@ -60,6 +65,7 @@ class ActivityService{
           startdate,
           finaldate,
           visibledate,
+          launchdate,
           doc.get('visible')??false,
           doc.get('prime')??false,
           doc.get('image')?? '');
@@ -77,6 +83,7 @@ class ActivityService{
   }
 
   void addActivityMap(Map<String, dynamic> map){
+    map["image"]=null;
     ref.add(map);
   }
 

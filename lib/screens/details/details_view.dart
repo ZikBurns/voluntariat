@@ -18,12 +18,20 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  var foregroundColor;
+
   Widget primeAppBar(){
+    foregroundColor= Colorizer.typecolor(widget.activity.type).computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
     if(widget.activity.prime){
       return AppBar(
+        iconTheme: IconThemeData(
+          color: foregroundColor, //change your color here
+        ),
         backgroundColor: Colorizer.typecolor(widget.activity.type),
-        title: Text(widget.activity.title),
-        actions: <Widget>[
+        title: Text(widget.activity.title,style:TextStyle(color: foregroundColor)),
+        /*actions: <Widget>[
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
@@ -53,13 +61,16 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               )
           ),
-        ],
+        ],*/
       );
     }
     else{
       return AppBar(
+          iconTheme: IconThemeData(
+            color: foregroundColor, //change your color here
+          ),
           backgroundColor: Colorizer.typecolor(widget.activity.type),
-          title: Text(widget.activity.title)
+          title: Text(widget.activity.title,style:TextStyle(color: foregroundColor))
       );
     }
   }
@@ -77,9 +88,8 @@ class _DetailsPageState extends State<DetailsPage> {
               maxWidth: 1000,
             ),
             child: ListView(
-                padding: const EdgeInsets.all(8),
                 children: <Widget>[
-                  (widget.activity.image!="")
+                  (widget.activity.image!=null)
                       ? Stack(
                         children:[
                           Padding(
@@ -99,6 +109,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       subtitle: SelectableText(widget.activity.desc)
                   ),
                   Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
+                  ListTile(
+                    title: Text("Entitats", style: Theme.of(context).textTheme.headline5)),
                   PresentEntities(widget.activity),
                   Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                   ListTile(

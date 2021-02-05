@@ -137,6 +137,19 @@ class FormElements extends StatelessWidget {
               ],
             ),
             FormBuilderDateTimePicker(
+              attribute: 'launchdate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Data de llançament',
+              ),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de llantçament";
+                }
+              ],
+            ),
+            FormBuilderDateTimePicker(
               attribute: 'visibledate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,

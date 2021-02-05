@@ -10,6 +10,7 @@ class Activity{
   DateTime startDate;
   DateTime finalDate;
   DateTime visibleDate;
+  DateTime launchDate;
   bool visible;
   bool prime;
   String image;
@@ -26,6 +27,7 @@ class Activity{
       this.startDate,
       this.finalDate,
       this.visibleDate,
+      this.launchDate,
       this.visible,
       this.prime,
       this.image);

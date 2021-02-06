@@ -62,127 +62,113 @@ class _State extends State<HomeList> {
           .where((activity) => activity.type == widget.filter)
           .toList();
     }
-    return PullToRevealTopItemList.builder(
-      revealWhenEmpty: true,
-      revealableHeight: 50,
-      startRevealed:true,
-      builder: (context, scrollController) => ListView.builder(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        physics: AlwaysScrollableScrollPhysics(),
-        controller: scrollController,
-        itemCount: list_activities.length,
-        itemBuilder: (context, index) {
-          var now = new DateTime.now();
-          bool expired = list_activities[index].visibleDate.isBefore(now);
-          List<String> entitiesinactivity=IDsToNames(list_activities[index].entities);
-          var act=list_activities[index].title.toLowerCase()+
-              list_activities[index].desc.toLowerCase()+
-              list_activities[index].place.toLowerCase()+
-              list_activities[index].schedule.toLowerCase()+
-              entitiesinactivity.toString().toLowerCase()+
-              list_activities[index].type.toString().toLowerCase();
-
-          if(searchtext==null){
-            if ((list_activities[index].visible) &&
-                (!expired) &&
-                (list_activities[index].prime))  {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(
-                    shape: new RoundedRectangleBorder(
-                        side: new BorderSide(
-                            color:
-                            Colorizer.typecolor(list_activities[index].type),
-                            width: 4.0),
-                        borderRadius: BorderRadius.circular(4.0)),
-                    child: HomeListTile(activity: list_activities[index])),
-              );
-            } else if ((list_activities[index].visible) &&
-                (!expired) &&
-                (!list_activities[index].prime)) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child:
-                Card(child: HomeListTile(activity: list_activities[index])),
-              );
-            } else
-              return Container();
-          }
-          else{
-            if ((list_activities[index].visible) &&
-                (!expired) &&
-                (list_activities[index].prime) && (act.contains(searchtext.toLowerCase())))  {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(
-                    shape: new RoundedRectangleBorder(
-                        side: new BorderSide(
-                            color:
-                            Colorizer.typecolor(list_activities[index].type),
-                            width: 4.0),
-                        borderRadius: BorderRadius.circular(4.0)),
-                    child: HomeListTile(activity: list_activities[index])),
-              );
-            } else if ((list_activities[index].visible) &&
-                (!expired) &&
-                (!list_activities[index].prime) && (act.contains(searchtext.toLowerCase()))) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child:
-                Card(child: HomeListTile(activity: list_activities[index])),
-              );
-            } else
-              return Container();
-          }
-          }
-      ),
-
-      revealableBuilder: (BuildContext context, RevealableToggler opener,
-          RevealableToggler closer, BoxConstraints constraints) {
-        return Padding(
-          padding: const EdgeInsets.only(top:5.0),
-          child: Row(
-            key: Key('scrollable-row'),
-            children: <Widget>[
-              SizedBox(width: 10),
-              Flexible(
-                child: TextFormField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-
-                    border: OutlineInputBorder(),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(25.7),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(25.7),
-                      ),
-                    filled: true,
-                      fillColor: Colors.white,
-                    hintText: 'Busca',
-                    hintStyle: TextStyle(color: Colors.blueGrey),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        // Removes any filtering effects
-                        searchController.text = '';
-                        setState(() {
-                          searchtext = null;
-                        });
-                      },
-                    )
-                  ),
-                ),
+    return Container(
+      child: Column(
+        children: [
+        Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: TextFormField(
+          controller: searchController,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(25.7),
               ),
-              SizedBox(width: 10),
-
-            ],
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(25.7),
+              ),
+              filled: true,
+              fillColor: Colors.white,
+              hintText: 'Busca',
+              hintStyle: TextStyle(color: Colors.blueGrey),
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  // Removes any filtering effects
+                  searchController.text = '';
+                  setState(() {
+                    searchtext = null;
+                  });
+                },
+              )
           ),
-        );
-      },
+          ),
+        ),
+          Expanded(
+            child: ListView.builder(
+                physics: AlwaysScrollableScrollPhysics(),
+                itemCount: list_activities.length,
+                itemBuilder: (context, index) {
+                  var now = new DateTime.now();
+                  bool expired = list_activities[index].visibleDate.isBefore(now);
+                  List<String> entitiesinactivity=IDsToNames(list_activities[index].entities);
+                  var act=list_activities[index].title.toLowerCase()+
+                      list_activities[index].desc.toLowerCase()+
+                      list_activities[index].place.toLowerCase()+
+                      list_activities[index].schedule.toLowerCase()+
+                      entitiesinactivity.toString().toLowerCase()+
+                      list_activities[index].type.toString().toLowerCase();
 
+                  if(searchtext==null){
+                    if ((list_activities[index].visible) &&
+                        (!expired) &&
+                        (list_activities[index].prime))  {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Card(
+                            shape: new RoundedRectangleBorder(
+                                side: new BorderSide(
+                                    color:
+                                    Colorizer.typecolor(list_activities[index].type),
+                                    width: 4.0),
+                                borderRadius: BorderRadius.circular(4.0)),
+                            child: HomeListTile(activity: list_activities[index])),
+                      );
+                    } else if ((list_activities[index].visible) &&
+                        (!expired) &&
+                        (!list_activities[index].prime)) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child:
+                        Card(child: HomeListTile(activity: list_activities[index])),
+                      );
+                    } else
+                      return Container();
+                  }
+                  else{
+                    if ((list_activities[index].visible) &&
+                        (!expired) &&
+                        (list_activities[index].prime) && (act.contains(searchtext.toLowerCase())))  {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Card(
+                            shape: new RoundedRectangleBorder(
+                                side: new BorderSide(
+                                    color:
+                                    Colorizer.typecolor(list_activities[index].type),
+                                    width: 4.0),
+                                borderRadius: BorderRadius.circular(4.0)),
+                            child: HomeListTile(activity: list_activities[index])),
+                      );
+                    } else if ((list_activities[index].visible) &&
+                        (!expired) &&
+                        (!list_activities[index].prime) && (act.contains(searchtext.toLowerCase()))) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child:
+                        Card(child: HomeListTile(activity: list_activities[index])),
+                      );
+                    } else
+                      return Container();
+                  }
+              },
+
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

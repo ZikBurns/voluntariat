@@ -38,8 +38,11 @@ class FormElements extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Text('Titol',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Titol',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -55,8 +58,11 @@ class FormElements extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text('Descripció',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Descripció',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -75,8 +81,11 @@ class FormElements extends StatelessWidget {
             //* ----------------------------------------------------
             //* CHECKBOX GROUP
             //* ----------------------------------------------------
-            Text('Entitat/s',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Entitat/s',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             FormBuilderCheckboxGroup(
               attribute: 'entities',
               options:
@@ -92,8 +101,11 @@ class FormElements extends StatelessWidget {
             //* ----------------------------------------------------
             //* CHECKBOX GROUP
             //* ----------------------------------------------------
-            Text('Tipus',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Tipus',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
@@ -108,8 +120,16 @@ class FormElements extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text('Dates',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Dates',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent',
+                  style: TextStyle(fontSize: 14, color: Colors.black)),
+            ),
             FormBuilderDateTimePicker(
               attribute: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
@@ -163,8 +183,11 @@ class FormElements extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text('Lloc/s',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Lloc/s',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -179,8 +202,11 @@ class FormElements extends StatelessWidget {
                 }
               ],
             ),
-            Text('Horari',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Horari',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -196,8 +222,11 @@ class FormElements extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text('Contacte',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Contacte',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -213,14 +242,20 @@ class FormElements extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text('Visibilitat',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Visibilitat',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             FormBuilderCheckbox(
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
             ),
-            Text('Destacada',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Destacada',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             FormBuilderCheckbox(
               attribute: 'prime',
               label: Text('Vols que l\'activitat sigui destacada?'),

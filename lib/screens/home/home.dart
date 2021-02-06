@@ -22,6 +22,7 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_firestore/screens/home/carousel.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
+import 'package:pull_to_reveal/pull_to_reveal.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -369,26 +370,25 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Flexible(
-              child: StreamProvider<List<Activity>>.value(
-                value: ActivityService().activities,
-                  child: HomeList(filter)
+              child: StreamProvider<List<Entity>>.value(
+                value: EntityService().entities,
+                child: StreamProvider<List<Activity>>.value(
+                  value: ActivityService().activities,
+                    child: HomeList(filter)
+                ),
               ),
             )
           ],
         ),
       ),
       Container(
-        color: Colors.black12,
-        child: Column(
-          children: [
-            Flexible(
+        color: Colors.black26,
+            child: Center(
               child: StreamProvider<List<Entity>>.value(
                 value: EntityService().entities,
                 child:EntitiesList(),
-              )
+              ),
             )
-          ],
-        ),
       ),
       Container(
         child: new ListView(
@@ -457,7 +457,7 @@ class _HomePageState extends State<HomePage> {
         ? Colors.black
         : Colors.white;
     return Scaffold(
-      appBar: searchBar.build(context),
+      //appBar: searchBar.build(context),
       drawer: filter == ""
           ? new Drawer(
               child: new ListView(

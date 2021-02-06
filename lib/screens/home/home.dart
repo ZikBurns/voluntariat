@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      filter = "";
     });
   }
 
@@ -587,7 +588,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        Container(
+        filter==""?Container(
           padding: EdgeInsets.only(left: 30.0),
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -599,6 +600,23 @@ class _HomePageState extends State<HomePage> {
               icon: Colorizer.showIcon(filter),
               label:
                   Text("Tipus", style: TextStyle(color: foregroundColor)),
+            ),
+          ),
+        ):
+        Container(
+          padding: EdgeInsets.only(left: 30.0),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                filter="";
+                print("bona nit");
+                (context as Element).reassemble();
+              },
+              backgroundColor: Colorizer.typecolor(filter),
+              icon: Icon(Icons.clear,color: Colors.black ),
+              label:
+              Text(filter, style: TextStyle(color: foregroundColor)),
             ),
           ),
         ),

@@ -21,6 +21,7 @@ class ActivityService{
       'visible':act.visible,
       'prime':act.prime,
       'image':act.image,
+      'mode':act.mode
     });
   }
   Future updateActivityMap(String id,Map<String, dynamic> map) async{
@@ -38,7 +39,8 @@ class ActivityService{
       'launchdate':map['launchdate'],
       'visible':map['visible'],
       'prime':map['prime'],
-      'image':map['image']
+      'image':map['image'],
+      'mode':map['mode']
     });
   }
 
@@ -52,7 +54,26 @@ class ActivityService{
       DateTime finaldate = doc.get('finaldate')?.toDate();
       DateTime visibledate = doc.get('visibledate')?.toDate();
       DateTime launchdate = doc.get('launchdate')?.toDate();
-
+      print("hgola"+doc.get('mode').toString()+":");
+      print(doc.get('mode').toString());
+      Activity act=new Activity(
+          doc.id,
+          doc.get('title')?? '',
+          doc.get('desc')?? '',
+          doc.get('type')?? '',
+          doc.get('contact')?? '',
+          doc.get('place')?? '',
+          doc.get('schedule')?? '',
+          entitylist,
+          startdate,
+          finaldate,
+          visibledate,
+          launchdate,
+          doc.get('visible')??false,
+          doc.get('prime')??false,
+          doc.get('image')?? '',
+          doc.get('mode')??'');
+      print(act.title);
       return Activity(
           doc.id,
           doc.get('title')?? '',
@@ -68,7 +89,8 @@ class ActivityService{
           launchdate,
           doc.get('visible')??false,
           doc.get('prime')??false,
-          doc.get('image')?? '');
+          doc.get('image')?? '',
+          doc.get('mode')??'');
     }).toList();
   }
 

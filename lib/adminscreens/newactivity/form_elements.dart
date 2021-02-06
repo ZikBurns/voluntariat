@@ -103,7 +103,7 @@ class FormElements extends StatelessWidget {
             //* ----------------------------------------------------
             Align(
               alignment: Alignment.topLeft,
-              child: Text('Tipus',
+              child: Text('Tipologia',
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderDropdown(
@@ -116,6 +116,19 @@ class FormElements extends StatelessWidget {
               validators: [
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
+                }
+              ],
+            ),
+            FormBuilderDropdown(
+              hint: Text('Selecciona si es presencial, virtual o semipresencial'),
+              attribute: 'type',
+              items: ["Presencial","Virtual","Semipresencial"]
+                  .map((type) =>
+                  DropdownMenuItem(value: type, child: Text("$type")))
+                  .toList(),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de ser presencial, virtual o semipresencial.";
                 }
               ],
             ),

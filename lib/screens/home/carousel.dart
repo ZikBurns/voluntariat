@@ -19,7 +19,7 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     var listActivities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> primelist = listActivities.where((activity) => activity.prime==true).toList();
-    listActivities.sort((a,b)=>a.launchDate.millisecondsSinceEpoch.compareTo(b.launchDate.millisecondsSinceEpoch));
+    listActivities.sort((a,b)=>b.launchDate.millisecondsSinceEpoch.compareTo(a.launchDate.millisecondsSinceEpoch));
     return Container(
       child: ListView(
         //mainAxisAlignment: MainAxisAlignment.center,

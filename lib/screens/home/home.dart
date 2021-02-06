@@ -37,6 +37,8 @@ class _HomePageState extends State<HomePage> {
   String filter = "";
   var foregroundColor;
   int _selectedIndex = 0;
+  String filtermode="";
+
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Voluntariats',
@@ -375,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                 value: EntityService().entities,
                 child: StreamProvider<List<Activity>>.value(
                   value: ActivityService().activities,
-                    child: HomeList(filter)
+                    child: HomeList(filter,filtermode)
                 ),
               ),
             )
@@ -538,6 +540,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.all_inclusive_rounded),
                         onPressed: () {
                           _selectedface2face = 0;
+                          filtermode="";
                           setState(() {});
                         },
                       )),
@@ -552,6 +555,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.desktop_windows),
                         onPressed: () {
                           _selectedface2face = 1;
+                          filtermode="Virtual";
                           setState(() {});
                         },
                       )),
@@ -566,6 +570,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.accessibility_new_rounded),
                         onPressed: () {
                           _selectedface2face = 2;
+                          filtermode="Presencial";
                           setState(() {});
                         },
                       )),
@@ -580,6 +585,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.shuffle),
                         onPressed: () {
                           _selectedface2face = 3;
+                          filtermode="Semipresencial";
                           setState(() {});
                         },
                       )),

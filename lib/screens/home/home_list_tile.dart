@@ -65,6 +65,28 @@ class _HomeListTileState extends State<HomeListTile> {
     }
   }
 
+
+  Icon modeicon(String mode){
+    if (mode=="Presencial"){
+      return new Icon(
+        Icons.accessibility_new_rounded,
+        size: 20,
+      );
+    }
+    else if(mode=="Virtual"){
+      return new Icon(
+        Icons.desktop_windows,
+        size: 20,
+      );
+    }
+    else{
+      return new Icon(
+        Icons.shuffle,
+        size: 20,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.activity.prime) {
@@ -91,10 +113,7 @@ class _HomeListTileState extends State<HomeListTile> {
             new Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                new Icon(
-                  Icons.desktop_windows,
-                  size: 20,
-                ),
+                modeicon(widget.activity.mode),
                 new Text(" " + widget.activity.title + " ",
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -122,10 +141,7 @@ class _HomeListTileState extends State<HomeListTile> {
         title: new Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            new Icon(
-              Icons.desktop_windows,
-              size: 20,
-            ),
+            modeicon(widget.activity.mode),
             new Text(" " + widget.activity.title + " ",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 maxLines: 2,

@@ -8,7 +8,8 @@ import 'package:pull_to_reveal/pull_to_reveal.dart';
 
 class HomeList extends StatefulWidget {
   String filter;
-  HomeList(this.filter);
+  String filtermode;
+  HomeList(this.filter,this.filtermode);
 
   @override
   _State createState() => _State();
@@ -17,8 +18,8 @@ class HomeList extends StatefulWidget {
 class _State extends State<HomeList> {
   TextEditingController searchController;
   String searchtext=null;
-
   List<Entity> entitylist;
+
   void initState() {
     searchController = TextEditingController();
     searchController.text="";
@@ -62,38 +63,47 @@ class _State extends State<HomeList> {
           .where((activity) => activity.type == widget.filter)
           .toList();
     }
+    if (widget.filtermode != "") {
+      list_activities = list_activities
+          .where((activity) => activity.mode == widget.filtermode)
+          .toList();
+    }
+
     return Container(
       child: Column(
         children: [
         Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: TextFormField(
-          controller: searchController,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(25.7),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(25.7),
-              ),
-              filled: true,
-              fillColor: Colors.white,
-              hintText: 'Busca',
-              hintStyle: TextStyle(color: Colors.blueGrey),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  // Removes any filtering effects
-                  searchController.text = '';
-                  setState(() {
-                    searchtext = null;
-                  });
-                },
-              )
-          ),
+          padding: const EdgeInsets.only(top:25.0),
+          child: Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: TextFormField(
+            controller: searchController,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(25.7),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(25.7),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Busca',
+                hintStyle: TextStyle(color: Colors.blueGrey),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    // Removes any filtering effects
+                    searchController.text = '';
+                    setState(() {
+                      searchtext = null;
+                    });
+                  },
+                )
+            ),
+            ),
           ),
         ),
           Expanded(

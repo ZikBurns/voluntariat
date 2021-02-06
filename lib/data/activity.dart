@@ -14,6 +14,7 @@ class Activity{
   bool visible;
   bool prime;
   String image;
+  String mode;
 
   Activity(
       this.id,
@@ -30,5 +31,6 @@ class Activity{
       this.launchDate,
       this.visible,
       this.prime,
-      this.image);
+      this.image,
+      this.mode);
 }

@@ -157,7 +157,7 @@ class Colorizer{
   static CircleAvatar showAvatar(Activity act){
     print(act.title);
     print(act.image);
-    if(act.image==null){
+    if(act.image==""){
       switch(act.type) {
         case 'Serveis Sociosanitaris': {
           return CircleAvatar(

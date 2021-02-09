@@ -40,11 +40,13 @@ class _ModifyActivityState extends State<ModifyActivity> {
             'place':widget.activity.place,
             'schedule':widget.activity.schedule,
             'type':widget.activity.type,
+            'launchdate':widget.activity.launchDate,
             'visibledate':widget.activity.visibleDate,
             'startdate': widget.activity.startDate,
             'finaldate': widget.activity.finalDate,
             'visible': widget.activity.visible,
             'prime': widget.activity.prime,
+            'mode':widget.activity.mode
           },
           key: _fbKey,
           child: Padding(
@@ -62,7 +64,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
                           child: Text("Enviar"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value);
+                              ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value, widget.activity.image);
                               Navigator.pop(context);
                               Navigator.pop(context);
                             }

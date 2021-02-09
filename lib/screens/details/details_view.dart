@@ -92,7 +92,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             child: ListView(
                 children: <Widget>[
-                  (widget.activity.image!=null)
+                  (widget.activity.image!="")
                       ? Stack(
                         children:[
                           Padding(

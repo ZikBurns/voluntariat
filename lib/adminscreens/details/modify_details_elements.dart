@@ -64,8 +64,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Text('Titol',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Titol',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -81,8 +84,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ],
             ),
             SizedBox(height: 20),
-            Text('Descripcio',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Descripció',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -91,7 +97,9 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               obscureText: false,
               attribute: 'desc',
               readOnly: false,
-              validators: [],
+              validators: [(val){
+                if(val=="") return "L'activitat ha de tenir una descripció.";
+              }],
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------
@@ -117,8 +125,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             //* ----------------------------------------------------
             //* CHECKBOX GROUP
             //* ----------------------------------------------------
-            Text('Tipus',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Tipologia',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               attribute: 'type',
@@ -126,10 +137,36 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
+                }
+              ],
+            ),
+            FormBuilderDropdown(
+              hint: Text('Selecciona si es presencial, virtual o semipresencial'),
+              attribute: 'mode',
+              items: ["Presencial","Virtual","Semipresencial"]
+                  .map((type) =>
+                  DropdownMenuItem(value: type, child: Text("$type")))
+                  .toList(),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de ser presencial, virtual o semipresencial.";
+                }
+              ],
             ),
             SizedBox(height: 20),
-            Text('Dates',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Dates',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent',
+                  style: TextStyle(fontSize: 14, color: Colors.black)),
+            ),
             FormBuilderDateTimePicker(
               attribute: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
@@ -147,6 +184,19 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ),
             ),
             FormBuilderDateTimePicker(
+              attribute: 'launchdate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Data de llançament',
+              ),
+              validators: [
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de llantçament";
+                }
+              ],
+            ),
+            FormBuilderDateTimePicker(
               attribute: 'visibledate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -160,8 +210,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ],
             ),
             SizedBox(height: 20),
-            Text('Lloc/s',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Lloc/s',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            ),
             //* ----------------------------------------------------
             //* TEXT INPUT
             //* ----------------------------------------------------
@@ -215,6 +268,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderCheckbox(
               attribute: 'visible',
               label: Text('Vols que l\'activitat sigui visible?'),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Destacada',
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderCheckbox(
               attribute: 'prime',

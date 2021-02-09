@@ -7,6 +7,7 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class EntitiesListSubActivites extends StatefulWidget {
   Entity entity;
@@ -20,6 +21,7 @@ class EntitiesListSubActivites extends StatefulWidget {
 class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
   @override
   Widget build(BuildContext context) {
+    print(widget.entity.image.toString());
     return StreamProvider<List<Activity>>.value(
         value: ActivityService().activities,
         child: StreamProvider<List<Entity>>.value(
@@ -34,6 +36,33 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                 color: Colors.black12,
                 child: Column(
                   children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        widget.entity.image!=""
+                            ? Stack(
+                          children:[
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                            Center(child: FadeInImage.memoryNetwork  (
+                              placeholder: kTransparentImage,
+                              image:widget.entity.image,
+                            ), )
+                          ],
+                        )
+                            : Container(),
+                      ],
+                    ),
+                    SizedBox(height:20),
+                    ListTile(
+                      title: Text(widget.entity.name),
+                      subtitle: Text(widget.entity.desc),
+                    ),
+                    ListTile(
+                      title: Text("Activitats de l'entitat:"),
+                    ),
                     Flexible(
                       child: EntitiesListSubActivitiesResults(widget.entity),
                     )

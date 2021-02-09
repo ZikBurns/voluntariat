@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class EntitiesListTile extends StatefulWidget {
   Entity entity;
@@ -19,6 +22,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
 
   //It's Future because we are promising that a String will be returned
   Future<String> UpdateEntityDialog(BuildContext context){
+
     return showDialog(
         context: context,
         builder: (context){
@@ -52,11 +56,42 @@ class _HomeListTileState extends State<EntitiesListTile> {
 
   @override
   Widget build(BuildContext context) {
+    var list_activities=Provider.of<List<Activity>>(context) ?? [];
+    list_activities = list_activities
+        .where((activity) => activity.entities.contains(widget.entity.id))
+        .toList();
     return ListTile(
-      title:Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+      title:Text(widget.entity.name+" ("+list_activities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+      subtitle: Container(
+          child: Row(
+            children: [
+              Expanded(child: Text(widget.entity.desc)),
+            ],
+          )
+      ),
       onTap: (){
         passData(widget.entity);
       },
+      //Text(list_activities.length.toString(),style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+      trailing: Container(
+        child: widget.entity.image!=""
+            ? CircleAvatar(
+            radius: 25.0,
+            child: AspectRatio(
+                aspectRatio: 1/1,
+                child: ClipOval(
+                  child: FadeInImage.memoryNetwork  (
+                    width: 100,
+                    height: 100,
+                    placeholder: kTransparentImage,
+                    image:widget.entity.image,
+                    fit: BoxFit.cover,
+                  ),
+                )
+            )
+        )
+            : CircleAvatar(),
+      ),
     );
   }
 }

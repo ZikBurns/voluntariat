@@ -24,7 +24,7 @@ class ActivityService{
       'mode':act.mode
     });
   }
-  Future updateActivityMap(String id,Map<String, dynamic> map) async{
+  Future updateActivityMap(String id,Map<String, dynamic> map, String image) async{
     return await ref.doc(id).set({
       'title': map['title'],
       'desc': map['desc'],
@@ -39,7 +39,7 @@ class ActivityService{
       'launchdate':map['launchdate'],
       'visible':map['visible'],
       'prime':map['prime'],
-      'image':map['image'],
+      'image':image,
       'mode':map['mode']
     });
   }

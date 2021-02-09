@@ -1,6 +1,7 @@
 class Entity{
   String name;
   String id;
-
-  Entity(this.id,this.name);
+  String desc;
+  String image;
+  Entity(this.id,this.name,this.desc,this.image);
 }

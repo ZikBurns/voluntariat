@@ -54,7 +54,7 @@ class _HomeListTileState extends State<HomeListTile> {
                     });
               },
               icon: new Icon(
-                Mdi.bullhorn,
+                Icons.campaign_outlined,
                 color: Colorizer.typecolor(widget.activity.type),
                 size: kIsWeb ? 26.0 : 26.0,
               ),

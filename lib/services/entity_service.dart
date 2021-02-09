@@ -7,7 +7,7 @@ class EntityService{
 
   List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      return Entity(doc.id,doc.get('name')?? '');
+      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'');
     }).toList();
   }
 
@@ -25,14 +25,14 @@ class EntityService{
     await FirebaseFirestore.instance.collection('Entities').doc(entity.id).delete();
   }
   
-  void addEntity(String entityname){
-    ref.add({'name':entityname});
+  void addEntity(Entity entity){
+    ref.add({'name': entity.name,'desc':entity.name,'image':entity.image});
   }
 
   void updateEntity(Entity entity) {
     try {
       ref.doc(entity.id)
-          .update({'name': entity.name});
+          .update({'name': entity.name,'desc':entity.desc,'image':entity.image});
     } catch (e) {
       print(e.toString());
     }

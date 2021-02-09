@@ -69,7 +69,7 @@ class _EntitiesListState extends State<AdminEntities> {
           ),
           floatingActionButton: FloatingActionButton(onPressed: (){
             NewEntityDialog(context).then((onValue){
-              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(onValue);
+              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(new Entity("",onValue,"",""));
             });
           },
             child: Icon(Icons.add,color:Colors.white,size: 30),

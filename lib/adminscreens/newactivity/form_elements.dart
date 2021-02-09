@@ -121,7 +121,7 @@ class FormElements extends StatelessWidget {
             ),
             FormBuilderDropdown(
               hint: Text('Selecciona si es presencial, virtual o semipresencial'),
-              attribute: 'type',
+              attribute: 'mode',
               items: ["Presencial","Virtual","Semipresencial"]
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))

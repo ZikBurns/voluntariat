@@ -132,16 +132,17 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ]),
-              new Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  modeicon(widget.activity.mode),
-                  new Text(" " + widget.activity.title + " ",
-                      style:
-                      TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis),
-                ],
+              RichText(
+                //maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(
+                  children: [
+                    WidgetSpan(child: modeicon(widget.activity.mode)),
+                    TextSpan(text:" " + widget.activity.title,
+                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -181,20 +182,18 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             },
           ),
           //isThreeLine: true,
-          title: new Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              modeicon(widget.activity.mode),
-              new Text(" " + widget.activity.title + " ",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
-            ],
+          title: RichText(
+            //maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              children: [
+                WidgetSpan(child: modeicon(widget.activity.mode)),
+                TextSpan(text:" " + widget.activity.title,
+                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
           subtitle: Text(widget.activity.desc,
               maxLines: 3, overflow: TextOverflow.ellipsis),
           //trailing: getPrimeIcon(),
@@ -244,16 +243,17 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ]),
-              new Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  modeicon(widget.activity.mode),
-                  new Text(" " + widget.activity.title + " ",
-                      style:
-                      TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis),
-                ],
+              RichText(
+                //maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(
+                  children: [
+                    WidgetSpan(child: modeicon(widget.activity.mode)),
+                    TextSpan(text:" " + widget.activity.title,
+                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -293,20 +293,18 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             },
           ),
           //isThreeLine: true,
-          title: new Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              modeicon(widget.activity.mode),
-              new Text(" " + widget.activity.title + " ",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
-            ],
+          title: RichText(
+            //maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              children: [
+                WidgetSpan(child: modeicon(widget.activity.mode)),
+                TextSpan(text:" " + widget.activity.title,
+                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
           subtitle: Text(widget.activity.desc,
               maxLines: 3, overflow: TextOverflow.ellipsis),
           //trailing: getPrimeIcon(),
@@ -321,7 +319,6 @@ class _HomeListTileState extends State<AdminHomeListTile> {
           onTap: () {
             passData(widget.activity);
           },
-          //isThreeLine: true,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -335,16 +332,17 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ]),
-              new Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  modeicon(widget.activity.mode),
-                  new Text(" " + widget.activity.title + " ",
-                      style:
-                      TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis),
-                ],
+              RichText(
+                //maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(
+                  children: [
+                    WidgetSpan(child: modeicon(widget.activity.mode)),
+                    TextSpan(text:" " + widget.activity.title,
+                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -384,20 +382,18 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             },
           ),
           //isThreeLine: true,
-          title: new Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              modeicon(widget.activity.mode),
-              new Text(" " + widget.activity.title + " ",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
-            ],
+          title: RichText(
+            //maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              children: [
+                WidgetSpan(child: modeicon(widget.activity.mode)),
+                TextSpan(text:" " + widget.activity.title,
+                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
           subtitle: Text(widget.activity.desc,
               maxLines: 3, overflow: TextOverflow.ellipsis),
           //trailing: getPrimeIcon(),

@@ -54,8 +54,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                RaisedButton(
-                    color: Colors.deepPurple,
+                ElevatedButton(
+                    style:ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.purple)) ,
                     child: Text(
                       'Sign In',
                       style: TextStyle(color: Colors.white),

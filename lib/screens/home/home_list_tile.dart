@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../details/details_view.dart';
+import 'package:flutter_firestore/screens/details/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter_firestore/commonscreeens/colorizer.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:mdi/mdi.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 class HomeListTile extends StatefulWidget {
@@ -137,24 +133,20 @@ class _HomeListTileState extends State<HomeListTile> {
         onTap: () {
           passData(widget.activity);
         },
-        //isThreeLine: true,
-        title: new Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            modeicon(widget.activity.mode),
-            new Text(" " + widget.activity.title + " ",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis),
-          ],
+        title: RichText(
+            //maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          text: TextSpan(
+            children: [
+              WidgetSpan(child: modeicon(widget.activity.mode)),
+              TextSpan(text:" " + widget.activity.title,
+                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+            ],
+          ),
         ),
-        /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
         subtitle: Text(widget.activity.desc,
             maxLines: 3, overflow: TextOverflow.ellipsis),
-        //trailing: getPrimeIcon(),
       );
     }
   }

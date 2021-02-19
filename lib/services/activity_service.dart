@@ -105,8 +105,10 @@ class ActivityService{
   }
 
   void addActivityMap(Map<String, dynamic> map){
-    map["image"]=null;
-    ref.add(map);
+    ref.add(map).then((value){
+      ref.doc(value.id).update({'image':null});
+      });
+
   }
 
   deleteActivity(Activity activity) async {

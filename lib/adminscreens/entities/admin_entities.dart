@@ -28,13 +28,13 @@ class _EntitiesListState extends State<AdminEntities> {
               autofocus: true,
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text("Cancelar"),
                 onPressed:  () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 onPressed: (){
                   Navigator.of(context).pop(controller.text.toString());
                 },

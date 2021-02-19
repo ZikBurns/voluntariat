@@ -75,13 +75,13 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'title',
+              name: 'title',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un titol.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -95,11 +95,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
-              attribute: 'desc',
+              name: 'desc',
               readOnly: false,
-              validators: [(val){
+              validator: FormBuilderValidators.compose([(val){
                 if(val=="") return "L'activitat ha de tenir una descripció.";
-              }],
+              }]),
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------
@@ -110,14 +110,14 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderCheckboxGroup(
               //TODO: initialvalue is assigned with [] first because the data has not yet arrived from the cloud and therefore cannot be assigned again. Find a way to make it work. Ideal option: make a loading button until Stream Provider has everything.
               initialValue: initialcheckedentities,
-              attribute: 'entities',
+              name: 'entities',
               options:
               namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
-              ],
+              ]),
               valueTransformer: (val)=>
               List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
@@ -132,29 +132,29 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             ),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
-              attribute: 'type',
+              name: 'type',
               items: ['Serveis Sociosanitaris','Atenció i suport a les families','Educació i lleure','Esport','Voluntariat Internacional','Atenció a les necessitats bàsiques','Defensa del mediambient','Joventut','Gent Gran','Protecció dels animals','Cultura']
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
                 }
-              ],
+              ]),
             ),
             FormBuilderDropdown(
               hint: Text('Selecciona si es presencial, virtual o semipresencial'),
-              attribute: 'mode',
+              name: 'mode',
               items: ["Presencial","Virtual","Semipresencial"]
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de ser presencial, virtual o semipresencial.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -168,7 +168,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                   style: TextStyle(fontSize: 14, color: Colors.black)),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'startdate',
+              name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
@@ -176,7 +176,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'finaldate',
+              name: 'finaldate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
@@ -184,30 +184,30 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'launchdate',
+              name: 'launchdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data de llançament',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de llantçament";
                 }
-              ],
+              ]),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'visibledate',
+              name: 'visibledate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data fins la que l\'activitat serà visible',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -221,13 +221,13 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'place',
+              name: 'place',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un lloc.";
                 }
-              ],
+              ]),
             ),
             Text('Horari',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
@@ -237,13 +237,13 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'schedule',
+              name: 'schedule',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un horari.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Text('Contacte',
@@ -254,20 +254,20 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
-              attribute: 'contact',
+              name: 'contact',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un contacte.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Text('Visibilitat',
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             FormBuilderCheckbox(
-              attribute: 'visible',
-              label: Text('Vols que l\'activitat sigui visible?'),
+              name: 'visible',
+              title: Text('Vols que l\'activitat sigui visible?'),
             ),
             Align(
               alignment: Alignment.topLeft,
@@ -275,8 +275,8 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderCheckbox(
-              attribute: 'prime',
-              label: Text('Vols que l\'activitat sigui destacada?'),
+              name: 'prime',
+              title: Text('Vols que l\'activitat sigui destacada?'),
             ),
           ],
         ),

@@ -30,8 +30,8 @@ class _EntitiesListState extends State<EntitiesList> {
   Widget build(BuildContext context) {
     final list_entities = Provider.of<List<Entity>>(context) ?? [];
 
-    return Container(
-      child: Column(
+    return Column(
+        //shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 25.0),
@@ -68,6 +68,8 @@ class _EntitiesListState extends State<EntitiesList> {
           ),
           Expanded(
             child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
                 itemCount: list_entities.length,
                 itemBuilder: (context, index) {
                   var ent = list_entities[index].name.toLowerCase() +
@@ -88,7 +90,6 @@ class _EntitiesListState extends State<EntitiesList> {
                 }),
           ),
         ],
-      ),
-    );
+      );
   }
 }

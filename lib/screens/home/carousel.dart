@@ -20,6 +20,7 @@ class _CarouselState extends State<Carousel> {
     var listActivities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> primelist = listActivities.where((activity) => activity.prime==true).toList();
     listActivities.sort((a,b)=>b.launchDate.millisecondsSinceEpoch.compareTo(a.launchDate.millisecondsSinceEpoch));
+
     return Container(
       child: ListView(
         //mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +76,6 @@ class _CarouselState extends State<Carousel> {
                         fit: BoxFit.cover,
                       ),*/
                     ),
-
                     Container(
                         alignment: Alignment.center,
                         child: Text(activity.title,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18.0),)),

@@ -36,13 +36,13 @@ class _FireFeedbackState extends State<FireFeedback> {
                             FormBuilderTextField(
                             maxLines: 1,
                             obscureText: false,
-                            attribute: 'title',
+                            name: 'title',
                             readOnly: false,
-                            validators: [
+                            validator: FormBuilderValidators.compose([
                             (val){
                             if(val=="") return "L'activitat ha de tenir un titol.";
                             }
-                        ],
+                        ]),
                         ),
                           SizedBox(height: 20),
                           Text('Cos del missatge',
@@ -53,13 +53,13 @@ class _FireFeedbackState extends State<FireFeedback> {
                           FormBuilderTextField(
                             maxLines: 8,
                             obscureText: false,
-                            attribute: 'desc',
+                            name: 'desc',
                             readOnly: false,
-                            validators: [
+                            validator:FormBuilderValidators.compose( [
                                   (val){
                                 if(val=="") return "L'activitat ha de tenir una descripció.";
                               }
-                            ],
+                            ]),
                           ),
                       ]
                         ),

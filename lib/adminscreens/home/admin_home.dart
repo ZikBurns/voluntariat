@@ -10,8 +10,7 @@ import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:unicorndial/unicorndial.dart';
-import 'admin_home_list.dart';
+import 'package:flutter_firestore/adminscreens/home/admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
@@ -105,7 +104,6 @@ class _HomePageState extends State<AdminHomePage> {
   }
 
   int _selectedface2face = 0;
-  // ignore: deprecated_member_use
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
@@ -418,10 +416,11 @@ class _HomePageState extends State<AdminHomePage> {
           color: Colors.black26,
           child: Center(
             child: StreamProvider<List<Entity>>.value(
-              value: EntityService().entities,
-              child: AdminEntitiesList(),
+                value: EntityService().entities,
+                child: AdminEntitiesList(),
+              ),
             ),
-          )),
+          ),
       Container(
         child: new ListView(
           padding: EdgeInsets.zero,

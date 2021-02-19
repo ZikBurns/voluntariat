@@ -7,7 +7,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FormNewActivity extends StatelessWidget {
+class FormNewActivity extends StatefulWidget {
+  @override
+  _FormNewActivityState createState() => _FormNewActivityState();
+}
+
+class _FormNewActivityState extends State<FormNewActivity> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -31,13 +36,16 @@ class FormNewActivity extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        RaisedButton(
+                        MaterialButton(
                           child: Text("Crear"
                               ""),
                           onPressed: (){
+                            print("hola");
                             if(_fbKey.currentState.saveAndValidate()){
+                              print("adeu");
                               ActivityService().addActivityMap(_fbKey.currentState.value);
                               Navigator.pop(context);
+                              print("adeu2");
                             }
                           },
                         ),

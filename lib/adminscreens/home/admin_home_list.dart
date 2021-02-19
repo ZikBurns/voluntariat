@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:provider/provider.dart';
-import 'admin_home_list_tile.dart';
+import 'package:flutter_firestore/adminscreens/home/admin_home_list_tile.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 
 

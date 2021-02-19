@@ -5,8 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 
-class FormElements extends StatelessWidget {
+class FormElements extends StatefulWidget {
+  @override
+  _FormElementsState createState() => _FormElementsState();
+}
+
+class _FormElementsState extends State<FormElements> {
   List<Entity> entitylist;
+
   List<dynamic> listOfIDs;
 
   List<String> EntitiesToNames(List<Entity> entitylist){
@@ -49,13 +55,13 @@ class FormElements extends StatelessWidget {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'title',
+              name: 'title',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                 (val){
                   if(val=="") return "L'activitat ha de tenir un titol.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -69,13 +75,13 @@ class FormElements extends StatelessWidget {
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
-              attribute: 'desc',
+              name: 'desc',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir una descripció.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             //* ----------------------------------------------------
@@ -87,14 +93,14 @@ class FormElements extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderCheckboxGroup(
-              attribute: 'entities',
+              name: 'entities',
               options:
                 namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                 (val){
                   if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
                 }
-              ],
+              ]),
               valueTransformer: (val)=> val==null ? val : List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
             SizedBox(height: 20),
@@ -108,29 +114,29 @@ class FormElements extends StatelessWidget {
             ),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
-              attribute: 'type',
+              name: 'type',
               items: ['Serveis Sociosanitaris','Atenció i suport a les families','Educació i lleure','Esport','Voluntariat Internacional','Atenció a les necessitats bàsiques','Defensa del mediambient','Joventut','Gent Gran','Protecció dels animals','Cultura']
                  .map((type) =>
                      DropdownMenuItem(value: type, child: Text("$type")))
                  .toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
                 }
-              ],
+              ]),
             ),
             FormBuilderDropdown(
               hint: Text('Selecciona si es presencial, virtual o semipresencial'),
-              attribute: 'mode',
+              name: 'mode',
               items: ["Presencial","Virtual","Semipresencial"]
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de ser presencial, virtual o semipresencial.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -144,56 +150,56 @@ class FormElements extends StatelessWidget {
                   style: TextStyle(fontSize: 14, color: Colors.black)),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'startdate',
+              name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data d\'inici',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data d\'inici";
                 }
-              ],
+              ]),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'finaldate',
+              name: 'finaldate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data final',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data final";
                 }
-              ],
+              ]),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'launchdate',
+              name: 'launchdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data de llançament',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de llantçament";
                 }
-              ],
+              ]),
             ),
             FormBuilderDateTimePicker(
-              attribute: 'visibledate',
+              name: 'visibledate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
                 labelText: 'Data fins la que l\'activitat serà visible',
               ),
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -207,13 +213,13 @@ class FormElements extends StatelessWidget {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'place',
+              name: 'place',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un lloc.";
                 }
-              ],
+              ]),
             ),
             Align(
               alignment: Alignment.topLeft,
@@ -226,13 +232,13 @@ class FormElements extends StatelessWidget {
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
-              attribute: 'schedule',
+              name: 'schedule',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un horari.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -246,13 +252,13 @@ class FormElements extends StatelessWidget {
             FormBuilderTextField(
               maxLines: 5,
               obscureText: false,
-              attribute: 'contact',
+              name: 'contact',
               readOnly: false,
-              validators: [
+              validator: FormBuilderValidators.compose([
                     (val){
                   if(val=="") return "L'activitat ha de tenir un contacte.";
                 }
-              ],
+              ]),
             ),
             SizedBox(height: 20),
             Align(
@@ -261,8 +267,9 @@ class FormElements extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderCheckbox(
-              attribute: 'visible',
-              label: Text('Vols que l\'activitat sigui visible?'),
+              name: 'visible',
+              initialValue: false,
+              title: Text('Vols que l\'activitat sigui visible?'),
             ),
             Align(
               alignment: Alignment.topLeft,
@@ -270,8 +277,9 @@ class FormElements extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),
             FormBuilderCheckbox(
-              attribute: 'prime',
-              label: Text('Vols que l\'activitat sigui destacada?'),
+              name: 'prime',
+              initialValue: false,
+              title: Text('Vols que l\'activitat sigui destacada?'),
             )
           ],
         ),

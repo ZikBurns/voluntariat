@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: "^0.14.3"
-  flutter_form_builder: "^3.14.1"
+  flutter_form_builder: ^4.2.0
   provider: ^4.3.2+2
   flutter_search_bar: ^2.1.0
   firebase_auth: "^0.18.3+1"
@@ -44,6 +44,8 @@ dependencies:
   mdi: ^4.0.0
   carousel_slider: ^3.0.0
   pull_to_reveal: ^0.0.2
+  cached_network_image: ^2.5.0
+
 
 
 
@@ -51,6 +53,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+
+
+dependency_overrides:
+  intl: 0.17.0-nullsafety.2
+  date_range_picker:
+    git:
+      url: https://github.com/LempereurBenjamin/date_range_picker
 
 dev_dependencies:
   flutter_test:

@@ -48,6 +48,8 @@ class _State extends State<EntitiesListSubActivitiesResults> {
     }
     list_activities=_resultsList;
     return ListView.builder(
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
         itemCount: list_activities.length,
         itemBuilder: (context,index){
           var now= new DateTime.now();

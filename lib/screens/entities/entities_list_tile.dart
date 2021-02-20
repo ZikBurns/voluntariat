@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/commonscreeens/entities_list_sublist.dart';
+import 'package:flutter_firestore/screens/entities/entities_list_sublist.dart';
+import 'package:flutter_firestore/screens/entities/entities_list_sublist_web.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class EntitiesListTile extends StatefulWidget {
   Entity entity;
@@ -16,7 +18,12 @@ class _HomeListTileState extends State<EntitiesListTile> {
   TextEditingController controller = TextEditingController();
 
   passData(Entity entity){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivites(entity)));
+    if (kIsWeb){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivitesWeb(entity)));
+    }
+    else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivites(entity)));
+    }
   }
 
 
@@ -34,13 +41,13 @@ class _HomeListTileState extends State<EntitiesListTile> {
               controller: controller,
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text("Cancelar"),
                 onPressed:  () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 onPressed: (){
                   Navigator.of(context).pop(controller.text.toString());
                 },

@@ -48,7 +48,6 @@ class _HomePageState extends State<AdminHomePage> {
                     TextField(
                       controller: controllername,
                       autofocus: true,
-                      decoration: InputDecoration(hintText: "Introdueix el nom"),
                     ),
                   ],
                 ),
@@ -56,15 +55,15 @@ class _HomePageState extends State<AdminHomePage> {
             ),
 
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text("Cancelar"),
                 onPressed:  () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 onPressed: (){
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(controllername.text.toString());
                 },
                 child: Text("Afegir"),
               )
@@ -532,10 +531,12 @@ class _HomePageState extends State<AdminHomePage> {
                     ),
             ])
           : _selectedIndex == 2
-          ?FloatingActionButton(onPressed: (){
+          ?
+      FloatingActionButton(onPressed: (){
         NewEntityDialog(context).then((onValue){
           if ((onValue!=null)&&(onValue.isNotEmpty)) {
-            Entity entity=new Entity("",controllername.text.toString(),"","");
+            print(onValue);
+            Entity entity=new Entity("",onValue,"","","");
             EntityService().addEntity(entity);
           }
 

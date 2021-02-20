@@ -10,7 +10,7 @@ class EntitiesList extends StatefulWidget {
 }
 
 class _EntitiesListState extends State<EntitiesList> {
-  TextEditingController searchController;
+  TextEditingController searchController= TextEditingController();
   String searchtext = null;
 
   void initState() {

@@ -19,7 +19,7 @@ class _PresentEntitiesState extends State<PresentEntities> {
       for (var i = 0; i < entities.length; i++) {
         for (var j = 0; j < widget.activity.entities.length; j++) {
           if (entities[i].id == widget.activity.entities[j])
-            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image));
+            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink));
             //text = text + entities[i].name + "\n";
         }
       }

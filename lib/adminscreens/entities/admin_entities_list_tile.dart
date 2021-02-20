@@ -8,7 +8,6 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firestore/commonscreeens/entities_list_sublist.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
@@ -32,27 +31,11 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
 
   @override
   Widget build(BuildContext context) {
-
     return StreamProvider<List<Activity>>.value(
       value: ActivityService().activities,
       child: ListTile(
-        title:Row(
-          children: [
-            Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
-          ],
-        ),
-        subtitle: Column(
-          children: <Widget>[
-            Container(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(widget.entity.desc),
-                    ),
-                  ],
-                ))
-          ],
-        ),
+        title: Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+        subtitle: Text(widget.entity.desc),
         onTap: (){
           passData(widget.entity);
         },

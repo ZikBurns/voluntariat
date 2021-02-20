@@ -93,13 +93,13 @@ class _DetailsPageState extends State<AdminDetailsPage> {
             title: Text("Vols esborrar la imatge de l'activitat?"),
             content: Text("Aquesta acció serà irreversible"),
             actions: [
-              FlatButton(
+              TextButton(
                 child: Text("Cancelar"),
                 onPressed:  () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: Text("Esborrar"),
                 onPressed:  () {
                   deleteImage();
@@ -230,13 +230,13 @@ class _DetailsPageState extends State<AdminDetailsPage> {
                           title: Text("Estas segur?"),
                           content: Text("Aquesta operació podria afectar altres dades de l'aplicacio"),
                           actions: [
-                            FlatButton(
+                            TextButton(
                               child: Text("Cancelar"),
                               onPressed:  () {
                                 Navigator.of(context, rootNavigator: true).pop();
                               },
                             ),
-                            FlatButton(
+                            TextButton(
                               child: Text("Esborrar"),
                               onPressed:  () {
                                 ActivityService().deleteActivity(widget.activity);

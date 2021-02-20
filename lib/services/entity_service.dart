@@ -7,7 +7,7 @@ class EntityService{
 
   List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'');
+      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'');
     }).toList();
   }
 
@@ -26,13 +26,13 @@ class EntityService{
   }
   
   void addEntity(Entity entity){
-    ref.add({'name': entity.name,'desc':entity.name,'image':entity.image});
+    ref.add({'name': entity.name,'desc':entity.name,'image':entity.image,'ytlink':entity.ytlink});
   }
 
   void updateEntity(Entity entity) {
     try {
       ref.doc(entity.id)
-          .update({'name': entity.name,'desc':entity.desc,'image':entity.image});
+          .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink});
     } catch (e) {
       print(e.toString());
     }

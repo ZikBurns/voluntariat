@@ -17,6 +17,7 @@ class _EntitiesListState extends State<AdminEntities> {
 
   //It's Future because we are promising to come back
   Future<String> NewEntityDialog(BuildContext context){
+    print("ADEU1232343143");
     return showDialog(
         context: context,
         builder: (context){
@@ -61,15 +62,16 @@ class _EntitiesListState extends State<AdminEntities> {
             color: Colors.black12,
             child: Column(
               children: [
-                Flexible(
-                  child: AdminEntitiesList(),
-                )
+                AdminEntitiesList()
               ],
             ),
           ),
+
           floatingActionButton: FloatingActionButton(onPressed: (){
+            print("ghla");
             NewEntityDialog(context).then((onValue){
-              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(new Entity("",onValue,"",""));
+              print(onValue);
+              if ((onValue!=null)&&(onValue.isNotEmpty)) EntityService().addEntity(new Entity("",onValue,"","",""));
             });
           },
             child: Icon(Icons.add,color:Colors.white,size: 30),

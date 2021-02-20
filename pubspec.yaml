@@ -45,6 +45,8 @@ dependencies:
   carousel_slider: ^3.0.0
   pull_to_reveal: ^0.0.2
   cached_network_image: ^2.5.0
+  youtube_player_flutter: ^7.0.0+7
+  youtube_player_iframe: ^1.2.0+2
 
 
 

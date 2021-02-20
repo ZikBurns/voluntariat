@@ -3,5 +3,6 @@ class Entity{
   String id;
   String desc;
   String image;
-  Entity(this.id,this.name,this.desc,this.image);
+  String ytlink;
+  Entity(this.id,this.name,this.desc,this.image,this.ytlink);
 }

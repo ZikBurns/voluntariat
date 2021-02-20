@@ -23,8 +23,6 @@ class _CarouselState extends State<Carousel> {
 
     return Container(
       child: ListView(
-        //mainAxisAlignment: MainAxisAlignment.center,
-        //crossAxisAlignment: CrossAxisAlignment.center,
         children:[
           Align(
             alignment: Alignment.centerLeft,
@@ -100,6 +98,7 @@ class _CarouselState extends State<Carousel> {
           ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               itemCount: listActivities.length,
               itemBuilder: (context,index){
                 var now= new DateTime.now();

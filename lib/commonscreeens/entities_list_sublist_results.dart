@@ -47,52 +47,65 @@ class _State extends State<EntitiesListSubActivitiesResults> {
       }
     }
     list_activities=_resultsList;
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        itemCount: list_activities.length,
-        itemBuilder: (context,index){
-          var now= new DateTime.now();
-          bool expired= list_activities[index].visibleDate.isBefore(now);
-          if((!admin.isLoggedIn)&&(!list_activities[index].visible)) return Container();
-          else if((!admin.isLoggedIn)&&(list_activities[index].visible)){
-            if((!expired)&&(list_activities[index].prime)){
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(
-                    shape: new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colorizer.typecolor(list_activities[index].type), width: 4.0),
-                        borderRadius: BorderRadius.circular(4.0)),
-                    child: HomeListTile(activity: list_activities[index])
-                ),
+    if(list_activities.isEmpty){
+      return ListTile(
+        title: Text("Aquesta entitat encara no té activitats programades."),
+      );
+    }
+    else{
+      return ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: list_activities.length+1,
+          itemBuilder: (context,index){
+            if(index==0){
+              return ListTile(
+                title: Text("Activitats de l'entitat:"),
               );
             }
-            else if((!expired)&&(!list_activities[index].prime)){
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(child: HomeListTile(activity: list_activities[index])),
-              );
+            else{
+              var now= new DateTime.now();
+              bool expired= list_activities[index-1].visibleDate.isBefore(now);
+              if((!admin.isLoggedIn)&&(!list_activities[index-1].visible)) return Container();
+              else if((!admin.isLoggedIn)&&(list_activities[index-1].visible)){
+                if((!expired)&&(list_activities[index-1].prime)){
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Card(
+                        shape: new RoundedRectangleBorder(
+                            side: new BorderSide(color: Colorizer.typecolor(list_activities[index-1].type), width: 4.0),
+                            borderRadius: BorderRadius.circular(4.0)),
+                        child: HomeListTile(activity: list_activities[index-1])
+                    ),
+                  );
+                }
+                else if((!expired)&&(!list_activities[index-1].prime)){
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Card(child: HomeListTile(activity: list_activities[index-1])),
+                  );
+                }
+                else return Container();
+              }
+              else{
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Card(
+                      shape: list_activities[index-1].prime
+                          ?new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.red, width: 4.0),
+                          borderRadius: BorderRadius.circular(4.0))
+                          : new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.circular(4.0)),
+                      child: AdminHomeListTile(activity: list_activities[index-1])
+                  ),
+                );
+              }
             }
-            else return Container();
-          }
-          else{
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                  shape: list_activities[index].prime
-                      ?new RoundedRectangleBorder(
-                      side: new BorderSide(color: Colors.red, width: 4.0),
-                      borderRadius: BorderRadius.circular(4.0))
-                      : new RoundedRectangleBorder(
-                      side: new BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(4.0)),
-                  child: AdminHomeListTile(activity: list_activities[index])
-              ),
-            );
-          }
-        }
-    );
 
-
+          }
+      );
+    }
   }
 }

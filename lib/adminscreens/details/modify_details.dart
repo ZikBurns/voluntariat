@@ -41,6 +41,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
             'schedule':widget.activity.schedule,
             'type':widget.activity.type,
             'launchdate':widget.activity.launchDate,
+            'releasedays':widget.activity.releasedays,
             'visibledate':widget.activity.visibleDate,
             'startdate': widget.activity.startDate,
             'finaldate': widget.activity.finalDate,

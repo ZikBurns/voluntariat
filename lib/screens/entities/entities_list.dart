@@ -34,23 +34,35 @@ class _EntitiesListState extends State<EntitiesList> {
         //shrinkWrap: true,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 25.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(4.0),
               child: TextFormField(
                 controller: searchController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(25.7),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(25.7),
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Color(0xFFF5F6F9),
                     hintText: 'Busca',
                     hintStyle: TextStyle(color: Colors.blueGrey),
                     suffixIcon: IconButton(
@@ -61,6 +73,7 @@ class _EntitiesListState extends State<EntitiesList> {
                         setState(() {
                           searchtext = null;
                         });
+                        FocusScope.of(context).unfocus();
                       },
                     )),
               ),
@@ -78,7 +91,7 @@ class _EntitiesListState extends State<EntitiesList> {
                       (searchtext != null) &&
                           (ent.contains(searchtext.toLowerCase()))) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(2.0),
                       child: Card(
                         child: EntitiesListTile(entity: list_entities[index]),
                       ),

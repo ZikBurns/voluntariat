@@ -128,7 +128,9 @@ class Colorizer{
   }
 
   static CircleAvatar showAvatarPrime(Activity act){
-    if(act.image==null){
+    print("hola123415");
+    if(act.image==""){
+      print("hola");
       return CircleAvatar(
           radius: 25.0,
           backgroundColor: Colors.black87,
@@ -152,6 +154,24 @@ class Colorizer{
           )
       );
     }
+  }
+  // Found on https://stackoverflow.com/questions/58360989/programmatically-lighten-or-darken-a-hex-color-in-dart. Thank you NearHuscarl.
+  Color darken(Color color, [double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+  // Found on https://stackoverflow.com/questions/58360989/programmatically-lighten-or-darken-a-hex-color-in-dart. Thank you NearHuscarl.
+  Color lighten(Color color, [double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    final hsl = HSLColor.fromColor(color);
+    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+
+    return hslLight.toColor();
   }
 
   static CircleAvatar showAvatar(Activity act){

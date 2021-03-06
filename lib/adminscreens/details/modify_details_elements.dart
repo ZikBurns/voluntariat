@@ -184,6 +184,19 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ),
             ),
             FormBuilderDateTimePicker(
+              name: 'visibledate',
+              format: DateFormat('dd-MM-yyyy'),
+              inputType: InputType.date,
+              decoration: InputDecoration(
+                labelText: 'Data fins la que l\'activitat serà visible',
+              ),
+              validator: FormBuilderValidators.compose([
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
+                }
+              ]),
+            ),
+            FormBuilderDateTimePicker(
               name: 'launchdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
@@ -196,18 +209,19 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                 }
               ]),
             ),
-            FormBuilderDateTimePicker(
-              name: 'visibledate',
-              format: DateFormat('dd-MM-yyyy'),
-              inputType: InputType.date,
-              decoration: InputDecoration(
-                labelText: 'Data fins la que l\'activitat serà visible',
-              ),
-              validator: FormBuilderValidators.compose([
-                    (val){
-                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
-                }
-              ]),
+            SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topLeft,
+              child:Text('Dies que l\'activitat serà novetat',
+                  style: TextStyle(fontSize: 14, color: Colors.black)),
+            ),
+            //* ----------------------------------------------------
+            //* Touch Spin
+            //* ----------------------------------------------------
+            FormBuilderTouchSpin(
+              name: 'releasedays',
+              step: 1,
+              textStyle: TextStyle(fontSize: 20, color: Colors.black),
             ),
             SizedBox(height: 20),
             Align(

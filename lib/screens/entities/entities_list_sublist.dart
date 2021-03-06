@@ -129,11 +129,7 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                           title: Text(widget.entity.name),
                           subtitle: Text(widget.entity.desc),
                         ),
-                        ListTile(
-                          title: Text("Activitats de l'entitat:"),
-                        ),
                         EntitiesListSubActivitiesResults(widget.entity),
-
                       ],
                     ),
                   ),

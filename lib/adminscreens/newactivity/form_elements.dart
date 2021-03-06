@@ -204,6 +204,22 @@ class _FormElementsState extends State<FormElements> {
             SizedBox(height: 20),
             Align(
               alignment: Alignment.topLeft,
+              child:Text('Dies que l\'activitat serà novetat',
+                  style: TextStyle(fontSize: 14, color: Colors.black)),
+            ),
+            //* ----------------------------------------------------
+            //* Touch Spin
+            //* ----------------------------------------------------
+            FormBuilderTouchSpin(
+              name: 'releasedays',
+              initialValue: 30,
+              step: 1,
+              textStyle: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+
+            SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topLeft,
               child: Text('Lloc/s',
                   style: TextStyle(fontSize: 20, color: Colors.black)),
             ),

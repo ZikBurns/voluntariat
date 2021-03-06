@@ -67,37 +67,58 @@ class _HomeListTileState extends State<EntitiesListTile> {
     list_activities = list_activities
         .where((activity) => activity.entities.contains(widget.entity.id))
         .toList();
-    return ListTile(
-      title:Text(widget.entity.name+" ("+list_activities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
-      subtitle: Container(
-          child: Row(
-            children: [
-              Expanded(child: Text(widget.entity.desc)),
-            ],
-          )
-      ),
-      onTap: (){
-        passData(widget.entity);
-      },
-      //Text(list_activities.length.toString(),style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
-      trailing: Container(
-        child: widget.entity.image!=""
-            ? CircleAvatar(
-            radius: 25.0,
-            child: AspectRatio(
-                aspectRatio: 1/1,
-                child: ClipOval(
-                  child: FadeInImage.memoryNetwork  (
-                    width: 100,
-                    height: 100,
-                    placeholder: kTransparentImage,
-                    image:widget.entity.image,
-                    fit: BoxFit.cover,
-                  ),
-                )
+    list_activities.removeWhere((element) => element.visible==false);
+    var now = new DateTime.now();
+    list_activities.removeWhere((element) => element.visibleDate.isBefore(now));
+
+    return Container(
+        decoration:BoxDecoration(
+          borderRadius: BorderRadius.all(
+              Radius.circular(5.0),
+          ),
+          border: Border.all(
+            color: Colors.blueGrey,
+            width: 1.0,
+          ),
+        ),
+      child: ListTile(
+        tileColor: Color(0xFFF5F6F9),
+        title:Text(widget.entity.name+" ("+list_activities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+        subtitle: Container(
+            child: Row(
+              children: [
+                Expanded(child: Text(widget.entity.desc,maxLines: 3, overflow: TextOverflow.ellipsis)),
+              ],
             )
-        )
-            : CircleAvatar(),
+        ),
+        onTap: (){
+          passData(widget.entity);
+        },
+        //Text(list_activities.length.toString(),style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+        trailing: Container(
+          child: widget.entity.image!=""
+              ? CircleAvatar(
+              radius: 25.0,
+              child: AspectRatio(
+                  aspectRatio: 1/1,
+                  child: ClipOval(
+                    child: Image.network(
+                      widget.entity.image,
+                      width: 100,
+                      height: 100,
+                    )
+                    /*FadeInImage.memoryNetwork  (
+                      width: 100,
+                      height: 100,
+                      placeholder: kTransparentImage,
+                      image:widget.entity.image,
+                      fit: BoxFit.cover,
+                    ),*/
+                  )
+              )
+          )
+              : CircleAvatar(),
+        ),
       ),
     );
   }

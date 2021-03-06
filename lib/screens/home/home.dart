@@ -357,7 +357,7 @@ class _HomePageState extends State<HomePage> {
         child: Carousel(),
       )),
       Container(
-        color: Colors.black12,
+        color: Colors.white,
         child: Column(
           children: [
             Flexible(
@@ -372,7 +372,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       Container(
-          color: Colors.black26,
+          color: Colors.white,
           child: Center(
             child: StreamProvider<List<Activity>>.value(
               value: ActivityService().activities,
@@ -430,7 +430,8 @@ class _HomePageState extends State<HomePage> {
     foregroundColor = Colorizer.typecolor(filter).computeLuminance() > 0.5
         ? Colors.black
         : Colors.white;
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       //appBar: searchBar.build(context),
       drawer: filter == ""
           ? new Drawer(
@@ -623,6 +624,7 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
+    )
     );
   }
 }

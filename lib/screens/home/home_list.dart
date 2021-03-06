@@ -74,33 +74,47 @@ class _State extends State<HomeList> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 25.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(4.0),
               child: TextFormField(
                 controller: searchController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(25.7),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(25.7),
+                      borderSide: BorderSide(
+                          color: Colors.blueGrey,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Color(0xFFF5F6F9),
                     hintText: 'Busca',
                     hintStyle: TextStyle(color: Colors.blueGrey),
                     suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
+                      color: Colors.blueGrey,
                       onPressed: () {
                         // Removes any filtering effects
                         searchController.text = '';
                         setState(() {
                           searchtext = null;
                         });
+                        FocusScope.of(context).unfocus();
                       },
                     )),
               ),
@@ -127,7 +141,7 @@ class _State extends State<HomeList> {
                       (!expired) &&
                       (list_activities[index].prime)) {
                     return Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
                           shape: new RoundedRectangleBorder(
                               side: new BorderSide(
@@ -142,7 +156,7 @@ class _State extends State<HomeList> {
                       (!expired) &&
                       (!list_activities[index].prime)) {
                     return Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
                           child:
                               HomeListTile(activity: list_activities[index])),
@@ -155,7 +169,7 @@ class _State extends State<HomeList> {
                       (list_activities[index].prime) &&
                       (act.contains(searchtext.toLowerCase()))) {
                     return Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
                           shape: new RoundedRectangleBorder(
                               side: new BorderSide(
@@ -171,7 +185,7 @@ class _State extends State<HomeList> {
                       (!list_activities[index].prime) &&
                       (act.contains(searchtext.toLowerCase()))) {
                     return Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
                           child:
                               HomeListTile(activity: list_activities[index])),

@@ -220,9 +220,83 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
     super.deactivate();
   }
 
+  FloatingActionButton deleteButton (){
+
+    return FloatingActionButton(
+      heroTag: "deleteactivitybutton",
+      onPressed: () async {
+        var list_activities = await Provider.of<List<Activity>>(context, listen: false) ?? [];
+        var canDelete = true;
+        print("hello");
+        print("bye");
+        for (var activity in list_activities) {
+          for (var entity in activity.entities) {
+            if (entity == widget.entity.id) canDelete = false;
+            print(entity+widget.entity.id);
+          }
+        }
+        print(canDelete);
+        if (canDelete) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Estas segur?"),
+                  content: Text(
+                      "Aquesta operació podria afectar altres dades de l'aplicacio"),
+                  actions: [
+                    TextButton(
+                      child: Text("Cancelar"),
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text("Esborrar"),
+                      onPressed: () {
+                        EntityService()
+                            .deleteEntity(widget.entity);
+                        Navigator.of(context, rootNavigator: true)
+                            .pop();
+                        Navigator.of(context, rootNavigator: true)
+                            .pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        } else {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(
+                      "No es pot esborrar l'entitat ja que té activitats assignades"),
+                  content: Text(
+                      "Desassigna les activitats d'aquesta entitat o esborra les activitats de l'entitat"),
+                  actions: [
+                    TextButton(
+                      child: Text("Acceptar"),
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        }
+      },
+      child: Icon(Icons.delete),
+      backgroundColor: Colors.red,
+      foregroundColor: Colors.white,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var list_activities = Provider.of<List<Activity>>(context) ?? [];
+
     if (widget.entity.ytlink == "") {
       return Scaffold(
         appBar: AppBar(
@@ -360,68 +434,7 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
               foregroundColor: Colors.white,
             ),
             SizedBox(height: 20),
-            FloatingActionButton(
-              heroTag: "deleteactivitybutton",
-              onPressed: () {
-                var canDelete = true;
-                for (var activity in list_activities) {
-                  for (var entity in activity.entities) {
-                    if (entity == widget.entity.id) canDelete = false;
-                  }
-                }
-                if (canDelete) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Estas segur?"),
-                          content: Text(
-                              "Aquesta operació podria afectar altres dades de l'aplicacio"),
-                          actions: [
-                            TextButton(
-                              child: Text("Cancelar"),
-                              onPressed: () {
-                                Navigator.of(context, rootNavigator: true)
-                                    .pop();
-                              },
-                            ),
-                            TextButton(
-                              child: Text("Esborrar"),
-                              onPressed: () {
-                                EntityService().deleteEntity(widget.entity);
-                                Navigator.of(context, rootNavigator: true)
-                                    .pop();
-                              },
-                            )
-                          ],
-                        );
-                      });
-                } else {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(
-                              "No es pot esborrar l'entitat ja que té activitats assignades"),
-                          content: Text(
-                              "Desassigna les activitats d'aquesta entitat o esborra les activitats de l'entitat"),
-                          actions: [
-                            TextButton(
-                              child: Text("Acceptar"),
-                              onPressed: () {
-                                Navigator.of(context, rootNavigator: true)
-                                    .pop();
-                              },
-                            )
-                          ],
-                        );
-                      });
-                }
-              },
-              child: Icon(Icons.delete),
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-            ),
+            deleteButton()
           ],
         ),
       );
@@ -568,69 +581,7 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
                     foregroundColor: Colors.white,
                   ),
                   SizedBox(height: 20),
-                  FloatingActionButton(
-                    heroTag: "deleteactivitybutton",
-                    onPressed: () {
-                      var canDelete = true;
-                      for (var activity in list_activities) {
-                        for (var entity in activity.entities) {
-                          if (entity == widget.entity.id) canDelete = false;
-                        }
-                      }
-                      if (canDelete) {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text("Estas segur?"),
-                                content: Text(
-                                    "Aquesta operació podria afectar altres dades de l'aplicacio"),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Cancelar"),
-                                    onPressed: () {
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("Esborrar"),
-                                    onPressed: () {
-                                      EntityService()
-                                          .deleteEntity(widget.entity);
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop();
-                                    },
-                                  )
-                                ],
-                              );
-                            });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                    "No es pot esborrar l'entitat ja que té activitats assignades"),
-                                content: Text(
-                                    "Desassigna les activitats d'aquesta entitat o esborra les activitats de l'entitat"),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Acceptar"),
-                                    onPressed: () {
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop();
-                                    },
-                                  )
-                                ],
-                              );
-                            });
-                      }
-                    },
-                    child: Icon(Icons.delete),
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                  ),
+                  deleteButton(),
                 ],
               ),
             );

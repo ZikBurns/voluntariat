@@ -15,11 +15,42 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
+
+
+  Color darken(Color color, [double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+  BoxDecoration switchIfNoImage(Activity activity){
+    if(activity.image==""){
+      return BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: darken(Colorizer.typecolor(activity.type),0.4),
+      );
+    }
+    else{
+      return BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          image: DecorationImage(
+              colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
+              image: NetworkImage(activity.image),
+              fit: BoxFit.cover
+          )
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var listActivities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> primelist = listActivities.where((activity) => activity.prime==true).toList();
     listActivities.sort((a,b)=>b.launchDate.millisecondsSinceEpoch.compareTo(a.launchDate.millisecondsSinceEpoch));
+
+
 
     return Container(
       child: ListView(
@@ -38,7 +69,7 @@ class _CarouselState extends State<Carousel> {
           ),
           CarouselSlider(
             options: CarouselOptions(
-              height: 400.0,
+              height: 360.0,
               enlargeCenterPage: true,
               autoPlay: true,
               aspectRatio: 16 / 9,
@@ -58,14 +89,7 @@ class _CarouselState extends State<Carousel> {
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                          colorFilter: ColorFilter.mode(Colors.black54, BlendMode.colorBurn),
-                            image: NetworkImage(activity.image),
-                            fit: BoxFit.cover
-                        ),
-                      ),
+                      decoration: switchIfNoImage(activity),
                       alignment: Alignment.center,
                       /*child: Image.network(
                         'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
@@ -76,7 +100,7 @@ class _CarouselState extends State<Carousel> {
                     ),
                     Container(
                         alignment: Alignment.center,
-                        child: Text(activity.title,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18.0),)),
+                        child: Text(activity.title,textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18.0),)),
                   ],
                 ),
               ),
@@ -103,7 +127,11 @@ class _CarouselState extends State<Carousel> {
               itemBuilder: (context,index){
                 var now= new DateTime.now();
                 bool expired= listActivities[index].visibleDate.isBefore(now);
-                if((listActivities[index].visible)&&(!expired)&&(listActivities[index].prime)){
+                var duration = new Duration(days : listActivities[index].releasedays);
+                var checknewdate= listActivities[index].launchDate.add(duration);
+                bool notnew= checknewdate.isBefore(now);
+
+                if((listActivities[index].visible)&&(!expired)&&(listActivities[index].prime)&&(!notnew)){
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(
@@ -114,7 +142,7 @@ class _CarouselState extends State<Carousel> {
                     ),
                   );
                 }
-                else if((listActivities[index].visible)&&(!expired)&&(!listActivities[index].prime)){
+                else if((listActivities[index].visible)&&(!expired)&&(!listActivities[index].prime)&&(!notnew)){
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(child: HomeListTile(activity: listActivities[index])),

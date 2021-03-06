@@ -101,7 +101,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             icon: Icon(Icons.visibility),
             onPressed: (){
               widget.activity.visible=false;
-              ActivityService().updateActivity(widget.activity);
+              ActivityService().updateActivity(widget.activity);/*
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),
@@ -115,7 +115,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                       ],
                     ),
                   )
-              );
+              );*/
             },
           ),
           //isThreeLine: true,
@@ -164,7 +164,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             icon: Icon(Icons.visibility),
             onPressed: (){
               widget.activity.visible=false;
-              ActivityService().updateActivity(widget.activity);
+              ActivityService().updateActivity(widget.activity);/*
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),
@@ -178,7 +178,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                       ],
                     ),
                   )
-              );
+              );*/
             },
           ),
           //isThreeLine: true,
@@ -212,7 +212,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             icon: Icon(Icons.visibility_off),
             onPressed: (){
               widget.activity.visible=true;
-              ActivityService().updateActivity(widget.activity);
+              ActivityService().updateActivity(widget.activity);/*
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),
@@ -226,7 +226,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                       ],
                     ),
                   )
-              );
+              );*/
             },
           ),
           //isThreeLine: true,
@@ -276,6 +276,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             onPressed: (){
               widget.activity.visible=true;
               ActivityService().updateActivity(widget.activity);
+              /*
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),
@@ -289,7 +290,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                       ],
                     ),
                   )
-              );
+              );*/
             },
           ),
           //isThreeLine: true,
@@ -364,7 +365,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
           },
           trailing: IconButton(
             icon: Icon(Icons.visibility_off),
-            onPressed: (){
+            onPressed: (){/*
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 5),
@@ -378,7 +379,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
                       ],
                     ),
                   )
-              );
+              );*/
             },
           ),
           //isThreeLine: true,

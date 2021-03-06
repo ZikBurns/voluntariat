@@ -76,7 +76,7 @@ class _FireFeedbackState extends State<FireFeedback> {
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               CollectionReference ref = FirebaseFirestore.instance.collection("Feedback");
-                              ref.add(_fbKey.currentState.value);
+                              ref.add(_fbKey.currentState.value);/*
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     duration: Duration(seconds: 4),
@@ -90,7 +90,7 @@ class _FireFeedbackState extends State<FireFeedback> {
                                       ],
                                     ),
                                   )
-                              );
+                              );*/
                               Navigator.pop(context);
                               Navigator.pop(context);
                             }

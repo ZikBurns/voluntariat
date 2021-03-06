@@ -96,6 +96,40 @@ class _HomeListTileState extends State<HomeListTile> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            RichText(
+              //maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [
+                  WidgetSpan(
+                    child: Icon(
+                    Icons.campaign_outlined,
+                    size: 22,
+                  ),
+                  ),
+                  TextSpan(text:"Destacat: ",
+                    style: TextStyle(fontSize: 16.0,color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            RichText(
+              //maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [
+                  WidgetSpan(child: modeicon(widget.activity.mode)),
+                  TextSpan(text:" " + widget.activity.title,
+                    style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        /*Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
               new Icon(
                 Icons.campaign_outlined,
@@ -119,7 +153,7 @@ class _HomeListTileState extends State<HomeListTile> {
             ),
           ],
         ),
-        /*Text(widget.activity.title,
+        Text(widget.activity.title,
           style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           maxLines: 2,
           overflow: TextOverflow.ellipsis),*/
@@ -129,6 +163,7 @@ class _HomeListTileState extends State<HomeListTile> {
       );
     } else {
       return ListTile(
+        tileColor: Color(0xFFF5F6F9),
         leading: Colorizer.showAvatar(widget.activity),
         onTap: () {
           passData(widget.activity);

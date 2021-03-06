@@ -69,14 +69,23 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                     child: ListView(
                       children: [
                         Container(
-                          child: widget.entity.image!=""
-                              ?
-                              Center(child: FadeInImage.memoryNetwork  (
-                                placeholder: kTransparentImage,
-                                image:widget.entity.image,
-                              ), )
-                            :
-                          Container(),
+                          color: Colors.black,
+                          constraints: BoxConstraints(
+                            maxHeight: 300,
+                          ),
+                          child: OverflowBox(
+                            minWidth: 0.0,
+                            minHeight: 0.0,
+                            maxWidth: double.infinity,
+                            child: widget.entity.image!=""
+                                ?
+                                Center(child: FadeInImage.memoryNetwork  (
+                                  placeholder: kTransparentImage,
+                                  image:widget.entity.image,
+                                ), )
+                              :
+                            Container(),
+                          ),
                         ),
                         SizedBox(height:20),
                         ListTile(

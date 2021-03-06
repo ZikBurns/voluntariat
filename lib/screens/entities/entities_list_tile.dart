@@ -102,18 +102,13 @@ class _HomeListTileState extends State<EntitiesListTile> {
               child: AspectRatio(
                   aspectRatio: 1/1,
                   child: ClipOval(
-                    child: Image.network(
-                      widget.entity.image,
-                      width: 100,
-                      height: 100,
-                    )
-                    /*FadeInImage.memoryNetwork  (
+                    child:FadeInImage.memoryNetwork  (
                       width: 100,
                       height: 100,
                       placeholder: kTransparentImage,
                       image:widget.entity.image,
                       fit: BoxFit.cover,
-                    ),*/
+                    ),
                   )
               )
           )

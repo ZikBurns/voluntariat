@@ -95,20 +95,31 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               child: ListView(
                   children: <Widget>[
-                    (widget.activity.image!="")
-                        ? Stack(
-                          children:[
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Center(child: CircularProgressIndicator()),
-                            ),
-                            Center(child: FadeInImage.memoryNetwork  (
-                              placeholder: kTransparentImage,
-                              image:widget.activity.image,
-                            ), )
-                          ],
-                        )
-                        : Container(),
+                    Container(
+                      color: Colors.black,
+                      constraints: BoxConstraints(
+                        maxHeight: 300,
+                      ),
+                      child: OverflowBox(
+                        minWidth: 0.0,
+                        minHeight: 0.0,
+                        maxWidth: double.infinity,
+                        child: (widget.activity.image!="")
+                            ? Stack(
+                              children:[
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Center(child: CircularProgressIndicator()),
+                                ),
+                                Center(child: FadeInImage.memoryNetwork  (
+                                  placeholder: kTransparentImage,
+                                  image:widget.activity.image,
+                                ), )
+                              ],
+                            )
+                            : Container(),
+                      ),
+                    ),
                     Divider(thickness:2,color: Colorizer.typecolor(widget.activity.type),indent: 20,endIndent:20),
                     ListTile(
                         title: Text("Descripcio",style: Theme.of(context).textTheme.headline5),

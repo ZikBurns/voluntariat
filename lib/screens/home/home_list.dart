@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/commonscreeens/commonfunctions.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
@@ -33,42 +34,14 @@ class _State extends State<HomeList> {
     });
   }
 
-  List<String> IDsToNames(List<String> idlist) {
-    List<String> namelist = [];
-    for (var i = 0; i < entitylist.length; i++) {
-      for (var j = 0; j < idlist.length; j++) {
-        if (idlist[j] == entitylist[i].id) namelist.add(entitylist[i].name);
-      }
-    }
-    return namelist;
-  }
 
   @override
   Widget build(BuildContext context) {
     var list_activities = Provider.of<List<Activity>>(context) ?? [];
     entitylist = Provider.of<List<Entity>>(context) ?? [];
-    list_activities.sort((a, b) {
-      if (b.prime)
-        return 1;
-      else
-        return -1;
-    });
-    list_activities.sort((a, b) {
-      if (b.prime)
-        return 1;
-      else
-        return -1;
-    });
-    if (widget.filter != "") {
-      list_activities = list_activities
-          .where((activity) => activity.type == widget.filter)
-          .toList();
-    }
-    if (widget.filtermode != "") {
-      list_activities = list_activities
-          .where((activity) => activity.mode == widget.filtermode)
-          .toList();
-    }
+    list_activities=CommonFunctions.sortActivityPrimes(list_activities);
+    list_activities=CommonFunctions.applyActivityFilters(list_activities,widget.filter,widget.filtermode);
+    list_activities=CommonFunctions.deleteHiddenActivities(list_activities);
 
     return Container(
       child: Column(
@@ -125,21 +98,9 @@ class _State extends State<HomeList> {
               physics: AlwaysScrollableScrollPhysics(),
               itemCount: list_activities.length,
               itemBuilder: (context, index) {
-                var now = new DateTime.now();
-                bool expired = list_activities[index].visibleDate.isBefore(now);
-                List<String> entitiesinactivity =
-                    IDsToNames(list_activities[index].entities);
-                var act = list_activities[index].title.toLowerCase() +
-                    list_activities[index].desc.toLowerCase() +
-                    list_activities[index].place.toLowerCase() +
-                    list_activities[index].schedule.toLowerCase() +
-                    entitiesinactivity.toString().toLowerCase() +
-                    list_activities[index].type.toString().toLowerCase();
-
-                if (searchtext == null) {
-                  if ((list_activities[index].visible) &&
-                      (!expired) &&
-                      (list_activities[index].prime)) {
+                var act = CommonFunctions.toStringLowerCaseComplete(list_activities[index],entitylist);
+                if (searchtext == null || act.contains(searchtext.toLowerCase())) {
+                  if (list_activities[index].prime) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
@@ -152,46 +113,18 @@ class _State extends State<HomeList> {
                           child:
                               HomeListTile(activity: list_activities[index])),
                     );
-                  } else if ((list_activities[index].visible) &&
-                      (!expired) &&
-                      (!list_activities[index].prime)) {
+                  }
+                  else {
                     return Padding(
                       padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                       child: Card(
                           child:
                               HomeListTile(activity: list_activities[index])),
                     );
-                  } else
-                    return Container();
-                } else {
-                  if ((list_activities[index].visible) &&
-                      (!expired) &&
-                      (list_activities[index].prime) &&
-                      (act.contains(searchtext.toLowerCase()))) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
-                      child: Card(
-                          shape: new RoundedRectangleBorder(
-                              side: new BorderSide(
-                                  color: Colorizer.typecolor(
-                                      list_activities[index].type),
-                                  width: 4.0),
-                              borderRadius: BorderRadius.circular(4.0)),
-                          child:
-                              HomeListTile(activity: list_activities[index])),
-                    );
-                  } else if ((list_activities[index].visible) &&
-                      (!expired) &&
-                      (!list_activities[index].prime) &&
-                      (act.contains(searchtext.toLowerCase()))) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
-                      child: Card(
-                          child:
-                              HomeListTile(activity: list_activities[index])),
-                    );
-                  } else
-                    return Container();
+                  }
+                }
+                else{
+                return Container();
                 }
               },
             ),

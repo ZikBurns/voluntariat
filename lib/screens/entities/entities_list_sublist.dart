@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
+import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
@@ -9,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class EntitiesListSubActivites extends StatefulWidget {
@@ -140,6 +143,7 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                           title: Text(widget.entity.name),
                           subtitle: Text(widget.entity.desc),
                         ),
+                        SocialNetworks(widget.entity),
                         EntitiesListSubActivitiesResults(widget.entity),
                       ],
                     ),

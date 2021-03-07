@@ -41,20 +41,20 @@ class _State extends State<AdminHomeList> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 25.0),
+          padding: const EdgeInsets.only(top: 4.0),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.all(4.0),
             child: TextFormField(
               controller: searchController,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(25.7),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(25.7),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                   filled: true,
                   fillColor: Colors.white,

@@ -2,14 +2,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_sublist_provider.dart';
+import 'package:flutter_firestore/adminscreens/entities/modify_entity.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
+import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';
@@ -317,45 +321,10 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
               ) : Container(),
               SizedBox(height: 20),
               ListTile(
-                title: Wrap(
-                  children: [
-                    Text(widget.entity.name),
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        UpdateEntityNameDialog(context).then((onValue) {
-                          if ((onValue != null) && (onValue.isNotEmpty)) {
-                            widget.entity.name = onValue;
-                            EntityService().updateEntity(widget.entity);
-                            (context as Element).reassemble();
-                          }
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                subtitle: Wrap(
-                  children: [
-                    Text(widget.entity.desc),
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        UpdateEntityDescDialog(context).then((onValue) {
-                          if ((onValue != null) && (onValue.isNotEmpty)) {
-                            print(onValue);
-                            widget.entity.desc = onValue;
-                            EntityService().updateEntity(widget.entity);
-                            (context as Element).reassemble();
-                          }
-                        });
-                      },
-                    ),
-                  ],
-                ),
+                title:Text(widget.entity.name),
+                subtitle:Text(widget.entity.desc),
               ),
-              ListTile(
-                title: Text("Activitats de l'entitat:"),
-              ),
+              SocialNetworks(widget.entity),
               EntitiesListSubActivitiesResults(widget.entity),
             ],
           ),
@@ -363,55 +332,13 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            widget.entity.ytlink == ""
-                ? FloatingActionButton(
-              heroTag: "addvideotoentitybutton",
+            FloatingActionButton(
+              heroTag: "editactivitybutton",
               onPressed: () {
-                UploadYTLinkDialog(context).then((onValue) {
-                  if ((onValue != null) && (onValue.isNotEmpty)) {
-                    print(onValue);
-                    widget.entity.ytlink = onValue;
-                    EntityService().updateEntity(widget.entity);
-                  }
-                });
-                (context as Element).reassemble();
+                Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyEntity(widget.entity)));
               },
-              child: Icon(Icons.ondemand_video),
-              foregroundColor: Colors.white,
-            )
-                : FloatingActionButton(
-              heroTag: "addvideotoentitybutton",
-              onPressed: () async {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Estas segur?"),
-                        content: Text(
-                            "Vols esborrar el video assignat a aquesta activitat"),
-                        actions: [
-                          TextButton(
-                            child: Text("Cancelar"),
-                            onPressed: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop();
-                            },
-                          ),
-                          TextButton(
-                            child: Text("Esborrar"),
-                            onPressed: () {
-                              widget.entity.ytlink = "";
-                              EntityService().updateEntity(widget.entity);
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop();
-                            },
-                          )
-                        ],
-                      );
-                    });
-                (context as Element).reassemble();
-              },
-              child: Icon(Icons.video_settings_outlined),
+              child: Icon(Icons.edit),
+              backgroundColor: Colors.yellow[900],
               foregroundColor: Colors.white,
             ),
             SizedBox(height: 20),
@@ -463,45 +390,13 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
                     Container(child: player),
                     SizedBox(height: 20),
                     ListTile(
-                      title: Wrap(
-                        children: [
-                          Text(widget.entity.name),
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () {
-                              UpdateEntityNameDialog(context).then((onValue) {
-                                if ((onValue != null) && (onValue.isNotEmpty)) {
-                                  widget.entity.name = onValue;
-                                  EntityService().updateEntity(widget.entity);
-                                  (context as Element).reassemble();
-                                }
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      subtitle: Wrap(
-                        children: [
-                          Text(widget.entity.desc),
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () {
-                              UpdateEntityDescDialog(context).then((onValue) {
-                                if ((onValue != null) && (onValue.isNotEmpty)) {
-                                  print(onValue);
-                                  widget.entity.desc = onValue;
-                                  EntityService().updateEntity(widget.entity);
-                                  (context as Element).reassemble();
-                                }
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                      title:Text(widget.entity.name),
+                      subtitle:Text(widget.entity.desc),
                     ),
                     ListTile(
                       title: Text("Activitats de l'entitat:"),
                     ),
+                    SocialNetworks(widget.entity),
                     EntitiesListSubActivitiesResults(widget.entity),
                   ],
                 ),
@@ -509,56 +404,13 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
               floatingActionButton: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  widget.entity.ytlink == ""
-                      ? FloatingActionButton(
-                    heroTag: "addvideotoentitybutton",
+                  FloatingActionButton(
+                    heroTag: "editactivitybutton",
                     onPressed: () {
-                      UploadYTLinkDialog(context).then((onValue) {
-                        if ((onValue != null) && (onValue.isNotEmpty)) {
-                          print(onValue);
-                          widget.entity.ytlink = onValue;
-                          EntityService().updateEntity(widget.entity);
-                        }
-                      });
-                      // pop current page
+                      //Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyActivity(widget.activity)));
                     },
-                    child: Icon(Icons.ondemand_video),
-                    foregroundColor: Colors.white,
-                  )
-                      : FloatingActionButton(
-                    heroTag: "addvideotoentitybutton",
-                    onPressed: () async {
-                      return showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text("Estas segur?"),
-                              content: Text(
-                                  "Vols esborrar el video assignat a aquesta activitat"),
-                              actions: [
-                                TextButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context,
-                                        rootNavigator: true)
-                                        .pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text("Esborrar"),
-                                  onPressed: () {
-                                    widget.entity.ytlink = "";
-                                    EntityService()
-                                        .updateEntity(widget.entity);
-                                    Navigator.pop(context);
-                                    setState(() {});
-                                  },
-                                )
-                              ],
-                            );
-                          });
-                    },
-                    child: Icon(Icons.video_settings_outlined),
+                    child: Icon(Icons.edit),
+                    backgroundColor: Colors.yellow[900],
                     foregroundColor: Colors.white,
                   ),
                   SizedBox(height: 20),

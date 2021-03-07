@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/entities/admin_entities_list.dart';
+import 'package:flutter_firestore/adminscreens/entities/newentity.dart';
 import 'package:flutter_firestore/adminscreens/newactivity/form_new_activity.dart';
 import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/data/activity.dart';
@@ -33,45 +34,6 @@ class _HomePageState extends State<AdminHomePage> {
   var foregroundColor;
   int _selectedIndex = 0;
   String filtermode = "";
-
-  Future<String> NewEntityDialog(BuildContext context){
-    return showDialog(
-        context: context,
-        builder: (context){
-          controllername = TextEditingController();
-          return AlertDialog(
-            title: Text("Introdueix les dades de l\'entitat"),
-            content: Container(
-              child: Flexible(
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: controllername,
-                      autofocus: true,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            actions: <Widget>[
-              TextButton(
-                child: Text("Cancelar"),
-                onPressed:  () {
-                  Navigator.of(context, rootNavigator: true).pop();
-                },
-              ),
-              TextButton(
-                onPressed: (){
-                  Navigator.of(context).pop(controllername.text.toString());
-                },
-                child: Text("Afegir"),
-              )
-            ],
-          );
-        }
-    );
-  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
@@ -397,7 +359,7 @@ class _HomePageState extends State<AdminHomePage> {
         child: Carousel(),
       )),
       Container(
-        color: Colors.black12,
+        color: Colors.white,
         child: Column(
           children: [
             Flexible(
@@ -412,7 +374,7 @@ class _HomePageState extends State<AdminHomePage> {
         ),
       ),
       Container(
-          color: Colors.black26,
+          color: Colors.white,
           child: Center(
             child: StreamProvider<List<Entity>>.value(
                 value: EntityService().entities,
@@ -471,104 +433,99 @@ class _HomePageState extends State<AdminHomePage> {
       ),
     ];
 
-    return Scaffold(
-      body: Container(
-        color: Colors.black12,
-        child: container[_selectedIndex],
-      ),
-      floatingActionButton: _selectedIndex == 1
-          ? Stack(alignment: Alignment.bottomRight, children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                    child: FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FormNewActivity()));
-                      },
-                      child: Icon(Icons.add, color: Colors.white, size: 30),
-                      backgroundColor: Colors.green,
-                    ),
-                  ),
-                ],
-              ),
-              filter == ""
-                  ? Container(
-                      padding: EdgeInsets.only(left: 30.0),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: FloatingActionButton.extended(
-                          onPressed: () {
-                            _settingModalBottomSheet(context);
-                          },
-                          backgroundColor: Colorizer.typecolor(filter),
-                          icon: Colorizer.showIcon(filter),
-                          label: Text("Tipus",
-                              style: TextStyle(color: foregroundColor)),
-                        ),
-                      ),
-                    )
-                  : Container(
-                      padding: EdgeInsets.only(left: 30.0),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: FloatingActionButton.extended(
-                          onPressed: () {
-                            filter = "";
-                            print("bona nit");
-                            (context as Element).reassemble();
-                          },
-                          backgroundColor: Colorizer.typecolor(filter),
-                          icon: Icon(Icons.clear, color: Colors.black),
-                          label: Text(filter,
-                              style: TextStyle(color: foregroundColor)),
-                        ),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          color: Colors.black12,
+          child: container[_selectedIndex],
+        ),
+        floatingActionButton: _selectedIndex == 1
+            ? Stack(alignment: Alignment.bottomRight, children: [
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      child: FloatingActionButton(
+                        heroTag: null,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormNewActivity()));
+                        },
+                        child: Icon(Icons.add, color: Colors.white, size: 30),
+                        backgroundColor: Colors.green,
                       ),
                     ),
-            ])
-          : _selectedIndex == 2
-          ?
-      FloatingActionButton(onPressed: (){
-        NewEntityDialog(context).then((onValue){
-          if ((onValue!=null)&&(onValue.isNotEmpty)) {
-            print(onValue);
-            Entity entity=new Entity("",onValue,"","","");
-            EntityService().addEntity(entity);
-          }
-
-        });
-      },
-        child: Icon(Icons.add,color:Colors.white,size: 30),
-        backgroundColor: Colors.green,
-      )
-          :Container(),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inici',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Activitats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_city),
-            label: 'Entitats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            label: 'Info',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+                  ],
+                ),
+                filter == ""
+                    ? Container(
+                        padding: EdgeInsets.only(left: 30.0),
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: FloatingActionButton.extended(
+                            onPressed: () {
+                              _settingModalBottomSheet(context);
+                            },
+                            backgroundColor: Colorizer.typecolor(filter),
+                            icon: Colorizer.showIcon(filter),
+                            label: Text("Tipus",
+                                style: TextStyle(color: foregroundColor)),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        padding: EdgeInsets.only(left: 30.0),
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: FloatingActionButton.extended(
+                            onPressed: () {
+                              filter = "";
+                              print("bona nit");
+                              (context as Element).reassemble();
+                            },
+                            backgroundColor: Colorizer.typecolor(filter),
+                            icon: Icon(Icons.clear, color: Colors.black),
+                            label: Text(filter,
+                                style: TextStyle(color: foregroundColor)),
+                          ),
+                        ),
+                      ),
+              ])
+            : _selectedIndex == 2
+            ?
+        FloatingActionButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder:(context)=> NewEntity()));
+        },
+          child: Icon(Icons.add,color:Colors.white,size: 30),
+          backgroundColor: Colors.green,
+        )
+            :Container(),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Inici',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              label: 'Activitats',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.location_city),
+              label: 'Entitats',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline),
+              label: 'Info',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/adminscreens/formcomponents/formcomponents.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -44,14 +45,7 @@ class _FormElementsState extends State<FormElements> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Titol',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Titol'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -64,14 +58,7 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Descripció',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Descripció'),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
@@ -84,14 +71,7 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            //* ----------------------------------------------------
-            //* CHECKBOX GROUP
-            //* ----------------------------------------------------
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Entitat/s',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Entitat/s'),
             FormBuilderCheckboxGroup(
               name: 'entities',
               options:
@@ -104,14 +84,7 @@ class _FormElementsState extends State<FormElements> {
               valueTransformer: (val)=> val==null ? val : List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
             SizedBox(height: 20),
-            //* ----------------------------------------------------
-            //* CHECKBOX GROUP
-            //* ----------------------------------------------------
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Tipologia',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Tipologia'),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               name: 'type',
@@ -139,16 +112,8 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Dates',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent',
-                  style: TextStyle(fontSize: 14, color: Colors.black)),
-            ),
+            FormComponents.titleText('Dates'),
+            FormComponents.titledesc('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent'),
             FormBuilderDateTimePicker(
               name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
@@ -202,14 +167,7 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child:Text('Dies que l\'activitat serà novetat',
-                  style: TextStyle(fontSize: 14, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* Touch Spin
-            //* ----------------------------------------------------
+            FormComponents.titledesc('Dies que l\'activitat serà novetat'),
             FormBuilderTouchSpin(
               name: 'releasedays',
               initialValue: 30,
@@ -218,14 +176,7 @@ class _FormElementsState extends State<FormElements> {
             ),
 
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Lloc/s',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Lloc/s'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -237,14 +188,7 @@ class _FormElementsState extends State<FormElements> {
                 }
               ]),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Horari',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Horari'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -257,14 +201,7 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Contacte',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Contacte'),
             FormBuilderTextField(
               maxLines: 5,
               obscureText: false,
@@ -277,21 +214,13 @@ class _FormElementsState extends State<FormElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Visibilitat',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Visibilitat'),
             FormBuilderCheckbox(
               name: 'visible',
               initialValue: false,
               title: Text('Vols que l\'activitat sigui visible?'),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Destacada',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Destacada'),
             FormBuilderCheckbox(
               name: 'prime',
               initialValue: false,

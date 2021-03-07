@@ -74,11 +74,11 @@ class _HomeListTileState extends State<EntitiesListTile> {
     return Container(
         decoration:BoxDecoration(
           borderRadius: BorderRadius.all(
-              Radius.circular(5.0),
+              Radius.circular(1.0),
           ),
           border: Border.all(
             color: Colors.blueGrey,
-            width: 1.0,
+            width: 0.3,
           ),
         ),
       child: ListTile(

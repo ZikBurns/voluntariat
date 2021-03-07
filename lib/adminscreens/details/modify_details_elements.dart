@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/adminscreens/formcomponents/formcomponents.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -64,14 +65,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Titol',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Titol'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -84,14 +78,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Descripció',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Descripció'),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
@@ -102,11 +89,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               }]),
             ),
             SizedBox(height: 20),
-            //* ----------------------------------------------------
-            //* CHECKBOX GROUP
-            //* ----------------------------------------------------
-            Text('Entitat/s',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormComponents.titleText('Entitat/s'),
             FormBuilderCheckboxGroup(
               //TODO: initialvalue is assigned with [] first because the data has not yet arrived from the cloud and therefore cannot be assigned again. Find a way to make it work. Ideal option: make a loading button until Stream Provider has everything.
               initialValue: initialcheckedentities,
@@ -122,14 +105,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               List<dynamic>.from(NamestoIDs(List<String>.from(val))),
             ),
             SizedBox(height: 20),
-            //* ----------------------------------------------------
-            //* CHECKBOX GROUP
-            //* ----------------------------------------------------
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Tipologia',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Tipologia'),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               name: 'type',
@@ -157,16 +133,8 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Dates',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent',
-                  style: TextStyle(fontSize: 14, color: Colors.black)),
-            ),
+            FormComponents.titleText('Dates'),
+            FormComponents.titledesc('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent'),
             FormBuilderDateTimePicker(
               name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
@@ -210,28 +178,14 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child:Text('Dies que l\'activitat serà novetat',
-                  style: TextStyle(fontSize: 14, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* Touch Spin
-            //* ----------------------------------------------------
+            FormComponents.titledesc('Dies que l\'activitat serà novetat'),
             FormBuilderTouchSpin(
               name: 'releasedays',
               step: 1,
               textStyle: TextStyle(fontSize: 20, color: Colors.black),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Lloc/s',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Lloc/s'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -243,11 +197,8 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
                 }
               ]),
             ),
-            Text('Horari',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Horari'),
+
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -260,11 +211,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Text('Contacte',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            FormComponents.titleText('Contacte'),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
@@ -277,17 +224,12 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             SizedBox(height: 20),
-            Text('Visibilitat',
-                style: TextStyle(fontSize: 20, color: Colors.black)),
+            FormComponents.titleText('Visibilitat'),
             FormBuilderCheckbox(
               name: 'visible',
               title: Text('Vols que l\'activitat sigui visible?'),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Destacada',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            FormComponents.titleText('Destacada'),
             FormBuilderCheckbox(
               name: 'prime',
               title: Text('Vols que l\'activitat sigui destacada?'),

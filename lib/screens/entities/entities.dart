@@ -12,41 +12,6 @@ class Entities extends StatefulWidget {
 }
 
 class _EntitiesListState extends State<Entities> {
-  TextEditingController controller = TextEditingController();
-
-  //It's Future because we are promising to come back
-  Future<String> NewEntityDialog(BuildContext context){
-    return showDialog(
-        context: context,
-        builder: (context){
-          controller = TextEditingController();
-          return AlertDialog(
-            title: Text("Introdueix el nom de la entitat"),
-            content: TextField(
-              controller: controller,
-              autofocus: true,
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Cancelar"),
-                onPressed:  () {
-                  Navigator.of(context, rootNavigator: true).pop();
-                },
-              ),
-              TextButton(
-                onPressed: (){
-                  Navigator.of(context).pop(controller.text.toString());
-                },
-                child: Text("Afegir"),
-              )
-            ],
-          );
-        }
-    );
-  }
-
-
-
 
   @override
   Widget build(BuildContext context) {

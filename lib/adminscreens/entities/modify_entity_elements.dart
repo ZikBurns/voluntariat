@@ -155,6 +155,11 @@ class _ModifyEntitiesElementsState extends State<ModifyEntityElements> {
               name: 'maps',
               readOnly: false,
             ),
+            FormBuilderColorPickerField(
+              name: 'color',
+              colorPickerType: ColorPickerType.MaterialPicker,
+              decoration: InputDecoration(labelText: 'Escolleix el color'),
+            ),
           ],
         ),
       ),

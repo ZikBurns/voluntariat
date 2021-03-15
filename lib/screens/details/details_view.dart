@@ -98,7 +98,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     Container(
                       color: Colors.black,
                       constraints: BoxConstraints(
-                        maxHeight: 300,
+                        maxHeight: widget.activity.image=="" ?0:300,
                       ),
                       child: OverflowBox(
                         minWidth: 0.0,

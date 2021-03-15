@@ -33,7 +33,8 @@ class _ModifyEntityState extends State<ModifyEntity> {
             'facebook':widget.entity.facebook,
             'instagram':widget.entity.instagram,
             'website':widget.entity.website,
-            'maps':widget.entity.maps
+            'maps':widget.entity.maps,
+            'color':Color(widget.entity.color)
           },
           key: _fbKey,
           child: Padding(

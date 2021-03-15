@@ -304,12 +304,15 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
     if (widget.entity.ytlink == "") {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colorizer.typecolor(""),
-          title: new Text(widget.entity.name),
+          backgroundColor: Color(widget.entity.color),
+          title: new Text(widget.entity.name,style: TextStyle(color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white),),
           centerTitle: true,
+          iconTheme: IconThemeData(
+            color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white
+          ),
         ),
         body: Container(
-          color: Colors.black12,
+          color: Colors.white,
           child: ListView(
             children: [
               widget.entity.image != ""
@@ -379,12 +382,15 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
           builder: (context, player) {
             return Scaffold(
               appBar: AppBar(
-                backgroundColor: Colorizer.typecolor(""),
-                title: new Text(widget.entity.name),
+                backgroundColor: Color(widget.entity.color),
+                title: new Text(widget.entity.name,style: TextStyle(color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white),),
                 centerTitle: true,
+                iconTheme: IconThemeData(
+                    color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white
+                ),
               ),
               body: Container(
-                color: Colors.black12,
+                color: Colors.white,
                 child: ListView(
                   children: [
                     Container(child: player),
@@ -407,8 +413,7 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
                   FloatingActionButton(
                     heroTag: "editactivitybutton",
                     onPressed: () {
-                      //Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyActivity(widget.activity)));
-                    },
+                      Navigator.push(context, MaterialPageRoute(builder:(context)=> ModifyEntity(widget.entity)));                    },
                     child: Icon(Icons.edit),
                     backgroundColor: Colors.yellow[900],
                     foregroundColor: Colors.white,

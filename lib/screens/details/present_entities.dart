@@ -19,7 +19,7 @@ class _PresentEntitiesState extends State<PresentEntities> {
       for (var i = 0; i < entities.length; i++) {
         for (var j = 0; j < widget.activity.entities.length; j++) {
           if (entities[i].id == widget.activity.entities[j])
-            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink,entities[i].twitter,entities[i].facebook,entities[i].instagram,entities[i].website,entities[i].maps));
+            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink,entities[i].twitter,entities[i].facebook,entities[i].instagram,entities[i].website,entities[i].maps,entities[i].color));
             //text = text + entities[i].name + "\n";
         }
       }
@@ -45,16 +45,12 @@ class _PresentEntitiesState extends State<PresentEntities> {
                   margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Card(
                     //shape: Border(right: BorderSide(color: Colors.red, width: 5)),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black26, width: 1),
+                    /*shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black26, width: 0),
                       borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    elevation: 5,
-                    child: ClipPath(
-                      child: EntitiesListTile(entity: listfinal[index]),
-                      clipper: ShapeBorderClipper(shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                    ),
+                    ),*/
+                    elevation: 2,
+                    child: EntitiesListTile(entity: listfinal[index]),
                   ),
                 );
               })

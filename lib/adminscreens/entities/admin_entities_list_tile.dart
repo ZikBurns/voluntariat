@@ -33,28 +33,40 @@ class _HomeListTileState extends State<AdminEntitiesListTile> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
       value: ActivityService().activities,
-      child: ListTile(
-        title: Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
-        subtitle: Text(widget.entity.desc),
-        onTap: (){
-          passData(widget.entity);
-        },
-        trailing: widget.entity.image!=""
-            ? CircleAvatar(
-            radius: 25.0,
-            child: AspectRatio(
-                aspectRatio: 1/1,
-                child: ClipOval(
-                  child: FadeInImage.memoryNetwork  (
-                    width: 100,
-                    height: 100,
-                    placeholder: kTransparentImage,
-                    image:widget.entity.image,
-                    fit: BoxFit.cover,
-                  ),
-                )
-            )
-        ) : CircleAvatar(),
+      child: Container(
+        decoration:BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(1.0),
+          ),
+          border: Border.all(
+            color: Colors.blueGrey,
+            width: 0.3,
+          ),
+        ),
+        child: ListTile(
+          tileColor: Color(0xFFF5F6F9),
+          title: Text(widget.entity.name,style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+          subtitle: Text(widget.entity.desc),
+          onTap: (){
+            passData(widget.entity);
+          },
+          trailing: widget.entity.image!=""
+              ? CircleAvatar(
+              radius: 25.0,
+              child: AspectRatio(
+                  aspectRatio: 1/1,
+                  child: ClipOval(
+                    child: FadeInImage.memoryNetwork  (
+                      width: 100,
+                      height: 100,
+                      placeholder: kTransparentImage,
+                      image:widget.entity.image,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+              )
+          ) : CircleAvatar(),
+        ),
       ),
     );
   }

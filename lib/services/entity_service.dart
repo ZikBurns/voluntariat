@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_firestore/data/entity.dart';
 
@@ -7,7 +9,7 @@ class EntityService{
 
   List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'',doc.get('twitter')??'',doc.get('facebook')??'',doc.get('instagram')??'',doc.get('website')??'',doc.get('maps')??'');
+      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'',doc.get('twitter')??'',doc.get('facebook')??'',doc.get('instagram')??'',doc.get('website')??'',doc.get('maps')??'',doc.get('color')??16777215);
     }).toList();
   }
 
@@ -26,9 +28,20 @@ class EntityService{
   }
 
   void addEntityMap(Map<String, dynamic> map){
-    ref.add(map).then((value){
-      ref.doc(value.id).update({'image':null});
-    });
+
+    ref.add(
+        {'name': map['name'],
+          'desc': map['desc'],
+          'image':'',
+          'ytlink': map['ytlink'],
+          'twitter': map['twitter'],
+          'facebook': map['facebook'],
+          'instagram': map['instagram'],
+          'website': map['website'],
+          'maps': map['maps'],
+          'color': (map['color'] as Color).value
+        }
+    );
 
   }
 
@@ -36,7 +49,7 @@ class EntityService{
   void updateEntity(Entity entity) {
     try {
       ref.doc(entity.id)
-          .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink,'twitter':entity.twitter,'facebook':entity.facebook,'instagram':entity.instagram,'website':entity.website,'maps':entity.maps});
+          .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink,'twitter':entity.twitter,'facebook':entity.facebook,'instagram':entity.instagram,'website':entity.website,'maps':entity.maps,'color':entity.color});
     } catch (e) {
       print(e.toString());
     }
@@ -52,6 +65,7 @@ class EntityService{
       'instagram':map['instagram'],
       'website':map['website'],
       'maps':map['maps'],
+      'color': (map['color'] as Color).value
     });
   }
 

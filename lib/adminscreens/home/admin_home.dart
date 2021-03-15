@@ -436,7 +436,7 @@ class _HomePageState extends State<AdminHomePage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          color: Colors.black12,
+          color: Colors.white,
           child: container[_selectedIndex],
         ),
         floatingActionButton: _selectedIndex == 1

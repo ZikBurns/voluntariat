@@ -48,6 +48,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
             'visible': widget.activity.visible,
             'prime': widget.activity.prime,
             'mode':widget.activity.mode
+
           },
           key: _fbKey,
           child: Padding(

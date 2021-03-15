@@ -63,9 +63,12 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                 value: EntityService().entities,
                 child: Scaffold(
                   appBar: AppBar(
-                    backgroundColor: Colorizer.typecolor(""),
-                    title: new Text(widget.entity.name),
+                    backgroundColor: Color(widget.entity.color),
+                    title: new Text(widget.entity.name,style: TextStyle(color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white),),
                     centerTitle: true,
+                    iconTheme: IconThemeData(
+                        color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white
+                    ),
                   ),
                   body: Container(
                     color: Colors.black12,
@@ -97,9 +100,7 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                           title: Text(widget.entity.name),
                           subtitle: Text(widget.entity.desc),
                         ),
-                        ListTile(
-                          title: Text("Activitats de l'entitat:"),
-                        ),
+                        SocialNetworks(widget.entity),
                         EntitiesListSubActivitiesResults(widget.entity),
                       ],
                     ),
@@ -127,9 +128,12 @@ class _EntitiesListSubActivitesState extends State<EntitiesListSubActivites> {
                 value: EntityService().entities,
                 child: Scaffold(
                   appBar: AppBar(
-                    backgroundColor: Colorizer.typecolor(""),
-                    title: new Text(widget.entity.name),
+                    backgroundColor: Color(widget.entity.color),
+                    title: new Text(widget.entity.name,style: TextStyle(color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white),),
                     centerTitle: true,
+                    iconTheme: IconThemeData(
+                        color: Color(widget.entity.color).computeLuminance() > 0.5 ? Colors.black : Colors.white
+                    ),
                   ),
                   body: Container(
                     color: Colors.black12,

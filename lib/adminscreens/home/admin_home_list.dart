@@ -47,27 +47,41 @@ class _State extends State<AdminHomeList> {
             child: TextFormField(
               controller: searchController,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: Colors.blueGrey,
+                      width: 1.0,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blueGrey,
+                      width: 1.0,
+                    ),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(
+                      color: Colors.blueGrey,
+                      width: 1.0,
+                    ),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Color(0xFFF5F6F9),
                   hintText: 'Busca',
                   hintStyle: TextStyle(color: Colors.blueGrey),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.clear),
+                    color: Colors.blueGrey,
                     onPressed: () {
                       // Removes any filtering effects
                       searchController.text = '';
                       setState(() {
                         searchtext = null;
                       });
+                      FocusScope.of(context).unfocus();
                     },
                   )),
             ),
@@ -83,18 +97,15 @@ class _State extends State<AdminHomeList> {
                     list_activities[index].schedule.toLowerCase() +
                     list_activities[index].type.toString().toLowerCase();
                 if((searchtext==null) ||(searchtext!=null)&&(act.contains(searchtext.toLowerCase()))){
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Card(
-                        shape: list_activities[index].prime
-                            ?new RoundedRectangleBorder(
-                            side: new BorderSide(color: Colorizer.typecolor(list_activities[index].type), width: 4.0),
-                            borderRadius: BorderRadius.circular(4.0))
-                            : new RoundedRectangleBorder(
-                            side: new BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius: BorderRadius.circular(4.0)),
-                        child: AdminHomeListTile(activity: list_activities[index])
-                    ),
+                  return Card(
+                      shape: list_activities[index].prime
+                          ?new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colorizer.typecolor(list_activities[index].type), width: 4.0),
+                          borderRadius: BorderRadius.circular(4.0))
+                          : new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.blueGrey[50], width: 0.0),
+                          borderRadius: BorderRadius.circular(4.0)),
+                      child: AdminHomeListTile(activity: list_activities[index])
                   );
                 }
                 else{

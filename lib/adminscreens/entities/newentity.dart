@@ -18,7 +18,7 @@ class _NewEntityState extends State<NewEntity> {
 
   @override
   Widget build(BuildContext context) {
-    Entity entity = new Entity("", "", "", "", "", "", "", "", "", "");
+    Entity entity = new Entity("", "", "", "", "", "", "", "", "", "",16777215);
     return Scaffold(
       appBar: AppBar(
         title: Text("Form"),
@@ -33,7 +33,8 @@ class _NewEntityState extends State<NewEntity> {
           'facebook':"",
           'instagram':"",
           'website':"",
-          'maps':""
+          'maps':"",
+          'color': Colors.blueGrey
         },
         key: _fbKey,
         child: Padding(

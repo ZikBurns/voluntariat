@@ -156,6 +156,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
         );
       } else {
         return ListTile(
+          tileColor: Color(0xFFF5F6F9),
           leading: Colorizer.showAvatar(widget.activity),
           onTap: () {
             passData(widget.activity);
@@ -267,6 +268,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
         );
       } else {
         return ListTile(
+          tileColor: Color(0xFFF5F6F9),
           leading: Colorizer.showAvatar(widget.activity),
           onTap: () {
             passData(widget.activity);
@@ -359,6 +361,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
         widget.activity.visible=false;
         ActivityService().updateActivity(widget.activity);
         return ListTile(
+          tileColor: Color(0xFFF5F6F9),
           leading: Colorizer.showAvatar(widget.activity),
           onTap: () {
             passData(widget.activity);

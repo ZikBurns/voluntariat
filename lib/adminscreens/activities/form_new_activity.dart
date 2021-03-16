@@ -1,5 +1,5 @@
 
-import 'package:flutter_firestore/adminscreens/newactivity/form_elements.dart';
+import 'package:flutter_firestore/adminscreens/activities/activity_form_fields.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
@@ -24,13 +24,18 @@ class _FormNewActivityState extends State<FormNewActivity> {
           title: Text("Form"),
         ),
         body: FormBuilder(
+          initialValue: {
+            'releasedays':30,
+            'visible': false,
+            'prime': false,
+          },
           key: _fbKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: Column(
                 children:[
-                  FormElements(),
+                  ActivityFormFields(),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(

@@ -2,16 +2,16 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/entities/modify_entity.dart';
-import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
+import 'package:flutter_firestore/commonscreeens/entities/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/commonscreeens/video_screen.dart';
+import 'package:flutter_firestore/commonscreeens/entities/video_screen.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
-import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';
+import 'package:flutter_firestore/commonscreeens/entities/entities_list_sublist_results.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class AdminEntitiesListSubActivites extends StatefulWidget {

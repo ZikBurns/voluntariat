@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
-import 'package:flutter_firestore/commonscreeens/colorizer.dart';
+import 'package:flutter_firestore/commonscreeens/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
-import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
 import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
@@ -62,16 +61,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   int _selectedface2face = 0;
-  // ignore: deprecated_member_use
-
-
-  void onSubmitted(String value) {
-    searchvalue = value;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SearchResults(searchvalue, filter)));
-  }
 
   void initState() {
     scrollController = ScrollController()

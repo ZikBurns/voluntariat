@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/adminscreens/activities/form_new_activity.dart';
 import 'package:flutter_firestore/adminscreens/entities/admin_entities_list.dart';
 import 'package:flutter_firestore/adminscreens/entities/newentity.dart';
-import 'package:flutter_firestore/adminscreens/newactivity/form_new_activity.dart';
-import 'package:flutter_firestore/commonscreeens/search_results.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/home/carousel.dart';
@@ -15,7 +14,7 @@ import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_firestore/commonscreeens/colorizer.dart';
+import 'package:flutter_firestore/commonscreeens/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AdminHomePage extends StatefulWidget {
@@ -63,14 +62,6 @@ class _HomePageState extends State<AdminHomePage> {
   }
 
   int _selectedface2face = 0;
-
-  void onSubmitted(String value) {
-    searchvalue = value;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SearchResults(searchvalue, filter)));
-  }
 
   void setDialVisible(bool value) {
     setState(() {

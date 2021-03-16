@@ -3,12 +3,12 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 
-class ModifyEntityElements extends StatefulWidget {
+class EntityFormFields extends StatefulWidget {
   @override
   _ModifyEntitiesElementsState createState() => _ModifyEntitiesElementsState();
 }
 
-class _ModifyEntitiesElementsState extends State<ModifyEntityElements> {
+class _ModifyEntitiesElementsState extends State<EntityFormFields> {
 
 
   @override

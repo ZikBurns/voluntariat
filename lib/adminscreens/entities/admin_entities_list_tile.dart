@@ -1,7 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_sublist.dart';
-import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_sublist_provider.dart';
+import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_details.dart';
+import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_details_provider.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';

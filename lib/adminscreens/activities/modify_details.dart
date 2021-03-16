@@ -1,5 +1,5 @@
 
-import 'package:flutter_firestore/adminscreens/details/modify_details_elements.dart';
+import 'package:flutter_firestore/adminscreens/activities/activity_form_fields.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
@@ -56,7 +56,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
             child: SingleChildScrollView(
               child: Column(
                 children:[
-                  ModifyActivityElements(widget.activity),
+                  ActivityFormFields(activity:widget.activity),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(

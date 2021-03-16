@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/details/admin_details.dart';
+import 'package:flutter_firestore/adminscreens/activities/admin_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
-import 'package:flutter_firestore/commonscreeens/colorizer.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commonscreeens/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 

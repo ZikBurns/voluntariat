@@ -7,18 +7,17 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import "package:charcode/charcode.dart";
 
 
-class ModifyActivityElements extends StatefulWidget {
+class ActivityFormFields extends StatefulWidget {
   Activity activity;
-  ModifyActivityElements(this.activity);
+  ActivityFormFields({this.activity});
 
   @override
-  _ModifyActivityElementsState createState() => _ModifyActivityElementsState();
+  _ActivityFormFieldsState createState() => _ActivityFormFieldsState();
 }
 
-class _ModifyActivityElementsState extends State<ModifyActivityElements> {
+class _ActivityFormFieldsState extends State<ActivityFormFields> {
   List<Entity> entitylist;
   List<dynamic> listOfIDs;
 
@@ -52,12 +51,44 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
     return namelist;
   }
 
+  FormBuilderCheckboxGroup builderCheckbox(){
+
+    final List<String> namelist = EntitiesToNames(entitylist);
+    namelist.sort();
+    if(widget.activity!=null){
+      List<String> initialcheckedentities=IDsToNames(widget.activity.entities);
+      return FormBuilderCheckboxGroup(
+        initialValue: initialcheckedentities,
+        name: 'entities',
+        options:
+        namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
+        validator: FormBuilderValidators.compose([
+              (val){
+            if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
+          }
+        ]),
+        valueTransformer: (val)=> val==null ? val :List<dynamic>.from(NamestoIDs(List<String>.from(val))),
+      );
+    }
+    else{
+      return FormBuilderCheckboxGroup(
+        name: 'entities',
+        options:
+        namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
+        validator: FormBuilderValidators.compose([
+              (val){
+            if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
+          }
+        ]),
+        valueTransformer: (val)=> val==null ? val : List<dynamic>.from(NamestoIDs(List<String>.from(val))),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     entitylist= Provider.of<List<Entity>>(context) ?? [];
-    final List<String> namelist = EntitiesToNames(entitylist);
-    List<String> initialcheckedentities=IDsToNames(widget.activity.entities);
+    FormBuilderCheckboxGroup entitycheckbox=builderCheckbox();
 
     return entitylist.length==0 ? CircularProgressIndicator(): Container(
       color: Colors.white,
@@ -90,20 +121,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             ),
             SizedBox(height: 20),
             FormComponents.titleText('Entitat/s'),
-            FormBuilderCheckboxGroup(
-              //TODO: initialvalue is assigned with [] first because the data has not yet arrived from the cloud and therefore cannot be assigned again. Find a way to make it work. Ideal option: make a loading button until Stream Provider has everything.
-              initialValue: initialcheckedentities,
-              name: 'entities',
-              options:
-              namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
-              validator: FormBuilderValidators.compose([
-                    (val){
-                  if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
-                }
-              ]),
-              valueTransformer: (val)=>
-              List<dynamic>.from(NamestoIDs(List<String>.from(val))),
-            ),
+            entitycheckbox,
             SizedBox(height: 20),
             FormComponents.titleText('Tipologia'),
             FormBuilderDropdown(
@@ -142,6 +160,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               decoration: InputDecoration(
                 labelText: 'Data d\'inici',
               ),
+              validator: FormBuilderValidators.compose([
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data d\'inici";
+                }
+              ]),
             ),
             FormBuilderDateTimePicker(
               name: 'finaldate',
@@ -150,6 +173,11 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               decoration: InputDecoration(
                 labelText: 'Data final',
               ),
+              validator: FormBuilderValidators.compose([
+                    (val){
+                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data final";
+                }
+              ]),
             ),
             FormBuilderDateTimePicker(
               name: 'visibledate',
@@ -198,7 +226,6 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
               ]),
             ),
             FormComponents.titleText('Horari'),
-
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -213,7 +240,7 @@ class _ModifyActivityElementsState extends State<ModifyActivityElements> {
             SizedBox(height: 20),
             FormComponents.titleText('Contacte'),
             FormBuilderTextField(
-              maxLines: 10,
+              maxLines: 5,
               obscureText: false,
               name: 'contact',
               readOnly: false,

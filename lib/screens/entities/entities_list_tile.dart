@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/entities/entities_list_sublist.dart';
+import 'package:flutter_firestore/screens/entities/entities_list_details.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 

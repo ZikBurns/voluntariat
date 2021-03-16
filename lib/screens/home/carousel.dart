@@ -5,7 +5,6 @@ import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_firestore/screens/details/details_view.dart';
 
 

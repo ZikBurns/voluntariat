@@ -8,7 +8,6 @@ import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
 import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -25,7 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  SearchBar searchBar;
   String searchvalue = null;
   ScrollController scrollController;
   bool dialVisible = true;
@@ -66,15 +64,6 @@ class _HomePageState extends State<HomePage> {
   int _selectedface2face = 0;
   // ignore: deprecated_member_use
 
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-        title: filter == ""
-            ? new Text("Voluntariats")
-            : new Text(filter, style: TextStyle(color: foregroundColor)),
-        //centerTitle: true,
-        backgroundColor: Colorizer.typecolor(filter),
-        actions: [searchBar.getSearchAction(context)]);
-  }
 
   void onSubmitted(String value) {
     searchvalue = value;
@@ -84,19 +73,6 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => SearchResults(searchvalue, filter)));
   }
 
-  _HomePageState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        buildDefaultAppBar: buildAppBar,
-        setState: setState,
-        onSubmitted: onSubmitted,
-        onCleared: () {
-          print("cleared");
-        },
-        onClosed: () {
-          print("closed");
-        });
-  }
   void initState() {
     scrollController = ScrollController()
       ..addListener(() {
@@ -432,7 +408,6 @@ class _HomePageState extends State<HomePage> {
         : Colors.white;
     return SafeArea(
         child: Scaffold(
-      //appBar: searchBar.build(context),
       drawer: filter == ""
           ? new Drawer(
               child: new ListView(

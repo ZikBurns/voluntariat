@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
-
 import 'package:transparent_image/transparent_image.dart';
+
 
 
 class AdminEntitiesListTile extends StatefulWidget {

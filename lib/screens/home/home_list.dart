@@ -5,7 +5,6 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/commonscreeens/colorizer.dart';
-import 'package:pull_to_reveal/pull_to_reveal.dart';
 
 class HomeList extends StatefulWidget {
   String filter;

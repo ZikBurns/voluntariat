@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Colorizer{
 

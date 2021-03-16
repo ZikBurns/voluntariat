@@ -24,30 +24,22 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: "^0.14.3"
+  firebase_core: ^0.5.3
+  firebase_storage: "^5.2.0"
+  firebase_auth: "^0.18.3+1"
   flutter_form_builder: ^4.2.0
   provider: ^5.0.0
-  flutter_search_bar: ^2.1.0
-  firebase_auth: "^0.18.3+1"
-  flutter_speed_dial: ^1.2.5
+  flutter_speed_dial: ^3.0.5
   linkable: ^1.0.6
-  url_launcher: ^5.4.10
-  firebase_storage: "^5.2.0"
-  image_picker: ^0.6.7+4
-  image_picker_for_web: ^0.1.0+1
+  url_launcher: ^5.7.10
+  image_picker: ^0.6.7+22
+  image_picker_for_web: ^0.1.0+2
   permission_handler: ^5.0.1+1
-  flutter_launcher_icons: ^0.8.1
   transparent_image: ^1.0.0
-  firebase_core: ^0.5.3
-  tutorial_coach_mark: ^0.5.2
   unicorndial: "^1.1.5"
-  material_design_icons_flutter: ^4.0.5855
-  mdi: ^4.0.0
   carousel_slider: ^3.0.0
-  pull_to_reveal: ^0.0.2
-  cached_network_image: ^2.5.0
-  youtube_player_flutter: ^7.0.0+7
   youtube_player_iframe: ^1.2.0+2
-  font_awesome_flutter: ^8.11.0
+  font_awesome_flutter: ^8.12.0
 
 
 

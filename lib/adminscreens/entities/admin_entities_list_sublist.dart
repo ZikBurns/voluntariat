@@ -1,21 +1,16 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_sublist_provider.dart';
 import 'package:flutter_firestore/adminscreens/entities/modify_entity.dart';
-import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/services/activity_service.dart';
+import 'package:flutter_firestore/screens/entities/video_screen.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -31,9 +26,7 @@ class AdminEntitiesListSubActivites extends StatefulWidget {
 
 class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActivites> {
   TextEditingController controller = TextEditingController();
-  YoutubePlayerController _YTcontroller = YoutubePlayerController(
-    initialVideoId: YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=-FTNbqxCfhA"),
-  );
+
 
   uploadImage() async {
     final _storage = FirebaseStorage.instance;
@@ -203,26 +196,6 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
         });
   }
 
-  void runYoutubePlayer() {
-    _YTcontroller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.entity.ytlink),
-      flags: YoutubePlayerFlags(
-        enableCaption: false,
-        autoPlay: false,
-        isLive: false,
-      ),
-    );
-  }
-
-  void dispose() {
-    _YTcontroller.dispose();
-    super.dispose();
-  }
-
-  void deactivate() {
-    _YTcontroller.pause();
-    super.deactivate();
-  }
 
   FloatingActionButton deleteButton (){
 
@@ -369,17 +342,6 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
         ),
       );
     } else {
-      runYoutubePlayer();
-      return YoutubePlayerBuilder(
-          player: YoutubePlayer(
-              controller: _YTcontroller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Colors.blue,
-              progressColors: ProgressBarColors(
-                playedColor: Colors.blue,
-                handleColor: Colors.blueAccent,
-              )),
-          builder: (context, player) {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Color(widget.entity.color),
@@ -393,7 +355,7 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
                 color: Colors.white,
                 child: ListView(
                   children: [
-                    Container(child: player),
+                    Container(child: VideoScreen(widget.entity.ytlink)),
                     SizedBox(height: 20),
                     ListTile(
                       title:Text(widget.entity.name),
@@ -442,7 +404,6 @@ class _AdminEntitiesListSubActivitesState extends State<AdminEntitiesListSubActi
                 ],
               ),
             );
-          });
+          }
     }
   }
-}

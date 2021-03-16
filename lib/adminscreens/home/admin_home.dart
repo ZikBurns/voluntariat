@@ -9,7 +9,6 @@ import 'package:flutter_firestore/screens/home/carousel.dart';
 import 'package:flutter_firestore/screens/home/home.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
@@ -26,7 +25,6 @@ class AdminHomePage extends StatefulWidget {
 
 class _HomePageState extends State<AdminHomePage> {
   TextEditingController controllername = TextEditingController();
-  SearchBar searchBar;
   String searchvalue = null;
   bool dialVisible = true;
   String filter = "";
@@ -66,16 +64,6 @@ class _HomePageState extends State<AdminHomePage> {
 
   int _selectedface2face = 0;
 
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-        title: filter == ""
-            ? new Text("Voluntariats")
-            : new Text(filter, style: TextStyle(color: foregroundColor)),
-        //centerTitle: true,
-        backgroundColor: Colorizer.typecolor(filter),
-        actions: [searchBar.getSearchAction(context)]);
-  }
-
   void onSubmitted(String value) {
     searchvalue = value;
     Navigator.push(
@@ -108,19 +96,6 @@ class _HomePageState extends State<AdminHomePage> {
       });
   }
 
-  _HomePageState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        buildDefaultAppBar: buildAppBar,
-        setState: setState,
-        onSubmitted: onSubmitted,
-        onCleared: () {
-          print("cleared");
-        },
-        onClosed: () {
-          print("closed");
-        });
-  }
 
   void _settingModalBottomSheet(context) {
     double screenpercentage;

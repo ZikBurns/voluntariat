@@ -7,9 +7,9 @@ import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 
 class EntitiesListSubActivitesWeb extends StatefulWidget {

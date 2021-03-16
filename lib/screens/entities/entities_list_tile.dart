@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/entities/entities_list_sublist.dart';
-import 'package:flutter_firestore/screens/entities/entities_list_sublist_web.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:transparent_image/transparent_image.dart';
 
 class EntitiesListTile extends StatefulWidget {
@@ -18,12 +16,7 @@ class _HomeListTileState extends State<EntitiesListTile> {
   TextEditingController controller = TextEditingController();
 
   passData(Entity entity){
-    if (kIsWeb){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivitesWeb(entity)));
-    }
-    else {
       Navigator.push(context, MaterialPageRoute(builder: (context) => EntitiesListSubActivites(entity)));
-    }
   }
 
 

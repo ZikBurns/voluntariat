@@ -5,7 +5,7 @@ import 'package:flutter_firestore/adminscreens/entities/modify_entity.dart';
 import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/entities/video_screen.dart';
+import 'package:flutter_firestore/commonscreeens/video_screen.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';

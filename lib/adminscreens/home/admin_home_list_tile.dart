@@ -84,12 +84,82 @@ class _HomeListTileState extends State<AdminHomeListTile> {
     }
   }
 
+  offVisibility(){
+    if(widget.activity.visible){
+      widget.activity.visible=false;
+      ActivityService().updateActivity(widget.activity);
+    }
+  }
+
+  switchVisibility(){
+    if(widget.activity.visible) widget.activity.visible=false;
+    else widget.activity.visible=true;
+    ActivityService().updateActivity(widget.activity);
+  }
+
+  Icon visibilityIcon(){
+    if(widget.activity.visible) return Icon(Icons.visibility);
+    else return Icon(Icons.visibility_off);
+  }
+
+  void showVisibilityMessage(bool expired)
+  {
+    if(widget.activity.visible && !expired){
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 2),
+            content: Row(
+              children: [
+                Icon(Icons.visibility),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Text('L\'activitat ara es visible per tothom'),
+                )
+              ],
+            ),
+          )
+      );
+    }
+    else if (!widget.activity.visible && !expired){
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 2),
+            content: Row(
+              children: [
+                Icon(Icons.visibility_off),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Text('L\'activitat ja no es visible'),
+                )
+              ],
+            ),
+          )
+      );
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 5),
+            content: Row(
+              children: [
+                Icon(Icons.visibility_off),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Text('L\'activitat esta configurada per ser visible fins el '+widget.activity.visibleDate.day.toString()+"/"+widget.activity.visibleDate.month.toString()+"/"+widget.activity.visibleDate.year.toString()+"\n"+"Actualitza les dates de l\'activitat per poder fer-la visible."),
+                )
+              ],
+            ),
+          )
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     var now= new DateTime.now();
     bool expired= widget.activity.visibleDate.isBefore(now);
-    if((widget.activity.visible)&&(!expired)){
+    if(expired) offVisibility();
       if (widget.activity.prime) {
         return ListTile(
           tileColor: Colorizer.typecolor(widget.activity.type),
@@ -98,24 +168,10 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             passData(widget.activity);
           },
           trailing: IconButton(
-            icon: Icon(Icons.visibility),
+            icon: visibilityIcon(),
             onPressed: (){
-              widget.activity.visible=false;
-              ActivityService().updateActivity(widget.activity);/*
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: Row(
-                      children: [
-                        Icon(Icons.visibility_off),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Text('L\'activitat ja no es visible'),
-                        )
-                      ],
-                    ),
-                  )
-              );*/
+              if (!expired) switchVisibility();
+              showVisibilityMessage(expired);
             },
           ),
           //isThreeLine: true,
@@ -146,13 +202,8 @@ class _HomeListTileState extends State<AdminHomeListTile> {
               ),
             ],
           ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
           subtitle: Text(widget.activity.desc,
               maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
         );
       } else {
         return ListTile(
@@ -162,24 +213,10 @@ class _HomeListTileState extends State<AdminHomeListTile> {
             passData(widget.activity);
           },
           trailing: IconButton(
-            icon: Icon(Icons.visibility),
+            icon: visibilityIcon(),
             onPressed: (){
-              widget.activity.visible=false;
-              ActivityService().updateActivity(widget.activity);/*
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: Row(
-                      children: [
-                        Icon(Icons.visibility_off),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Text('L\'activitat ja no es visible'),
-                        )
-                      ],
-                    ),
-                  )
-              );*/
+              if (!expired) switchVisibility();
+              showVisibilityMessage(expired);
             },
           ),
           //isThreeLine: true,
@@ -199,211 +236,6 @@ class _HomeListTileState extends State<AdminHomeListTile> {
               maxLines: 3, overflow: TextOverflow.ellipsis),
           //trailing: getPrimeIcon(),
         );
-      }
-    }
-    else if((!widget.activity.visible)&&(!expired)){
-      if (widget.activity.prime) {
-        return ListTile(
-          tileColor: Colorizer.typecolor(widget.activity.type),
-          leading: Colorizer.showAvatarPrime(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          trailing: IconButton(
-            icon: Icon(Icons.visibility_off),
-            onPressed: (){
-              widget.activity.visible=true;
-              ActivityService().updateActivity(widget.activity);/*
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: Row(
-                      children: [
-                        Icon(Icons.visibility),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Text('L\'activitat ara es visible per tothom'),
-                        )
-                      ],
-                    ),
-                  )
-              );*/
-            },
-          ),
-          //isThreeLine: true,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                new Icon(
-                  Icons.campaign_outlined,
-                  size: 22,
-                ),
-                new Text(
-                  "Destacat: ",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-              ]),
-              RichText(
-                //maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(child: modeicon(widget.activity.mode)),
-                    TextSpan(text:" " + widget.activity.title,
-                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
-        );
-      } else {
-        return ListTile(
-          tileColor: Color(0xFFF5F6F9),
-          leading: Colorizer.showAvatar(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          trailing: IconButton(
-            icon: Icon(Icons.visibility_off),
-            onPressed: (){
-              widget.activity.visible=true;
-              ActivityService().updateActivity(widget.activity);
-              /*
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: Row(
-                      children: [
-                        Icon(Icons.visibility),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Text('L\'activitat ara es visible per tothom'),
-                        )
-                      ],
-                    ),
-                  )
-              );*/
-            },
-          ),
-          //isThreeLine: true,
-          title: RichText(
-            //maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              children: [
-                WidgetSpan(child: modeicon(widget.activity.mode)),
-                TextSpan(text:" " + widget.activity.title,
-                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
-        );
-      }
-    }
-    else{
-      if (widget.activity.prime) {
-        return ListTile(
-          tileColor: Colorizer.typecolor(widget.activity.type),
-          leading: Colorizer.showAvatarPrime(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                new Icon(
-                  Icons.campaign_outlined,
-                  size: 22,
-                ),
-                new Text(
-                  "Destacat: ",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-              ]),
-              RichText(
-                //maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(child: modeicon(widget.activity.mode)),
-                    TextSpan(text:" " + widget.activity.title,
-                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          /*Text(widget.activity.title,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis),*/
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
-        );
-      } else {
-        widget.activity.visible=false;
-        ActivityService().updateActivity(widget.activity);
-        return ListTile(
-          tileColor: Color(0xFFF5F6F9),
-          leading: Colorizer.showAvatar(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          trailing: IconButton(
-            icon: Icon(Icons.visibility_off),
-            onPressed: (){/*
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 5),
-                    content: Row(
-                      children: [
-                        Icon(Icons.visibility_off),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Text('L\'activitat esta configurada per ser visible fins el '+widget.activity.visibleDate.day.toString()+"/"+widget.activity.visibleDate.month.toString()+"/"+widget.activity.visibleDate.year.toString()+"\n"+"Actualitza les dates de l\'activitat per poder fer-la visible."),
-                        )
-                      ],
-                    ),
-                  )
-              );*/
-            },
-          ),
-          //isThreeLine: true,
-          title: RichText(
-            //maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              children: [
-                WidgetSpan(child: modeicon(widget.activity.mode)),
-                TextSpan(text:" " + widget.activity.title,
-                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
-        );
-      }
-
     }
   }
 }

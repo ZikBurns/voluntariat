@@ -3,7 +3,7 @@ import 'package:flutter_firestore/commonscreeens/colorizer.dart';
 import 'package:flutter_firestore/commonscreeens/socialnetworks.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/entities/video_screen.dart';
+import 'package:flutter_firestore/commonscreeens/video_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_firestore/commonscreeens/entities_list_sublist_results.dart';

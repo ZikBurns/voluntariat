@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/activities/admin_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/screens/details/details_view.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-
+import 'package:flutter_firestore/data/admin.dart'as admin;
 
 class AdminHomeListTile extends StatefulWidget {
   final Activity activity;
@@ -17,7 +18,8 @@ class _HomeListTileState extends State<AdminHomeListTile> {
 
 
   passData(Activity activity){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(activity)));
+    if(admin.isLoggedIn)Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(activity)));
+    else Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(activity)));
   }
 
   Widget getPrimeIcon()
@@ -161,80 +163,109 @@ class _HomeListTileState extends State<AdminHomeListTile> {
     bool expired= widget.activity.visibleDate.isBefore(now);
     if(expired) offVisibility();
       if (widget.activity.prime) {
-        return ListTile(
-          tileColor: Colorizer.typecolor(widget.activity.type),
-          leading: Colorizer.showAvatarPrime(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          trailing: IconButton(
-            icon: visibilityIcon(),
-            onPressed: (){
-              if (!expired) switchVisibility();
-              showVisibilityMessage(expired);
+        return Container(
+          decoration:BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(1.0),
+            ),
+            border: Border.all(
+              color: Colors.blueGrey,
+              width: 0.3,
+            ),
+          ),
+          child: ListTile(
+            tileColor: Colorizer.typecolor(widget.activity.type),
+            leading: Colorizer.showAvatarPrime(widget.activity),
+            onTap: () {
+              passData(widget.activity);
             },
-          ),
-          //isThreeLine: true,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                new Icon(
-                  Icons.campaign_outlined,
-                  size: 22,
-                ),
-                new Text(
-                  "Destacat: ",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-              ]),
-              RichText(
-                //maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(child: modeicon(widget.activity.mode)),
-                    TextSpan(text:" " + widget.activity.title,
-                      style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-        );
-      } else {
-        return ListTile(
-          tileColor: Color(0xFFF5F6F9),
-          leading: Colorizer.showAvatar(widget.activity),
-          onTap: () {
-            passData(widget.activity);
-          },
-          trailing: IconButton(
-            icon: visibilityIcon(),
-            onPressed: (){
-              if (!expired) switchVisibility();
-              showVisibilityMessage(expired);
-            },
-          ),
-          //isThreeLine: true,
-          title: RichText(
-            //maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
+            trailing: admin.isLoggedIn?IconButton(
+              icon: visibilityIcon(),
+              onPressed: (){
+                if (!expired) switchVisibility();
+                showVisibilityMessage(expired);
+              },
+            ):Padding(padding: EdgeInsets.all(0.0)),
+            //isThreeLine: true,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                WidgetSpan(child: modeicon(widget.activity.mode)),
-                TextSpan(text:" " + widget.activity.title,
-                  style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                RichText(
+                  //maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.campaign_outlined,
+                          size: 22,
+                        ),
+                      ),
+                      TextSpan(text:"Destacat: ",
+                        style: TextStyle(fontSize: 16.0,color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                RichText(
+                  //maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(child: modeicon(widget.activity.mode)),
+                      TextSpan(text:" " + widget.activity.title,
+                        style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
+            subtitle: Text(widget.activity.desc,
+                maxLines: 3, overflow: TextOverflow.ellipsis),
           ),
-          subtitle: Text(widget.activity.desc,
-              maxLines: 3, overflow: TextOverflow.ellipsis),
-          //trailing: getPrimeIcon(),
+        );
+      } else {
+        return Container(
+          decoration:BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(1.0),
+            ),
+            border: Border.all(
+              color: Colors.blueGrey,
+              width: 0.3,
+            ),
+          ),
+          child: ListTile(
+            tileColor: Color(0xFFF5F6F9),
+            leading: Colorizer.showAvatar(widget.activity),
+            onTap: () {
+              passData(widget.activity);
+            },
+            trailing: admin.isLoggedIn?IconButton(
+              icon: visibilityIcon(),
+              onPressed: (){
+                if (!expired) switchVisibility();
+                showVisibilityMessage(expired);
+              },
+            ):Padding(padding: EdgeInsets.all(0.0)),
+            //isThreeLine: true,
+            title: RichText(
+              //maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [
+                  WidgetSpan(child: modeicon(widget.activity.mode)),
+                  TextSpan(text:" " + widget.activity.title,
+                    style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            subtitle: Text(widget.activity.desc,
+                maxLines: 3, overflow: TextOverflow.ellipsis),
+            //trailing: getPrimeIcon(),
+          ),
         );
     }
   }

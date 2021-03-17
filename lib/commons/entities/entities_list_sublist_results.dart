@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
-import 'package:flutter_firestore/adminscreens/home/admin_home_list_tile.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home_list_tile.dart';
 
 class EntitiesListSubActivitiesResults extends StatefulWidget {
   Entity entity;
@@ -75,14 +74,14 @@ class _State extends State<EntitiesListSubActivitiesResults> {
                         shape: new RoundedRectangleBorder(
                             side: new BorderSide(color: Colorizer.typecolor(list_activities[index-1].type), width: 4.0),
                             borderRadius: BorderRadius.circular(4.0)),
-                        child: HomeListTile(activity: list_activities[index-1])
+                        child: AdminHomeListTile(activity: list_activities[index-1])
                     ),
                   );
                 }
                 else if((!expired)&&(!list_activities[index-1].prime)){
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Card(child: HomeListTile(activity: list_activities[index-1])),
+                    child: Card(child: AdminHomeListTile(activity: list_activities[index-1])),
                   );
                 }
                 else return Container();

@@ -1,9 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home.dart';
 import 'package:flutter_firestore/services/signin_service.dart';
-
+import 'package:flutter_firestore/data/admin.dart'as admin;
 class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -71,7 +71,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             error = 'No s\' ha pogut iniciar sessio';
                           });
                         }
-                        else Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));;
+                        else{
+                          admin.isLoggedIn = true;
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+                        }
                       }
                     }
                 ),

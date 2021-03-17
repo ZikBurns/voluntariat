@@ -81,6 +81,16 @@ class CommonFunctions{
     return activities;
   }
 
+  static List<Activity> applyTypeFilter(List<Activity> activities,String filter)
+  {
+    if (filter != "") {
+      activities = activities
+          .where((activity) => activity.type == filter)
+          .toList();
+    }
+    return activities;
+  }
+
   static List<Activity> applyActivityFilters(List<Activity> activities,String filter, String filtermode)
   {
     if (filter != "") {
@@ -95,6 +105,8 @@ class CommonFunctions{
     }
     return activities;
   }
+
+
   static List<Activity> deleteHiddenActivities(List<Activity> activities)
   {
     activities=activities

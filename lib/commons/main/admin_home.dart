@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore/adminscreens/activities/form_new_activity.dart';
 import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/admin_entities_list.dart';
-import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
+import 'package:flutter_firestore/adminscreens/entities/newentity.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:flutter_firestore/screens/home/home_list.dart';
-import 'package:flutter_firestore/commons/firefeedback.dart';
+import 'package:flutter_firestore/data/entity.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/carousel.dart';
 import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
+import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home_list.dart';
+import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
+import 'package:flutter_firestore/data/admin.dart' as admin;
+import 'package:flutter_firestore/commons/firefeedback.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
-import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/services/entity_service.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/carousel.dart';
 
-
-class HomePage extends StatefulWidget {
+class AdminHomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<AdminHomePage> {
+  TextEditingController controllername = TextEditingController();
   String searchvalue = null;
-  ScrollController scrollController;
   bool dialVisible = true;
   String filter = "";
+  ScrollController scrollController;
   var foregroundColor;
   int _selectedIndex = 0;
   String filtermode = "";
@@ -62,15 +64,6 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedface2face = 0;
 
-  void initState() {
-    scrollController = ScrollController()
-      ..addListener(() {
-        setDialVisible(scrollController.position.userScrollDirection ==
-            ScrollDirection.forward);
-      });
-    super.initState();
-  }
-
   void setDialVisible(bool value) {
     setState(() {
       dialVisible = value;
@@ -84,6 +77,209 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (ctx, i) => ListTile(title: Text('Item $i')),
     );
   }
+
+  void initState() {
+    foregroundColor = Colorizer.typecolor(filter).computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
+    super.initState();
+    scrollController = ScrollController()
+      ..addListener(() {
+        setDialVisible(scrollController.position.userScrollDirection ==
+            ScrollDirection.forward);
+      });
+  }
+
+  Container customFloatingActionButton(){
+    if(admin.isLoggedIn){
+      if(_selectedIndex==1){
+        return Container(
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FormNewActivity()));
+                    },
+                    child: Icon(Icons.add, color: Colors.white, size: 30),
+                    backgroundColor: Colors.green,
+                  ),
+                ),
+              ],
+            ),
+            filter == ""
+                ? Container(
+              padding: EdgeInsets.only(left: 30.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    _settingModalBottomSheet(context);
+                  },
+                  backgroundColor: Colorizer.typecolor(filter),
+                  icon: Colorizer.showIcon(filter),
+                  label: Text("Tipus",
+                      style: TextStyle(color: foregroundColor)),
+                ),
+              ),
+            )
+                : Container(
+              padding: EdgeInsets.only(left: 30.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    filter = "";
+                    (context as Element).reassemble();
+                  },
+                  backgroundColor: Colorizer.typecolor(filter),
+                  icon: Icon(Icons.clear, color: Colors.black),
+                  label: Text(filter,
+                      style: TextStyle(color: foregroundColor)),
+                ),
+              ),
+            ),
+          ]),
+        );
+      }
+      else if(_selectedIndex==2){
+        return Container(
+          child: FloatingActionButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder:(context)=> NewEntity()));
+          },
+            child: Icon(Icons.add,color:Colors.white,size: 30),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+      else return Container();
+    }
+    else{
+      if(_selectedIndex==1){
+        return Container(
+          child: Stack(alignment: Alignment.bottomRight, children: [
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                Container(
+                  child: UnicornDialer(
+                    backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
+                    parentButtonBackground: Colors.black,
+                    orientation: UnicornOrientation.VERTICAL,
+                    parentButton:
+                    _Face2FaceOptions.elementAt(_selectedface2face),
+                    childButtons: [
+                      UnicornButton(
+                          hasLabel: true,
+                          labelText: "Totes les activitats",
+                          labelColor: Colors.black,
+                          currentButton: FloatingActionButton(
+                            heroTag: "Totes les activitats",
+                            backgroundColor: Colors.black,
+                            mini: true,
+                            child: Icon(Icons.all_inclusive_rounded),
+                            onPressed: () {
+                              _selectedface2face = 0;
+                              filtermode = "";
+                              setState(() {});
+                            },
+                          )),
+                      UnicornButton(
+                          hasLabel: true,
+                          labelText: "Virtual",
+                          labelColor: Colors.black,
+                          currentButton: FloatingActionButton(
+                            heroTag: "Només Virtual",
+                            backgroundColor: Colors.black87,
+                            mini: true,
+                            child: Icon(Icons.desktop_windows),
+                            onPressed: () {
+                              _selectedface2face = 1;
+                              filtermode = "Virtual";
+                              setState(() {});
+                            },
+                          )),
+                      UnicornButton(
+                          hasLabel: true,
+                          labelText: "Presencial",
+                          labelColor: Colors.black,
+                          currentButton: FloatingActionButton(
+                            heroTag: "Només Presencial",
+                            backgroundColor: Colors.black87,
+                            mini: true,
+                            child: Icon(Icons.accessibility_new_rounded),
+                            onPressed: () {
+                              _selectedface2face = 2;
+                              filtermode = "Presencial";
+                              setState(() {});
+                            },
+                          )),
+                      UnicornButton(
+                          hasLabel: true,
+                          labelText: "Semipresencial",
+                          labelColor: Colors.black,
+                          currentButton: FloatingActionButton(
+                            heroTag: "Semipresencial",
+                            backgroundColor: Colors.black87,
+                            mini: true,
+                            child: Icon(Icons.shuffle),
+                            onPressed: () {
+                              _selectedface2face = 3;
+                              filtermode = "Semipresencial";
+                              setState(() {});
+                            },
+                          )),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            filter == ""
+                ? Container(
+              padding: EdgeInsets.only(left: 30.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    _settingModalBottomSheet(context);
+                  },
+                  backgroundColor: Colorizer.typecolor(filter),
+                  icon: Colorizer.showIcon(filter),
+                  label: Text("Tipus",
+                      style: TextStyle(color: foregroundColor)),
+                ),
+              ),
+            )
+                : Container(
+              padding: EdgeInsets.only(left: 30.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    filter = "";
+                    print("bona nit");
+                    (context as Element).reassemble();
+                  },
+                  backgroundColor: Colorizer.typecolor(filter),
+                  icon: Icon(Icons.clear, color: Colors.black),
+                  label: Text(filter,
+                      style: TextStyle(color: foregroundColor)),
+                ),
+              ),
+            ),
+          ]),
+        );
+      }
+      else return Container();
+    }
+  }
+
 
   void _settingModalBottomSheet(context) {
     double screenpercentage;
@@ -313,14 +509,40 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  BottomNavigationBar customNavBar(){
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Inici',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.explore),
+          label: 'Activitats',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.location_city),
+          label: 'Entitats',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.info_outline),
+          label: 'Info',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.amber[800],
+      onTap: _onItemTapped,
+    );
+  }
+
+  Container bodyHome(){
     final container = [
       Container(
           child: StreamProvider<List<Activity>>.value(
-        value: ActivityService().activities,
-        child: Carousel(),
-      )),
+            value: ActivityService().activities,
+            child: Carousel(),
+          )),
       Container(
         color: Colors.white,
         child: Column(
@@ -330,23 +552,21 @@ class _HomePageState extends State<HomePage> {
                 value: EntityService().entities,
                 child: StreamProvider<List<Activity>>.value(
                     value: ActivityService().activities,
-                    child: HomeList(filter, filtermode)),
+                    child: admin.isLoggedIn?AdminHomeList(filter:filter):AdminHomeList(filter: filter,filtermode: filtermode)),
               ),
             )
           ],
         ),
       ),
       Container(
-          color: Colors.white,
-          child: Center(
-            child: StreamProvider<List<Activity>>.value(
-              value: ActivityService().activities,
-              child: StreamProvider<List<Entity>>.value(
-                value: EntityService().entities,
-                child: AdminEntitiesList(),
-              ),
-            ),
-          )),
+        color: Colors.white,
+        child: Center(
+          child: StreamProvider<List<Entity>>.value(
+            value: EntityService().entities,
+            child: AdminEntitiesList(),
+          ),
+        ),
+      ),
       Container(
         child: new ListView(
           padding: EdgeInsets.zero,
@@ -368,227 +588,62 @@ class _HomePageState extends State<HomePage> {
               leading: new Icon(Icons.approval, color: Colors.black),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AboutPage()));
+                    MaterialPageRoute(builder: (context) => AboutPageAdmin()));
               },
             ),
+            admin.isLoggedIn?Container():
             new ListTile(
               title: new Text("Zona Administrador"),
               leading: new Icon(Icons.assignment_outlined, color: Colors.black),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AdminHomePage()));
+                print("HOLAAAAAAA");
+                setState(() {
+                  admin.isLoggedIn = true;
+                });
+                //Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
               },
             ),
             new ListTile(
               title: new Text("Dona el teu feedback"),
               leading:
-                  new Icon(Icons.announcement_outlined, color: Colors.black),
+              new Icon(Icons.announcement_outlined, color: Colors.black),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => FireFeedback()));
               },
             ),
+            new Divider(
+              height: 10.0,
+              color: Colors.black,
+            ),
+            admin.isLoggedIn?
+            new ListTile(
+              title: new Text("Tancar"),
+              leading: new Icon(Icons.close, color: Colors.black),
+              onTap: () {
+                setState(() {
+                  admin.isLoggedIn = false;
+                });
+              },
+            ):Container()
           ],
         ),
       ),
     ];
-    foregroundColor = Colorizer.typecolor(filter).computeLuminance() > 0.5
-        ? Colors.black
-        : Colors.white;
-    return SafeArea(
-        child: Scaffold(
-      drawer: filter == ""
-          ? new Drawer(
-              child: new ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  new UserAccountsDrawerHeader(
-                      accountName: new Text(
-                        "Aplicació de voluntariats",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      accountEmail: new Text("Sigues voluntari a Tortosa",
-                          style: TextStyle(color: Colors.black)),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/escutp.png"),
-                            fit: BoxFit.cover),
-                      )),
-                  new ListTile(
-                    title: new Text("Qui som?"),
-                    leading: new Icon(Icons.approval, color: Colors.black),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AboutPage()));
-                    },
-                  ),
-                  new ListTile(
-                    title: new Text("Zona Administrador"),
-                    leading: new Icon(Icons.assignment_outlined,
-                        color: Colors.black),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignInScreen()));
-                    },
-                  ),
-                  new ListTile(
-                    title: new Text("Dona el teu feedback"),
-                    leading: new Icon(Icons.announcement_outlined,
-                        color: Colors.black),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FireFeedback()));
-                    },
-                  ),
-                ],
-              ),
-            )
-          : null,
-      body: container[_selectedIndex],
-      floatingActionButton: _selectedIndex == 1
-          ? Stack(alignment: Alignment.bottomRight, children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                    child:
-                    UnicornDialer(
-                      backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
-                      parentButtonBackground: Colors.black,
-                      orientation: UnicornOrientation.VERTICAL,
-                      parentButton:
-                      _Face2FaceOptions.elementAt(_selectedface2face),
-                      childButtons: [
-                        UnicornButton(
-                            hasLabel: true,
-                            labelText: "Totes les activitats",
-                            labelColor: Colors.black,
-                            currentButton: FloatingActionButton(
-                              heroTag: "Totes les activitats",
-                              backgroundColor: Colors.black,
-                              mini: true,
-                              child: Icon(Icons.all_inclusive_rounded),
-                              onPressed: () {
-                                _selectedface2face = 0;
-                                filtermode = "";
-                                setState(() {});
-                              },
-                            )),
-                        UnicornButton(
-                            hasLabel: true,
-                            labelText: "Virtual",
-                            labelColor: Colors.black,
-                            currentButton: FloatingActionButton(
-                              heroTag: "Només Virtual",
-                              backgroundColor: Colors.black87,
-                              mini: true,
-                              child: Icon(Icons.desktop_windows),
-                              onPressed: () {
-                                _selectedface2face = 1;
-                                filtermode = "Virtual";
-                                setState(() {});
-                              },
-                            )),
-                        UnicornButton(
-                            hasLabel: true,
-                            labelText: "Presencial",
-                            labelColor: Colors.black,
-                            currentButton: FloatingActionButton(
-                              heroTag: "Només Presencial",
-                              backgroundColor: Colors.black87,
-                              mini: true,
-                              child: Icon(Icons.accessibility_new_rounded),
-                              onPressed: () {
-                                _selectedface2face = 2;
-                                filtermode = "Presencial";
-                                setState(() {});
-                              },
-                            )),
-                        UnicornButton(
-                            hasLabel: true,
-                            labelText: "Semipresencial",
-                            labelColor: Colors.black,
-                            currentButton: FloatingActionButton(
-                              heroTag: "Semipresencial",
-                              backgroundColor: Colors.black87,
-                              mini: true,
-                              child: Icon(Icons.shuffle),
-                              onPressed: () {
-                                _selectedface2face = 3;
-                                filtermode = "Semipresencial";
-                                setState(() {});
-                              },
-                            )),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              filter == ""
-                  ? Container(
-                      padding: EdgeInsets.only(left: 30.0),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: FloatingActionButton.extended(
-                          onPressed: () {
-                            _settingModalBottomSheet(context);
-                          },
-                          backgroundColor: Colorizer.typecolor(filter),
-                          icon: Colorizer.showIcon(filter),
-                          label: Text("Tipus",
-                              style: TextStyle(color: foregroundColor)),
-                        ),
-                      ),
-                    )
-                  : Container(
-                      padding: EdgeInsets.only(left: 30.0),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: FloatingActionButton.extended(
-                          onPressed: () {
-                            filter = "";
-                            print("bona nit");
-                            (context as Element).reassemble();
-                          },
-                          backgroundColor: Colorizer.typecolor(filter),
-                          icon: Icon(Icons.clear, color: Colors.black),
-                          label: Text(filter,
-                              style: TextStyle(color: foregroundColor)),
-                        ),
-                      ),
-                    ),
-            ])
-          : Container(),
+    return container[_selectedIndex];
+  }
 
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inici',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Activitats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_city),
-            label: 'Entitats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            label: 'Info',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: bodyHome(),
+        ),
+        floatingActionButton: customFloatingActionButton(),
+        bottomNavigationBar: customNavBar(),
       ),
-    )
     );
   }
 }

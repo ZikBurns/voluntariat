@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/admin_entities_list.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home.dart';
-import 'package:flutter_firestore/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list.dart';
-import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
+import 'package:flutter_firestore/commons/firefeedback.dart';
 import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
@@ -11,10 +12,9 @@ import 'package:flutter_firestore/screens/aboutpage/about_page.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
-import 'package:flutter_firestore/screens/entities/entities_list.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
-import 'package:flutter_firestore/screens/home/carousel.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/carousel.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
               value: ActivityService().activities,
               child: StreamProvider<List<Entity>>.value(
                 value: EntityService().entities,
-                child: EntitiesList(),
+                child: AdminEntitiesList(),
               ),
             ),
           )),
@@ -455,13 +455,13 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 children: [
                   Container(
-                    child: //buildSpeedDial()
-                        UnicornDialer(
+                    child:
+                    UnicornDialer(
                       backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
                       parentButtonBackground: Colors.black,
                       orientation: UnicornOrientation.VERTICAL,
                       parentButton:
-                          _Face2FaceOptions.elementAt(_selectedface2face),
+                      _Face2FaceOptions.elementAt(_selectedface2face),
                       childButtons: [
                         UnicornButton(
                             hasLabel: true,

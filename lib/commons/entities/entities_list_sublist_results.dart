@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
@@ -91,13 +91,6 @@ class _State extends State<EntitiesListSubActivitiesResults> {
                 return Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Card(
-                      shape: list_activities[index-1].prime
-                          ?new RoundedRectangleBorder(
-                          side: new BorderSide(color: Colors.red, width: 4.0),
-                          borderRadius: BorderRadius.circular(4.0))
-                          : new RoundedRectangleBorder(
-                          side: new BorderSide(color: Colors.white, width: 2.0),
-                          borderRadius: BorderRadius.circular(4.0)),
                       child: AdminHomeListTile(activity: list_activities[index-1])
                   ),
                 );

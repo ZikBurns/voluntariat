@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home_list_tile.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 
 
 class AdminHomeList extends StatefulWidget {

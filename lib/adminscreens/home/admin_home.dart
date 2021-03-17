@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminscreens/activities/form_new_activity.dart';
-import 'package:flutter_firestore/adminscreens/entities/admin_entities_list.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/admin_entities_list.dart';
 import 'package:flutter_firestore/adminscreens/entities/newentity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/home/carousel.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/carousel.dart';
 import 'package:flutter_firestore/screens/home/home.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
@@ -12,9 +12,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_firestore/adminscreens/home/admin_home_list.dart';
 import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
-import 'package:flutter_firestore/commonscreeens/firefeedback.dart';
+import 'package:flutter_firestore/commons/firefeedback.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_firestore/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AdminHomePage extends StatefulWidget {
@@ -406,9 +406,9 @@ class _HomePageState extends State<AdminHomePage> {
           child: container[_selectedIndex],
         ),
         floatingActionButton: _selectedIndex == 1
-            ? Stack(alignment: Alignment.bottomRight, children: [
+            ? Stack(alignment: Alignment.bottomCenter, children: [
                 Stack(
-                  alignment: Alignment.bottomRight,
+                  alignment: Alignment.bottomCenter,
                   children: [
                     Container(
                       child: FloatingActionButton(
@@ -448,7 +448,6 @@ class _HomePageState extends State<AdminHomePage> {
                           child: FloatingActionButton.extended(
                             onPressed: () {
                               filter = "";
-                              print("bona nit");
                               (context as Element).reassemble();
                             },
                             backgroundColor: Colorizer.typecolor(filter),

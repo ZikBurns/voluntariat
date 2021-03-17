@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore/screens/details/details_view.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
 
 class HomeListTile extends StatefulWidget {
   final Activity activity;

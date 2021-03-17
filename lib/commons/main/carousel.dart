@@ -1,12 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commonscreeens/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/colors/colorizer.dart';
+import 'package:flutter_firestore/commons/commonfunctions.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/home/home_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/screens/details/details_view.dart';
-
+import 'package:flutter_firestore/data/admin.dart' as admin;
 
 class Carousel extends StatefulWidget {
   @override
@@ -48,8 +49,8 @@ class _CarouselState extends State<Carousel> {
     var listActivities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> primelist = listActivities.where((activity) => activity.prime==true).toList();
     listActivities.sort((a,b)=>b.launchDate.millisecondsSinceEpoch.compareTo(a.launchDate.millisecondsSinceEpoch));
-
-
+    listActivities=CommonFunctions.deleteHiddenActivities(listActivities);
+    listActivities=CommonFunctions.selectNewActivities(listActivities);
 
     return Container(
       child: ListView(
@@ -124,13 +125,7 @@ class _CarouselState extends State<Carousel> {
               physics: ClampingScrollPhysics(),
               itemCount: listActivities.length,
               itemBuilder: (context,index){
-                var now= new DateTime.now();
-                bool expired= listActivities[index].visibleDate.isBefore(now);
-                var duration = new Duration(days : listActivities[index].releasedays);
-                var checknewdate= listActivities[index].launchDate.add(duration);
-                bool notnew= checknewdate.isBefore(now);
-
-                if((listActivities[index].visible)&&(!expired)&&(listActivities[index].prime)&&(!notnew)){
+                if((listActivities[index].prime)){
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(
@@ -140,18 +135,15 @@ class _CarouselState extends State<Carousel> {
                         child: HomeListTile(activity: listActivities[index])
                     ),
                   );
-                }
-                else if((listActivities[index].visible)&&(!expired)&&(!listActivities[index].prime)&&(!notnew)){
+                } else {
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(child: HomeListTile(activity: listActivities[index])),
                   );
                 }
-                else return Container();
               }
           )
         ]
-
       ),
     );
   }

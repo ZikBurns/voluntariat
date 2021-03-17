@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/entities_list_tile.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'admin_entities_list_tile.dart';
-
+import 'package:flutter_firestore/data/admin.dart' as admin;
 
 class AdminEntitiesList extends StatefulWidget {
   @override
@@ -86,30 +86,30 @@ class _AdminEntitiesListState extends State<AdminEntitiesList> {
         ),
         Expanded(
           child: StreamProvider<List<Activity>>.value(
-                value: ActivityService().activities,
-                child: StreamProvider<List<Entity>>.value(
-                  value: EntityService().entities,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: list_entities.length,
-                      itemBuilder: (context, index) {
-                      var ent = list_entities[index].name.toLowerCase() +
-                      list_entities[index].desc.toLowerCase();
-                      if ((searchtext == null) ||
-                      (searchtext != null) &&
-                      (ent.contains(searchtext.toLowerCase()))) {
-                        return Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Card(
-                            child: AdminEntitiesListTile(list_entities[index]),
-                          ),
-                        );
-                      }
-                      else return Container();
-                      }
-                  ),
-                ),
+            value: ActivityService().activities,
+            child: StreamProvider<List<Entity>>.value(
+              value: EntityService().entities,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: list_entities.length,
+                  itemBuilder: (context, index) {
+                  var ent = list_entities[index].name.toLowerCase() +
+                  list_entities[index].desc.toLowerCase();
+                  if ((searchtext == null) ||
+                  (searchtext != null) &&
+                  (ent.contains(searchtext.toLowerCase()))) {
+                    return Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Card(
+                        child: EntitiesListTile(list_entities[index]),
+                      ),
+                    );
+                  }
+                  else return Container();
+                  }
+              ),
+            ),
               )
           ),
       ],

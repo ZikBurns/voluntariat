@@ -1,9 +1,39 @@
 
 
+import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:transparent_image/transparent_image.dart';
+
+import 'entities/video_screen.dart';
 
 class CommonFunctions{
+
+  static Container showMedia(String ytlink, String image) {
+    if (ytlink == "" && image != "") {
+      return Container(
+        color: Colors.black,
+        constraints: BoxConstraints(
+          maxHeight: 300,
+        ),
+        child: OverflowBox(
+            minWidth: 0.0,
+            minHeight: 0.0,
+            maxWidth: double.infinity,
+            child: Center(
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: image,
+              ),
+            )),
+      );
+    } else if (ytlink != "") {
+      return Container(
+        child: VideoScreen(ytlink),
+      );
+    } else
+      return Container();
+  }
 
   static List<String> IDsToNames(List<String> idlist,List<Entity> entitylist) {
     List<String> namelist = [];
@@ -76,4 +106,17 @@ class CommonFunctions{
         .toList();
     return activities;
   }
+  static List<Activity> selectNewActivities(List<Activity> activities)
+  {
+    var now= new DateTime.now();
+    activities=activities
+        .where((activity) {
+          var duration = new Duration(days : activity.releasedays);
+          var checknewdate= activity.launchDate.add(duration);
+          return checknewdate.isAfter(now);
+    })
+        .toList();
+    return activities;
+  }
+
 }

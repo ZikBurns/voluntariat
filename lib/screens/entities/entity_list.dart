@@ -29,7 +29,7 @@ class _EntitiesListState extends State<EntitiesList> {
   }
   @override
   Widget build(BuildContext context) {
-    var list_entities=Provider.of<List<Entity>>(context) ?? [];
+    var listEntities=Provider.of<List<Entity>>(context) ?? [];
 
 
 
@@ -91,17 +91,17 @@ class _EntitiesListState extends State<EntitiesList> {
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: list_entities.length,
+                  itemCount: listEntities.length,
                   itemBuilder: (context, index) {
-                  var ent = list_entities[index].name.toLowerCase() +
-                  list_entities[index].desc.toLowerCase();
+                  var ent = listEntities[index].name.toLowerCase() +
+                  listEntities[index].desc.toLowerCase();
                   if ((searchtext == null) ||
                   (searchtext != null) &&
                   (ent.contains(searchtext.toLowerCase()))) {
                     return Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: Card(
-                        child: EntityListTile(list_entities[index]),
+                        child: EntityListTile(listEntities[index]),
                       ),
                     );
                   }

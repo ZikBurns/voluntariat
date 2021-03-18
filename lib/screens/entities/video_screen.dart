@@ -12,28 +12,28 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
-  YoutubePlayerController _YTcontroller;
+  YoutubePlayerController _ytController;
 
   @override
   void initState() {
-    _YTcontroller = YoutubePlayerController(
+    _ytController = YoutubePlayerController(
       initialVideoId: YoutubePlayerController.convertUrlToId(widget.videolink),
       params: YoutubePlayerParams(
         showControls: true,
         showFullscreenButton: true,
       ),
     );
-    _YTcontroller.onEnterFullscreen = () {
+    _ytController.onEnterFullscreen = () {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
       log('Entered Fullscreen');
     };
-    _YTcontroller.onExitFullscreen = () {
+    _ytController.onExitFullscreen = () {
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
       Future.delayed(const Duration(seconds: 1), () {
-        _YTcontroller.play();
+        _ytController.play();
       });
       Future.delayed(const Duration(seconds: 5), () {
         SystemChrome.setPreferredOrientations(DeviceOrientation.values);
@@ -44,7 +44,7 @@ class _VideoScreenState extends State<VideoScreen> {
   }
 
   void dispose() {
-    _YTcontroller.close();
+    _ytController.close();
     super.dispose();
   }
 
@@ -56,7 +56,7 @@ class _VideoScreenState extends State<VideoScreen> {
       alignment: Alignment.topCenter,
       child: Container(
         child: YoutubePlayerControllerProvider(
-          controller: _YTcontroller,
+          controller: _ytController,
           child: LayoutBuilder(
             builder: (context, constraints) {
               return player;

@@ -22,13 +22,13 @@ class _HomeListTileState extends State<EntityListTile> {
 
   @override
   Widget build(BuildContext context) {
-    var list_activities=Provider.of<List<Activity>>(context) ?? [];
-    list_activities = list_activities
+    var listActivities=Provider.of<List<Activity>>(context) ?? [];
+    listActivities = listActivities
         .where((activity) => activity.entities.contains(widget.entity.id))
         .toList();
-    list_activities.removeWhere((element) => element.visible==false);
+    listActivities.removeWhere((element) => element.visible==false);
     var now = new DateTime.now();
-    list_activities.removeWhere((element) => element.visibleDate.isBefore(now));
+    listActivities.removeWhere((element) => element.visibleDate.isBefore(now));
 
     return StreamProvider<List<Activity>>.value(
       initialData: [],
@@ -45,7 +45,7 @@ class _HomeListTileState extends State<EntityListTile> {
           ),
         child: ListTile(
           tileColor: Color(0xFFF5F6F9),
-          title:Text(widget.entity.name+" ("+list_activities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
+          title:Text(widget.entity.name+" ("+listActivities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
           subtitle: Container(
               child: Row(
                 children: [

@@ -31,7 +31,7 @@ class _HomePageState extends State<Home> {
   var foregroundColor;
   int _selectedIndex = 0;
   String filtermode = "";
-  
+
 
   static const List<Widget> _Face2FaceOptions = <Widget>[
     Icon(Icons.all_inclusive_rounded),

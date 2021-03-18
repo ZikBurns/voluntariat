@@ -224,7 +224,6 @@ class _HomeListTileState extends State<ActivityListTile> {
           ),
         );
       } else {
-        print("ANDREEEEEEEEEEEEEEEEEEEEEEEEEEEEEU");
         return Container(
           decoration:BoxDecoration(
             borderRadius: BorderRadius.all(

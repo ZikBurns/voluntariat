@@ -81,7 +81,7 @@ class _AdminEntityDetailsState
     EntityService().updateEntity(widget.entity);
   }
 
-  Future<String> DeleteImageDialog(BuildContext context) {
+  Future<String> deleteImageDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -114,10 +114,9 @@ class _AdminEntityDetailsState
     return FloatingActionButton(
       heroTag: "deleteactivitybutton",
       onPressed: () async {
-        var list_activities =
-            await Provider.of<List<Activity>>(context, listen: false) ?? [];
+        var listActivities = Provider.of<List<Activity>>(context, listen: false) ?? [];
         var canDelete = true;
-        for (var activity in list_activities) {
+        for (var activity in listActivities) {
           for (var entity in activity.entities) {
             if (entity == widget.entity.id) canDelete = false;
           }
@@ -240,7 +239,7 @@ class _AdminEntityDetailsState
               : FloatingActionButton(
                   heroTag: "addphototoactivitybutton",
                   onPressed: () async {
-                    await DeleteImageDialog(context);
+                    await deleteImageDialog(context);
                     (context as Element).reassemble();
                   },
                   child: Icon(Icons.broken_image),

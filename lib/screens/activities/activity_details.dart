@@ -83,7 +83,7 @@ class _DetailsPageState extends State<ActivityDetails> {
     ActivityService().updateActivity(widget.activity);
   }
 
-  Future<String> NewImageDialog(BuildContext context){
+  Future<String> newImageDialog(BuildContext context){
     return showDialog(
         context: context,
         builder: (context){
@@ -150,7 +150,7 @@ class _DetailsPageState extends State<ActivityDetails> {
             FloatingActionButton(
               heroTag: "addphototoactivitybutton",
               onPressed: () async {
-                await NewImageDialog(context);
+                await newImageDialog(context);
                 (context as Element).reassemble();
               },
               child: Icon(Icons.broken_image),

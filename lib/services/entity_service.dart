@@ -7,7 +7,7 @@ class EntityService{
   CollectionReference ref = FirebaseFirestore.instance.collection("Entities");
   EntityService();
 
-  List<Entity> _EntitiesFromSnapshot(QuerySnapshot snapshot) {
+  List<Entity> _entitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
       return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'',doc.get('twitter')??'',doc.get('facebook')??'',doc.get('instagram')??'',doc.get('website')??'',doc.get('maps')??'',doc.get('color')??16777215);
     }).toList();
@@ -16,7 +16,7 @@ class EntityService{
   // get brews stream
   Stream<List<Entity>> get entities {
     return ref.snapshots()
-        .map(_EntitiesFromSnapshot);
+        .map(_entitiesFromSnapshot);
   }
 
   Stream<QuerySnapshot> getsnapshots(){
@@ -69,7 +69,7 @@ class EntityService{
   }
 
   Future<List<String>> listOfNamesEntity() async {
-    List<String> endlist = new List();
+    List<String> endlist =[];
     final QuerySnapshot result = await ref.get();
     final List<DocumentSnapshot> documents = result.docs;
     documents.forEach((data){

@@ -18,7 +18,7 @@ class ActivityList extends StatefulWidget {
 
 class _State extends State<ActivityList> {
   TextEditingController searchController;
-  String searchtext = null;
+  String searchtext;
   void _onSearch() {
     setState(() {
       searchtext = searchController.text;
@@ -35,15 +35,14 @@ class _State extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
     List<Entity> entitylist= Provider.of<List<Entity>>(context) ?? [];
-    var list_activities = Provider.of<List<Activity>>(context) ?? [];
-    list_activities=CommonFunctions.sortActivityPrimes(list_activities);
+    var listActivities = Provider.of<List<Activity>>(context) ?? [];
+    listActivities=CommonFunctions.sortActivityPrimes(listActivities);
     if(admin.isLoggedIn) {
-      list_activities = CommonFunctions.applyTypeFilter(list_activities, widget.filter);
+      listActivities = CommonFunctions.applyTypeFilter(listActivities, widget.filter);
     }
     else{
-      print("FIELTROS"+widget.filter+widget.filtermode);
-      list_activities=CommonFunctions.applyActivityFilters(list_activities,widget.filter,widget.filtermode);
-      list_activities=CommonFunctions.deleteHiddenActivities(list_activities);
+      listActivities=CommonFunctions.applyActivityFilters(listActivities,widget.filter,widget.filtermode);
+      listActivities=CommonFunctions.deleteHiddenActivities(listActivities);
     }
 
       return Column(
@@ -99,21 +98,21 @@ class _State extends State<ActivityList> {
           Expanded(
             child: ListView.builder(
                 physics: AlwaysScrollableScrollPhysics(),
-                itemCount: list_activities.length,
+                itemCount: listActivities.length,
                 itemBuilder: (context, index) {
-                  var act = CommonFunctions.toStringLowerCaseComplete(list_activities[index],entitylist);
+                  var act = CommonFunctions.toStringLowerCaseComplete(listActivities[index],entitylist);
                   if((searchtext==null)||(act.contains(searchtext.toLowerCase()))){
-                    if (list_activities[index].prime) {
+                    if (listActivities[index].prime) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                         child: Card(
                             shape: new RoundedRectangleBorder(
                                 side: new BorderSide(
                                     color: Colorizer.typecolor(
-                                        list_activities[index].type),
+                                        listActivities[index].type),
                                     width: 4.0),
                                 borderRadius: BorderRadius.circular(4.0)),
-                            child:ActivityListTile(activity: list_activities[index]),
+                            child:ActivityListTile(activity: listActivities[index]),
                         ));
                     }
                     else {
@@ -121,7 +120,7 @@ class _State extends State<ActivityList> {
                       return Padding(
                         padding: const EdgeInsets.only(left: 4.0, right: 4.0,top: 1.0,bottom: 1.0),
                         child: Card(
-                            child:ActivityListTile(activity: list_activities[index]))
+                            child:ActivityListTile(activity: listActivities[index]))
                       );
                     }
                   }

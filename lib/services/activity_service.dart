@@ -46,7 +46,7 @@ class ActivityService{
     });
   }
 
-  List<Activity> _ActivitiesFromSnapshot(QuerySnapshot snapshot) {
+  List<Activity> _activitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
       var entitylist;
       //Firestore returns a List<Dynamic>, we want to transform it to List<String>
@@ -56,24 +56,6 @@ class ActivityService{
       DateTime finaldate = doc.get('finaldate')?.toDate();
       DateTime visibledate = doc.get('visibledate')?.toDate();
       DateTime launchdate = doc.get('launchdate')?.toDate();
-      Activity act=new Activity(
-          doc.id,
-          doc.get('title')?? '',
-          doc.get('desc')?? '',
-          doc.get('type')?? '',
-          doc.get('contact')?? '',
-          doc.get('place')?? '',
-          doc.get('schedule')?? '',
-          entitylist,
-          startdate,
-          finaldate,
-          visibledate,
-          launchdate,
-          doc.get('releasedays')?? '',
-          doc.get('visible')??false,
-          doc.get('prime')??false,
-          doc.get('image')?? '',
-          doc.get('mode')??'');
       return Activity(
           doc.id,
           doc.get('title')?? '',
@@ -98,7 +80,7 @@ class ActivityService{
   // get brews stream
   Stream<List<Activity>> get activities {
     return ref.snapshots()
-        .map(_ActivitiesFromSnapshot);
+        .map(_activitiesFromSnapshot);
   }
 
   void addActivity(Activity activity){

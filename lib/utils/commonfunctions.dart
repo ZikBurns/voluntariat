@@ -35,7 +35,25 @@ class CommonFunctions{
       return Container();
   }
 
-  static List<String> IDsToNames(List<String> idlist,List<Entity> entitylist) {
+  static List<String> entitiesToNames(List<Entity> entitylist){
+    List<String> namelist = [];
+    for (var i=0; i<entitylist.length; i++) {
+      namelist.add(entitylist[i].name);
+    }
+    return namelist;
+  }
+
+  static List<String> namestoIDs(List<String> namelist,List<Entity> entitylist){
+    List<String> idlist=[];
+    for (var i=0; i<entitylist.length; i++) {
+      for (var j=0; j<namelist.length; j++) {
+        if (namelist[j] == entitylist[i].name) idlist.add(entitylist[i].id);
+      }
+    }
+    return idlist;
+  }
+
+  static List<String> iDsToNames(List<String> idlist,List<Entity> entitylist) {
     List<String> namelist = [];
     for (var i = 0; i < entitylist.length; i++) {
       for (var j = 0; j < idlist.length; j++) {
@@ -54,7 +72,7 @@ class CommonFunctions{
   }
   static String toStringLowerCaseComplete(Activity act,List<Entity> entitylist){
     List<String> entitiesinactivity =
-    CommonFunctions.IDsToNames(act.entities,entitylist);
+    CommonFunctions.iDsToNames(act.entities,entitylist);
     return act.title.toLowerCase() +
         act.desc.toLowerCase() +
         act.place.toLowerCase() +

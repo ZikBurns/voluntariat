@@ -5,7 +5,6 @@ import 'package:flutter_firestore/screens/entities/entity_details.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:flutter_firestore/data/admin.dart' as admin;
 
 class EntityListTile extends StatefulWidget {
   Entity entity;
@@ -32,6 +31,7 @@ class _HomeListTileState extends State<EntityListTile> {
     list_activities.removeWhere((element) => element.visibleDate.isBefore(now));
 
     return StreamProvider<List<Activity>>.value(
+      initialData: [],
       value: ActivityService().activities,
       child: Container(
           decoration:BoxDecoration(

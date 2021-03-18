@@ -13,7 +13,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
 
@@ -179,8 +178,10 @@ class _AdminEntityDetailsState
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
+      initialData: [],
         value: ActivityService().activities,
         child: StreamProvider<List<Entity>>.value(
+            initialData: [],
         value: EntityService().entities,
     child:Scaffold(
       appBar: AppBar(

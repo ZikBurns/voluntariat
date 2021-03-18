@@ -5,7 +5,6 @@ import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:flutter_firestore/data/admin.dart' as admin;
 
 class EntitiesList extends StatefulWidget {
   @override
@@ -14,14 +13,12 @@ class EntitiesList extends StatefulWidget {
 
 class _EntitiesListState extends State<EntitiesList> {
   TextEditingController searchController = TextEditingController();
-  ScrollController _scrollViewController;
   String searchtext = null;
 
   void initState() {
     searchController = TextEditingController();
     searchController.text = "";
     searchController.addListener(_onSearch);
-    _scrollViewController = new ScrollController();
     super.initState();
   }
 
@@ -86,8 +83,10 @@ class _EntitiesListState extends State<EntitiesList> {
         ),
         Expanded(
           child: StreamProvider<List<Activity>>.value(
+            initialData: [],
             value: ActivityService().activities,
             child: StreamProvider<List<Entity>>.value(
+              initialData: [],
               value: EntityService().entities,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,

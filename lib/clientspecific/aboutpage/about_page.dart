@@ -22,6 +22,7 @@ class AboutPage extends StatelessWidget {
                   subtitle: SelectableText("Aquest es un projecte de colaboracio entre el ajuntament de Tortosa i la Universitat Rovira i Virgili bla bla bla...")
               ),
               Divider(thickness:2,color: Colors.amberAccent,indent: 20,endIndent:20),
+              
             ]
         ),
         )

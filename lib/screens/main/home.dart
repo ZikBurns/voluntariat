@@ -31,21 +31,7 @@ class _HomePageState extends State<Home> {
   var foregroundColor;
   int _selectedIndex = 0;
   String filtermode = "";
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Voluntariats',
-    ),
-    Text(
-      'Voluntariats Presencials',
-    ),
-    Text(
-      'Voluntariats Virtuals',
-    ),
-    Text(
-      'Voluntariats Semipresencials',
-    ),
-  ];
+  
 
   static const List<Widget> _Face2FaceOptions = <Widget>[
     Icon(Icons.all_inclusive_rounded),
@@ -298,11 +284,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.black87,
-                      child: IconButton(
-                        icon: Icon(
+                      child:  Icon(
                           Icons.dashboard,
                           color: Colors.white,
-                        ),
                       ),
                     ),
                     title: new Text('Totes les activitats',
@@ -317,11 +301,9 @@ class _HomePageState extends State<Home> {
                       leading: CircleAvatar(
                         radius: 20,
                         backgroundColor: Colors.red,
-                        child: IconButton(
-                          icon: Icon(
+                        child: Icon(
                             Icons.local_hospital,
                             color: Colors.black,
-                          ),
                         ),
                       ),
                       title: new Text('Serveis Sociosanitaris'),
@@ -334,9 +316,7 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.deepPurpleAccent,
-                      child: IconButton(
-                        icon: Icon(Icons.family_restroom, color: Colors.black),
-                      ),
+                      child: Icon(Icons.family_restroom, color: Colors.black),
                     ),
                     title: new Text('Atenció i suport a les families'),
                     onTap: () {
@@ -349,11 +329,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.lime,
-                      child: IconButton(
-                        icon: Icon(
+                      child:Icon(
                           Icons.local_library,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Educació i lleure'),
@@ -367,10 +345,8 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.cyanAccent,
-                      child: IconButton(
-                        icon:
+                      child:
                             Icon(Icons.sports_volleyball, color: Colors.black),
-                      ),
                     ),
                     title: new Text('Esport'),
                     onTap: () {
@@ -383,11 +359,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.greenAccent,
-                      child: IconButton(
-                        icon: Icon(
+                      child: Icon(
                           Icons.public,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Voluntariat Internacional'),
@@ -401,11 +375,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.pinkAccent,
-                      child: IconButton(
-                        icon: Icon(
+                      child:  Icon(
                           Icons.accessibility_new,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Atenció a les necessitats bàsiques'),
@@ -419,11 +391,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.lightGreenAccent,
-                      child: IconButton(
-                        icon: Icon(
+                      child: Icon(
                           Icons.nature,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Defensa del mediambient'),
@@ -437,12 +407,10 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.deepOrange,
-                      child: IconButton(
-                        icon: Icon(
+                      child:  Icon(
                           Icons.face,
                           color: Colors.black,
                         ),
-                      ),
                     ),
                     title: new Text('Joventut'),
                     onTap: () {
@@ -455,11 +423,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.indigo,
-                      child: IconButton(
-                        icon: Icon(
+                      child: Icon(
                           Icons.elderly,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Gent Gran'),
@@ -473,9 +439,7 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.brown,
-                      child: IconButton(
-                        icon: Icon(Icons.pets, color: Colors.black),
-                      ),
+                      child: Icon(Icons.pets, color: Colors.black),
                     ),
                     title: new Text('Protecció dels animals'),
                     onTap: () {
@@ -488,11 +452,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.yellow,
-                      child: IconButton(
-                        icon: Icon(
+                      child: Icon(
                           Icons.theater_comedy,
                           color: Colors.black,
-                        ),
                       ),
                     ),
                     title: new Text('Cultura'),
@@ -538,6 +500,7 @@ class _HomePageState extends State<Home> {
     final container = [
       Container(
           child: StreamProvider<List<Activity>>.value(
+            initialData: [],
             value: ActivityService().activities,
             child: Carousel(),
           )),
@@ -547,8 +510,10 @@ class _HomePageState extends State<Home> {
           children: [
             Flexible(
               child: StreamProvider<List<Entity>>.value(
+                initialData: [],
                 value: EntityService().entities,
                 child: StreamProvider<List<Activity>>.value(
+                  initialData: [],
                     value: ActivityService().activities,
                     child: admin.isLoggedIn?ActivityList(filter:filter):ActivityList(filter:filter,filtermode: filtermode,),
               ),
@@ -561,6 +526,7 @@ class _HomePageState extends State<Home> {
         color: Colors.white,
         child: Center(
           child: StreamProvider<List<Entity>>.value(
+            initialData: [],
             value: EntityService().entities,
             child: EntitiesList(),
           ),

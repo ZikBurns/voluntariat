@@ -11,11 +11,9 @@ import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:linkable/linkable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
 
@@ -128,8 +126,10 @@ class _DetailsPageState extends State<ActivityDetails> {
 
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
+      initialData: [],
       value: ActivityService().activities,
       child: StreamProvider<List<Entity>>.value(
+        initialData: [],
         value: EntityService().entities,
         child: Scaffold(
             appBar: primeAppBar(),

@@ -18,6 +18,7 @@ class _FormNewActivityState extends State<FormNewActivity> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
+      initialData: [],
       value: EntityService().entities,
       child: Scaffold(
         appBar: AppBar(

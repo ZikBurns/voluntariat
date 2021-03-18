@@ -7,7 +7,6 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import "package:charcode/charcode.dart";
 
 
 class ModifyActivity extends StatefulWidget {
@@ -24,6 +23,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Entity>>.value(
+      initialData: [],
       value: EntityService().entities,
       child: Scaffold(
         appBar: AppBar(
@@ -60,7 +60,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        RaisedButton(
+                        ElevatedButton(
                           child: Text("Enviar"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){

@@ -1,20 +1,20 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/activities/present_entities.dart';
+import 'package:flutter_firestore/screens/activities/activity_present_entities.dart';
 import 'package:linkable/linkable.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class DetailsBody extends StatefulWidget {
+class ActivityDetailsBody extends StatefulWidget {
   Activity activity;
-  DetailsBody(this.activity);
+  ActivityDetailsBody(this.activity);
   @override
-  _DetailsBodyState createState() => _DetailsBodyState();
+  _ActivityDetailsBodyState createState() => _ActivityDetailsBodyState();
 }
 
-class _DetailsBodyState extends State<DetailsBody> {
+class _ActivityDetailsBodyState extends State<ActivityDetailsBody> {
 
 
   @override

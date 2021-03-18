@@ -1,5 +1,5 @@
 
-import 'package:flutter_firestore/adminscreens/activities/activity_form_fields.dart';
+import 'package:flutter_firestore/adminspecific/activities/activity_form_fields.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
@@ -23,8 +23,6 @@ class _ModifyActivityState extends State<ModifyActivity> {
 
   @override
   Widget build(BuildContext context) {
-
-    print(widget.activity.entities);
     return StreamProvider<List<Entity>>.value(
       value: EntityService().entities,
       child: Scaffold(

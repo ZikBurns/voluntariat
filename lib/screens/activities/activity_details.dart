@@ -3,30 +3,30 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_firestore/adminscreens/activities/modify_details.dart';
-import 'package:flutter_firestore/commons/activities/details_body.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
+import 'package:flutter_firestore/adminspecific/activities/modify_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/activities/present_entities.dart';
+import 'package:flutter_firestore/screens/activities/activity_details_body.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:linkable/linkable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_firestore/data/admin.dart' as admin;
 
 
-class AdminDetailsPage extends StatefulWidget {
+class ActivityDetails extends StatefulWidget {
   Activity activity;
-  AdminDetailsPage(this.activity);
+  ActivityDetails(this.activity);
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
 
-class _DetailsPageState extends State<AdminDetailsPage> {
+class _DetailsPageState extends State<ActivityDetails> {
   String imageUrl;
 
   uploadImage() async {
@@ -113,7 +113,18 @@ class _DetailsPageState extends State<AdminDetailsPage> {
         }
     );
   }
-
+  Widget primeAppBar(){
+    var foregroundColor= Colorizer.typecolor(widget.activity.type).computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
+    return AppBar(
+      iconTheme: IconThemeData(
+        color: foregroundColor, //change your color here
+      ),
+      backgroundColor: Colorizer.typecolor(widget.activity.type),
+      title: Text(widget.activity.title,style:TextStyle(color: foregroundColor)),
+    );
+  }
 
   Widget build(BuildContext context) {
     return StreamProvider<List<Activity>>.value(
@@ -121,12 +132,9 @@ class _DetailsPageState extends State<AdminDetailsPage> {
       child: StreamProvider<List<Entity>>.value(
         value: EntityService().entities,
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colorizer.typecolor(widget.activity.type),
-              title: Text(widget.activity.title),
-            ),
-            body: DetailsBody(widget.activity),
-          floatingActionButton: Column(
+            appBar: primeAppBar(),
+            body: ActivityDetailsBody(widget.activity),
+          floatingActionButton: admin.isLoggedIn?Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             widget.activity.image==""
@@ -194,7 +202,7 @@ class _DetailsPageState extends State<AdminDetailsPage> {
               foregroundColor: Colors.white,
             ),
           ],
-        ),
+        ):Container(),
         ),
       ),
     );

@@ -1,23 +1,21 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/modify_entity.dart';
-import 'package:flutter_firestore/commons/commonfunctions.dart';
-import 'package:flutter_firestore/commons/entities/entities_list_sublist_results.dart';
-import 'package:flutter_firestore/commons/entities/socialnetworks.dart';
-import 'package:flutter_firestore/commons/commonfunctions.dart';
-import 'package:flutter_firestore/commons/entities/socialnetworks.dart';
+import 'package:flutter_firestore/adminspecific/entities/modify_entity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/commons/entities/video_screen.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/commonfunctions.dart';
+import 'package:flutter_firestore/screens/entities/entity_present_activities.dart';
+import 'package:flutter_firestore/screens/entities/socialnetworks.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
-import 'package:flutter_firestore/commons/entities/entities_list_sublist_results.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_firestore/data/admin.dart' as admin;
+
 
 class AdminEntityDetails extends StatefulWidget {
   Entity entity;
@@ -120,15 +118,11 @@ class _AdminEntityDetailsState
         var list_activities =
             await Provider.of<List<Activity>>(context, listen: false) ?? [];
         var canDelete = true;
-        print("hello");
-        print("bye");
         for (var activity in list_activities) {
           for (var entity in activity.entities) {
             if (entity == widget.entity.id) canDelete = false;
-            print(entity + widget.entity.id);
           }
         }
-        print(canDelete);
         if (canDelete) {
           showDialog(
               context: context,
@@ -215,11 +209,11 @@ class _AdminEntityDetailsState
               subtitle: Text(widget.entity.desc),
             ),
             SocialNetworks(widget.entity),
-            EntitiesListSubActivitiesResults(widget.entity),
+            EntityPresentActivities(widget.entity),
           ],
         ),
       ),
-      floatingActionButton: Column(
+      floatingActionButton: admin.isLoggedIn?Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
@@ -254,7 +248,7 @@ class _AdminEntityDetailsState
           SizedBox(height: 20),
           deleteButton()
         ],
-      ),
+      ):Container(),
     )));
   }
 }

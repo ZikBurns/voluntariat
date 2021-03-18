@@ -20,7 +20,6 @@ class SocialNetworks extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.facebook),
                 iconSize: 40,
                 onPressed: () async {
-                  print("Pressed");
                   await canLaunch(entity.facebook) ? await launch(entity.facebook) : throw 'Could not launch '+entity.facebook;
 
                 }
@@ -30,7 +29,6 @@ class SocialNetworks extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.twitter),
                 iconSize: 40,
                 onPressed: () async {
-                  print("Pressed");
                   await canLaunch(entity.twitter) ? await launch(entity.twitter) : throw 'Could not launch '+entity.twitter;
 
                 }
@@ -40,7 +38,6 @@ class SocialNetworks extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.globe),
                 iconSize: 40,
                 onPressed: () async {
-                  print("Pressed");
                   await canLaunch(entity.website) ? await launch(entity.website) : throw 'Could not launch '+entity.website;
 
                 }
@@ -50,7 +47,6 @@ class SocialNetworks extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.instagram),
                 iconSize: 40,
                 onPressed: () async {
-                  print("Pressed");
                   await canLaunch(entity.instagram) ? await launch(entity.instagram) : throw 'Could not launch '+entity.instagram;
                 }
             ),
@@ -59,7 +55,6 @@ class SocialNetworks extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
                 iconSize: 40,
                 onPressed: () async {
-                  print("Pressed");
                   await canLaunch(entity.maps) ? await launch(entity.maps) : throw 'Could not launch '+entity.maps;
                 }
             ),

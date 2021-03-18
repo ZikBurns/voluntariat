@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/activities/form_new_activity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/admin_entities_list.dart';
-import 'package:flutter_firestore/adminscreens/entities/newentity.dart';
+import 'package:flutter_firestore/adminspecific/aboutpage/about_page_admin.dart';
+import 'package:flutter_firestore/adminspecific/activities/form_new_activity.dart';
+import 'package:flutter_firestore/adminspecific/entities/new_entity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/carousel.dart';
-import 'package:flutter_firestore/screens/signinadmin/signin_screen.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/colorizer.dart';
+import 'package:flutter_firestore/screens/entities/entity_list.dart';
+import 'package:flutter_firestore/screens/firefeedback.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/activities/activity_list.dart';
+import 'package:flutter_firestore/screens/main/carousel.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home_list.dart';
-import 'package:flutter_firestore/adminscreens/aboutpage/about_page_admin.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
-import 'package:flutter_firestore/commons/firefeedback.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
 
-class AdminHomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<AdminHomePage> {
+class _HomePageState extends State<Home> {
   TextEditingController controllername = TextEditingController();
   String searchvalue = null;
   bool dialVisible = true;
@@ -263,7 +262,6 @@ class _HomePageState extends State<AdminHomePage> {
                 child: FloatingActionButton.extended(
                   onPressed: () {
                     filter = "";
-                    print("bona nit");
                     (context as Element).reassemble();
                   },
                   backgroundColor: Colorizer.typecolor(filter),
@@ -552,8 +550,9 @@ class _HomePageState extends State<AdminHomePage> {
                 value: EntityService().entities,
                 child: StreamProvider<List<Activity>>.value(
                     value: ActivityService().activities,
-                    child: admin.isLoggedIn?AdminHomeList(filter:filter):AdminHomeList(filter: filter,filtermode: filtermode)),
+                    child: admin.isLoggedIn?ActivityList(filter:filter):ActivityList(filter:filter,filtermode: filtermode,),
               ),
+            )
             )
           ],
         ),
@@ -563,7 +562,7 @@ class _HomePageState extends State<AdminHomePage> {
         child: Center(
           child: StreamProvider<List<Entity>>.value(
             value: EntityService().entities,
-            child: AdminEntitiesList(),
+            child: EntitiesList(),
           ),
         ),
       ),
@@ -596,7 +595,6 @@ class _HomePageState extends State<AdminHomePage> {
               title: new Text("Zona Administrador"),
               leading: new Icon(Icons.assignment_outlined, color: Colors.black),
               onTap: () {
-                print("HOLAAAAAAA");
                 setState(() {
                   admin.isLoggedIn = true;
                 });

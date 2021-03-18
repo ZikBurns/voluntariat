@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home.dart';
+import 'package:flutter_firestore/screens/main/home.dart';
 import 'package:flutter_firestore/services/signin_service.dart';
 import 'package:flutter_firestore/data/admin.dart'as admin;
 class SignInScreen extends StatefulWidget {
@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         }
                         else{
                           admin.isLoggedIn = true;
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                         }
                       }
                     }

@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/admin_entities_list_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'package:flutter_firestore/screens/entities/entities_list_details.dart';
+import 'package:flutter_firestore/screens/entities/entity_details.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
-class EntitiesListTile extends StatefulWidget {
+class EntityListTile extends StatefulWidget {
   Entity entity;
-  EntitiesListTile(this.entity);
+  EntityListTile(this.entity);
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
 
-class _HomeListTileState extends State<EntitiesListTile> {
+class _HomeListTileState extends State<EntityListTile> {
   TextEditingController controller = TextEditingController();
 
   passData(Entity entity){
-    if(admin.isLoggedIn) Navigator.push(context, MaterialPageRoute(builder: (context) => AdminEntityDetails(entity)));
-    else Navigator.push(context, MaterialPageRoute(builder: (context) =>EntityDetails(entity)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AdminEntityDetails(entity)));
   }
 
   @override

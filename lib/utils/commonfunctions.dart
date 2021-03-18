@@ -5,7 +5,7 @@ import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import 'entities/video_screen.dart';
+import '../screens/entities/video_screen.dart';
 
 class CommonFunctions{
 

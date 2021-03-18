@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/colorizer.dart';
+import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/activities/activity_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/main/admin_home_list_tile.dart';
 
-class EntitiesListSubActivitiesResults extends StatefulWidget {
+class EntityPresentActivities extends StatefulWidget {
   Entity entity;
-  EntitiesListSubActivitiesResults(this.entity);
+  EntityPresentActivities(this.entity);
 
   @override
   _State createState() => _State();
 }
 
-class _State extends State<EntitiesListSubActivitiesResults> {
+class _State extends State<EntityPresentActivities> {
   List<Entity> entitylist;
 
   List<String> IDsToNames(List<String> idlist){
@@ -74,14 +74,14 @@ class _State extends State<EntitiesListSubActivitiesResults> {
                         shape: new RoundedRectangleBorder(
                             side: new BorderSide(color: Colorizer.typecolor(list_activities[index-1].type), width: 4.0),
                             borderRadius: BorderRadius.circular(4.0)),
-                        child: AdminHomeListTile(activity: list_activities[index-1])
+                        child: ActivityListTile(activity: list_activities[index-1])
                     ),
                   );
                 }
                 else if((!expired)&&(!list_activities[index-1].prime)){
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Card(child: AdminHomeListTile(activity: list_activities[index-1])),
+                    child: Card(child: ActivityListTile(activity: list_activities[index-1])),
                   );
                 }
                 else return Container();
@@ -90,7 +90,7 @@ class _State extends State<EntitiesListSubActivitiesResults> {
                 return Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Card(
-                      child: AdminHomeListTile(activity: list_activities[index-1])
+                      child: ActivityListTile(activity: list_activities[index-1])
                   ),
                 );
               }

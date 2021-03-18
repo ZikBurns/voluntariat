@@ -56,8 +56,6 @@ class ActivityService{
       DateTime finaldate = doc.get('finaldate')?.toDate();
       DateTime visibledate = doc.get('visibledate')?.toDate();
       DateTime launchdate = doc.get('launchdate')?.toDate();
-      print("hgola"+doc.get('mode').toString()+":");
-      print(doc.get('mode').toString());
       Activity act=new Activity(
           doc.id,
           doc.get('title')?? '',
@@ -76,7 +74,6 @@ class ActivityService{
           doc.get('prime')??false,
           doc.get('image')?? '',
           doc.get('mode')??'');
-      print(act.title);
       return Activity(
           doc.id,
           doc.get('title')?? '',

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/entities_list_tile.dart';
+import 'package:flutter_firestore/screens/entities/entity_list_tile.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
-class AdminEntitiesList extends StatefulWidget {
+class EntitiesList extends StatefulWidget {
   @override
-  _AdminEntitiesListState createState() => _AdminEntitiesListState();
+  _EntitiesListState createState() => _EntitiesListState();
 }
 
-class _AdminEntitiesListState extends State<AdminEntitiesList> {
+class _EntitiesListState extends State<EntitiesList> {
   TextEditingController searchController = TextEditingController();
   ScrollController _scrollViewController;
   String searchtext = null;
@@ -102,7 +102,7 @@ class _AdminEntitiesListState extends State<AdminEntitiesList> {
                     return Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: Card(
-                        child: EntitiesListTile(list_entities[index]),
+                        child: EntityListTile(list_entities[index]),
                       ),
                     );
                   }

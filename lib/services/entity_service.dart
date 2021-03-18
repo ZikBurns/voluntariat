@@ -51,7 +51,6 @@ class EntityService{
       ref.doc(entity.id)
           .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink,'twitter':entity.twitter,'facebook':entity.facebook,'instagram':entity.instagram,'website':entity.website,'maps':entity.maps,'color':entity.color});
     } catch (e) {
-      print(e.toString());
     }
   }
   Future<void> updateEntityMap(String id,Map<String, dynamic> map, String image) async {

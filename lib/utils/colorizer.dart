@@ -127,10 +127,7 @@ class Colorizer{
     }
   }
 
-  static CircleAvatar showAvatarPrime(Activity act){
-    print("hola123415");
-    if(act.image==""){
-      print("hola");
+  static CircleAvatar showAvatarPrime(Activity act){if(act.image==""){
       return CircleAvatar(
           radius: 25.0,
           backgroundColor: Colors.black87,
@@ -175,8 +172,6 @@ class Colorizer{
   }
 
   static CircleAvatar showAvatar(Activity act){
-    print(act.title);
-    print(act.image);
     if(act.image==""){
       switch(act.type) {
         case 'Serveis Sociosanitaris': {

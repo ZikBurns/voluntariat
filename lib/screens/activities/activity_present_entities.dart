@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/screens/entities/entity_list_tile.dart';
 import 'package:provider/provider.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/commons/entities/entities_list_tile.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
+
 class PresentEntities extends StatefulWidget {
   @override
   Activity activity;
@@ -50,7 +50,7 @@ class _PresentEntitiesState extends State<PresentEntities> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),*/
                     elevation: 2,
-                    child: EntitiesListTile(listfinal[index]),
+                    child: EntityListTile(listfinal[index]),
                   ),
                 );
               })

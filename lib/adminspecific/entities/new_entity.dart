@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/entities/entity_form_fields.dart';
+import 'package:flutter_firestore/adminspecific/entities/entity_form_fields.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

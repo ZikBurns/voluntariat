@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminscreens/activities/admin_details.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:flutter_firestore/screens/details/details_view.dart';
+import 'package:flutter_firestore/screens/activities/activity_details.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_firestore/data/admin.dart'as admin;
+import 'package:flutter_firestore/utils/colorizer.dart';
 
-class AdminHomeListTile extends StatefulWidget {
+class ActivityListTile extends StatefulWidget {
   final Activity activity;
-  AdminHomeListTile({this.activity});
+  ActivityListTile({this.activity});
   @override
   _HomeListTileState createState() => _HomeListTileState();
 }
 
-class _HomeListTileState extends State<AdminHomeListTile> {
+class _HomeListTileState extends State<ActivityListTile> {
 
 
   passData(Activity activity){
-    if(admin.isLoggedIn)Navigator.push(context, MaterialPageRoute(builder: (context) => AdminDetailsPage(activity)));
-    else Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(activity)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDetails(activity)));
   }
 
   Widget getPrimeIcon()
@@ -226,6 +224,7 @@ class _HomeListTileState extends State<AdminHomeListTile> {
           ),
         );
       } else {
+        print("ANDREEEEEEEEEEEEEEEEEEEEEEEEEEEEEU");
         return Container(
           decoration:BoxDecoration(
             borderRadius: BorderRadius.all(

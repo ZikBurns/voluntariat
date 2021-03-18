@@ -1,14 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/commons/colors/colorizer.dart';
-import 'package:flutter_firestore/commons/commonfunctions.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/screens/activities/activity_details.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
+import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firestore/screens/details/details_view.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
-import 'admin_home_list_tile.dart';
+import '../activities/activity_list_tile.dart';
 
 class Carousel extends StatefulWidget {
   @override
@@ -83,7 +83,7 @@ class _CarouselState extends State<Carousel> {
             InkWell(
               onTap: (){
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => DetailsPage(activity)));
+                    context, MaterialPageRoute(builder: (context) => ActivityDetails(activity)));
               },
               child: Container(
                 child: Stack(
@@ -133,13 +133,13 @@ class _CarouselState extends State<Carousel> {
                         shape: new RoundedRectangleBorder(
                             side: new BorderSide(color: Colorizer.typecolor(listActivities[index].type), width: 4.0),
                             borderRadius: BorderRadius.circular(4.0)),
-                        child: AdminHomeListTile(activity: listActivities[index])
+                        child: ActivityListTile(activity: listActivities[index])
                     ),
                   );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Card(child: AdminHomeListTile(activity: listActivities[index])),
+                    child: Card(child: ActivityListTile(activity: listActivities[index])),
                   );
                 }
               }

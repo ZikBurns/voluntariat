@@ -1,5 +1,5 @@
 
-import 'package:flutter_firestore/adminscreens/activities/activity_form_fields.dart';
+import 'package:flutter_firestore/adminspecific/activities/activity_form_fields.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
@@ -45,12 +45,9 @@ class _FormNewActivityState extends State<FormNewActivity> {
                           child: Text("Crear"
                               ""),
                           onPressed: (){
-                            print("hola");
                             if(_fbKey.currentState.saveAndValidate()){
-                              print("adeu");
                               ActivityService().addActivityMap(_fbKey.currentState.value);
                               Navigator.pop(context);
-                              print("adeu2");
                             }
                           },
                         ),

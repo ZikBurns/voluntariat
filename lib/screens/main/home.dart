@@ -4,10 +4,10 @@ import 'package:flutter_firestore/adminspecific/activities/form_new_activity.dar
 import 'package:flutter_firestore/adminspecific/entities/new_entity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/colorizer.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/screens/entities/entity_list.dart';
 import 'package:flutter_firestore/screens/firefeedback.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/activities/activity_list.dart';
+import 'package:flutter_firestore/screens/activities/activity_list.dart';
 import 'package:flutter_firestore/screens/main/carousel.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';

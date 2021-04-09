@@ -74,7 +74,9 @@ class _HomeListTileState extends State<EntityListTile> {
                     )
                 )
             )
-                : CircleAvatar(),
+                : CircleAvatar(
+              backgroundColor: Color(widget.entity.color),
+            ),
           ),
         ),
       ),

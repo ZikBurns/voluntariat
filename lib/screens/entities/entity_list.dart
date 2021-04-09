@@ -14,7 +14,7 @@ class EntitiesList extends StatefulWidget {
 class _EntitiesListState extends State<EntitiesList> {
   TextEditingController searchController = TextEditingController();
   String searchtext = null;
-
+  ScrollController scrollController =ScrollController();
   void initState() {
     searchController = TextEditingController();
     searchController.text = "";
@@ -88,25 +88,30 @@ class _EntitiesListState extends State<EntitiesList> {
             child: StreamProvider<List<Entity>>.value(
               initialData: [],
               value: EntityService().entities,
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: listEntities.length,
-                  itemBuilder: (context, index) {
-                  var ent = listEntities[index].name.toLowerCase() +
-                  listEntities[index].desc.toLowerCase();
-                  if ((searchtext == null) ||
-                  (searchtext != null) &&
-                  (ent.contains(searchtext.toLowerCase()))) {
-                    return Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Card(
-                        child: EntityListTile(listEntities[index]),
-                      ),
-                    );
-                  }
-                  else return Container();
-                  }
+              child: Scrollbar(
+                isAlwaysShown: true,
+                controller: scrollController,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    controller: scrollController,
+                    itemCount: listEntities.length,
+                    itemBuilder: (context, index) {
+                    var ent = listEntities[index].name.toLowerCase() +
+                    listEntities[index].desc.toLowerCase();
+                    if ((searchtext == null) ||
+                    (searchtext != null) &&
+                    (ent.contains(searchtext.toLowerCase()))) {
+                      return Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Card(
+                          child: EntityListTile(listEntities[index]),
+                        ),
+                      );
+                    }
+                    else return Container();
+                    }
+                ),
               ),
             ),
               )

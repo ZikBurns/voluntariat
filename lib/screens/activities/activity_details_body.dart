@@ -24,7 +24,7 @@ class _ActivityDetailsBodyState extends State<ActivityDetailsBody> {
       child: ListView(
           children: <Widget>[
             Container(
-              color: Colors.black,
+              color: Colors.white,
               constraints: BoxConstraints(
                 maxHeight: widget.activity.image=="" ?0:300,
               ),

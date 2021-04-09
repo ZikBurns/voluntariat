@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminspecific/entities/modify_entity.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/commonfunctions.dart';
+import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:flutter_firestore/screens/entities/entity_present_activities.dart';
 import 'package:flutter_firestore/screens/entities/socialnetworks.dart';
 import 'package:flutter_firestore/services/activity_service.dart';

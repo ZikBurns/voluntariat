@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/utils/colorizer.dart';
-import 'file:///C:/Users/ZikBu/Desktop/TFG/FlutterProjects/flutter_firestore/lib/screens/activities/activity_list_tile.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
+import 'package:flutter_firestore/screens/activities/activity_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 

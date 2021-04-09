@@ -12,7 +12,7 @@ class CommonFunctions{
   static Container showMedia(String ytlink, String image) {
     if (ytlink == "" && image != "") {
       return Container(
-        color: Colors.black,
+        color: Colors.white,
         constraints: BoxConstraints(
           maxHeight: 300,
         ),
@@ -29,6 +29,11 @@ class CommonFunctions{
       );
     } else if (ytlink != "") {
       return Container(
+        color: Colors.white,
+        constraints: BoxConstraints(
+          maxHeight: 300,
+          maxWidth: 300
+        ),
         child: VideoScreen(ytlink),
       );
     } else

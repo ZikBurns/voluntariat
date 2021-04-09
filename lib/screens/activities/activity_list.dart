@@ -30,6 +30,7 @@ class _State extends State<ActivityList> {
     searchController.text = "";
     searchController.addListener(_onSearch);
     super.initState();
+
   }
 
   @override
@@ -80,6 +81,7 @@ class _State extends State<ActivityList> {
                     fillColor: Color(0xFFF5F6F9),
                     hintText: 'Busca',
                     hintStyle: TextStyle(color: Colors.blueGrey),
+                    //TODO: Hide x when nothing is written
                     suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
                       color: Colors.blueGrey,

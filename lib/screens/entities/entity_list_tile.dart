@@ -46,13 +46,7 @@ class _HomeListTileState extends State<EntityListTile> {
         child: ListTile(
           tileColor: Color(0xFFF5F6F9),
           title:Text(widget.entity.name+" ("+listActivities.length.toString()+")",style:TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold)),
-          subtitle: Container(
-              child: Row(
-                children: [
-                  Expanded(child: Text(widget.entity.desc,maxLines: 3, overflow: TextOverflow.ellipsis)),
-                ],
-              )
-          ),
+          subtitle: Text(widget.entity.desc,maxLines: 3, overflow: TextOverflow.ellipsis),
           onTap: (){
             passData(widget.entity);
           },

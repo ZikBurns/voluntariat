@@ -95,7 +95,7 @@ class ActivityService{
   }
 
   deleteActivity(Activity activity) async {
-    await FirebaseFirestore.instance.collection('Activities').doc(activity.id).delete();
+    await ref.doc(activity.id).delete();
   }
 
 }

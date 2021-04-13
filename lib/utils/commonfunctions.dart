@@ -141,6 +141,7 @@ class CommonFunctions{
         .toList();
     return activities;
   }
+
   static List<Activity> selectNewActivities(List<Activity> activities)
   {
     var now= new DateTime.now();

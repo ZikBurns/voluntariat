@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminspecific/aboutpage/about_page_admin.dart';
-import 'package:flutter_firestore/adminspecific/activities/form_new_activity.dart';
-import 'package:flutter_firestore/adminspecific/entities/new_entity.dart';
+import 'package:flutter_firestore/adminspecific/activities/activity_form.dart';
+import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
+import 'package:flutter_firestore/screens/main/about_page.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
@@ -89,7 +89,7 @@ class _HomePageState extends State<Home> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FormNewActivity()));
+                              builder: (context) => ModifyActivity(null)));
                     },
                     child: Icon(Icons.add, color: Colors.white, size: 30),
                     backgroundColor: Colors.green,
@@ -136,7 +136,7 @@ class _HomePageState extends State<Home> {
           child: FloatingActionButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewEntity()));
+                  MaterialPageRoute(builder: (context) => ModifyEntity(null)));
             },
             child: Icon(Icons.add, color: Colors.white, size: 30),
             backgroundColor: Colors.green,
@@ -554,7 +554,7 @@ class _HomePageState extends State<Home> {
               leading: new Icon(Icons.approval, color: Colors.black),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AboutPageAdmin()));
+                    MaterialPageRoute(builder: (context) => AboutPage()));
               },
             ),
             admin.isLoggedIn

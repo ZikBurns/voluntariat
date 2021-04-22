@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_firestore/adminspecific/activities/modify_details.dart';
+import 'package:flutter_firestore/adminspecific/activities/activity_form.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/activities/activity_details_body.dart';

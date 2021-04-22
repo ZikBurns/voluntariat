@@ -1,5 +1,6 @@
 
 import 'package:flutter_firestore/adminspecific/activities/activity_form_fields.dart';
+import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
@@ -7,12 +8,16 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FormNewActivity extends StatefulWidget {
+
+class ModifyActivity extends StatefulWidget {
+  Activity activity;
+  ModifyActivity(this.activity);
+
   @override
-  _FormNewActivityState createState() => _FormNewActivityState();
+  _ModifyActivityState createState() => _ModifyActivityState();
 }
 
-class _FormNewActivityState extends State<FormNewActivity> {
+class _ModifyActivityState extends State<ModifyActivity> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -25,10 +30,29 @@ class _FormNewActivityState extends State<FormNewActivity> {
           title: Text("Form"),
         ),
         body: FormBuilder(
-          initialValue: {
+          initialValue:
+          widget.activity==null?
+          {
             'releasedays':30,
             'visible': false,
             'prime': false,
+          }
+          :
+          {
+            'title': widget.activity.title,
+            'desc': widget.activity.desc,
+            'contact':widget.activity.contact,
+            'place':widget.activity.place,
+            'schedule':widget.activity.schedule,
+            'type':widget.activity.type,
+            'launchdate':widget.activity.launchDate,
+            'releasedays':widget.activity.releasedays,
+            'visibledate':widget.activity.visibleDate,
+            'startdate': widget.activity.startDate,
+            'finaldate': widget.activity.finalDate,
+            'visible': widget.activity.visible,
+            'prime': widget.activity.prime,
+            'mode':widget.activity.mode
           },
           key: _fbKey,
           child: Padding(
@@ -36,19 +60,20 @@ class _FormNewActivityState extends State<FormNewActivity> {
             child: SingleChildScrollView(
               child: Column(
                 children:[
-                  ActivityFormFields(),
+                  ActivityFormFields(activity:widget.activity),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        MaterialButton(
-                          child: Text("Crear"
-                              ""),
+                        ElevatedButton(
+                          child: Text("Enviar"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              ActivityService().addActivityMap(_fbKey.currentState.value);
+                              if(widget.activity==null)ActivityService().addActivityMap(_fbKey.currentState.value);
+                              else ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value, widget.activity.image);
                               Navigator.pop(context);
+                              if(widget.activity!=null) Navigator.pop(context);
                             }
                           },
                         ),
@@ -64,3 +89,4 @@ class _FormNewActivityState extends State<FormNewActivity> {
     );
   }
 }
+

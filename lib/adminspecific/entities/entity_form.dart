@@ -25,7 +25,19 @@ class _ModifyEntityState extends State<ModifyEntity> {
         ),
         body: FormBuilder(
           initialValue:
+          widget.entity==null?
           {
+            'name': "",
+            'desc': "",
+            'ytlink':"",
+            'twitter':"",
+            'facebook':"",
+            'instagram':"",
+            'website':"",
+            'maps':"",
+            'color': Colors.blueGrey
+          }
+          :{
             'name': widget.entity.name,
             'desc': widget.entity.desc,
             'ytlink':widget.entity.ytlink,
@@ -52,9 +64,10 @@ class _ModifyEntityState extends State<ModifyEntity> {
                           child: Text("Enviar"),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              EntityService().updateEntityMap(widget.entity.id,_fbKey.currentState.value, widget.entity.image);
+                              if(widget.entity==null) EntityService().addEntityMap(_fbKey.currentState.value);
+                              else EntityService().updateEntityMap(widget.entity.id,_fbKey.currentState.value, widget.entity.image);
                               Navigator.pop(context);
-                              Navigator.pop(context);
+                              if(widget.entity!=null) Navigator.pop(context);
                             }
                           },
                         ),

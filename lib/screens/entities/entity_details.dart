@@ -1,7 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/adminspecific/entities/modify_entity.dart';
+import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';

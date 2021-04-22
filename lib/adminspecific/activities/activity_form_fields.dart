@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
-import 'package:flutter_firestore/adminspecific/activities/form components.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +54,22 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
     }
   }
 
+  Align titleText(String text){
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(text,
+          style: TextStyle(fontSize: 20, color: Colors.black)),
+    );
+  }
+  Align titledesc(String text){
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(text,
+          style: TextStyle(fontSize: 14, color: Colors.black)),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     entitylist= Provider.of<List<Entity>>(context) ?? [];
@@ -66,7 +81,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            FormComponents.titleText('Titol'),
+            titleText('Titol'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -79,7 +94,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               ]),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Descripció'),
+            titleText('Descripció'),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
@@ -90,10 +105,10 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               }]),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Entitat/s'),
+            titleText('Entitat/s'),
             entitycheckbox,
             SizedBox(height: 20),
-            FormComponents.titleText('Tipologia'),
+            titleText('Tipologia'),
             FormBuilderDropdown(
               hint: Text('Selecciona un tipus'),
               name: 'type',
@@ -121,8 +136,8 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               ]),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Dates'),
-            FormComponents.titledesc('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent'),
+            titleText('Dates'),
+            titledesc('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent'),
             FormBuilderDateTimePicker(
               name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
@@ -176,14 +191,14 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               ]),
             ),
             SizedBox(height: 20),
-            FormComponents.titledesc('Dies que l\'activitat serà novetat'),
+            titledesc('Dies que l\'activitat serà novetat'),
             FormBuilderTouchSpin(
               name: 'releasedays',
               step: 1,
               textStyle: TextStyle(fontSize: 20, color: Colors.black),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Lloc/s'),
+            titleText('Lloc/s'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -195,7 +210,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
                 }
               ]),
             ),
-            FormComponents.titleText('Horari'),
+            titleText('Horari'),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -208,7 +223,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               ]),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Contacte'),
+            titleText('Contacte'),
             FormBuilderTextField(
               maxLines: 5,
               obscureText: false,
@@ -221,12 +236,12 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               ]),
             ),
             SizedBox(height: 20),
-            FormComponents.titleText('Visibilitat'),
+            titleText('Visibilitat'),
             FormBuilderCheckbox(
               name: 'visible',
               title: Text('Vols que l\'activitat sigui visible?'),
             ),
-            FormComponents.titleText('Destacada'),
+            titleText('Destacada'),
             FormBuilderCheckbox(
               name: 'prime',
               title: Text('Vols que l\'activitat sigui destacada?'),

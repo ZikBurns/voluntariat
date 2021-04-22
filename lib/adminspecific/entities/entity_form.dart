@@ -7,15 +7,10 @@ import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class ModifyEntity extends StatefulWidget {
+class ModifyEntity extends StatelessWidget {
   Entity entity;
   ModifyEntity(this.entity);
 
-  @override
-  _ModifyEntityState createState() => _ModifyEntityState();
-}
-
-class _ModifyEntityState extends State<ModifyEntity> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -27,7 +22,7 @@ class _ModifyEntityState extends State<ModifyEntity> {
         ),
         body: FormBuilder(
           initialValue:
-          widget.entity==null?
+          this.entity==null?
           {
             'name': "",
             'desc': "",
@@ -40,15 +35,15 @@ class _ModifyEntityState extends State<ModifyEntity> {
             'color': Colors.blueGrey
           }
           :{
-            'name': widget.entity.name,
-            'desc': widget.entity.desc,
-            'ytlink':widget.entity.ytlink,
-            'twitter':widget.entity.twitter,
-            'facebook':widget.entity.facebook,
-            'instagram':widget.entity.instagram,
-            'website':widget.entity.website,
-            'maps':widget.entity.maps,
-            'color':Color(widget.entity.color)
+            'name': this.entity.name,
+            'desc': this.entity.desc,
+            'ytlink':this.entity.ytlink,
+            'twitter':this.entity.twitter,
+            'facebook':this.entity.facebook,
+            'instagram':this.entity.instagram,
+            'website':this.entity.website,
+            'maps':this.entity.maps,
+            'color':Color(this.entity.color)
           },
           key: _fbKey,
           child: Padding(
@@ -66,10 +61,10 @@ class _ModifyEntityState extends State<ModifyEntity> {
                           child: Text(Strings.textEnviar),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              if(widget.entity==null) EntityService().addEntityMap(_fbKey.currentState.value);
-                              else EntityService().updateEntityMap(widget.entity.id,_fbKey.currentState.value, widget.entity.image);
+                              if(this.entity==null) EntityService().addEntityMap(_fbKey.currentState.value);
+                              else EntityService().updateEntityMap(this.entity.id,_fbKey.currentState.value, this.entity.image);
                               Navigator.pop(context);
-                              if(widget.entity!=null) Navigator.pop(context);
+                              if(this.entity!=null) Navigator.pop(context);
                             }
                           },
                         ),

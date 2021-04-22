@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FireFeedback extends StatefulWidget {
-  @override
-  _FireFeedbackState createState() => _FireFeedbackState();
-}
-
-class _FireFeedbackState extends State<FireFeedback> {
+class FireFeedback extends StatelessWidget{
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override

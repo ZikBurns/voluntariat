@@ -8,15 +8,10 @@ import 'package:flutter_firestore/screens/activities/activity_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/admin.dart' as admin;
 
-class EntityPresentActivities extends StatefulWidget {
+class EntityPresentActivities extends StatelessWidget {
   Entity entity;
   EntityPresentActivities(this.entity);
 
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<EntityPresentActivities> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +25,7 @@ class _State extends State<EntityPresentActivities> {
     for(var activity in listActivities){
       List<String> entitiesinactivity=CommonFunctions.iDsToNames(activity.entities,entitylist);
       for(var entity in entitiesinactivity) {
-        if (entity == widget.entity.name) {
+        if (entity == this.entity.name) {
           _resultsList.add(activity);
         }
       }

@@ -4,23 +4,18 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/entities/entity_list_tile.dart';
 import 'package:provider/provider.dart';
 
-class PresentEntities extends StatefulWidget {
+class PresentEntities extends StatelessWidget {
   @override
   Activity activity;
   PresentEntities(this.activity);
-  _PresentEntitiesState createState() => _PresentEntitiesState();
-}
 
-class _PresentEntitiesState extends State<PresentEntities> {
   List<Entity> presentEntities(List<Entity> entities) {
     List<Entity> newlist=[];
     if ((entities != null) && (entities.length > 0)) {
-      String text = "";
       for (var i = 0; i < entities.length; i++) {
-        for (var j = 0; j < widget.activity.entities.length; j++) {
-          if (entities[i].id == widget.activity.entities[j])
+        for (var j = 0; j < this.activity.entities.length; j++) {
+          if (entities[i].id == this.activity.entities[j])
             newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink,entities[i].twitter,entities[i].facebook,entities[i].instagram,entities[i].website,entities[i].maps,entities[i].color));
-            //text = text + entities[i].name + "\n";
         }
       }
       return newlist;

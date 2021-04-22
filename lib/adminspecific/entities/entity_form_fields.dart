@@ -4,12 +4,7 @@ import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 
-class EntityFormFields extends StatefulWidget {
-  @override
-  _ModifyEntitiesElementsState createState() => _ModifyEntitiesElementsState();
-}
-
-class _ModifyEntitiesElementsState extends State<EntityFormFields> {
+class EntityFormFields extends StatelessWidget {
 
   Align titleText(String text){
     return Align(

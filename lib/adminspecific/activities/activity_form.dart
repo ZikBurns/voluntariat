@@ -10,15 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class ModifyActivity extends StatefulWidget {
+class ModifyActivity extends StatelessWidget {
   Activity activity;
   ModifyActivity(this.activity);
 
-  @override
-  _ModifyActivityState createState() => _ModifyActivityState();
-}
-
-class _ModifyActivityState extends State<ModifyActivity> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -33,7 +28,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
         ),
         body: FormBuilder(
           initialValue:
-          widget.activity==null?
+          this.activity==null?
           {
             'releasedays':30,
             'visible': false,
@@ -41,20 +36,20 @@ class _ModifyActivityState extends State<ModifyActivity> {
           }
           :
           {
-            'title': widget.activity.title,
-            'desc': widget.activity.desc,
-            'contact':widget.activity.contact,
-            'place':widget.activity.place,
-            'schedule':widget.activity.schedule,
-            'type':widget.activity.type,
-            'launchdate':widget.activity.launchDate,
-            'releasedays':widget.activity.releasedays,
-            'visibledate':widget.activity.visibleDate,
-            'startdate': widget.activity.startDate,
-            'finaldate': widget.activity.finalDate,
-            'visible': widget.activity.visible,
-            'prime': widget.activity.prime,
-            'mode':widget.activity.mode
+            'title': this.activity.title,
+            'desc': this.activity.desc,
+            'contact':this.activity.contact,
+            'place':this.activity.place,
+            'schedule':this.activity.schedule,
+            'type':this.activity.type,
+            'launchdate':this.activity.launchDate,
+            'releasedays':this.activity.releasedays,
+            'visibledate':this.activity.visibleDate,
+            'startdate': this.activity.startDate,
+            'finaldate': this.activity.finalDate,
+            'visible': this.activity.visible,
+            'prime': this.activity.prime,
+            'mode':this.activity.mode
           },
           key: _fbKey,
           child: Padding(
@@ -62,7 +57,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
             child: SingleChildScrollView(
               child: Column(
                 children:[
-                  ActivityFormFields(activity:widget.activity),
+                  ActivityFormFields(activity:this.activity),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
@@ -72,10 +67,10 @@ class _ModifyActivityState extends State<ModifyActivity> {
                           child: Text(Strings.textEnviar),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
-                              if(widget.activity==null)ActivityService().addActivityMap(_fbKey.currentState.value);
-                              else ActivityService().updateActivityMap(widget.activity.id,_fbKey.currentState.value, widget.activity.image);
+                              if(this.activity==null)ActivityService().addActivityMap(_fbKey.currentState.value);
+                              else ActivityService().updateActivityMap(this.activity.id,_fbKey.currentState.value, this.activity.image);
                               Navigator.pop(context);
-                              if(widget.activity!=null) Navigator.pop(context);
+                              if(this.activity!=null) Navigator.pop(context);
                             }
                           },
                         ),

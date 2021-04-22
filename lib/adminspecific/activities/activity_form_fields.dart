@@ -7,23 +7,19 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_firestore/utils/strings.dart';
 
-class ActivityFormFields extends StatefulWidget {
+class ActivityFormFields extends StatelessWidget {
   Activity activity;
   ActivityFormFields({this.activity});
 
-  @override
-  _ActivityFormFieldsState createState() => _ActivityFormFieldsState();
-}
 
-class _ActivityFormFieldsState extends State<ActivityFormFields> {
   List<Entity> entitylist;
 
   FormBuilderCheckboxGroup builderCheckbox(){
 
     final List<String> namelist = CommonFunctions.entitiesToNames(entitylist);
     namelist.sort();
-    if(widget.activity!=null){
-      List<String> initialcheckedentities=CommonFunctions.iDsToNames(widget.activity.entities,entitylist);
+    if(this.activity!=null){
+      List<String> initialcheckedentities=CommonFunctions.iDsToNames(this.activity.entities,entitylist);
       return FormBuilderCheckboxGroup(
         initialValue: initialcheckedentities,
         name: 'entities',

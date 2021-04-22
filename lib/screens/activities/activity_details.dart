@@ -9,6 +9,7 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/activities/activity_details_body.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -80,17 +81,17 @@ class _DetailsPageState extends State<ActivityDetails> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Vols esborrar la imatge de l'activitat?"),
-            content: Text("Aquesta acció serà irreversible"),
+            title: Text(Strings.activityImageErase),
+            content: Text(Strings.activityImageEraseWarn),
             actions: [
               TextButton(
-                child: Text("Cancelar"),
+                child: Text(Strings.textCancelar),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
               TextButton(
-                child: Text("Esborrar"),
+                child: Text(Strings.textEsborrar),
                 onPressed: () {
                   deleteImage();
                   Navigator.of(context, rootNavigator: true).pop();
@@ -172,19 +173,19 @@ class _DetailsPageState extends State<ActivityDetails> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Estas segur?"),
+                                title: Text(Strings.activityEraseWarn1),
                                 content: Text(
-                                    "Aquesta operació podria afectar altres dades de l'aplicacio"),
+                                    Strings.activityEraseWarn2),
                                 actions: [
                                   TextButton(
-                                    child: Text("Cancelar"),
+                                    child: Text(Strings.textCancelar),
                                     onPressed: () {
                                       Navigator.of(context, rootNavigator: true)
                                           .pop();
                                     },
                                   ),
                                   TextButton(
-                                    child: Text("Esborrar"),
+                                    child: Text(Strings.textEsborrar),
                                     onPressed: () {
                                       ActivityService()
                                           .deleteActivity(widget.activity);

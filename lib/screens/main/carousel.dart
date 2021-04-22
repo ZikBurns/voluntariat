@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/screens/activities/activity_details.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class _CarouselState extends State<Carousel> {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(padding: EdgeInsets.all(8.0),
-              child: Text("Activitats Destacades:",
+              child: Text(Strings.carouselDestacatsTitol,
                 style: TextStyle(
                   fontSize:20,
                   fontWeight: FontWeight.bold
@@ -92,12 +93,6 @@ class _CarouselState extends State<Carousel> {
                       margin: EdgeInsets.all(5.0),
                       decoration: switchIfNoImage(activity),
                       alignment: Alignment.center,
-                      /*child: Image.network(
-                        'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-                        height: 250,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),*/
                     ),
                     Container(
                         alignment: Alignment.center,
@@ -111,7 +106,7 @@ class _CarouselState extends State<Carousel> {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(padding: EdgeInsets.all(8.0),
-              child: Text("Novetats:",
+              child: Text(Strings.carouselNovetatsTitol,
                 style: TextStyle(
                     fontSize:20,
                     fontWeight: FontWeight.bold

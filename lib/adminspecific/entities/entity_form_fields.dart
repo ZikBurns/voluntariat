@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 
@@ -10,6 +11,20 @@ class EntityFormFields extends StatefulWidget {
 
 class _ModifyEntitiesElementsState extends State<EntityFormFields> {
 
+  Align titleText(String text){
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(text,
+          style: TextStyle(fontSize: 20, color: Colors.black)),
+    );
+  }
+  Align titledesc(String text){
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(text,
+          style: TextStyle(fontSize: 14, color: Colors.black)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +34,7 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Nom',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            titleText(Strings.formEntityNom),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -34,19 +42,12 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
               validator: FormBuilderValidators.compose([
                     (val){
-                  if(val=="") return "L'entitat ha de tenir un nom.";
+                  if(val=="") return Strings.formEntityNomWarn;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Descripció',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            titleText(Strings.formEntityDesc),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
@@ -57,17 +58,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               }]),
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Video de YouTube',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            titleText(Strings.formEntityYT),
             FormBuilderTextField(
               decoration: InputDecoration(
-                hintText: "Introdueix el link al video o deixa el camp en blanc"
+                hintText: Strings.formEntitySocialHint
               ),
               maxLines: 2,
               obscureText: false,
@@ -75,17 +69,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Pàgina de twitter',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            titleText(Strings.formEntityTwitter),
             FormBuilderTextField(
               decoration: InputDecoration(
-                  hintText: "Introdueix el link o deixa el camp en blanc"
+                  hintText: Strings.formEntitySocialHint
               ),
               maxLines: 2,
               obscureText: false,
@@ -93,17 +80,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Pàgina de facebook',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
-            //* ----------------------------------------------------
-            //* TEXT INPUT
-            //* ----------------------------------------------------
+            titleText(Strings.formEntityFacebook),
             FormBuilderTextField(
               decoration: InputDecoration(
-                  hintText: "Introdueix el link o deixa el camp en blanc"
+                  hintText: Strings.formEntitySocialHint
               ),
               maxLines: 1,
               obscureText: false,
@@ -111,14 +91,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Pàgina de Instagram',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            titleText(Strings.formEntityInstagram),
             FormBuilderTextField(
               decoration: InputDecoration(
-                  hintText: "Introdueix el link o deixa el camp en blanc"
+                  hintText: Strings.formEntitySocialHint
               ),
               maxLines: 1,
               obscureText: false,
@@ -126,14 +102,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Pàgina web',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            titleText(Strings.formEntityWeb),
             FormBuilderTextField(
               decoration: InputDecoration(
-                  hintText: "Introdueix el link o deixa el camp en blanc"
+                  hintText: Strings.formEntitySocialHint
               ),
               maxLines: 1,
               obscureText: false,
@@ -141,14 +113,10 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
               readOnly: false,
             ),
             SizedBox(height: 20),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('Direcció de Google Maps',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ),
+            titleText(Strings.formEntityMaps),
             FormBuilderTextField(
               decoration: InputDecoration(
-                  hintText: "Introdueix el link o deixa el camp en blanc"
+                  hintText: Strings.formEntitySocialHint
               ),
               maxLines: 1,
               obscureText: false,
@@ -158,7 +126,7 @@ class _ModifyEntitiesElementsState extends State<EntityFormFields> {
             FormBuilderColorPickerField(
               name: 'color',
               colorPickerType: ColorPickerType.MaterialPicker,
-              decoration: InputDecoration(labelText: 'Escolleix el color'),
+              decoration: InputDecoration(labelText: Strings.formEntityColorHint),
             ),
           ],
         ),

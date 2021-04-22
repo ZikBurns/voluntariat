@@ -5,6 +5,7 @@ import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_firestore/data/admin.dart'as admin;
 import 'package:flutter_firestore/utils/colorizer.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 
 class ActivityListTile extends StatefulWidget {
   final Activity activity;
@@ -28,7 +29,7 @@ class _HomeListTileState extends State<ActivityListTile> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             IconButton(
-              tooltip: 'Destacat',
+              tooltip: Strings.activityDestacat,
               color: Colorizer.typecolor(widget.activity.type),
               highlightColor: Colorizer.typecolor(widget.activity.type),
               onPressed: () {
@@ -36,9 +37,9 @@ class _HomeListTileState extends State<ActivityListTile> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Es necessiten voluntaris urgentment:"),
+                        title: Text(Strings.activityUrgent),
                         content:
-                        Text("Les activitats destacades tenen un megàfon."),
+                        Text(Strings.activityUrgentWarn),
                         actions: <Widget>[
                           TextButton(
                             child: Text('D\'acord'),
@@ -64,13 +65,13 @@ class _HomeListTileState extends State<ActivityListTile> {
   }
 
   Icon modeicon(String mode){
-    if (mode=="Presencial"){
+    if (mode==Strings.modePresencial){
       return new Icon(
         Icons.accessibility_new_rounded,
         size: 20,
       );
     }
-    else if(mode=="Virtual"){
+    else if(mode==Strings.modeVirtual){
       return new Icon(
         Icons.desktop_windows,
         size: 20,
@@ -113,7 +114,7 @@ class _HomeListTileState extends State<ActivityListTile> {
                 Icon(Icons.visibility),
                 SizedBox(width: 20,),
                 Expanded(
-                  child: Text('L\'activitat ara es visible per tothom'),
+                  child: Text(Strings.activityWarnVisible),
                 )
               ],
             ),
@@ -129,7 +130,7 @@ class _HomeListTileState extends State<ActivityListTile> {
                 Icon(Icons.visibility_off),
                 SizedBox(width: 20,),
                 Expanded(
-                  child: Text('L\'activitat ja no es visible'),
+                  child: Text(Strings.activityWarnNoVisible),
                 )
               ],
             ),
@@ -199,7 +200,7 @@ class _HomeListTileState extends State<ActivityListTile> {
                           size: 22,
                         ),
                       ),
-                      TextSpan(text:"Destacat: ",
+                      TextSpan(text:Strings.activityDestacat+": ",
                         style: TextStyle(fontSize: 16.0,color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ],

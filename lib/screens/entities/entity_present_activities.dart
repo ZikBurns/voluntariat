@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/screens/activities/activity_list_tile.dart';
@@ -37,7 +38,7 @@ class _State extends State<EntityPresentActivities> {
     listActivities=_resultsList;
     if(listActivities.isEmpty){
       return ListTile(
-        title: Text("Aquesta entitat encara no té activitats programades."),
+        title: Text(Strings.entityNoActivities),
       );
     }
     else{
@@ -48,7 +49,7 @@ class _State extends State<EntityPresentActivities> {
           itemBuilder: (context,index){
             if(index==0){
               return ListTile(
-                title: Text("Activitats de l'entitat:"),
+                title: Text(Strings.entityActivities),
               );
             }
             else{

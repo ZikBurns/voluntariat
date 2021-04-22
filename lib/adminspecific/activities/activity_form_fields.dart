@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
@@ -7,7 +5,7 @@ import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_firestore/utils/strings.dart';
 
 class ActivityFormFields extends StatefulWidget {
   Activity activity;
@@ -33,7 +31,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
         namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
         validator: FormBuilderValidators.compose([
               (val){
-            if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
+            if((val==null)|| (val.length==0)) return Strings.formActivityWarnUnaEntitat;
           }
         ]),
         valueTransformer: (val)=> val==null ? val :List<dynamic>.from(CommonFunctions.namestoIDs(List<String>.from(val),entitylist)),
@@ -46,7 +44,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
         namelist.map((e) => FormBuilderFieldOption(value: e)).toList(),
         validator: FormBuilderValidators.compose([
               (val){
-            if((val==null)|| (val.length==0)) return "L'activitat ha de tenir al menys una entitat.";
+            if((val==null)|| (val.length==0)) return Strings.formActivityWarnUnaEntitat;
           }
         ]),
         valueTransformer: (val)=> val==null ? val : List<dynamic>.from(CommonFunctions.namestoIDs(List<String>.from(val),entitylist)),
@@ -81,7 +79,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            titleText('Titol'),
+            titleText(Strings.formActivityTextTitol),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -89,61 +87,61 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               readOnly: false,
               validator: FormBuilderValidators.compose([
                     (val){
-                  if(val=="") return "L'activitat ha de tenir un titol.";
+                  if(val=="") return Strings.formActivityTextTitolWarn;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            titleText('Descripció'),
+            titleText(Strings.activityDesc),
             FormBuilderTextField(
               maxLines: 10,
               obscureText: false,
               name: 'desc',
               readOnly: false,
               validator: FormBuilderValidators.compose([(val){
-                if(val=="") return "L'activitat ha de tenir una descripció.";
+                if(val=="") return Strings.formActivityTextDescWarn;
               }]),
             ),
             SizedBox(height: 20),
-            titleText('Entitat/s'),
+            titleText(Strings.formActivityTextEntitats),
             entitycheckbox,
             SizedBox(height: 20),
-            titleText('Tipologia'),
+            titleText(Strings.formActivityTextTipologia),
             FormBuilderDropdown(
-              hint: Text('Selecciona un tipus'),
+              hint: Text(Strings.formActivityTextSelType),
               name: 'type',
-              items: ['Serveis Sociosanitaris','Atenció i suport a les families','Educació i lleure','Esport','Voluntariat Internacional','Atenció a les necessitats bàsiques','Defensa del mediambient','Joventut','Gent Gran','Protecció dels animals','Cultura']
+              items: [Strings.typesss,Strings.typeFamilia,Strings.typeEducacio,Strings.typeEsport,Strings.typeInter,Strings.typeBasic,Strings.typeMedi,Strings.typeJove,Strings.typeGran,Strings.typeAnimal,Strings.typeCult]
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
               validator: FormBuilderValidators.compose([
                     (val){
-                  if((val==null)|| (val=="")) return "L'activitat ha de tenir un tipus.";
+                  if((val==null)|| (val=="")) return Strings.formActivityWarnTipus;
                 }
               ]),
             ),
             FormBuilderDropdown(
-              hint: Text('Selecciona si es presencial, virtual o semipresencial'),
+              hint: Text(Strings.formActivitySelectType),
               name: 'mode',
-              items: ["Presencial","Virtual","Semipresencial"]
+              items: [Strings.modePresencial,Strings.modeVirtual,Strings.modeSemi]
                   .map((type) =>
                   DropdownMenuItem(value: type, child: Text("$type")))
                   .toList(),
               validator: FormBuilderValidators.compose([
                     (val){
-                  if((val==null)|| (val=="")) return "L'activitat ha de ser presencial, virtual o semipresencial.";
+                  if((val==null)|| (val=="")) return Strings.formActivityWarnMode;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            titleText('Dates'),
-            titledesc('Si hi ha una diferencia de més de 10 anys entre la data de començament i la de final, l\'activitat serà permanent'),
+            titleText(Strings.activityDates),
+            titledesc(Strings.formActivityTextDatesExplicacio),
             FormBuilderDateTimePicker(
               name: 'startdate',
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Data d\'inici',
+                labelText: Strings.activityDataInici,
               ),
               validator: FormBuilderValidators.compose([
                     (val){
@@ -156,7 +154,7 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Data final',
+                labelText: Strings.activityDataFinal,
               ),
               validator: FormBuilderValidators.compose([
                     (val){
@@ -169,11 +167,11 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Data fins la que l\'activitat serà visible',
+                labelText: Strings.formActivityTextDataVisible,
               ),
               validator: FormBuilderValidators.compose([
                     (val){
-                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de caducitat";
+                  if((val==null)|| (val=="")) return Strings.formActivityTextDataVisibleWarn;
                 }
               ]),
             ),
@@ -182,23 +180,23 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               format: DateFormat('dd-MM-yyyy'),
               inputType: InputType.date,
               decoration: InputDecoration(
-                labelText: 'Data de llançament',
+                labelText: Strings.formActivityTextDataLaunch,
               ),
               validator: FormBuilderValidators.compose([
                     (val){
-                  if((val==null)|| (val=="")) return "L'activitat ha de tenir una data de llantçament";
+                  if((val==null)|| (val=="")) return Strings.formActivityTextDataLaunchWarn;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            titledesc('Dies que l\'activitat serà novetat'),
+            titledesc(Strings.formActivityTextDiesLaunch),
             FormBuilderTouchSpin(
               name: 'releasedays',
               step: 1,
               textStyle: TextStyle(fontSize: 20, color: Colors.black),
             ),
             SizedBox(height: 20),
-            titleText('Lloc/s'),
+            titleText(Strings.activityLloc),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -206,11 +204,11 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               readOnly: false,
               validator: FormBuilderValidators.compose([
                     (val){
-                  if(val=="") return "L'activitat ha de tenir un lloc.";
+                  if(val=="") return Strings.formActivityTextLlocWarn;
                 }
               ]),
             ),
-            titleText('Horari'),
+            titleText(Strings.activityHorari),
             FormBuilderTextField(
               maxLines: 1,
               obscureText: false,
@@ -218,12 +216,12 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               readOnly: false,
               validator: FormBuilderValidators.compose([
                     (val){
-                  if(val=="") return "L'activitat ha de tenir un horari.";
+                  if(val=="") return Strings.formActivityTextHorariWarn;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            titleText('Contacte'),
+            titleText(Strings.activityContacte),
             FormBuilderTextField(
               maxLines: 5,
               obscureText: false,
@@ -231,20 +229,20 @@ class _ActivityFormFieldsState extends State<ActivityFormFields> {
               readOnly: false,
               validator: FormBuilderValidators.compose([
                     (val){
-                  if(val=="") return "L'activitat ha de tenir un contacte.";
+                  if(val=="") return Strings.formActivityTextContacteWarn;
                 }
               ]),
             ),
             SizedBox(height: 20),
-            titleText('Visibilitat'),
+            titleText(Strings.formActivityTextVisibilitat),
             FormBuilderCheckbox(
               name: 'visible',
-              title: Text('Vols que l\'activitat sigui visible?'),
+              title: Text(Strings.formActivityTextVisibilitatWarn),
             ),
-            titleText('Destacada'),
+            titleText(Strings.activityDestacat),
             FormBuilderCheckbox(
               name: 'prime',
-              title: Text('Vols que l\'activitat sigui destacada?'),
+              title: Text(Strings.formActivityTextDestacatWarn),
             ),
           ],
         ),

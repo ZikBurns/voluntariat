@@ -4,6 +4,7 @@ import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,8 @@ class _ModifyActivityState extends State<ModifyActivity> {
       value: EntityService().entities,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Form"),
+          title: Text("Formulari"),
+          backgroundColor: Colors.green,
         ),
         body: FormBuilder(
           initialValue:
@@ -67,7 +69,7 @@ class _ModifyActivityState extends State<ModifyActivity> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         ElevatedButton(
-                          child: Text("Enviar"),
+                          child: Text(Strings.textEnviar),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               if(widget.activity==null)ActivityService().addActivityMap(_fbKey.currentState.value);

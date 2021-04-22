@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:flutter_firestore/screens/entities/entity_present_activities.dart';
 import 'package:flutter_firestore/screens/entities/socialnetworks.dart';
@@ -86,17 +87,17 @@ class _AdminEntityDetailsState
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Vols esborrar la imatge de l'activitat?"),
-            content: Text("Aquesta acció serà irreversible"),
+            title: Text(Strings.entityImageErase),
+            content: Text(Strings.entityImageEraseWarn),
             actions: [
               TextButton(
-                child: Text("Cancelar"),
+                child: Text(Strings.textCancelar),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
               TextButton(
-                child: Text("Esborrar"),
+                child: Text(Strings.textEsborrar),
                 onPressed: () {
                   deleteImage();
                   Navigator.of(context, rootNavigator: true).pop();
@@ -126,18 +127,18 @@ class _AdminEntityDetailsState
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: Text("Estas segur?"),
+                  title: Text(Strings.entityEraseWarn1),
                   content: Text(
-                      "Aquesta operació podria afectar altres dades de l'aplicacio"),
+                      Strings.entityEraseWarn2),
                   actions: [
                     TextButton(
-                      child: Text("Cancelar"),
+                      child: Text(Strings.textCancelar),
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pop();
                       },
                     ),
                     TextButton(
-                      child: Text("Esborrar"),
+                      child: Text(Strings.textEsborrar),
                       onPressed: () {
                         EntityService().deleteEntity(widget.entity);
                         Navigator.of(context, rootNavigator: true).pop();
@@ -152,10 +153,8 @@ class _AdminEntityDetailsState
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: Text(
-                      "No es pot esborrar l'entitat ja que té activitats assignades"),
-                  content: Text(
-                      "Desassigna les activitats d'aquesta entitat o esborra les activitats de l'entitat"),
+                  title: Text(Strings.entityEraseWarn3),
+                  content: Text(Strings.entityEraseWarn4),
                   actions: [
                     TextButton(
                       child: Text("Acceptar"),

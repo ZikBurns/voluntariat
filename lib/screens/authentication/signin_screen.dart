@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/screens/main/home.dart';
 import 'package:flutter_firestore/services/signin_service.dart';
 import 'package:flutter_firestore/data/admin.dart'as admin;
+import 'package:flutter_firestore/utils/strings.dart';
+
 class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -24,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in Admin'),
+        title: Text(Strings.signTitle),
       ),
       body: Center(
         child: Container(
@@ -35,8 +37,8 @@ class _SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 SizedBox(height: 20.0),
                 TextFormField(
-                  decoration: new InputDecoration(hintText: 'email'),
-                  validator: (val) => val.isEmpty ? 'Introdueix un email' : null,
+                  decoration: new InputDecoration(hintText: Strings.signHintCorreu),
+                  validator: (val) => val.isEmpty ? Strings.signEnterCorreu : null,
                   onChanged: (val) {
                     setState(() => email = val);
                   },
@@ -44,10 +46,10 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 20.0),
                 TextFormField(
                   obscureText: true,
-                  decoration: new InputDecoration(hintText: 'contrasenya'),
+                  decoration: new InputDecoration(hintText: Strings.signHintContra),
                   validator: (val) =>
                   val.length < 6
-                      ? 'La contasenya ha de tenir mes de 6 caracters'
+                      ? Strings.signEnterContra
                       : null,
                   onChanged: (val) {
                     setState(() => password = val);
@@ -57,7 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ElevatedButton(
                     style:ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.purple)) ,
                     child: Text(
-                      'Sign In',
+                      Strings.textEntrar,
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
@@ -68,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (result == null) {
                           setState(() {
                             loading = false;
-                            error = 'No s\' ha pogut iniciar sessio';
+                            error = Strings.signError;
                           });
                         }
                         else{

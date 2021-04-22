@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminspecific/entities/entity_form_fields.dart';
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ModifyEntity extends StatefulWidget {
@@ -21,7 +22,8 @@ class _ModifyEntityState extends State<ModifyEntity> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Form"),
+          title: Text("Formulari"),
+          backgroundColor: Colors.green,
         ),
         body: FormBuilder(
           initialValue:
@@ -61,7 +63,7 @@ class _ModifyEntityState extends State<ModifyEntity> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
-                          child: Text("Enviar"),
+                          child: Text(Strings.textEnviar),
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               if(widget.entity==null) EntityService().addEntityMap(_fbKey.currentState.value);

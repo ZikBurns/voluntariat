@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Colorizer{
@@ -7,37 +8,37 @@ class Colorizer{
 
   static Color typecolor(String type){
     switch(type) {
-      case 'Serveis Sociosanitaris': {
+      case Strings.typesss: {
         return Colors.red;
       }break;
-      case 'Atenció i suport a les families': {
+      case Strings.typeFamilia: {
         return Colors.deepPurpleAccent;
       }break;
-      case 'Educació i lleure': {
+      case Strings.typeEducacio: {
         return Colors.lime;
       }break;
-      case 'Esport': {
+      case Strings.typeEsport: {
         return Colors.cyanAccent;
       }break;
-      case 'Atenció a les necessitats bàsiques': {
+      case Strings.typeBasic: {
         return Colors.pinkAccent;
       }break;
-      case 'Voluntariat Internacional': {
+      case Strings.typeInter: {
         return Colors.greenAccent;
       }break;
-      case 'Defensa del mediambient': {
+      case Strings.typeMedi: {
         return Colors.lightGreenAccent;
       }break;
-      case 'Joventut': {
+      case Strings.typeJove: {
         return Colors.deepOrange;
       }break;
-      case 'Gent Gran': {
+      case Strings.typeGran: {
       return Colors.indigo;
     }break;
-      case 'Protecció dels animals': {
+      case Strings.typeAnimal: {
         return Colors.brown;
       }break;
-      case 'Cultura': {
+      case Strings.typeCult: {
         return Colors.yellow;
       }break;
       default: {
@@ -48,37 +49,37 @@ class Colorizer{
 
   static Icon showIcon(String type){
     switch(type) {
-      case 'Serveis Sociosanitaris': {
+      case Strings.typesss: {
         return Icon(Icons.local_hospital, color: Colors.black);
       }break;
-      case 'Atenció i suport a les families': {
+      case Strings.typeFamilia: {
         return Icon(Icons.family_restroom, color: Colors.black);
       }break;
-      case 'Educació i lleure': {
+      case Strings.typeEducacio: {
         return Icon(Icons.local_library, color: Colors.black);
       }break;
-      case 'Esport': {
+      case Strings.typeEsport: {
         return Icon(Icons.sports_volleyball, color: Colors.black);
       }break;
-      case 'Voluntariat Internacional': {
+      case Strings.typeInter: {
         return Icon(Icons.public, color: Colors.black);
       }break;
-      case 'Atenció a les necessitats bàsiques': {
+      case Strings.typeBasic: {
         Icon(Icons.accessibility_new, color: Colors.black);
       }break;
-      case 'Defensa del mediambient': {
+      case Strings.typeMedi: {
         return Icon(Icons.nature, color: Colors.black);
       }break;
-      case 'Joventut': {
+      case Strings.typeJove: {
         return Icon(Icons.face, color: Colors.black);
       }break;
-      case 'Gent Gran': {
+      case Strings.typeGran: {
         return Icon(Icons.elderly, color: Colors.black);
       }break;
-      case 'Protecció dels animals': {
+      case Strings.typeAnimal: {
         return Icon(Icons.pets, color: Colors.black);
       }break;
-      case 'Cultura': {
+      case Strings.typeCult: {
         return Icon(Icons.theater_comedy, color: Colors.black);
       }break;
       default: {
@@ -88,37 +89,37 @@ class Colorizer{
   }
   static Icon showIconPrime(String type){
     switch(type) {
-      case 'Serveis Sociosanitaris': {
+      case Strings.typesss: {
         return Icon(Icons.local_hospital, color: typecolor(type));
       }break;
-      case 'Atenció i suport a les families': {
+      case Strings.typeFamilia: {
         return Icon(Icons.family_restroom, color: typecolor(type));
       }break;
-      case 'Educació i lleure': {
+      case Strings.typeEducacio: {
         return Icon(Icons.local_library, color: typecolor(type));
       }break;
-      case 'Esport': {
+      case Strings.typeEsport: {
         return Icon(Icons.sports_volleyball, color: typecolor(type));
       }break;
-      case 'Voluntariat Internacional': {
+      case Strings.typeInter: {
         return Icon(Icons.public, color: typecolor(type));
       }break;
-      case 'Atenció a les necessitats bàsiques': {
+      case Strings.typeBasic: {
         Icon(Icons.accessibility_new, color: typecolor(type));
       }break;
-      case 'Defensa del mediambient': {
+      case Strings.typeMedi: {
         return Icon(Icons.nature, color: typecolor(type));
       }break;
-      case 'Joventut': {
+      case Strings.typeJove: {
         return Icon(Icons.face, color: typecolor(type));
       }break;
-      case 'Gent Gran': {
+      case Strings.typeGran: {
         return Icon(Icons.elderly, color: typecolor(type));
       }break;
-      case 'Protecció dels animals': {
+      case Strings.typeAnimal: {
         return Icon(Icons.pets, color: typecolor(type));
       }break;
-      case 'Cultura': {
+      case Strings.typeCult: {
         return Icon(Icons.theater_comedy, color: typecolor(type));
       }break;
       default: {
@@ -174,77 +175,77 @@ class Colorizer{
   static CircleAvatar showAvatar(Activity act){
     if(act.image==""){
       switch(act.type) {
-        case 'Serveis Sociosanitaris': {
+        case Strings.typesss: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.red,
             child: Icon(Icons.local_hospital, color: Colors.black),
           );
         }break;
-        case 'Atenció i suport a les families': {
+        case Strings.typeFamilia: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.deepPurpleAccent,
             child: Icon(Icons.family_restroom, color: Colors.black),
           );
         }break;
-        case 'Educació i lleure': {
+        case Strings.typeEducacio: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.lime,
             child: Icon(Icons.local_library, color: Colors.black),
           );
         }break;
-        case 'Esport': {
+        case Strings.typeEsport: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.cyanAccent,
             child: Icon(Icons.sports_volleyball, color: Colors.black),
           );
         }break;
-        case 'Voluntariat Internacional': {
+        case Strings.typeInter: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.greenAccent,
             child: Icon(Icons.public, color: Colors.black),
           );
         }break;
-        case 'Atenció a les necessitats bàsiques': {
+        case Strings.typeBasic: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.pinkAccent,
             child: Icon(Icons.accessibility_new, color: Colors.black),
           );
         }break;
-        case 'Defensa del mediambient': {
+        case Strings.typeMedi: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.lightGreenAccent,
             child: Icon(Icons.nature, color: Colors.black),
           );
         }break;
-        case 'Joventut': {
+        case Strings.typeJove: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.deepOrange,
             child: Icon(Icons.face, color: Colors.black),
           );
         }break;
-        case 'Gent Gran': {
+        case Strings.typeGran: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.indigo,
             child: Icon(Icons.elderly, color: Colors.black),
           );
         }break;
-        case 'Protecció dels animals': {
+        case Strings.typeAnimal: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.brown,
             child: Icon(Icons.pets, color: Colors.black),
           );
         }break;
-        case 'Cultura': {
+        case Strings.typeCult: {
           return CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.yellow,

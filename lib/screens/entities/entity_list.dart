@@ -3,6 +3,7 @@ import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/entities/entity_list_tile.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore/data/activity.dart';
 
@@ -65,7 +66,7 @@ class _EntitiesListState extends State<EntitiesList> {
                   ),
                   filled: true,
                   fillColor: Color(0xFFF5F6F9),
-                  hintText: 'Busca',
+                  hintText: Strings.textCerca,
                   hintStyle: TextStyle(color: Colors.blueGrey),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.clear),

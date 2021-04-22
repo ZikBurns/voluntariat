@@ -4,6 +4,7 @@ import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
 import 'package:flutter_firestore/screens/main/about_page.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/screens/entities/entity_list.dart';
 import 'package:flutter_firestore/screens/firefeedback.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -161,10 +163,10 @@ class _HomePageState extends State<Home> {
                     childButtons: [
                       UnicornButton(
                           hasLabel: true,
-                          labelText: "Totes les activitats",
+                          labelText: Strings.modeTot,
                           labelColor: Colors.black,
                           currentButton: FloatingActionButton(
-                            heroTag: "Totes les activitats",
+                            heroTag: Strings.modeTot,
                             backgroundColor: Colors.black,
                             mini: true,
                             child: Icon(Icons.all_inclusive_rounded),
@@ -176,46 +178,46 @@ class _HomePageState extends State<Home> {
                           )),
                       UnicornButton(
                           hasLabel: true,
-                          labelText: "Virtual",
+                          labelText: Strings.modeVirtual,
                           labelColor: Colors.black,
                           currentButton: FloatingActionButton(
-                            heroTag: "Només Virtual",
+                            heroTag: Strings.modeVirtual,
                             backgroundColor: Colors.black87,
                             mini: true,
                             child: Icon(Icons.desktop_windows),
                             onPressed: () {
                               _selectedface2face = 1;
-                              filtermode = "Virtual";
+                              filtermode = Strings.modeVirtual;
                               setState(() {});
                             },
                           )),
                       UnicornButton(
                           hasLabel: true,
-                          labelText: "Presencial",
+                          labelText: Strings.modePresencial,
                           labelColor: Colors.black,
                           currentButton: FloatingActionButton(
-                            heroTag: "Només Presencial",
+                            heroTag: Strings.modePresencialNomes,
                             backgroundColor: Colors.black87,
                             mini: true,
                             child: Icon(Icons.accessibility_new_rounded),
                             onPressed: () {
                               _selectedface2face = 2;
-                              filtermode = "Presencial";
+                              filtermode = Strings.modePresencial;
                               setState(() {});
                             },
                           )),
                       UnicornButton(
                           hasLabel: true,
-                          labelText: "Semipresencial",
+                          labelText: Strings.modeSemi,
                           labelColor: Colors.black,
                           currentButton: FloatingActionButton(
-                            heroTag: "Semipresencial",
+                            heroTag: Strings.modeSemi,
                             backgroundColor: Colors.black87,
                             mini: true,
                             child: Icon(Icons.shuffle),
                             onPressed: () {
                               _selectedface2face = 3;
-                              filtermode = "Semipresencial";
+                              filtermode = Strings.modeSemi;
                               setState(() {});
                             },
                           )),
@@ -235,7 +237,7 @@ class _HomePageState extends State<Home> {
                         },
                         backgroundColor: Colorizer.typecolor(filter),
                         icon: Colorizer.showIcon(filter),
-                        label: Text("Tipus",
+                        label: Text(Strings.type,
                             style: TextStyle(color: foregroundColor)),
                       ),
                     ),
@@ -287,7 +289,7 @@ class _HomePageState extends State<Home> {
                         color: Colors.white,
                       ),
                     ),
-                    title: new Text('Totes les activitats',
+                    title: new Text(Strings.modeTot,
                         style: TextStyle(color: Colors.white)),
                     onTap: () {
                       filter = "";
@@ -304,9 +306,9 @@ class _HomePageState extends State<Home> {
                           color: Colors.black,
                         ),
                       ),
-                      title: new Text('Serveis Sociosanitaris'),
+                      title: new Text(Strings.typesss),
                       onTap: () {
-                        filter = "Serveis Sociosanitaris";
+                        filter = Strings.typesss;
                         setState(() {});
                         Navigator.pop(context);
                       }),
@@ -316,9 +318,9 @@ class _HomePageState extends State<Home> {
                       backgroundColor: Colors.deepPurpleAccent,
                       child: Icon(Icons.family_restroom, color: Colors.black),
                     ),
-                    title: new Text('Atenció i suport a les families'),
+                    title: new Text(Strings.typeFamilia),
                     onTap: () {
-                      filter = "Atenció i suport a les families";
+                      filter = Strings.typeFamilia;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -332,9 +334,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Educació i lleure'),
+                    title: new Text(Strings.typeEducacio),
                     onTap: () {
-                      filter = "Educació i lleure";
+                      filter = Strings.typeEducacio;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -345,9 +347,9 @@ class _HomePageState extends State<Home> {
                       backgroundColor: Colors.cyanAccent,
                       child: Icon(Icons.sports_volleyball, color: Colors.black),
                     ),
-                    title: new Text('Esport'),
+                    title: new Text(Strings.typeEsport),
                     onTap: () {
-                      filter = "Esport";
+                      filter = Strings.typeEsport;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -361,9 +363,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Voluntariat Internacional'),
+                    title: new Text(Strings.typeInter),
                     onTap: () {
-                      filter = "Voluntariat Internacional";
+                      filter = Strings.typeInter;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -377,9 +379,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Atenció a les necessitats bàsiques'),
+                    title: new Text(Strings.typeBasic),
                     onTap: () {
-                      filter = "Atenció a les necessitats bàsiques";
+                      filter = Strings.typeBasic;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -393,9 +395,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Defensa del mediambient'),
+                    title: new Text(Strings.typeMedi),
                     onTap: () {
-                      filter = "Defensa del mediambient";
+                      filter = Strings.typeMedi;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -409,9 +411,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Joventut'),
+                    title: new Text(Strings.typeJove),
                     onTap: () {
-                      filter = "Joventut";
+                      filter = Strings.typeJove;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -425,9 +427,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Gent Gran'),
+                    title: new Text(Strings.typeGran),
                     onTap: () {
-                      filter = "Gent Gran";
+                      filter = Strings.typeGran;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -438,9 +440,9 @@ class _HomePageState extends State<Home> {
                       backgroundColor: Colors.brown,
                       child: Icon(Icons.pets, color: Colors.black),
                     ),
-                    title: new Text('Protecció dels animals'),
+                    title: new Text(Strings.typeAnimal),
                     onTap: () {
-                      filter = "Protecció dels animals";
+                      filter = Strings.typeAnimal;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -454,9 +456,9 @@ class _HomePageState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    title: new Text('Cultura'),
+                    title: new Text(Strings.typeCult),
                     onTap: () {
-                      filter = "Cultura";
+                      filter = Strings.typeCult;
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -472,19 +474,19 @@ class _HomePageState extends State<Home> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Inici',
+          label: Strings.homeInici,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.explore),
-          label: 'Activitats',
+          label: Strings.homeActivitats,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.location_city),
-          label: 'Entitats',
+          label: Strings.homeEntitats,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.info_outline),
-          label: 'Info',
+          label: Strings.homeInfo,
         ),
       ],
       currentIndex: _selectedIndex,
@@ -560,7 +562,7 @@ class _HomePageState extends State<Home> {
             admin.isLoggedIn
                 ? Container()
                 : new ListTile(
-                    title: new Text("Zona Administrador"),
+                    title: new Text(Strings.homeAdmin),
                     leading: new Icon(Icons.assignment_outlined,
                         color: Colors.black),
                     onTap: () {
@@ -571,7 +573,7 @@ class _HomePageState extends State<Home> {
                     },
                   ),
             new ListTile(
-              title: new Text("Dona el teu feedback"),
+              title: new Text(Strings.homefeedback),
               leading:
                   new Icon(Icons.announcement_outlined, color: Colors.black),
               onTap: () {
@@ -585,7 +587,7 @@ class _HomePageState extends State<Home> {
             ),
             admin.isLoggedIn
                 ? new ListTile(
-                    title: new Text("Tancar"),
+                    title: new Text(Strings.hometTancar),
                     leading: new Icon(Icons.close, color: Colors.black),
                     onTap: () {
                       setState(() {

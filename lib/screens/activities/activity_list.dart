@@ -4,6 +4,7 @@ import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/admin.dart'as admin;
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/activities/activity_list_tile.dart';
+import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class _State extends State<ActivityList> {
                     ),
                     filled: true,
                     fillColor: Color(0xFFF5F6F9),
-                    hintText: 'Busca',
+                      hintText: Strings.textCerca,
                     hintStyle: TextStyle(color: Colors.blueGrey),
                     //TODO: Hide x when nothing is written
                     suffixIcon: IconButton(

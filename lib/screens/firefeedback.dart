@@ -14,7 +14,7 @@ class _FireFeedbackState extends State<FireFeedback> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Form"),
+          title: Text("Feedback"),
         ),
         body: FormBuilder(
           key: _fbKey,

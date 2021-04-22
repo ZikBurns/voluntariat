@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/data/activity.dart';
-import 'package:flutter_firestore/utils/colorizer.dart';
+import 'package:flutter_firestore/data/admin.dart'as admin;
 import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/screens/activities/activity_list_tile.dart';
+import 'package:flutter_firestore/utils/colorizer.dart';
 import 'package:flutter_firestore/utils/commonfunctions.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firestore/data/admin.dart'as admin;
 
 class ActivityList extends StatefulWidget {
   String filter;
@@ -19,20 +19,6 @@ class ActivityList extends StatefulWidget {
 class _State extends State<ActivityList> {
   TextEditingController searchController;
   String searchtext;
-  void _onSearch() {
-    setState(() {
-      searchtext = searchController.text;
-    });
-  }
-
-  void initState() {
-    searchController = TextEditingController();
-    searchController.text = "";
-    searchController.addListener(_onSearch);
-    super.initState();
-
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Entity> entitylist= Provider.of<List<Entity>>(context) ?? [];
@@ -45,9 +31,7 @@ class _State extends State<ActivityList> {
       listActivities=CommonFunctions.applyActivityFilters(listActivities,widget.filter,widget.filtermode);
       listActivities=CommonFunctions.deleteHiddenActivities(listActivities);
     }
-
       return Column(
-
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
@@ -136,4 +120,18 @@ class _State extends State<ActivityList> {
         ],
       );
     }
+
+  void initState() {
+    searchController = TextEditingController();
+    searchController.text = "";
+    searchController.addListener(_onSearch);
+    super.initState();
+
+  }
+
+  void _onSearch() {
+    setState(() {
+      searchtext = searchController.text;
+    });
+  }
   }

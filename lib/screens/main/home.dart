@@ -32,7 +32,6 @@ class _HomePageState extends State<Home> {
   int _selectedIndex = 0;
   String filtermode = "";
 
-
   static const List<Widget> _Face2FaceOptions = <Widget>[
     Icon(Icons.all_inclusive_rounded),
     Icon(Icons.desktop_windows),
@@ -75,9 +74,9 @@ class _HomePageState extends State<Home> {
       });
   }
 
-  Container customFloatingActionButton(){
-    if(admin.isLoggedIn){
-      if(_selectedIndex==1){
+  Container customFloatingActionButton() {
+    if (admin.isLoggedIn) {
+      if (_selectedIndex == 1) {
         return Container(
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Stack(
@@ -100,53 +99,53 @@ class _HomePageState extends State<Home> {
             ),
             filter == ""
                 ? Container(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton.extended(
-                  onPressed: () {
-                    _settingModalBottomSheet(context);
-                  },
-                  backgroundColor: Colorizer.typecolor(filter),
-                  icon: Colorizer.showIcon(filter),
-                  label: Text("Tipus",
-                      style: TextStyle(color: foregroundColor)),
-                ),
-              ),
-            )
+                    padding: EdgeInsets.only(left: 30.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {
+                          _settingModalBottomSheet(context);
+                        },
+                        backgroundColor: Colorizer.typecolor(filter),
+                        icon: Colorizer.showIcon(filter),
+                        label: Text("Tipus",
+                            style: TextStyle(color: foregroundColor)),
+                      ),
+                    ),
+                  )
                 : Container(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton.extended(
-                  onPressed: () {
-                    filter = "";
-                    (context as Element).reassemble();
-                  },
-                  backgroundColor: Colorizer.typecolor(filter),
-                  icon: Icon(Icons.clear, color: Colors.black),
-                  label: Text(filter,
-                      style: TextStyle(color: foregroundColor)),
-                ),
-              ),
-            ),
+                    padding: EdgeInsets.only(left: 30.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {
+                          filter = "";
+                          (context as Element).reassemble();
+                        },
+                        backgroundColor: Colorizer.typecolor(filter),
+                        icon: Icon(Icons.clear, color: Colors.black),
+                        label: Text(filter,
+                            style: TextStyle(color: foregroundColor)),
+                      ),
+                    ),
+                  ),
           ]),
         );
-      }
-      else if(_selectedIndex==2){
+      } else if (_selectedIndex == 2) {
         return Container(
-          child: FloatingActionButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder:(context)=> NewEntity()));
-          },
-            child: Icon(Icons.add,color:Colors.white,size: 30),
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewEntity()));
+            },
+            child: Icon(Icons.add, color: Colors.white, size: 30),
             backgroundColor: Colors.green,
           ),
         );
-      }
-      else return Container();
-    }
-    else{
-      if(_selectedIndex==1){
+      } else
+        return Container();
+    } else {
+      if (_selectedIndex == 1) {
         return Container(
           child: Stack(alignment: Alignment.bottomRight, children: [
             Stack(
@@ -158,7 +157,7 @@ class _HomePageState extends State<Home> {
                     parentButtonBackground: Colors.black,
                     orientation: UnicornOrientation.VERTICAL,
                     parentButton:
-                    _Face2FaceOptions.elementAt(_selectedface2face),
+                        _Face2FaceOptions.elementAt(_selectedface2face),
                     childButtons: [
                       UnicornButton(
                           hasLabel: true,
@@ -227,43 +226,42 @@ class _HomePageState extends State<Home> {
             ),
             filter == ""
                 ? Container(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton.extended(
-                  onPressed: () {
-                    _settingModalBottomSheet(context);
-                  },
-                  backgroundColor: Colorizer.typecolor(filter),
-                  icon: Colorizer.showIcon(filter),
-                  label: Text("Tipus",
-                      style: TextStyle(color: foregroundColor)),
-                ),
-              ),
-            )
+                    padding: EdgeInsets.only(left: 30.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {
+                          _settingModalBottomSheet(context);
+                        },
+                        backgroundColor: Colorizer.typecolor(filter),
+                        icon: Colorizer.showIcon(filter),
+                        label: Text("Tipus",
+                            style: TextStyle(color: foregroundColor)),
+                      ),
+                    ),
+                  )
                 : Container(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton.extended(
-                  onPressed: () {
-                    filter = "";
-                    (context as Element).reassemble();
-                  },
-                  backgroundColor: Colorizer.typecolor(filter),
-                  icon: Icon(Icons.clear, color: Colors.black),
-                  label: Text(filter,
-                      style: TextStyle(color: foregroundColor)),
-                ),
-              ),
-            ),
+                    padding: EdgeInsets.only(left: 30.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {
+                          filter = "";
+                          (context as Element).reassemble();
+                        },
+                        backgroundColor: Colorizer.typecolor(filter),
+                        icon: Icon(Icons.clear, color: Colors.black),
+                        label: Text(filter,
+                            style: TextStyle(color: foregroundColor)),
+                      ),
+                    ),
+                  ),
           ]),
         );
-      }
-      else return Container();
+      } else
+        return Container();
     }
   }
-
 
   void _settingModalBottomSheet(context) {
     double screenpercentage;
@@ -284,9 +282,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.black87,
-                      child:  Icon(
-                          Icons.dashboard,
-                          color: Colors.white,
+                      child: Icon(
+                        Icons.dashboard,
+                        color: Colors.white,
                       ),
                     ),
                     title: new Text('Totes les activitats',
@@ -302,8 +300,8 @@ class _HomePageState extends State<Home> {
                         radius: 20,
                         backgroundColor: Colors.red,
                         child: Icon(
-                            Icons.local_hospital,
-                            color: Colors.black,
+                          Icons.local_hospital,
+                          color: Colors.black,
                         ),
                       ),
                       title: new Text('Serveis Sociosanitaris'),
@@ -329,9 +327,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.lime,
-                      child:Icon(
-                          Icons.local_library,
-                          color: Colors.black,
+                      child: Icon(
+                        Icons.local_library,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Educació i lleure'),
@@ -345,8 +343,7 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.cyanAccent,
-                      child:
-                            Icon(Icons.sports_volleyball, color: Colors.black),
+                      child: Icon(Icons.sports_volleyball, color: Colors.black),
                     ),
                     title: new Text('Esport'),
                     onTap: () {
@@ -360,8 +357,8 @@ class _HomePageState extends State<Home> {
                       radius: 20,
                       backgroundColor: Colors.greenAccent,
                       child: Icon(
-                          Icons.public,
-                          color: Colors.black,
+                        Icons.public,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Voluntariat Internacional'),
@@ -375,9 +372,9 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.pinkAccent,
-                      child:  Icon(
-                          Icons.accessibility_new,
-                          color: Colors.black,
+                      child: Icon(
+                        Icons.accessibility_new,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Atenció a les necessitats bàsiques'),
@@ -392,8 +389,8 @@ class _HomePageState extends State<Home> {
                       radius: 20,
                       backgroundColor: Colors.lightGreenAccent,
                       child: Icon(
-                          Icons.nature,
-                          color: Colors.black,
+                        Icons.nature,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Defensa del mediambient'),
@@ -407,10 +404,10 @@ class _HomePageState extends State<Home> {
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.deepOrange,
-                      child:  Icon(
-                          Icons.face,
-                          color: Colors.black,
-                        ),
+                      child: Icon(
+                        Icons.face,
+                        color: Colors.black,
+                      ),
                     ),
                     title: new Text('Joventut'),
                     onTap: () {
@@ -424,8 +421,8 @@ class _HomePageState extends State<Home> {
                       radius: 20,
                       backgroundColor: Colors.indigo,
                       child: Icon(
-                          Icons.elderly,
-                          color: Colors.black,
+                        Icons.elderly,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Gent Gran'),
@@ -453,8 +450,8 @@ class _HomePageState extends State<Home> {
                       radius: 20,
                       backgroundColor: Colors.yellow,
                       child: Icon(
-                          Icons.theater_comedy,
-                          color: Colors.black,
+                        Icons.theater_comedy,
+                        color: Colors.black,
                       ),
                     ),
                     title: new Text('Cultura'),
@@ -469,7 +466,7 @@ class _HomePageState extends State<Home> {
         });
   }
 
-  BottomNavigationBar customNavBar(){
+  BottomNavigationBar customNavBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
@@ -496,29 +493,33 @@ class _HomePageState extends State<Home> {
     );
   }
 
-  Container bodyHome(){
+  Container bodyHome() {
     final container = [
       Container(
           child: StreamProvider<List<Activity>>.value(
-            initialData: [],
-            value: ActivityService().activities,
-            child: Carousel(),
-          )),
+        initialData: [],
+        value: ActivityService().activities,
+        child: Carousel(),
+      )),
       Container(
         color: Colors.white,
         child: Column(
           children: [
             Flexible(
-              child: StreamProvider<List<Entity>>.value(
+                child: StreamProvider<List<Entity>>.value(
+              initialData: [],
+              value: EntityService().entities,
+              child: StreamProvider<List<Activity>>.value(
                 initialData: [],
-                value: EntityService().entities,
-                child: StreamProvider<List<Activity>>.value(
-                  initialData: [],
-                    value: ActivityService().activities,
-                    child: admin.isLoggedIn?ActivityList(filter:filter):ActivityList(filter:filter,filtermode: filtermode,),
+                value: ActivityService().activities,
+                child: admin.isLoggedIn
+                    ? ActivityList(filter: filter)
+                    : ActivityList(
+                        filter: filter,
+                        filtermode: filtermode,
+                      ),
               ),
-            )
-            )
+            ))
           ],
         ),
       ),
@@ -556,21 +557,23 @@ class _HomePageState extends State<Home> {
                     MaterialPageRoute(builder: (context) => AboutPageAdmin()));
               },
             ),
-            admin.isLoggedIn?Container():
-            new ListTile(
-              title: new Text("Zona Administrador"),
-              leading: new Icon(Icons.assignment_outlined, color: Colors.black),
-              onTap: () {
-                setState(() {
-                  admin.isLoggedIn = true;
-                });
-                //Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
-              },
-            ),
+            admin.isLoggedIn
+                ? Container()
+                : new ListTile(
+                    title: new Text("Zona Administrador"),
+                    leading: new Icon(Icons.assignment_outlined,
+                        color: Colors.black),
+                    onTap: () {
+                      setState(() {
+                        admin.isLoggedIn = true;
+                      });
+                      //Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
+                    },
+                  ),
             new ListTile(
               title: new Text("Dona el teu feedback"),
               leading:
-              new Icon(Icons.announcement_outlined, color: Colors.black),
+                  new Icon(Icons.announcement_outlined, color: Colors.black),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => FireFeedback()));
@@ -580,16 +583,17 @@ class _HomePageState extends State<Home> {
               height: 10.0,
               color: Colors.black,
             ),
-            admin.isLoggedIn?
-            new ListTile(
-              title: new Text("Tancar"),
-              leading: new Icon(Icons.close, color: Colors.black),
-              onTap: () {
-                setState(() {
-                  admin.isLoggedIn = false;
-                });
-              },
-            ):Container()
+            admin.isLoggedIn
+                ? new ListTile(
+                    title: new Text("Tancar"),
+                    leading: new Icon(Icons.close, color: Colors.black),
+                    onTap: () {
+                      setState(() {
+                        admin.isLoggedIn = false;
+                      });
+                    },
+                  )
+                : Container()
           ],
         ),
       ),

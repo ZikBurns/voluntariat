@@ -260,7 +260,6 @@ class Colorizer{
       }
     }
     else{
-
           return CircleAvatar(
               radius: 25.0,
               backgroundColor: typecolor(act.type),

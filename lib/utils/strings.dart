@@ -110,3 +110,5 @@ class Strings {
   static const String formEntityMaps='Lloc a Google Maps';
   static const String formEntityColorHint='Escolleix el color';
 }
+
+

@@ -118,6 +118,26 @@ class EntityFormFields extends StatelessWidget {
               name: 'maps',
               readOnly: false,
             ),
+            titleText("Contacte de l'entitat: mails i/o telèfons"),
+            FormBuilderTextField(
+              maxLines: 5,
+              obscureText: false,
+              name: 'contact',
+              readOnly: false,
+              validator: FormBuilderValidators.compose([(val){
+                if(val=="") return "L'entitat ha de tenir uns contactes.";
+              }]),
+            ),
+            titleText("Tasques de voluntariat"),
+            FormBuilderTextField(
+              maxLines: 5,
+              obscureText: false,
+              name: 'tasks',
+              readOnly: false,
+              validator: FormBuilderValidators.compose([(val){
+                if(val=="") return "L'entitat ha de tenir unes tasques de voluntariat.";
+              }]),
+            ),
             FormBuilderColorPickerField(
               name: 'color',
               colorPickerType: ColorPickerType.MaterialPicker,

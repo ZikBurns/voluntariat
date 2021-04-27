@@ -172,19 +172,19 @@ class _HomeListTileState extends State<ActivityListTile> {
               width: 0.3,
             ),
           ),
-          child: ListTile(
+          child: admin.isLoggedIn?ListTile(
             tileColor: Colorizer.typecolor(widget.activity.type),
             leading: Colorizer.showAvatarPrime(widget.activity),
             onTap: () {
               passData(widget.activity);
             },
-            trailing: admin.isLoggedIn?IconButton(
+            trailing: IconButton(
               icon: visibilityIcon(),
               onPressed: (){
                 if (!expired) switchVisibility();
                 showVisibilityMessage(expired);
               },
-            ):Padding(padding: EdgeInsets.all(0.0)),
+            ),
             //isThreeLine: true,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,6 +222,47 @@ class _HomeListTileState extends State<ActivityListTile> {
             ),
             subtitle: Text(widget.activity.desc,
                 maxLines: 3, overflow: TextOverflow.ellipsis),
+          ):
+          ListTile(
+            tileColor: Colorizer.typecolor(widget.activity.type),
+            leading: Colorizer.showAvatarPrime(widget.activity),
+            onTap: () {
+              passData(widget.activity);
+            },
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.campaign_outlined,
+                          size: 22,
+                        ),
+                      ),
+                      TextSpan(text:Strings.activityDestacat+": ",
+                        style: TextStyle(fontSize: 16.0,color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                RichText(
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(child: modeicon(widget.activity.mode)),
+                      TextSpan(text:" " + widget.activity.title,
+                        style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            subtitle: Text(widget.activity.desc,
+                maxLines: 3, overflow: TextOverflow.ellipsis),
           ),
         );
       } else {
@@ -235,22 +276,20 @@ class _HomeListTileState extends State<ActivityListTile> {
               width: 0.3,
             ),
           ),
-          child: ListTile(
+          child: admin.isLoggedIn?ListTile(
             tileColor: Color(0xFFF5F6F9),
             leading: Colorizer.showAvatar(widget.activity),
             onTap: () {
               passData(widget.activity);
             },
-            trailing: admin.isLoggedIn?IconButton(
+            trailing: IconButton(
               icon: visibilityIcon(),
               onPressed: (){
                 if (!expired) switchVisibility();
                 showVisibilityMessage(expired);
               },
-            ):Padding(padding: EdgeInsets.all(0.0)),
-            //isThreeLine: true,
+            ),
             title: RichText(
-              //maxLines: 2,
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 children: [
@@ -263,7 +302,26 @@ class _HomeListTileState extends State<ActivityListTile> {
             ),
             subtitle: Text(widget.activity.desc,
                 maxLines: 3, overflow: TextOverflow.ellipsis),
-            //trailing: getPrimeIcon(),
+          ):
+          ListTile(
+            tileColor: Color(0xFFF5F6F9),
+            leading: Colorizer.showAvatar(widget.activity),
+            onTap: () {
+              passData(widget.activity);
+            },
+            title: RichText(
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [
+                  WidgetSpan(child: modeicon(widget.activity.mode)),
+                  TextSpan(text:" " + widget.activity.title,
+                    style: TextStyle(fontSize: 18.0,color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            subtitle: Text(widget.activity.desc,
+                maxLines: 3, overflow: TextOverflow.ellipsis),
           ),
         );
     }

@@ -15,7 +15,7 @@ class PresentEntities extends StatelessWidget {
       for (var i = 0; i < entities.length; i++) {
         for (var j = 0; j < this.activity.entities.length; j++) {
           if (entities[i].id == this.activity.entities[j])
-            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink,entities[i].twitter,entities[i].facebook,entities[i].instagram,entities[i].website,entities[i].maps,entities[i].color));
+            newlist.add(new Entity(entities[i].id,entities[i].name,entities[i].desc,entities[i].image,entities[i].ytlink,entities[i].twitter,entities[i].facebook,entities[i].instagram,entities[i].website,entities[i].maps,entities[i].contact,entities[i].tasks,entities[i].color));
         }
       }
       return newlist;

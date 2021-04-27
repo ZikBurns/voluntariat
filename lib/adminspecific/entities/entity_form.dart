@@ -32,6 +32,8 @@ class ModifyEntity extends StatelessWidget {
             'instagram':"",
             'website':"",
             'maps':"",
+            'contacts':"",
+            'tasks':"",
             'color': Colors.blueGrey
           }
           :{
@@ -43,6 +45,8 @@ class ModifyEntity extends StatelessWidget {
             'instagram':this.entity.instagram,
             'website':this.entity.website,
             'maps':this.entity.maps,
+            'contacts':this.entity.contact,
+            'tasks':this.entity.tasks,
             'color':Color(this.entity.color)
           },
           key: _fbKey,

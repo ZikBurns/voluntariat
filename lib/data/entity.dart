@@ -9,8 +9,10 @@ class Entity{
   String instagram;
   String website;
   String maps;
+  String contact;
+  String tasks;
   int color;
 
   Entity(this.id,this.name, this.desc, this.image, this.ytlink, this.twitter,
-      this.facebook, this.instagram, this.website, this.maps,this.color);
+      this.facebook, this.instagram, this.website, this.maps,this.contact,this.tasks,this.color);
 }

@@ -37,6 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 SizedBox(height: 20.0),
                 TextFormField(
+                  key: Key("SignInScreen_email"),
                   decoration: new InputDecoration(hintText: Strings.signHintCorreu),
                   validator: (val) => val.isEmpty ? Strings.signEnterCorreu : null,
                   onChanged: (val) {
@@ -45,6 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
+                  key: Key("SignInScreen_password"),
                   obscureText: true,
                   decoration: new InputDecoration(hintText: Strings.signHintContra),
                   validator: (val) =>
@@ -57,6 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 20.0),
                 ElevatedButton(
+                    key: Key("SignInScreen_send"),
                     style:ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.purple)) ,
                     child: Text(
                       Strings.textEntrar,

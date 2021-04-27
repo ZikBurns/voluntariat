@@ -11,6 +11,7 @@ import 'package:flutter_firestore/screens/entities/socialnetworks.dart';
 import 'package:flutter_firestore/services/activity_service.dart';
 import 'package:flutter_firestore/services/entity_service.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:linkable/linkable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
@@ -207,7 +208,15 @@ class _AdminEntityDetailsState
               title: Text(widget.entity.name),
               subtitle: Text(widget.entity.desc),
             ),
+            widget.entity.contact!=""?ListTile(
+              title: Text("Contacte:"),
+              subtitle: Linkable(text: widget.entity.contact),
+            ):Container(),
             SocialNetworks(widget.entity),
+            widget.entity.tasks!=""?ListTile(
+              title: Text("Tasques de voluntariat:"),
+              subtitle: Text(widget.entity.tasks),
+            ):Container(),
             EntityPresentActivities(widget.entity),
           ],
         ),

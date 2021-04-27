@@ -39,7 +39,7 @@ dependencies:
   unicorndial: "^1.1.5"
   carousel_slider: ^3.0.0
   youtube_player_iframe: ^1.2.0+2
-  font_awesome_flutter: ^8.12.0
+  font_awesome_flutter: ^9.0.0
   flutter_native_splash: ^0.2.8
 
 

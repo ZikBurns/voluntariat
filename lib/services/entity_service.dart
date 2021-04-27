@@ -9,7 +9,7 @@ class EntityService{
 
   List<Entity> _entitiesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'',doc.get('twitter')??'',doc.get('facebook')??'',doc.get('instagram')??'',doc.get('website')??'',doc.get('maps')??'',doc.get('color')??16777215);
+      return Entity(doc.id,doc.get('name')?? '',doc.get('desc')??'',doc.get('image')??'',doc.get('ytlink')??'',doc.get('twitter')??'',doc.get('facebook')??'',doc.get('instagram')??'',doc.get('website')??'',doc.get('maps')??'',doc.get('contact')??'',doc.get('tasks')??'',doc.get('color')??16777215);
     }).toList();
   }
 
@@ -39,6 +39,8 @@ class EntityService{
           'instagram': map['instagram'],
           'website': map['website'],
           'maps': map['maps'],
+          'contact': map['contact'],
+          'tasks': map['tasks'],
           'color': (map['color'] as Color).value
         }
     );
@@ -49,7 +51,7 @@ class EntityService{
   void updateEntity(Entity entity) {
     try {
       ref.doc(entity.id)
-          .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink,'twitter':entity.twitter,'facebook':entity.facebook,'instagram':entity.instagram,'website':entity.website,'maps':entity.maps,'color':entity.color});
+          .update({'name': entity.name,'desc':entity.desc,'image':entity.image,'ytlink':entity.ytlink,'twitter':entity.twitter,'facebook':entity.facebook,'instagram':entity.instagram,'website':entity.website,'maps':entity.maps,'contact':entity.contact,'tasks':entity.tasks,'color':entity.color});
     } catch (e) {
     }
   }
@@ -64,6 +66,8 @@ class EntityService{
       'instagram':map['instagram'],
       'website':map['website'],
       'maps':map['maps'],
+      'contact': map['contact'],
+      'tasks': map['tasks'],
       'color': (map['color'] as Color).value
     });
   }

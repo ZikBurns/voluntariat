@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminspecific/activities/activity_form.dart';
 import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
+import 'package:flutter_firestore/adminspecific/feedback/feedbackadmin.dart';
 import 'package:flutter_firestore/screens/main/about_page.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
@@ -572,7 +573,16 @@ class _HomePageState extends State<Home> {
                       //Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
                     },
                   ),
+            admin.isLoggedIn?
             new ListTile(
+              title: new Text(Strings.adminfeedback),
+              leading:
+              new Icon(Icons.announcement_outlined, color: Colors.black),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FeedbackAdmin()));
+              },
+            ):new ListTile(
               title: new Text(Strings.homefeedback),
               leading:
                   new Icon(Icons.announcement_outlined, color: Colors.black),

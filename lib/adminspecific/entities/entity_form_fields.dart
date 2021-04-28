@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore/data/entity.dart';
 import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -124,9 +123,6 @@ class EntityFormFields extends StatelessWidget {
               obscureText: false,
               name: 'contact',
               readOnly: false,
-              validator: FormBuilderValidators.compose([(val){
-                if(val=="") return "L'entitat ha de tenir uns contactes.";
-              }]),
             ),
             titleText("Tasques de voluntariat"),
             FormBuilderTextField(
@@ -134,9 +130,6 @@ class EntityFormFields extends StatelessWidget {
               obscureText: false,
               name: 'tasks',
               readOnly: false,
-              validator: FormBuilderValidators.compose([(val){
-                if(val=="") return "L'entitat ha de tenir unes tasques de voluntariat.";
-              }]),
             ),
             FormBuilderColorPickerField(
               name: 'color',

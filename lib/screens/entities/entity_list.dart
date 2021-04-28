@@ -99,7 +99,8 @@ class _EntitiesListState extends State<EntitiesList> {
                     itemCount: listEntities.length,
                     itemBuilder: (context, index) {
                     var ent = listEntities[index].name.toLowerCase() +
-                    listEntities[index].desc.toLowerCase();
+                    listEntities[index].desc.toLowerCase()+
+                        listEntities[index].tasks.toLowerCase();
                     if ((searchtext == null) ||
                     (searchtext != null) &&
                     (ent.contains(searchtext.toLowerCase()))) {

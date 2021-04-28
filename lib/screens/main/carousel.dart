@@ -49,6 +49,8 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     var listActivities=Provider.of<List<Activity>>(context) ?? [];
     List<Activity> primelist = listActivities.where((activity) => activity.prime==true).toList();
+    primelist=CommonFunctions.deleteHiddenActivities(primelist);
+
     listActivities.sort((a,b)=>b.launchDate.millisecondsSinceEpoch.compareTo(a.launchDate.millisecondsSinceEpoch));
     listActivities=CommonFunctions.deleteHiddenActivities(listActivities);
     listActivities=CommonFunctions.selectNewActivities(listActivities);
@@ -56,6 +58,7 @@ class _CarouselState extends State<Carousel> {
     return Container(
       child: ListView(
         children:[
+          primelist.length==0?Container():
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(padding: EdgeInsets.all(8.0),
@@ -68,6 +71,7 @@ class _CarouselState extends State<Carousel> {
 
             ),
           ),
+          primelist.length==0?Container():
           CarouselSlider(
             options: CarouselOptions(
               height: 360.0,
@@ -102,6 +106,7 @@ class _CarouselState extends State<Carousel> {
             )
             ).toList(),
           ),
+          listActivities.length==0?Container():
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(padding: EdgeInsets.all(8.0),

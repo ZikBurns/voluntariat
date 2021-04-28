@@ -30,6 +30,7 @@ class Strings {
   static const String homeAdmin = "Zona Administrador";
   static const String hometTancar = "Tancar";
   static const String homefeedback = "Dona el teu feedback";
+  static const String adminfeedback = "Llistat de feedback";
 
   static const String entityActivities = "Activitats de l'entitat:";
   static const String entityNoActivities = "Aquesta entitat encara no té activitats programades.";

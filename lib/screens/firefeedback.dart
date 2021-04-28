@@ -12,6 +12,11 @@ class FireFeedback extends StatelessWidget{
           title: Text("Feedback"),
         ),
         body: FormBuilder(
+          initialValue:
+              {
+                'title': "",
+                'desc': "",
+              },
           key: _fbKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,7 +40,7 @@ class FireFeedback extends StatelessWidget{
                             readOnly: false,
                             validator: FormBuilderValidators.compose([
                             (val){
-                            if(val=="") return "L'activitat ha de tenir un titol.";
+                              if(val=="") return "El feedback ha de tenir un assumpte.";
                             }
                         ]),
                         ),
@@ -52,7 +57,7 @@ class FireFeedback extends StatelessWidget{
                             readOnly: false,
                             validator:FormBuilderValidators.compose( [
                                   (val){
-                                if(val=="") return "L'activitat ha de tenir una descripció.";
+                                if(val=="") return "El feedback ha de tenir un cos.";
                               }
                             ]),
                           ),
@@ -71,7 +76,7 @@ class FireFeedback extends StatelessWidget{
                           onPressed: (){
                             if(_fbKey.currentState.saveAndValidate()){
                               CollectionReference ref = FirebaseFirestore.instance.collection("Feedback");
-                              ref.add(_fbKey.currentState.value);/*
+                              ref.add(_fbKey.currentState.value);
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     duration: Duration(seconds: 4),
@@ -85,8 +90,7 @@ class FireFeedback extends StatelessWidget{
                                       ],
                                     ),
                                   )
-                              );*/
-                              Navigator.pop(context);
+                              );
                               Navigator.pop(context);
                             }
                           },

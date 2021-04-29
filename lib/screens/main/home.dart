@@ -18,7 +18,7 @@ import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
-import 'package:flutter_firestore/utils/strings.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -615,14 +615,17 @@ class _HomePageState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: bodyHome(),
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Scaffold(
+          body: Container(
+            color: Colors.white,
+            child: bodyHome(),
+          ),
+          floatingActionButton: customFloatingActionButton(),
+          bottomNavigationBar: customNavBar(),
         ),
-        floatingActionButton: customFloatingActionButton(),
-        bottomNavigationBar: customNavBar(),
       ),
     );
   }

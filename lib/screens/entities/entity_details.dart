@@ -203,7 +203,7 @@ class _AdminEntityDetailsState
         child: ListView(
           children: [
             CommonFunctions.showMedia(widget.entity.ytlink,widget.entity.image),
-            SizedBox(height: 20),
+            SizedBox(height: 5),
             ListTile(
               title: Text(widget.entity.name),
               subtitle: Text(widget.entity.desc),

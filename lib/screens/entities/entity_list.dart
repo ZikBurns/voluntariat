@@ -31,8 +31,7 @@ class _EntitiesListState extends State<EntitiesList> {
   @override
   Widget build(BuildContext context) {
     var listEntities=Provider.of<List<Entity>>(context) ?? [];
-
-
+    listEntities.sort((a, b) => a.name.compareTo(b.name));
 
     return Column(
       children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore/adminspecific/activities/activity_form.dart';
 import 'package:flutter_firestore/adminspecific/entities/entity_form.dart';
 import 'package:flutter_firestore/adminspecific/feedback/feedbackadmin.dart';
+import 'package:flutter_firestore/screens/authentication/signin_screen.dart';
 import 'package:flutter_firestore/screens/main/about_page.dart';
 import 'package:flutter_firestore/data/activity.dart';
 import 'package:flutter_firestore/data/entity.dart';
@@ -18,7 +19,6 @@ import 'package:flutter_firestore/data/admin.dart' as admin;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:unicorndial/unicorndial.dart';
-import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -529,10 +529,14 @@ class _HomePageState extends State<Home> {
       Container(
         color: Colors.white,
         child: Center(
-          child: StreamProvider<List<Entity>>.value(
+          child: StreamProvider<List<Activity>>.value(
             initialData: [],
-            value: EntityService().entities,
-            child: EntitiesList(),
+            value: ActivityService().activities,
+            child: StreamProvider<List<Entity>>.value(
+              initialData: [],
+              value: EntityService().entities,
+              child: EntitiesList(),
+            ),
           ),
         ),
       ),
@@ -568,9 +572,10 @@ class _HomePageState extends State<Home> {
                         color: Colors.black),
                     onTap: () {
                       setState(() {
-                        admin.isLoggedIn = true;
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
+                        //admin.isLoggedIn = true;
                       });
-                      //Navigator.push(context,MaterialPageRoute(builder: (context) => SignInScreen()));
+
                     },
                   ),
             admin.isLoggedIn?
@@ -616,12 +621,15 @@ class _HomePageState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.white30,
       child: SafeArea(
         child: Scaffold(
-          body: Container(
-            color: Colors.white,
-            child: bodyHome(),
+          body: Center(
+            child: Container(
+
+              color: Colors.white,
+              child: bodyHome(),
+            ),
           ),
           floatingActionButton: customFloatingActionButton(),
           bottomNavigationBar: customNavBar(),

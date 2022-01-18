@@ -18,7 +18,6 @@ class FeedbackService{
     }).toList();
   }
 
-  // get brews stream
   Stream<List<Feed>> get feedback {
     return ref.snapshots()
         .map(_feedFromSnapshot);

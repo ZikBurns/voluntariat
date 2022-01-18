@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+
 
 class FireFeedback extends StatelessWidget{
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore/utils/strings.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 
 class EntityFormFields extends StatelessWidget {
 
@@ -133,7 +134,7 @@ class EntityFormFields extends StatelessWidget {
             ),
             FormBuilderColorPickerField(
               name: 'color',
-              colorPickerType: ColorPickerType.MaterialPicker,
+              colorPickerType: ColorPickerType.materialPicker,
               decoration: InputDecoration(labelText: Strings.formEntityColorHint),
             ),
           ],

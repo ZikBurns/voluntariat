@@ -13,7 +13,6 @@ class EntityService{
     }).toList();
   }
 
-  // get brews stream
   Stream<List<Entity>> get entities {
     return ref.snapshots()
         .map(_entitiesFromSnapshot);
